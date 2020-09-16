@@ -1,0 +1,38 @@
+.Divider {
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+  font-size: 12px;
+  color: var(--gray-3);
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    flex: 1;
+    border-top: 1px solid var(--gray-6);
+  }
+}
+
+.Divider--text-center,
+.Divider--text-left,
+.Divider--text-right {
+  &:before {
+    margin-right: 12px;
+  }
+  &:after {
+    margin-left: 12px;
+  }
+}
+
+.Divider--text-left {
+  &:before {
+    max-width: 10%;
+  }
+}
+
+.Divider--text-right {
+  &:after {
+    max-width: 10%;
+  }
+}

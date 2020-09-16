@@ -1,0 +1,136 @@
+.Card {
+  overflow: hidden;
+  border-radius: @card-border-radius;
+  background: @card-bg;
+  box-shadow: @card-box-shadow;
+
+  &--xl {
+    width: @card-size-xl;
+  }
+  &--lg {
+    width: @card-size-lg;
+  }
+  &--md {
+    width: @card-size-md;
+  }
+  &--sm {
+    width: @card-size-sm;
+  }
+  &--xs {
+    width: @card-size-xs;
+  }
+  &--fluid {
+    width: @card-fluid-width;
+    max-width: @card-max-width;
+    min-width: @card-min-width;
+  }
+}
+
+/* CardMedia */
+.CardMedia {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+
+  &:after {
+    display: block;
+    height: 0;
+    content: '';
+  }
+  &--wide {
+    &:after {
+      padding-top: 56.25%;
+    }
+  }
+  &--square {
+    &:after {
+      padding-top: 100%;
+    }
+  }
+  &-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+/* CardTitle */
+.CardTitle {
+  padding: @card-title-padding;
+
+  &--center {
+    padding: 4px 2px; // FIXME
+    text-align: center;
+  }
+  &-title {
+    font-size: @card-title-font-size;
+  }
+  &-subtitle {
+    color: @card-subtitle-color;
+    font-size: @card-subtitle-font-size;
+  }
+}
+
+/* CardContent */
+.CardContent {
+  padding: @card-padding;
+
+  .CardTitle + & {
+    padding-top: 0;
+  }
+}
+
+/* CardText */
+.CardText {
+  padding: @card-padding;
+  color: @card-text-color;
+
+  .CardTitle + & {
+    padding-top: 0;
+  }
+}
+
+/* CardActions */
+.CardActions {
+  display: flex;
+  padding: @card-padding;
+
+  .CardTitle + &,
+  .CardText + & {
+    padding-top: 0;
+  }
+  .Btn {
+    flex: 1 1 auto;
+    line-height: @card-btn-line-height;
+  }
+  .Btn + .Btn {
+    margin-left: @card-btn-spacing-x;
+  }
+}
+
+.CardActions--column {
+  flex-direction: column;
+  padding: 0;
+
+  .Btn {
+    padding: @card-btn-padding;
+    border: 0;
+    border-top: 1px solid @card-btn-border-color;
+    border-radius: 0;
+    background: @card-column-btn-bg;
+
+    &:last-child {
+      border-radius: 0 0 @card-border-radius @card-border-radius;
+    }
+  }
+  .Btn + .Btn {
+    margin: @card-btn-spacing-y;
+  }
+  .Btn--primary {
+    color: @card-column-btn-primary-color;
+  }
+}

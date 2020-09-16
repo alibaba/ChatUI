@@ -1,0 +1,48 @@
+.Toolbar {
+  padding: 10px 12px 25px;
+}
+
+.Toolbar-item {
+  display: inline-block;
+  width: 25%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.Toolbar-btn {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: 70px;
+  color: var(--gray-1);
+  vertical-align: top;
+
+  &:hover {
+    color: var(--brand-1);
+    cursor: pointer;
+  }
+  &:focus {
+    color: var(--gray-1);
+  }
+}
+
+.Toolbar-btnIcon {
+  display: inline-block;
+
+  .Icon {
+    font-size: 40px;
+    transition: 0.3s;
+  }
+}
+
+.Toolbar-img {
+  width: 40px;
+  height: 40px;
+}
+
+.Toolbar-btnText {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  transition: 0.3s;
+}

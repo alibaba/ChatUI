@@ -1,0 +1,12 @@
+.Price {
+  display: inline;
+  font-size: @price-font-size;
+
+  &--original {
+    color: var(--gray-3);
+    text-decoration: line-through;
+  }
+  &:not(&--original) &-integer {
+    font-size: @price-integer-font-size;
+  }
+}

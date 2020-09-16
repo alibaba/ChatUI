@@ -1,0 +1,91 @@
+.Message {
+  position: relative;
+
+  & + & {
+    margin-top: 12px;
+  }
+  &.left {
+    animation: msgLeft .5s ease-in-out;
+
+    .Bubble {
+      margin-right: 18%;
+    }
+  }
+  &.right {
+    animation: msgRight .5s ease-in-out;
+
+    .Message-content {
+      flex-direction: row-reverse;
+
+      & > .Avatar {
+        margin-right: 0;
+        margin-left: 4px;
+      }
+    }
+    .Bubble {
+      margin-left: 28%;
+      border-radius: @bubble-right-border-radius;
+      background: @bubble-right-bg;
+    }
+    .Avatar + .Bubble {
+      margin-left: 18%;
+    }
+  }
+}
+
+.Message-meta {
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.Message-content {
+  display: flex;
+  align-items: flex-start;
+
+  & > .Avatar {
+    flex-shrink: 0;
+    margin-right: 4px;
+  }
+}
+
+/* SystemMessage */
+.SystemMessage {
+  padding: 0 16px;
+  font-size: 12px;
+  color: var(--gray-2);
+  text-align: center;
+
+  a {
+    margin-left: 5px;
+  }
+}
+
+@keyframes msgLeft {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes msgRight {
+  0% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  20% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

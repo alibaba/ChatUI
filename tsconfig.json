@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    /* Project Options */
+    "allowJs": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "lib": ["dom", "esnext"],
+    "module": "esnext",
+    "target": "esnext",
+
+    /* Strict Checks */
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+
+    /* Module Resolution */
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+
+    /* Linter Checks */
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    /* Advanced */
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "stripInternal": true,
+    "resolveJsonModule": true,
+  },
+
+  /* File Inclusion */
+  "exclude": ["node_modules", "dist", "es", "lib"],
+  "include": ["src", "types"],
+}

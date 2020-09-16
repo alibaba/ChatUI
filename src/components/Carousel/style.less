@@ -1,0 +1,25 @@
+.Carousel {
+  overflow: hidden;
+}
+
+.Carousel-inner {
+  display: flex;
+}
+
+.Carousel-indicators {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+
+  li {
+    width: 6px;
+    height: 6px;
+    margin: 0 2px;
+    border-radius: 50%;
+    background: var(--gray-4);
+    transition: 0.3s;
+  }
+  .active {
+    background: var(--brand-1);
+  }
+}

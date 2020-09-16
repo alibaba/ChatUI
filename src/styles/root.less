@@ -1,0 +1,49 @@
+:root {
+  --brand-1: @brand-1;
+  --brand-2: @brand-2;
+  --brand-3: @brand-3;
+  --black: @black;
+  --white: @white;
+  --gray-1: @gray-1;
+  --gray-2: @gray-2;
+  --gray-3: @gray-3;
+  --gray-4: @gray-4;
+  --gray-5: @gray-5;
+  --gray-6: @gray-6;
+  --gray-7: @gray-7;
+  --gray-8: @gray-8;
+  --light-1: @light-1;
+  --light-2: @light-2;
+  --blue: @blue;
+  --gray-dark: @gray-dark;
+  --green: @green;
+  --orange: @orange;
+  --red: @red;
+  --yellow: @yellow;
+  --yellow-light: @yellow-light;
+  --shadow-1: @shadow-1;
+  --shadow-2: @shadow-2;
+  --shadow-3: @shadow-3;
+  --shadow-4: @shadow-4;
+  --shadow-5: @shadow-5;
+  --safe-top: 0px;
+  --safe-bottom: 0px;
+
+  & when (@global-style = true) {
+    background-color: var(--light-1);
+  }
+}
+
+@supports (top: constant(safe-area-inset-top)) {
+  :root {
+    --safe-top: constant(safe-area-inset-top);
+    --safe-bottom: constant(safe-area-inset-bottom);
+  }
+}
+
+@supports (top: env(safe-area-inset-top)) {
+  :root {
+    --safe-top: env(safe-area-inset-top);
+    --safe-bottom: env(safe-area-inset-bottom);
+  }
+}

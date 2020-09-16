@@ -1,0 +1,62 @@
+.Tabs-nav {
+  position: relative;
+  display: flex;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.Tabs--scrollable {
+  .Tabs-nav {
+    overflow: hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .Tabs-navItem {
+    flex: 0 0 22%;
+  }
+}
+
+.Tabs-navItem {
+  flex: 1;
+  text-align: center;
+}
+
+.Tabs-navLink {
+  display: inline-block;
+  margin: 0;
+  padding: 8px 3px;
+  border: 0;
+  background: transparent;
+  color: var(--gray-dark);
+  line-height: 20px;
+  font-weight: 300;
+  transition: 0.3s;
+
+  &:hover {
+    cursor: pointer;
+  }
+  &.active {
+    color: var(--brand-1);
+    font-weight: 400;
+  }
+}
+
+.Tabs-navPointer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--brand-2);
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Tabs-pane {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}

@@ -1,0 +1,23 @@
+.Tag {
+  display: inline-block;
+  position: relative;
+  margin: @tag-margin;
+  padding: @tag-padding;
+  border-radius: @tag-border-radius;
+  color: @tag-color;
+  font-size: @tag-font-size;
+  line-height: 1.2;
+  white-space: nowrap;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background: currentColor;
+    opacity: @tag-bg-opacity;
+  }
+}

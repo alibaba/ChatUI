@@ -1,0 +1,60 @@
+.ScrollView {
+  overflow: hidden;
+
+  &-scroller {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none; // IE/Edge
+    scrollbar-width: none; // FF
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  &--fullWidth {
+    margin: 0 -8px;
+  }
+  &--fullWidth:not(&--hasControls) &-inner {
+    padding: 0 8px;
+  }
+}
+
+.ScrollView--x {
+  .ScrollView-scroller {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    margin-bottom: -18px;
+    padding-bottom: 18px;
+  }
+  .ScrollView-inner {
+    display: flex;
+  }
+  .ScrollView-item {
+    flex: 0 0 auto;
+    margin-left: 8px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.ScrollView--hasControls {
+  display: flex;
+  align-items: center;
+
+  .ScrollView-scroller {
+    flex: 1;
+  }
+}
+
+.ScrollView-control {
+  padding: 6px;
+  color: var(--gray-3);
+  font-size: 16px;
+
+  &:not(:disabled):hover {
+    color: var(--brand-1);
+  }
+}

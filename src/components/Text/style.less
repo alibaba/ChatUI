@@ -1,0 +1,19 @@
+.Text--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.Text--break {
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+.Text--ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+  /* -webkit-line-clamp: 2; */
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,50 @@
+.Toast,
+.Toast-content {
+  display: flex;
+  align-items: center;
+}
+
+.Toast {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  justify-content: center;
+  transition: all 300ms ease 0s;
+  transform: translateY(-50%);
+  opacity: 0;
+  visibility: hidden;
+
+  &[data-type='success'] .Icon {
+    color: var(--green);
+  }
+  &[data-type='error'] .Icon {
+    color: var(--red);
+  }
+  &[data-type='loading'] .Icon {
+    color: var(--yellow);
+  }
+  &.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  .Icon {
+    margin-right: 8px;
+    font-size: 24px;
+  }
+}
+
+.Toast-content {
+  min-width: 160px;
+  margin: 0 20px;
+  padding: 18px 20px 18px 28px;
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: var(--shadow-3);
+}
+
+.Toast-message {
+  flex: 1 1 auto;
+  font-size: 16px;
+}

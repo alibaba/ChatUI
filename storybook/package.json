@@ -1,0 +1,16 @@
+{
+  "name": "chatui-storybook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.0.18",
+    "@storybook/addon-essentials": "^6.0.18",
+    "@storybook/react": "^6.0.18",
+    "less-loader": "^7.0.0"
+  }
+}

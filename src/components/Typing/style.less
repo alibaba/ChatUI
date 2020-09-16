@@ -1,0 +1,47 @@
+.Typing {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  transition: opacity 0.1s;
+}
+
+.Typing-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 5px;
+  border-radius: 50%;
+  background: var(--brand-2);
+  animation: typing-dot 0.9s linear infinite;
+
+  &:nth-child(1) {
+    margin: 0;
+    opacity: 0.9;
+  }
+  &:nth-child(2) {
+    opacity: 0.3;
+    animation-delay: 0.225s;
+  }
+  &:nth-child(3) {
+    opacity: 0.6;
+    animation-delay: 0.45s;
+  }
+}
+
+@keyframes typing-dot {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(6px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

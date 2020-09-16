@@ -1,0 +1,17 @@
+.IconBtn {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--gray-2);
+
+  &.Btn--primary {
+    color: var(--brand-2);
+  }
+  &:disabled {
+    border-color: var(--gray-6);
+    color: var(--gray-6);
+  }
+  & > .Icon {
+    display: block;
+  }
+}
