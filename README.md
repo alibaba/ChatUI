@@ -25,18 +25,21 @@ English | [简体中文](./README.zh-CN.md)
 
 ## Environment Support
 
-- PC
-- mobile
-- [CSS Variables](https://caniuse.com/css-variables)
+- Modern browsers (support [CSS Variables](https://caniuse.com/css-variables))
+- Internet Explorer 11 (with [polyfills](https://stackoverflow.com/questions/57020976/polyfills-in-2019-for-ie11) and [CSS Variables Polyfill](https://github.com/nuxodin/ie11CustomProperties) / [css-vars-ponyfill](https://github.com/jhildenbiddle/css-vars-ponyfill))
+
+| <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" width="24px" height="24px" /><br>Edge | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" /><br>Firefox | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" /><br>Chrome | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" /><br>Safari | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari-ios/safari-ios_48x48.png" alt="iOS Safari" width="24px" height="24px" /><br>iOS Safari | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/android-webview/android-webview_48x48.png" alt="Android WebView" width="24px" height="24px" /><br>Android WebView |
+| --- | --- | --- | --- | --- | --- |
+| 16+ | 31+ | 49+ | 9.1+ | 9.3+ | 6+ |
 
 ## Install
 
 ```bash
-npm install chatui --save
+npm install @chatui/core --save
 ```
 
 ```bash
-yarn add chatui
+yarn add @chatui/core
 ```
 
 ## Usage
