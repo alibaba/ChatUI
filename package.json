@@ -1,5 +1,5 @@
 {
-  "name": "chatui",
+  "name": "@chatui/core",
   "version": "0.1.0",
   "description": "The chat UI for React.",
   "main": "lib/index.js",
@@ -96,6 +96,14 @@
     "chat",
     "chat-ui"
   ],
-  "author": "akai <akainice@google.com>",
+  "homepage": "https://chatui.io/",
+  "bugs": {
+    "url": "https://github.com/alibaba/ChatUI/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alibaba/ChatUI"
+  },
+  "author": "akai <akainice@gmail.com>",
   "license": "MIT"
 }
