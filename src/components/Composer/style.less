@@ -1,0 +1,110 @@
+.Composer {
+  display: flex;
+  align-items: flex-end;
+  padding: 8px;
+
+  > div + div {
+    margin-left: 8px;
+  }
+}
+
+.Composer-actions {
+  .IconBtn {
+    padding: 6px;
+    border-radius: 50%;
+    font-size: 26px;
+  }
+  .IconBtn,
+  .IconBtn:hover,
+  .IconBtn:active {
+    background: var(--white);
+    color: var(--brand-1);
+  }
+}
+
+.Composer-toggleBtn {
+  transition: transform 0.2s;
+
+  &.active {
+    transform: rotate(45deg);
+  }
+}
+
+.Composer-inputWrap {
+  flex: 1;
+  position: relative;
+}
+
+.Composer-input {
+  overflow: hidden;
+  max-height: 126px;
+  line-height: 22px;
+  padding: 8px 32px 8px 16px;
+  border: 0;
+  background-color: var(--white);
+  border-radius: 20px;
+  word-break: break-all;
+  caret-color: var(--brand-2);
+  transition: border-color .15s ease-in-out;
+
+  &:placeholder-shown + .Composer-sendBtn {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.Composer-sendBtn {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  padding: 2px;
+  background: var(--brand-1);
+  color: var(--white);
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.Composer-toolbar {
+  margin-right: 20px;
+  padding: 8px 0;
+
+  .Btn {
+    margin-left: 20px;
+    font-size: 28px;
+
+    &:first-child {
+      margin: 0;
+    }
+    &:hover {
+      color: var(--brand-1);
+    }
+    &:focus:before,
+    &:focus:after {
+      opacity: 0;
+    }
+  }
+  img {
+    display: block;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.Composer--lg {
+  padding: 12px 20px 16px;
+
+  .Composer-input {
+    padding: 10px 38px 10px 16px;
+    border: 1px solid var(--white);
+    border-radius: 22px;
+
+    &:focus {
+      border-color: var(--brand-1);
+    }
+  }
+  .Composer-sendBtn {
+    right: 8px;
+    bottom: 8px;
+    font-size: 24px;
+  }
+}

@@ -1,0 +1,19 @@
+.MessageContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+
+  & > .PullToRefresh {
+    flex: 1;
+
+    & > .PullToRefresh-inner {
+      padding-bottom: 40px;
+    }
+  }
+}
+
+.MessageList {
+  padding: 8px;
+}

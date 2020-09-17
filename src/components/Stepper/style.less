@@ -1,0 +1,67 @@
+.Step {
+  position: relative;
+  padding-left: 24px;
+  padding-bottom: 10px;
+
+  &:last-child {
+    padding-bottom: 0;
+
+    .Step-line {
+      display: none;
+    }
+  }
+}
+
+.Step--active {
+  .Step-dot {
+    transform: scale(1.5);
+    background: var(--brand-1);
+  }
+  .Step-line {
+    background: var(--gray-6);
+  }
+  .Step-title,
+  .Step-desc {
+    color: var(--gray-1);
+  }
+}
+
+.Step--disabled {
+  .Step-dot,
+  .Step-line {
+    background: var(--gray-6);
+  }
+  .Step-title,
+  .Step-desc {
+    color: var(--gray-4);
+  }
+}
+
+.Step-dot {
+  position: absolute;
+  top: 6px;
+  left: 2px;
+  z-index: 2;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand-3);
+}
+
+.Step-line {
+  position: absolute;
+  top: 13px;
+  left: 5px;
+  bottom: -7px;
+  width: 2px;
+  background: var(--brand-3);
+}
+
+.Step-title {
+  color: var(--gray-2);
+}
+
+.Step-desc {
+  color: var(--gray-3);
+  font-size: 12px;
+}

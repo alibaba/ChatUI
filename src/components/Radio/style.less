@@ -1,0 +1,66 @@
+.Checkbox,
+.Radio {
+  position: relative;
+  display: inline-block;
+  margin: 0 5px 5px 0;
+  padding: 6px 12px;
+  border: 1px solid var(--gray-6);
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.15s ease-in-out;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.RadioGroup--block {
+  .Radio {
+    display: block;
+    margin: 10px 0 0;
+
+    &:first-child {
+      margin: 0;
+    }
+  }
+}
+
+.CheckboxGroup--block {
+  .Checkbox {
+    display: block;
+    margin: 10px 0 0;
+
+    &:first-child {
+      margin: 0;
+    }
+  }
+}
+
+.Checkbox--disabled,
+.Radio--disabled {
+  border-color: transparent;
+  background: var(--gray-7);
+  color: var(--gray-4);
+  cursor: initial;
+}
+
+.Checkbox--checked,
+.Radio--checked {
+  border-color: var(--brand-3);
+  background: var(--brand-3);
+  color: var(--gray-1);
+}
+
+.Checkbox-input,
+.Radio-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: inherit;
+}

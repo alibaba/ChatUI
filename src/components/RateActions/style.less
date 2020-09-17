@@ -1,0 +1,36 @@
+.RateActions {
+  position: relative;
+  z-index: @zindex-rate-actions;
+  align-self: flex-end;
+  width: 32px;
+  margin: 0 8px;
+}
+
+.RateBtn {
+  padding: 4px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: var(--shadow-1);
+  color: var(--gray-2);
+  font-size: 24px;
+  transition: 0.2s;
+
+  & + .RateBtn {
+    margin-top: 9px;
+  }
+  &.active {
+    box-shadow: 0;
+  }
+  &[data-type='good'] {
+    &:hover,
+    &.active {
+      color: var(--brand-1);
+    }
+  }
+  &[data-type='bad'] {
+    &:hover,
+    &.active {
+      color: #46c2eb;
+    }
+  }
+}

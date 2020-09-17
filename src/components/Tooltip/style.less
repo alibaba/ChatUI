@@ -1,0 +1,40 @@
+[data-tooltip] {
+  position: relative;
+  cursor: pointer;
+
+  &:after,
+  &:before {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.18s ease-out 0.18s;
+    transform: translate(-50%, 4px);
+    transform-origin: top;
+  }
+  &:after {
+    content: attr(aria-label);
+    margin-bottom: 10px;
+    padding: 0.5em 1em;
+    border-radius: 6px;
+    background: var(--gray-1);
+    color: var(--white);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  &:before {
+    content: "";
+    width: 0;
+    height: 0;
+    transform-origin: top;
+    border: 5px solid transparent;
+    border-top-color: var(--gray-1);
+  }
+  &:hover:before,
+  &:hover:after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

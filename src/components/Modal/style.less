@@ -1,0 +1,189 @@
+.Modal,
+.Popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  z-index: @zindex-modal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Modal {
+  &.active {
+    .Modal-dialog {
+      opacity: @modal-show-opacity;
+      transform: @modal-show-transform;
+    }
+  }
+}
+
+.Modal-dialog {
+  position: relative;
+  z-index: @zindex-modal;
+  width: @modal-width;
+  border-radius: @modal-border-radius;
+  background: @modal-bg;
+  box-shadow: @modal-box-shadow;
+  opacity: @modal-opacity;
+  transition: @modal-transition;
+  transform: @modal-fade-transform;
+}
+
+@media (max-width: 320px) {
+  .Modal-dialog {
+    width: 300px;
+  }
+}
+
+.Modal-header {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.Modal-title {
+  flex: 1;
+  padding: @modal-title-padding;
+  font-size: @modal-title-font-size;
+}
+
+.Modal-close {
+  padding: @modal-close-padding;
+  font-size: @modal-close-font-size;
+}
+
+.Modal-footer {
+  display: flex;
+}
+
+.Modal-footer--h {
+  padding: @modal-footer-x-padding;
+
+  .Btn {
+    flex: 1 1 auto;
+    line-height: @modal-btn-x-line-height;
+  }
+  .Btn + .Btn {
+    margin-left: @modal-btn-x-spacing;
+  }
+}
+
+.Modal-footer--v {
+  flex-direction: column;
+  padding-top: @modal-footer-y-padding-top;
+
+  .Btn {
+    padding: @modal-btn-y-padding 12px;
+    border: 0;
+    border-top: @modal-btn-y-border-width solid @modal-btn-y-border-color;
+    border-radius: 0;
+    background: @modal-btn-y-bg;
+    color: @modal-btn-y-color;
+    font-weight: @modal-btn-y-font-weight;
+
+    &:last-child {
+      border-radius: 0 0 @modal-border-radius @modal-border-radius;
+    }
+  }
+  .Btn--primary {
+    color: @modal-btn-y-primary-color;
+  }
+}
+
+/* Popup */
+.Popup {
+  align-items: flex-end;
+
+  &.active {
+    .Popup-dialog {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+.Popup-dialog {
+  position: relative;
+  z-index: @zindex-popup;
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-radius: @popup-border-radius @popup-border-radius 0 0;
+  background: @popup-bg;
+  box-shadow: @popup-box-shadow;
+  opacity: 0;
+  transform: translate3d(0, 100%, 0);
+  transition: 0.3s;
+}
+
+.Popup-header {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.Popup-title {
+  padding: @popup-title-padding;
+  flex: 1;
+  color: @popup-title-color;
+  font-size: @popup-title-font-size;
+}
+
+.Popup-close {
+  padding: @popup-close-padding;
+  color: @popup-close-color;
+  font-size: @popup-close-font-size;
+
+  &:hover {
+    color: @popup-close-hover-color;
+  }
+}
+
+.Popup-body {
+  &.overflow {
+    max-height: 300px;
+    max-height: @popup-max-height;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.Popup-footer {
+  display: flex;
+  flex-direction: column;
+  padding: @popup-footer-padding;
+  background: @popup-footer-bg;
+
+  .Btn + .Btn {
+    margin-top: @popup-btn-x-spacing;
+  }
+}
+
+/* Confirm */
+.Confirm {
+  text-align: center;
+
+  .Modal-body {
+    color: @confirm-color;
+    padding: @confirm-body-padding;
+  }
+}
+
+.S--modalOpen,
+.S--modalOpen .MessageContainer > .PullToRefresh {
+  overflow: hidden;
+}
+
+.S--wide {
+  .Popup {
+    align-items: center;
+  }
+  .Popup-dialog {
+    width: @popup-wide-width;
+    border-radius: @popup-border-radius;
+  }
+}

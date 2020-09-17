@@ -1,0 +1,6 @@
+*.js
+
+# build
+dist
+es
+lib

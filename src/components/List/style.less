@@ -1,0 +1,26 @@
+.List {
+  background: var(--white);
+}
+
+.ListItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-top: 1px solid var(--gray-7);
+  color: var(--gray-1);
+  transition: 0.3s;
+
+  &:first-child {
+    border-top: 0;
+  }
+}
+
+a.ListItem:hover {
+  background: var(--light-2);
+  color: var(--brand-1);
+  cursor: pointer;
+}
+
+.ListItem-content {
+  flex: 1;
+}

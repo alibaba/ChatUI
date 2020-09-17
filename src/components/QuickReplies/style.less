@@ -1,0 +1,62 @@
+.QuickReplies {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  z-index: 110;
+  bottom: 100%;
+  overflow: hidden;
+  padding: 4px 0;
+  background: rgba(242, 244, 245, 0.95);
+  transition: opacity 0.3s;
+
+  &[data-visible='false'] {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.QuickReply {
+  position: relative;
+  margin: 0;
+  padding: 5px 11px;
+  border: 1px solid var(--white);
+  border-radius: 20px;
+  line-height: 1.43;
+  background: var(--white);
+  cursor: pointer;
+  color: var(--gray-1);
+  transition: 0.15s ease-in-out;
+
+  &.new::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: 2px;
+    width: 9px;
+    height: 9px;
+    border: 1px solid var(--white);
+    background-color: var(--red);
+    overflow: hidden;
+    border-radius: 50%;
+  }
+  &.highlight {
+    border-color: var(--brand-2);
+  }
+  &-inner {
+    display: flex;
+    align-items: center;
+  }
+  &-img {
+    max-height: 16px;
+  }
+  &-inner > .Icon,
+  &-img {
+    margin-right: 3px;
+  }
+}
+
+@media (hover: hover) {
+  .QuickReply:hover {
+    border-color: var(--brand-2);
+  }
+}

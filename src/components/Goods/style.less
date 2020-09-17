@@ -1,0 +1,57 @@
+.Goods {
+  padding: @goods-gap;
+
+  & + & {
+    border-top: @goods-border-width solid @goods-border-color;
+  }
+  &-img {
+    width: @goods-img-width;
+    height: @goods-img-height;
+    margin-right: @goods-gap;
+    object-fit: contain;
+  }
+  &-main {
+    .Price {
+      margin-right: @goods-gap;
+    }
+  }
+  &-desc {
+    color: @goods-desc-color;
+    font-size: @goods-desc-font-size;
+  }
+  &-meta {
+    color: @goods-meta-color;
+    font-size: @goods-meta-font-size;
+  }
+  &-countUnit {
+    color: @goods-count-color;
+    font-size: @goods-count-font-size;
+  }
+  &-unit {
+    margin-left: 3px;
+    font-size: @goods-unit-font-size;
+  }
+  &-buyBtn {
+    float: right;
+    background: @goods-buy-btn-bg;
+    color: @goods-buy-btn-color;
+    padding: @goods-buy-btn-padding;
+  }
+  &-detailBtn {
+    min-width: @goods-detail-btn-min-width;
+    padding: @goods-detail-btn-padding;
+    border-radius: @goods-detail-btn-border-radius;
+    font-size: @goods-detail-btn-font-size;
+    line-height: @goods-detail-btn-line-height;
+  }
+  &-aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: @goods-gap;
+  }
+  &-status {
+    color: @goods-status-color;
+    font-size: @goods-status-font-size;
+  }
+}

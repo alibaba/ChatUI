@@ -1,0 +1,91 @@
+.RecorderToast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  width: 160px;
+  height: 160px;
+  padding: 10px;
+  transform: translate(-50%, -50%);
+  border-radius: 12px;
+  background: rgba(51, 51, 51, 0.87);
+  color: var(--white);
+  text-align: center;
+}
+
+.Recorder--cancel {
+  .RecorderToast {
+    color: var(--red);
+  }
+  .Recorder-btn {
+    background: var(--gray-7);
+    color: var(--gray-3);
+  }
+}
+
+.RecorderToast-icon {
+  position: relative;
+  font-size: 37px;
+}
+
+.RecorderToast-waves {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  transition: .3s;
+}
+
+.RecorderToast-wave-1,
+.RecorderToast-wave-2,
+.RecorderToast-wave-3 {
+  position: absolute;
+  z-index: -1;
+  color: var(--brand-2);
+  animation: wave 10s linear infinite;
+}
+
+.RecorderToast-wave-1 {
+  top: -25px;
+  left: 14px;
+  font-size: 176px;
+  opacity: 0.2;
+}
+
+.RecorderToast-wave-2 {
+  top: -12px;
+  left: -21px;
+  font-size: 186px;
+  opacity: 0.4;
+}
+
+.RecorderToast-wave-3 {
+  top: 21px;
+  left: 46px;
+  font-size: 71px;
+  opacity: 0.8;
+}
+
+.Recorder-btn {
+  height: 38px;
+  border-radius: 20px;
+  background: var(--white);
+  color: var(--gray-dark);
+  line-height: 38px;
+  text-align: center;
+  transition: .3s;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+@keyframes wave {
+  0% {
+    transform: translateY(5%) rotate(0);
+  }
+  50% {
+    transform: translateY(-5%) rotate(180deg);
+  }
+  100% {
+    transform: translateY(5%) rotate(360deg);
+  }
+}

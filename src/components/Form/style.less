@@ -1,0 +1,63 @@
+.Form {
+  background: var(--white);
+
+  &.is-light {
+    background: var(--light-2);
+
+    .InputWrapper {
+      margin: 0 -12px;
+    }
+  }
+}
+
+/* FormItem */
+.FormItem {
+  position: relative;
+  padding: 0 12px;
+
+  & + & {
+    margin-top: 20px;
+  }
+  &.required {
+    .Label:after {
+      content: '*';
+      display: inline-block;
+      color: var(--red);
+      font-size: 14px;
+      font-family: SimSun,sans-serif;
+      line-height: 1;
+      vertical-align: middle;
+    }
+  }
+  &.is-invalid {
+    .Label,
+    .HelpText {
+      color: var(--red);
+    }
+    .InputWrapper.is-light .Input {
+      border-bottom-color: var(--red);
+    }
+  }
+  .RadioGroup,
+  .CheckboxGroup {
+    margin-top: 10px;
+  }
+  .Label + .Input {
+    margin-top: 5px;
+  }
+}
+
+/* FormActions */
+.FormActions {
+  display: flex;
+  padding: 10px 12px;
+  background: var(--white);
+
+  .Btn {
+    flex: 1;
+    line-height: 20px;
+  }
+  .Btn + .Btn {
+    margin-left: 6px;
+  }
+}

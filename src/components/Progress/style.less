@@ -1,0 +1,23 @@
+.Progress {
+  display: flex;
+  height: @progress-height;
+  overflow: hidden;
+  background-color: @progress-bg;
+  border-radius: @progress-border-radius;
+
+  &-bar {
+    overflow: hidden;
+    background-color: @progress-bar-bg;
+    transition: @progress-bar-transition;
+  }
+  &--success {
+    .Progress-bar {
+      background-color: @progress-bar-bg-success;
+    }
+  }
+  &--error {
+    .Progress-bar {
+      background-color: @progress-bar-bg-error;
+    }
+  }
+}

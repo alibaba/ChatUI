@@ -1,0 +1,59 @@
+.FileCard {
+  padding: 8px;
+}
+
+.FileCard-icon {
+  position: relative;
+  height: 60px;
+  margin-right: 8px;
+  color: var(--gray-2);
+
+  &[data-type='pdf'] {
+    color: var(--red);
+  }
+  &[data-type*='doc'] {
+    color: var(--blue);
+  }
+  &[data-type*='ppt'],
+  &[data-type='key'] {
+    color: var(--orange);
+  }
+  &[data-type*='xls'] {
+    color: var(--green);
+  }
+  &[data-type='rar'],
+  &[data-type='zip'] {
+    color: var(--brand-1);
+  }
+  .Icon {
+    font-size: 60px;
+  }
+}
+
+.FileCard-name {
+  height: 38px;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.FileCard-ext {
+  position: absolute;
+  left: 20px;
+  bottom: 15px;
+  transform-origin: left bottom;
+  transform: scale(0.5);
+  max-width: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.FileCard-meta {
+  color: var(--gray-3);
+  font-size: 12px;
+
+  & > a,
+  & > span {
+    margin-right: 10px;
+  }
+}
