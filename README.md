@@ -26,11 +26,11 @@ English | [简体中文](./README.zh-CN.md)
 
 ## Features
 
-- 😎**Best Practices**: The best practice for chat interaction based on our experience of Alime Chatbot
-- 🛡**TypeScript**: Written in TypeScript with predictable static types
-- 📱**Responsive**: Responsive design to adapt automatically to whatever device
-- ♿**Accessibility**: Accessibility support and get the certification from Accessibility Research Association
-- 🎨**Theming**: Powerful theme customization in every detail
+- 😎 **Best Practices**: The best practice for chat interaction based on our experience of Alime Chatbot
+- 🛡 **TypeScript**: Written in TypeScript with predictable static types
+- 📱 **Responsive**: Responsive design to adapt automatically to whatever device
+- ♿ **Accessibility**: Accessibility support and get the certification from Accessibility Research Association
+- 🎨 **Theming**: Powerful theme customization in every detail
 - 🌍 **International**: Internationalization support for dozens of languages
 
 ## Environment Support
