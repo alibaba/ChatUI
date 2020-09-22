@@ -1,12 +1,22 @@
-<p align="center">
+<h1 align="center">
   <a href="https://chatui.io/">
     <img width="109" height="28" src="https://gw.alicdn.com/tfs/TB1uYH4QoY1gK0jSZFMXXaWcVXa-218-56.svg" alt="ChatUI">
   </a>
-</p>
+</h1>
 
 <p align="center">服务于智能对话领域的设计和开发体系，助力智能对话机器人的搭建</p>
 
 <p align="center">官网：<a href="https://chatui.io/" target="_blank">https://chatui.io</a></p>
+
+<div align="center">
+
+[![LICENSE](https://img.shields.io/npm/l/@chatui/core?style=flat-square)](https://github.com/alibaba/ChatUI/blob/master/LICENSE)
+[![NPM version](https://img.shields.io/npm/v/@chatui/core?style=flat-square)](https://www.npmjs.com/package/@chatui/core)
+[![NPM downloads](https://img.shields.io/npm/dm/@chatui/core?style=flat-square)](https://www.npmjs.com/package/@chatui/core)
+[![Gzip Size](https://img.badgesize.io/https://unpkg.com/@chatui/core@0.1.0/dist/index.js?compression=gzip)](https://unpkg.com/@chatui/core@0.1.0/dist/index.js)
+[![Jsdelivr Hits](https://img.shields.io/jsdelivr/npm/hm/@chatui/core?style=flat-square)](https://cdn.jsdelivr.net/npm/@chatui/core)
+
+</div>
 
 <p align="center">
   <img width="750" src="https://gw.alicdn.com/tfs/TB1WTl.lQ9l0K4jSZFKXXXFjpXa-1500-833.jpg">
@@ -85,6 +95,8 @@ const App = () => {
   );
 };
 ```
+
+[![DEMO](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/chatui-demo-o6n3z?fontsize=14&hidenavigation=1&theme=dark)
 
 ### 定制主题
 
