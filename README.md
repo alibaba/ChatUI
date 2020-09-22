@@ -4,7 +4,7 @@
   </a>
 </h1>
 
-<p align="center">The UI design language and React library for Chatbot UI</p>
+<p align="center">The UI design language and React library for Conversational UI</p>
 
 <p align="center">Website：<a href="https://chatui.io/" target="_blank">https://chatui.io</a></p>
 
@@ -26,12 +26,12 @@ English | [简体中文](./README.zh-CN.md)
 
 ## Features
 
-- The best practice for chatbot interaction and design based on our experience of Alime Chatbot
-- Written in TypeScript with predictable static types
-- Responsive design to adapt automatically to whatever device
-- Accessibility support and get the certification from Accessibility Research Association
-- Powerful theme customization in every detail
-- Internationalization support for dozens of languages
+- 😎**Best Practices**: The best practice for chat interaction based on our experience of Alime Chatbot
+- 🛡**TypeScript**: Written in TypeScript with predictable static types
+- 📱**Responsive**: Responsive design to adapt automatically to whatever device
+- ♿**Accessibility**: Accessibility support and get the certification from Accessibility Research Association
+- 🎨**Theming**: Powerful theme customization in every detail
+- 🌍 **International**: Internationalization support for dozens of languages
 
 ## Environment Support
 
