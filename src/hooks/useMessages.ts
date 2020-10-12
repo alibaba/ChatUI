@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useCallback } from 'react';
 import { getRandomString } from '../utils';
 import { MessageProps, MessageId } from '../components/Message';
 
@@ -28,44 +28,54 @@ const makeMsg = (msg: MessageWithoutId, id?: MessageId) => {
 };
 
 const TYPING_ID = '_TYPING_';
-let isTyping = false;
 
 export default function useMessages(initialState: MessageWithoutId[] = []) {
   const initialMsgs: Messages = useMemo(() => initialState.map(makeMsg), [initialState]);
   const [messages, setMessages] = useState(initialMsgs);
+  const isTypingRef = useRef(false);
 
-  const prependMsgs = (msgs: Messages) => {
+  const prependMsgs = useCallback((msgs: Messages) => {
     setMessages((prev: Messages) => [...msgs, ...prev]);
-  };
+  }, []);
 
-  const updateMsg = (id: MessageId, msg: MessageWithoutId) => {
+  const updateMsg = useCallback((id: MessageId, msg: MessageWithoutId) => {
     setMessages((prev) => prev.map((t) => (t._id === id ? makeMsg(msg, id) : t)));
-  };
+  }, []);
 
-  const appendMsg = (msg: MessageWithoutId) => {
-    const newMsg = makeMsg(msg);
-    if (isTyping) {
-      isTyping = false;
-      updateMsg(TYPING_ID, newMsg);
-    } else {
-      setMessages((prev) => [...prev, newMsg]);
-    }
-  };
+  const appendMsg = useCallback(
+    (msg: MessageWithoutId) => {
+      const newMsg = makeMsg(msg);
+      if (isTypingRef.current) {
+        isTypingRef.current = false;
+        updateMsg(TYPING_ID, newMsg);
+      } else {
+        setMessages((prev) => [...prev, newMsg]);
+      }
+    },
+    [updateMsg],
+  );
 
-  const deleteMsg = (id: MessageId) => {
+  const deleteMsg = useCallback((id: MessageId) => {
     setMessages((prev) => prev.filter((t) => t._id !== id));
-  };
+  }, []);
 
-  const setTyping = (typing: boolean) => {
-    if (typing) {
-      appendMsg({
-        _id: TYPING_ID,
-        type: 'typing',
-        content: {},
-      });
-      isTyping = typing;
-    }
-  };
+  const setTyping = useCallback(
+    (typing: boolean) => {
+      if (typing === isTypingRef.current) return;
+
+      if (typing) {
+        appendMsg({
+          _id: TYPING_ID,
+          type: 'typing',
+          content: {},
+        });
+      } else {
+        deleteMsg(TYPING_ID);
+      }
+      isTypingRef.current = typing;
+    },
+    [appendMsg, deleteMsg],
+  );
 
   return {
     messages,
