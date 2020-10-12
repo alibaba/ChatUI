@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Typing /> should render correctly 1`] = `
+<div>
+  <div
+    class="Bubble typing"
+    data-type="typing"
+  >
+    <div
+      aria-busy="true"
+      class="Typing"
+    >
+      <div
+        class="Typing-dot"
+      />
+      <div
+        class="Typing-dot"
+      />
+      <div
+        class="Typing-dot"
+      />
+    </div>
+  </div>
+</div>
+`;
