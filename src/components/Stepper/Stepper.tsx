@@ -23,7 +23,7 @@ export const Stepper = React.forwardRef<HTMLUListElement, StepperProps>((props, 
       state.active = true;
     } else if (current > index) {
       state.completed = true;
-    } else if (current < index) {
+    } else {
       state.disabled = true;
     }
 
