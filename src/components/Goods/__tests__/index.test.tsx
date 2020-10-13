@@ -4,7 +4,7 @@ import { Goods } from '..';
 
 afterEach(cleanup);
 
-describe('<Empty />', () => {
+describe('<Goods />', () => {
   it('should render the name', () => {
     const { getByTestId } = render(<Goods name="testName" data-testid="goods" />);
     const goods = getByTestId('goods');
@@ -43,6 +43,23 @@ describe('<Empty />', () => {
     expect(goods.querySelector('.Price')).toHaveTextContent('123');
   });
 
+  it('should render the original price', () => {
+    const { getByTestId } = render(
+      <Goods name="testName" price={123} originalPrice={321} data-testid="goods" />,
+    );
+    const goods = getByTestId('goods');
+
+    expect(goods.querySelector('.Price')).toHaveTextContent('123');
+    expect(goods.querySelector('.Price--original')).toHaveTextContent('321');
+  });
+
+  it('should render the meta content', () => {
+    const { getByTestId } = render(<Goods name="testName" meta="testMeta" data-testid="goods" />);
+    const goods = getByTestId('goods');
+
+    expect(goods.querySelector('.Goods-meta')).toHaveTextContent('testMeta');
+  });
+
   it('should render the count', () => {
     const { getByTestId } = render(
       <Goods name="testName" count={123} unit="g" data-testid="goods" />,
@@ -63,5 +80,16 @@ describe('<Empty />', () => {
     if (btn) {
       fireEvent.click(btn);
     }
+  });
+
+  it('should render order', () => {
+    const { getByTestId } = render(
+      <Goods type="order" name="testName" action={{ label: 'testAction' }} data-testid="order" />,
+    );
+    const order = getByTestId('order');
+
+    expect(order.querySelector('.Goods-name')).toHaveTextContent('testName');
+    expect(order.querySelector('.Goods-aside')).not.toBeNull();
+    expect(order.querySelector('.Goods-detailBtn')).toHaveTextContent('testAction');
   });
 });
