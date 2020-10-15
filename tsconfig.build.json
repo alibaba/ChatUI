@@ -4,5 +4,6 @@
     "declaration": true,
     "declarationDir": "lib",
     "emitDeclarationOnly": true
-  }
+  },
+  "exclude": ["**/__tests__"]
 }
