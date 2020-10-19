@@ -98,6 +98,14 @@ const App = () => {
 
 [![DEMO](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/chatui-demo-o6n3z?fontsize=14&hidenavigation=1&theme=dark)
 
+### Development
+
+```bash
+cd storybook
+npm i
+npm run storybook
+```
+
 ## Theme
 
 Visit [Customize Theme](https://chatui.io/docs/customize-theme) for detail

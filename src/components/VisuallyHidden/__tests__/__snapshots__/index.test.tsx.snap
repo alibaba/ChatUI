@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<VisuallyHidden /> should render correctly 1`] = `
+<div>
+  <span
+    style="position: absolute; height: 1px; width: 1px; overflow: hidden; margin: -1px; white-space: nowrap;"
+  />
+</div>
+`;

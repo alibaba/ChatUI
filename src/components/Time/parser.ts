@@ -6,7 +6,7 @@ export type IDate = number | string | Date;
 
 type DateFormats = {
   [p: string]: string;
-}
+};
 
 interface TimeLocale {
   weekdays: string[];
@@ -34,11 +34,11 @@ const getFormat = (date: Date) => {
   const diff = getWeeHours().getTime() - date.getTime();
 
   if (diff < 0) {
-    return 'LT';
+    return 'LT'; // 今天
   } else if (diff < MS_A_DAY) {
-    return 'YT';
+    return 'YT'; // 昨天
   } else if (diff < MS_A_WEEK) {
-    return 'WT';
+    return 'WT'; // 这周
   }
   return 'lll';
 };

@@ -6,8 +6,8 @@ type ILocales = {
 };
 
 type ILocaleContext = {
-  locale: string;
-  locales: ILocales;
+  locale?: string;
+  locales?: ILocales;
 };
 
 const LocaleContext = React.createContext<ILocaleContext>(undefined!);
@@ -21,10 +21,11 @@ LocaleProvider.defaultProps = {
   locale: DEFAULT_LOCALE,
 };
 
-const useLocale = (comp: string) => {
+const useLocale = (comp?: string) => {
   const localeContext = useContext(LocaleContext);
   const { locale, locales } = localeContext;
-  const defaultStrings = (defaultLocales as ILocales)[locale] || defaultLocales[DEFAULT_LOCALE];
+  const defaultStrings =
+    (locale && (defaultLocales as ILocales)[locale]) || defaultLocales[DEFAULT_LOCALE];
   let strings = locales ? { ...defaultStrings, ...locales } : defaultStrings;
 
   if (comp) {

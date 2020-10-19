@@ -7,7 +7,7 @@ export interface ToolbarProps {
 }
 
 export const Toolbar: React.FC<ToolbarProps> = (props) => {
-  const { items = [], onClick } = props;
+  const { items, onClick } = props;
   return (
     <div className="Toolbar">
       {items.map((item) => (
