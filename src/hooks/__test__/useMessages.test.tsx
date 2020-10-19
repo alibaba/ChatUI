@@ -178,16 +178,12 @@ describe('useMessages', () => {
     expect(queryAllByTestId('item').length).toBe(1);
   });
 
-  it('should render typing bubble', () => {
+  it('should toggle typing bubble', () => {
     function Test() {
       const { messages, setTyping } = useMessages([
         { type: 'test', content: 'test1', _id: 1 },
         { type: 'test', content: 'test2', _id: 2 },
       ]);
-
-      function handleClick() {
-        setTyping(true);
-      }
 
       return (
         <div data-testid="list">
@@ -196,14 +192,60 @@ describe('useMessages', () => {
               {t.type === 'typing' ? t.type : t.content}
             </span>
           ))}
-          <button data-testid="btn" onClick={handleClick} />
+          <button
+            data-testid="add"
+            onClick={() => {
+              setTyping(true);
+            }}
+          />
+          <button
+            data-testid="remove"
+            onClick={() => {
+              setTyping(false);
+            }}
+          />
         </div>
       );
     }
 
     const { queryAllByTestId, getByTestId } = render(<Test />);
 
-    fireEvent.click(getByTestId('btn'));
+    fireEvent.click(getByTestId('add'));
+    expect(queryAllByTestId('item').length).toBe(3);
+    expect(queryAllByTestId('item')[2]).toHaveTextContent('typing');
+
+    fireEvent.click(getByTestId('remove'));
+    expect(queryAllByTestId('item').length).toBe(2);
+  });
+
+  it('should ignore when call `setTyping` twice', () => {
+    function Test() {
+      const { messages, setTyping } = useMessages([
+        { type: 'test', content: 'test1', _id: 1 },
+        { type: 'test', content: 'test2', _id: 2 },
+      ]);
+
+      return (
+        <div data-testid="list">
+          {messages.map((t) => (
+            <span data-testid="item" key={t._id}>
+              {t.type === 'typing' ? t.type : t.content}
+            </span>
+          ))}
+          <button
+            data-testid="add"
+            onClick={() => {
+              setTyping(true);
+            }}
+          />
+        </div>
+      );
+    }
+
+    const { queryAllByTestId, getByTestId } = render(<Test />);
+
+    fireEvent.click(getByTestId('add'));
+    fireEvent.click(getByTestId('add'));
     expect(queryAllByTestId('item').length).toBe(3);
     expect(queryAllByTestId('item')[2]).toHaveTextContent('typing');
   });
