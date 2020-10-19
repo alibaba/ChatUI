@@ -98,6 +98,14 @@ const App = () => {
 
 [![DEMO](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/chatui-demo-o6n3z?fontsize=14&hidenavigation=1&theme=dark)
 
+### 本地开发
+
+```bash
+cd storybook
+npm i
+npm run storybook
+```
+
 ### 定制主题
 
 参考 [定制主题](https://chatui.io/docs/customize-theme) 文档。
