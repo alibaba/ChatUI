@@ -109,9 +109,10 @@ export const Tabs: React.FC<TabsProps> = (props) => {
     const nav = navRef.current;
     if (!nav) return;
 
-    const tab = nav.children[indexRef.current].firstChild;
-    if (!tab) return;
+    const currentNav = nav.children[indexRef.current];
+    if (!currentNav) return;
 
+    const tab = currentNav.firstChild;
     const { offsetWidth: tabWidth, offsetLeft: tabOffsetLeft } = tab as HTMLElement;
 
     setPointerStyles({
