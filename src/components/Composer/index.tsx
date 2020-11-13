@@ -246,7 +246,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
         autoSize
         ref={inputRef}
         placeholder={placeholder}
-        enterkeyhint="send"
+        enterKeyHint="send"
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         onKeyDown={handleInputKeyDown}
