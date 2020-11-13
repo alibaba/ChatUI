@@ -31,7 +31,7 @@ export const Base: React.FC<ModalProps> = (props) => {
     title,
     titleId = useNextId('modal-'),
     showClose = true,
-    autoFocus,
+    autoFocus = true,
     backdrop = true,
     overflow,
     actions,
