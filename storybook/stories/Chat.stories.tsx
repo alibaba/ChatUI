@@ -111,6 +111,13 @@ export const Default = (args: ChatProps) => {
     <Chat
       {...args}
       navbar={{ title: '智能助理' }}
+      toolbar={[
+        {
+          type: 'photo',
+          title: 'Photo',
+          icon: 'image',
+        },
+      ]}
       messages={messages}
       renderMessageContent={renderMessageContent}
       quickReplies={defaultQuickReplies}
