@@ -30,6 +30,7 @@ const QuickReplies = (props: QuickRepliesProps) => {
     <ScrollView
       className="QuickReplies"
       data={items}
+      itemKey="code"
       ref={scroller}
       data-visible={visible}
       fullWidth

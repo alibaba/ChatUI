@@ -1,7 +1,14 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 
-import Chat, { Bubble, MessageProps, ChatProps, useMessages, QuickReplyItemProps } from '../../src';
+import Chat, {
+  Bubble,
+  MessageProps,
+  ChatProps,
+  useMessages,
+  QuickReplyItemProps,
+  useQuickReplies,
+} from '../../src';
 import '../../src/styles/index.less';
 
 export default {
@@ -42,25 +49,30 @@ const defaultQuickReplies = [
   {
     icon: 'message',
     name: '联系人工服务',
+    code: 'q1',
     isNew: true,
     isHighlight: true,
   },
   {
     name: '短语1',
+    code: 'q2',
     isNew: true,
   },
   {
     name: '短语2',
+    code: 'q3',
     isHighlight: true,
   },
   {
     name: '短语3',
+    code: 'q4',
   },
 ];
 
 export const Default = (args: ChatProps) => {
   // 消息列表
   const { messages, appendMsg, setTyping } = useMessages(initialMessages);
+  const { quickReplies, replace } = useQuickReplies(defaultQuickReplies);
 
   // 发送回调
   function handleSend(type: string, val: string) {
@@ -87,6 +99,20 @@ export const Default = (args: ChatProps) => {
   // 快捷短语回调，可根据 item 数据做出不同的操作，这里以发送文本消息为例
   function handleQuickReplyClick(item: QuickReplyItemProps) {
     handleSend('text', item.name);
+
+    if (item.code === 'q1') {
+      replace([
+        {
+          name: '短语a',
+          code: 'qa',
+          isHighlight: true,
+        },
+        {
+          name: '短语b',
+          code: 'qb',
+        },
+      ]);
+    }
   }
 
   function renderMessageContent(msg: MessageProps) {
@@ -120,7 +146,7 @@ export const Default = (args: ChatProps) => {
       ]}
       messages={messages}
       renderMessageContent={renderMessageContent}
-      quickReplies={defaultQuickReplies}
+      quickReplies={quickReplies}
       onQuickReplyClick={handleQuickReplyClick}
       onSend={handleSend}
     />

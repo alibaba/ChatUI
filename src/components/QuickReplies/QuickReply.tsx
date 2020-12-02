@@ -4,6 +4,7 @@ import { Icon } from '../Icon';
 
 export interface QuickReplyItemProps {
   name: string;
+  code?: string;
   icon?: string;
   img?: string;
   isNew?: boolean;
@@ -18,6 +19,11 @@ export interface QuickReplyProps {
 
 export const QuickReply = (props: QuickReplyProps) => {
   const { item, index, onClick } = props;
+
+  function handleClick() {
+    onClick(item, index);
+  }
+
   return (
     <button
       className={clsx('QuickReply', {
@@ -25,8 +31,9 @@ export const QuickReply = (props: QuickReplyProps) => {
         highlight: item.isHighlight,
       })}
       type="button"
-      onClick={() => onClick(item, index)}
+      data-code={item.code}
       aria-label={`快捷短语: ${item.name}，双击发送`}
+      onClick={handleClick}
     >
       <div className="QuickReply-inner">
         {item.icon && <Icon type={item.icon} />}
