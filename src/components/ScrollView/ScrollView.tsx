@@ -5,11 +5,12 @@ import { IconButton } from '../IconButton';
 import canUse from '../../utils/canUse';
 
 export type ScrollViewProps<T> = Pick<ScrollViewItemProps, 'effect' | 'onIntersect'> & {
+  data: Array<T>;
+  renderItem: (item: T, index: number) => React.ReactNode;
   className?: string;
   fullWidth?: boolean;
   scrollX?: boolean;
-  data: Array<T>;
-  renderItem: (item: T, index: number) => React.ReactNode;
+  itemKey?: string | ((item: T, index: number) => string);
   onScroll?: (event: React.UIEvent<HTMLDivElement, UIEvent>) => void;
   children?: React.ReactNode;
 };
@@ -27,6 +28,7 @@ export const ScrollView = React.forwardRef<ScrollViewHandle, ScrollViewProps<any
     scrollX = true,
     effect = 'slide',
     data,
+    itemKey,
     renderItem,
     onIntersect,
     onScroll,
@@ -44,6 +46,14 @@ export const ScrollView = React.forwardRef<ScrollViewHandle, ScrollViewProps<any
   function handleNext() {
     const el = scrollerRef.current;
     el.scrollLeft += el.offsetWidth;
+  }
+
+  function getItemKey(item: any, index: number) {
+    let key;
+    if (itemKey) {
+      key = typeof itemKey === 'function' ? itemKey(item, index) : item[itemKey];
+    }
+    return key || index;
   }
 
   useImperativeHandle(ref, () => ({
@@ -77,7 +87,7 @@ export const ScrollView = React.forwardRef<ScrollViewHandle, ScrollViewProps<any
       <div className="ScrollView-scroller" ref={scrollerRef} onScroll={onScroll}>
         <div className="ScrollView-inner">
           {data.map((item, i) => (
-            <Item item={item} effect={effect} onIntersect={onIntersect} key={i}>
+            <Item item={item} effect={effect} onIntersect={onIntersect} key={getItemKey(item, i)}>
               {renderItem(item, i)}
             </Item>
           ))}
