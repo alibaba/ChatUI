@@ -1,13 +1,18 @@
 .List {
-  background: var(--white);
+  background: @list-bg;
+
+  &--bordered {
+    border: @list-border-width solid @list-border-color;
+    border-radius: @list-border-radius;
+  }
 }
 
 .ListItem {
   display: flex;
   align-items: center;
-  padding: 10px 15px;
-  border-top: 1px solid var(--gray-7);
-  color: var(--gray-1);
+  padding: @list-item-padding;
+  border-top: @list-border-width solid @list-border-color;
+  color: @list-item-color;
   transition: 0.3s;
 
   &:first-child {
@@ -16,8 +21,8 @@
 }
 
 a.ListItem:hover {
-  background: var(--light-2);
-  color: var(--brand-1);
+  background: @list-item-hover-bg;
+  color: @list-item-hover-color;
   cursor: pointer;
 }
 
