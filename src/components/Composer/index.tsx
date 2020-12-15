@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { useState, useRef, useEffect, useImperativeHandle } from 'react';
 import clsx from 'clsx';
-import { IconButton, IconButtonProps } from '../IconButton';
+import { IconButtonProps } from '../IconButton';
 import { Input } from '../Input';
 import { Recorder, RecorderProps } from '../Recorder';
 import { Toolbar } from '../Toolbar';
@@ -234,14 +234,16 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     return <ClickOutside onClick={handleAccessoryBlur}>{accessory}</ClickOutside>;
   }
 
-  const inputTypeIcon = inputType === 'text' ? 'mic' : 'keyboard';
+  const isInputText = inputType === 'text';
+  const inputTypeIcon = isInputText ? 'mic' : 'keyboard';
   const hasToolbar = toolbar.length > 0;
 
-  const renderInput = () => (
-    <div className={clsx({ 'S--invisible': inputType !== 'text' })}>
+  const renderInput = (minRows: number) => (
+    <div className={clsx({ 'S--invisible': !isInputText })}>
       <Input
         className="Composer-input"
         value={text}
+        minRows={minRows}
         rows={1}
         autoSize
         ref={inputRef}
@@ -252,12 +254,6 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
         onKeyDown={handleInputKeyDown}
         onChange={handleTextChange}
         onPaste={onImageSend ? handlePaste : undefined}
-      />
-      <IconButton
-        className="Composer-sendBtn"
-        icon="paper-plane"
-        onMouseDown={handleSendBtnClick}
-        aria-label="发送"
       />
       {handlePaste && (
         <SendConfirm file={pastedImage!} onCancel={handleImageCancel} onSend={handleImageSend} />
@@ -288,7 +284,15 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
             {accessoryContent}
           </Popover>
         )}
-        <div className="Composer-inputWrap">{renderInput()}</div>
+        <div className="Composer-inputWrap">{renderInput(3)}</div>
+        <Action
+          className="Composer-sendBtn"
+          icon="paper-plane"
+          color="primary"
+          disabled={!text}
+          onMouseDown={handleSendBtnClick}
+          aria-label="发送"
+        />
       </div>
     );
   }
@@ -302,15 +306,24 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
             data-icon={inputTypeIcon}
             icon={inputTypeIcon}
             onClick={handleInputTypeChange}
-            aria-label={inputType === 'text' ? '切换到语音输入' : '切换到键盘输入'}
+            aria-label={isInputText ? '切换到语音输入' : '切换到键盘输入'}
           />
         )}
         <div className="Composer-inputWrap">
-          {renderInput()}
-          {inputType === 'voice' && <Recorder {...recorder} />}
+          {renderInput(1)}
+          {!isInputText && <Recorder {...recorder} />}
         </div>
-        {rightAction && <Action {...rightAction} />}
-        {hasToolbar && (
+        {text && (
+          <Action
+            className="Composer-sendBtn"
+            icon="paper-plane"
+            color="primary"
+            onMouseDown={handleSendBtnClick}
+            aria-label="发送"
+          />
+        )}
+        {!text && rightAction && <Action {...rightAction} />}
+        {!text && hasToolbar && (
           <Action
             className={clsx('Composer-toggleBtn', {
               active: isAccessoryOpen,

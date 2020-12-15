@@ -14,11 +14,17 @@
     border-radius: 50%;
     font-size: 26px;
   }
-  .IconBtn,
-  .IconBtn:hover,
-  .IconBtn:active {
-    background: var(--white);
-    color: var(--brand-1);
+  .IconBtn:not(:disabled) {
+    &,
+    &:hover,
+    &:active {
+      background: var(--white);
+      color: var(--brand-1);
+    }
+  }
+  .Btn--primary:not(:disabled) {
+    background: var(--brand-1);
+    color: var(--white);
   }
 }
 
@@ -51,17 +57,6 @@
     visibility: hidden;
     opacity: 0;
   }
-}
-
-.Composer-sendBtn {
-  position: absolute;
-  right: 7px;
-  bottom: 7px;
-  padding: 2px;
-  background: var(--brand-1);
-  color: var(--white);
-  font-size: 20px;
-  transition: 0.3s;
 }
 
 .Composer-toolbar {
@@ -102,9 +97,7 @@
       border-color: var(--brand-1);
     }
   }
-  .Composer-sendBtn {
-    right: 8px;
-    bottom: 8px;
-    font-size: 24px;
+  .Composer-actions {
+    padding: 4px 0;
   }
 }
