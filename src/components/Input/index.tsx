@@ -20,7 +20,7 @@ export type InputProps = {
   multiline?: boolean;
   autoSize?: boolean;
   disabled?: boolean;
-  enterKeyHint?: string;
+  enterKeyHint?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
   onChange?: (
     value: string,
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
