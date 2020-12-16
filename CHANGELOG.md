@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/alibaba/ChatUI/compare/v0.1.5...v0.2.0) (2020-12-16)
+
+
+### Features
+
+* [Composer] Change the send button and plus sign to mutually exclusive display ([de48814](https://github.com/alibaba/ChatUI/commit/de4881497cd0588b3e05d45477e978e279075cd4))
+
+
+### Bug Fixes
+
+* [Input] update `enterKeyHint`'s type ([a880eac](https://github.com/alibaba/ChatUI/commit/a880eac5329c4a674a2ad0b504a75bfc8c4b5b68))
+
 ### [0.1.5](https://github.com/alibaba/ChatUI/compare/v0.1.4...v0.1.5) (2020-12-08)
 
 
