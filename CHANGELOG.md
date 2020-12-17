@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/alibaba/ChatUI/compare/v0.2.0...v0.2.1) (2020-12-17)
+
+
+### Bug Fixes
+
+* [Composer] Revert .ChatFooter's z-index ([9a855b0](https://github.com/alibaba/ChatUI/commit/9a855b0eeee104b8693380679faeba69dbfadf33))
+* [RateActions] Reduce .RateActions' z-index ([0ca468e](https://github.com/alibaba/ChatUI/commit/0ca468e0f06406b2e9c02c1cb7e22795201f8c01))
+
 ## [0.2.0](https://github.com/alibaba/ChatUI/compare/v0.1.5...v0.2.0) (2020-12-16)
 
 
