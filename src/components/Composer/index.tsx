@@ -313,17 +313,8 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
           {renderInput(1)}
           {!isInputText && <Recorder {...recorder} />}
         </div>
-        {text && (
-          <Action
-            className="Composer-sendBtn"
-            icon="paper-plane"
-            color="primary"
-            onMouseDown={handleSendBtnClick}
-            aria-label="发送"
-          />
-        )}
         {!text && rightAction && <Action {...rightAction} />}
-        {!text && hasToolbar && (
+        {hasToolbar && (
           <Action
             className={clsx('Composer-toggleBtn', {
               active: isAccessoryOpen,
@@ -331,6 +322,15 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
             icon="plus"
             onClick={handleAccessoryToggle}
             aria-label={isAccessoryOpen ? '关闭工具栏' : '展开工具栏'}
+          />
+        )}
+        {text && (
+          <Action
+            className="Composer-sendBtn"
+            icon="paper-plane"
+            color="primary"
+            onMouseDown={handleSendBtnClick}
+            aria-label="发送"
           />
         )}
       </div>
