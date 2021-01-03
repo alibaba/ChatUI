@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.2-beta.0](https://github.com/alibaba/ChatUI/compare/v0.2.1...v0.2.2-beta.0) (2021-01-03)
+
+
+### Features
+
+* [Composer] add `data-action-icon` to `.Composer-actions` ([76add41](https://github.com/alibaba/ChatUI/commit/76add417e6c8a9317c5d303165440988638cef92))
+* [Composer] show toolbar toggle button when typing ([11b850b](https://github.com/alibaba/ChatUI/commit/11b850b6170f3f84881e72a8b43eb705ed1c7714))
+
 ### [0.2.1](https://github.com/alibaba/ChatUI/compare/v0.2.0...v0.2.1) (2020-12-17)
 
 
