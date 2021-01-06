@@ -1,22 +1,33 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import clsx from 'clsx';
 
 export interface VideoProps {
   className?: string;
-  src: string;
+  src?: string;
   cover?: string;
   duration?: string | number;
   style?: React.CSSProperties;
+  videoRef?: React.RefObject<HTMLVideoElement>;
   onClick?: (paused: boolean, event: React.MouseEvent) => void;
   onCoverLoad?: (event: React.SyntheticEvent) => void;
 }
 
 export const Video: React.FC<VideoProps> = (props) => {
-  const { className, src, cover, duration, onClick, onCoverLoad, style, ...other } = props;
+  const {
+    className,
+    src,
+    cover,
+    duration,
+    onClick,
+    onCoverLoad,
+    style,
+    videoRef = useRef<HTMLVideoElement>(null),
+    children,
+    ...other
+  } = props;
 
   const [isPlayed, setIsPlayed] = useState(false);
   const [paused, setPaused] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   function handleClick(e: React.MouseEvent) {
     setIsPlayed(true);
@@ -34,52 +45,42 @@ export const Video: React.FC<VideoProps> = (props) => {
     }
   }
 
-  useEffect(() => {
-    const video = videoRef.current;
-    const handlePlay = () => {
-      setPaused(false);
-    };
-    const handlePause = () => {
-      setPaused(true);
-    };
+  function handlePlay() {
+    setPaused(false);
+  }
 
-    if (video) {
-      video.addEventListener('play', handlePlay);
-      video.addEventListener('pause', handlePause);
-      video.addEventListener('ended', handlePause);
-    }
+  function handlePause() {
+    setPaused(true);
+  }
 
-    return () => {
-      if (video) {
-        video.removeEventListener('play', handlePlay);
-        video.removeEventListener('pause', handlePause);
-        video.removeEventListener('ended', handlePause);
-      }
-    };
-  }, []);
+  const hasCover = !isPlayed && !!cover;
+  const hasDuration = hasCover && !!duration;
 
   return (
     <div
       className={clsx('Video', `Video--${paused ? 'paused' : 'playing'}`, className)}
       style={style}
     >
-      {!isPlayed && (
-        <>
-          {cover && <img className="Video-cover" src={cover} onLoad={onCoverLoad} alt="" />}
-          {duration && <span className="Video-duration">{duration}</span>}
-        </>
-      )}
+      {hasCover && <img className="Video-cover" src={cover} onLoad={onCoverLoad} alt="" />}
+      {hasDuration && <span className="Video-duration">{duration}</span>}
       <video
         className="Video-video"
         src={src}
         ref={videoRef}
-        hidden={!!cover && !isPlayed}
+        hidden={hasCover}
         controls
+        onPlay={handlePlay}
+        onPause={handlePause}
+        onEnded={handlePause}
         {...other}
-      />
-      <button className={clsx('Video-playBtn', { paused })} type="button" onClick={handleClick}>
-        <span className="Video-playIcon" />
-      </button>
+      >
+        {children}
+      </video>
+      {hasCover && (
+        <button className={clsx('Video-playBtn', { paused })} type="button" onClick={handleClick}>
+          <span className="Video-playIcon" />
+        </button>
+      )}
     </div>
   );
 };
