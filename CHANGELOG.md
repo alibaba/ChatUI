@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.2](https://github.com/alibaba/ChatUI/compare/v0.2.2-beta.0...v0.2.2) (2021-01-08)
+
+
+### Features
+
+* [ErrorBoundary] support `FallbackComponent` props ([a1915a7](https://github.com/alibaba/ChatUI/commit/a1915a77552b47c9ce72fc967ecae1052ffb1c94))
+
+
+### Bug Fixes
+
+* [Video] show the play button when the cover is specified ([3d91644](https://github.com/alibaba/ChatUI/commit/3d91644c7db7089911bfcd9af491d49d993f1404))
+
 ### [0.2.2-beta.0](https://github.com/alibaba/ChatUI/compare/v0.2.1...v0.2.2-beta.0) (2021-01-03)
 
 
