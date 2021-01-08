@@ -1,23 +1,42 @@
 import React from 'react';
 
-export interface ErrorBoundaryProps {
-  fallback?: React.ReactNode;
-}
+export type ErrorBoundaryState = {
+  error: Error | null;
+  errorInfo: React.ErrorInfo | null;
+};
 
-export class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
-  state = { hasError: false };
+type FallbackProps = ErrorBoundaryState;
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
+export type ErrorBoundaryProps = {
+  FallbackComponent?: React.ComponentType<FallbackProps>;
+  [k: string]: any;
+};
+
+export class ErrorBoundary extends React.Component<
+  React.PropsWithRef<React.PropsWithChildren<ErrorBoundaryProps>>,
+  ErrorBoundaryState
+> {
+  state = {
+    error: null,
+    errorInfo: null,
+  };
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    this.setState({ error, errorInfo });
   }
 
   render() {
-    const { fallback, children } = this.props;
-    const { hasError } = this.state;
+    const { FallbackComponent, children, ...rest } = this.props;
+    const { error, errorInfo } = this.state;
 
-    if (hasError) {
-      return fallback || null;
+    if (errorInfo) {
+      if (FallbackComponent) {
+        return <FallbackComponent error={error} errorInfo={errorInfo} {...rest} />;
+      }
+
+      return null;
     }
+
     return children;
   }
 }

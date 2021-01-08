@@ -30,6 +30,8 @@ export { Divider } from './components/Divider';
 export type { DividerProps } from './components/Divider';
 export { Empty } from './components/Empty';
 export type { EmptyProps } from './components/Empty';
+export { ErrorBoundary } from './components/ErrorBoundary';
+export type { ErrorBoundaryProps } from './components/ErrorBoundary';
 export { Flex, FlexItem } from './components/Flex';
 export type { FlexProps, FlexItemProps } from './components/Flex';
 export { Form, FormActions, FormItem } from './components/Form';
