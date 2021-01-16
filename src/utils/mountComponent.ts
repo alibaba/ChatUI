@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function mountComponent(Comp: React.ReactElement, root = document.body) {
+export function mountComponent(Comp: React.ReactElement, root = document.body) {
   const div = document.createElement('div');
   root.appendChild(div);
 
@@ -16,5 +16,3 @@ function mountComponent(Comp: React.ReactElement, root = document.body) {
 
   return div;
 }
-
-export default mountComponent;

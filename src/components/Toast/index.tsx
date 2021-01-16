@@ -1,5 +1,5 @@
 import React from 'react';
-import mountComponent from '../../utils/mountComponent';
+import { mountComponent } from '../../utils/mountComponent';
 import { Toast } from './Toast';
 
 function show(content: string, type: string, duration = 2000) {

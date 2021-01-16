@@ -2,6 +2,7 @@ import 'intersection-observer';
 
 export { default as clsx } from 'clsx';
 
+export { mountComponent } from './utils/mountComponent';
 export { Avatar } from './components/Avatar';
 export type { AvatarProps, AvatarSize, AvatarShape } from './components/Avatar';
 export { Backdrop } from './components/Backdrop';
