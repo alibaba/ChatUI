@@ -2,6 +2,8 @@ import 'intersection-observer';
 
 export { default as clsx } from 'clsx';
 
+export { importScript } from './utils/importScript';
+export { lazyComponent } from './utils/lazyComponent';
 export { mountComponent } from './utils/mountComponent';
 export { Avatar } from './components/Avatar';
 export type { AvatarProps, AvatarSize, AvatarShape } from './components/Avatar';
