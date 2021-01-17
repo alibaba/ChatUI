@@ -1,343 +1,475 @@
-import React, { createRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useImperativeHandle } from 'react';
 import clsx from 'clsx';
-import canUse from '../../utils/canUse';
-import { setTransform, setTransition } from '../../utils/style';
+import { CarouselItem } from './Item';
 
-const formElements = ['TEXTAREA', 'OPTION', 'INPUT', 'SELECT'];
-
-export type CarouselProps = typeof Carousel.defaultProps & {
+export interface CarouselProps {
+  children: React.ReactNode;
   className?: string;
-  // duration?: number;
-  // easing?: string;
-  // startIndex?: number;
-  // draggable?: boolean;
-  // multipleDrag?: boolean;
-  // threshold?: number;
-  // loop?: boolean;
-  // rtl?: boolean;
-  // indicators?: boolean;
-  // autoplay?: boolean;
-  // autoplaySpeed?: number;
-  onChange?: () => void;
-};
+  startIndex?: number;
+  draggable?: boolean;
+  duration?: number;
+  easing?: string;
+  threshold?: number;
+  loop?: boolean;
+  rtl?: boolean;
+  autoPlay?: boolean;
+  interval?: number;
+  // pauseOnHover?: boolean;
+  dots?: boolean;
+  onChange?: (activeIndex?: number) => void;
 
-export interface CarouselState {
-  currentSlide: number;
+  // Deprecated:
+  autoplay?: boolean;
+  autoplaySpeed?: number;
+  indicators?: boolean;
 }
 
-interface DragProps {
+export interface CarouselHandle {
+  goTo: (n: number) => void;
+  prev: () => void;
+  next: () => void;
+}
+
+interface State {
+  first: boolean;
+  wrapWidth: number;
+  hover: boolean;
   startX: number;
   endX: number;
   startY: number;
-  letItGo: boolean | null;
+  canMove: boolean | null;
   preventClick: boolean;
+  pressDown: boolean;
 }
 
-class Carousel extends React.Component<CarouselProps, CarouselState> {
-  private wrapperRef = createRef<HTMLDivElement>();
+type DragEvent = React.TouchEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement, MouseEvent>;
 
-  private innerRef = createRef<HTMLDivElement>();
+const formElements = ['TEXTAREA', 'OPTION', 'INPUT', 'SELECT'];
 
-  len = 0;
+export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, ref) => {
+  const {
+    className,
+    startIndex = 0,
+    draggable = true,
+    duration = 300,
+    easing = 'ease',
+    threshold = 20,
+    loop = true,
+    rtl = false,
+    autoPlay = props.autoplay || false,
+    interval = props.autoplaySpeed || 4000,
+    dots = props.indicators || true,
+    onChange,
+    children,
+  } = props;
 
-  selectorWidth = 0;
+  const count = React.Children.count(children);
+  const itemWith = `${100 / count}%`;
 
-  pointerDown = false;
+  const wrapperRef = useRef<HTMLDivElement>(null!);
+  const innerRef = useRef<HTMLDivElement>(null!);
+  const autoPlayTimerRef = useRef<any>(null);
 
-  autoPlayTimer: any = 0;
-
-  drag: DragProps = {
+  const stateRef = useRef<State>({
+    first: true,
+    wrapWidth: 0,
+    hover: false,
     startX: 0,
     endX: 0,
     startY: 0,
-    letItGo: null,
+    canMove: null,
+    pressDown: false,
     preventClick: false,
+  });
+
+  const getIndex = useCallback(
+    (idx: number) => (loop ? idx % count : Math.max(0, Math.min(idx, count - 1))),
+    [count, loop],
+  );
+
+  const [activeIndex, setActiveIndex] = useState(getIndex(startIndex));
+
+  const enableTransition = useCallback(() => {
+    innerRef.current.style.transition = `transform ${duration}ms ${easing}`;
+  }, [duration, easing]);
+
+  const disableTransition = () => {
+    innerRef.current.style.transition = 'transform 0s';
   };
 
-  static defaultProps = {
-    duration: 300,
-    easing: 'ease',
-    startIndex: 0,
-    draggable: true,
-    multipleDrag: true,
-    threshold: 20,
-    loop: true,
-    rtl: false,
-    indicators: true,
-    autoplay: false,
-    autoplaySpeed: 3000,
-    onChange: () => {},
+  const moveX = (x: number) => {
+    innerRef.current.style.transform = `translate3d(${x}px, 0, 0)`;
   };
 
-  constructor(props: CarouselProps) {
-    super(props);
+  const slideTo = useCallback(
+    (idx: number, smooth?: boolean) => {
+      const nextIndex = loop ? idx + 1 : idx;
+      const offset = (rtl ? 1 : -1) * nextIndex * stateRef.current.wrapWidth;
 
-    const { startIndex, children } = this.props;
-    this.len = children ? React.Children.count(children) : 0;
-
-    this.state = {
-      currentSlide: Math.max(0, Math.min(startIndex, this.len - 1)),
-    };
-  }
-
-  componentDidMount() {
-    const wrap = this.wrapperRef.current;
-    if (wrap) {
-      this.selectorWidth = wrap.offsetWidth;
-      this.attachEvents();
-    }
-
-    if (this.props.autoplay) {
-      this.autoPlay();
-    }
-
-    if (this.state.currentSlide !== 0) {
-      this.slideToCurrent();
-    }
-  }
-
-  attachEvents() {
-    const { draggable } = this.props;
-
-    if (!draggable) return;
-
-    this.pointerDown = false;
-    this.drag = {
-      startX: 0,
-      endX: 0,
-      startY: 0,
-      letItGo: null,
-      preventClick: false,
-    };
-
-    const wrapper = this.wrapperRef.current;
-    const passive = canUse('passiveListener') ? { passive: false } : false;
-
-    if (wrapper) {
-      wrapper.addEventListener('touchstart', this.touchStart);
-      wrapper.addEventListener('touchmove', this.touchMove, passive);
-      wrapper.addEventListener('touchend', this.touchEnd);
-    }
-  }
-
-  detachEvents() {
-    const wrapper = this.wrapperRef.current;
-
-    if (wrapper) {
-      wrapper.removeEventListener('touchstart', this.touchStart);
-      wrapper.removeEventListener('touchmove', this.touchMove);
-      wrapper.removeEventListener('touchend', this.touchEnd);
-    }
-  }
-
-  setTranslateX(offset: number) {
-    const el = this.innerRef.current;
-    if (el) {
-      setTransform(el, `translate3d(${offset}px, 0, 0)`);
-    }
-  }
-
-  enableTransition() {
-    const { easing, duration } = this.props;
-    const el = this.innerRef.current;
-    if (el) {
-      setTransition(el, `all ${duration}ms ${easing}`);
-    }
-  }
-
-  disableTransition() {
-    const { easing } = this.props;
-    const el = this.innerRef.current;
-    if (el) {
-      setTransition(el, `all 0ms ${easing}`);
-    }
-  }
-
-  touchStart = (e: TouchEvent) => {
-    const ignore = formElements.indexOf((e.target as Element).nodeName) !== -1;
-    if (ignore) return;
-
-    e.stopPropagation();
-    this.pointerDown = true;
-    this.drag.startX = e.touches[0].pageX;
-    this.drag.startY = e.touches[0].pageY;
-
-    this.autoPlayClear();
-  };
-
-  touchMove = (e: TouchEvent) => {
-    e.stopPropagation();
-
-    const touch = e.touches[0];
-
-    if (this.drag.letItGo === null) {
-      // eslint-disable-next-line max-len
-      this.drag.letItGo =
-        Math.abs(this.drag.startY - touch.pageY) < Math.abs(this.drag.startX - touch.pageX);
-    }
-
-    if (this.pointerDown && this.drag.letItGo) {
-      e.preventDefault();
-      this.drag.endX = touch.pageX;
-
-      const { rtl } = this.props;
-      const { currentSlide } = this.state;
-      const currentOffset = currentSlide * this.selectorWidth;
-      let dragOffset = this.drag.endX - this.drag.startX;
-
-      if (
-        (currentSlide === 0 && dragOffset > 0) ||
-        (currentSlide === this.len - 1 && dragOffset < 0)
-      ) {
-        // 阻尼
-        dragOffset *= 0.35;
-      }
-
-      const offset = rtl ? currentOffset + dragOffset : (currentOffset - dragOffset) * -1;
-
-      this.disableTransition();
-      this.setTranslateX(offset);
-    }
-  };
-
-  touchEnd = (e: TouchEvent) => {
-    const { autoplay } = this.props;
-    e.stopPropagation();
-    this.pointerDown = false;
-    this.enableTransition();
-    if (this.drag.endX) {
-      this.updateAfterDrag();
-    }
-    this.clearDrag();
-    if (autoplay) {
-      this.autoPlay();
-    }
-  };
-
-  clearDrag() {
-    this.drag = {
-      startX: 0,
-      endX: 0,
-      startY: 0,
-      letItGo: null,
-      preventClick: this.drag.preventClick,
-    };
-  }
-
-  slideToCurrent() {
-    const { rtl } = this.props;
-    const { currentSlide } = this.state;
-    const offset = (rtl ? 1 : -1) * currentSlide * this.selectorWidth;
-
-    this.setTranslateX(offset);
-  }
-
-  goTo(index: number, callback?: () => void) {
-    if (this.len <= 1) return;
-
-    const { onChange } = this.props;
-    const { currentSlide } = this.state;
-
-    this.setState({
-      currentSlide: Math.min(Math.max(index, 0), this.len - 1),
-    });
-
-    // eslint-disable-next-line react/destructuring-assignment
-    if (currentSlide !== this.state.currentSlide) {
-      this.slideToCurrent();
-      onChange.call(this);
-      if (callback) {
-        callback.call(this);
-      }
-    }
-  }
-
-  prev(howManySlides = 1, callback?: () => void) {
-    const { currentSlide } = this.state;
-    const index = Math.max(currentSlide - howManySlides, 0);
-
-    this.goTo(index, callback);
-  }
-
-  next(howManySlides = 1, callback?: () => void) {
-    const { currentSlide } = this.state;
-    const index = Math.min(currentSlide + howManySlides, this.len - 1);
-
-    this.goTo(index, callback);
-  }
-
-  updateAfterDrag() {
-    const { rtl, multipleDrag, threshold } = this.props;
-    const { len } = this;
-
-    const movement = (rtl ? -1 : 1) * (this.drag.endX - this.drag.startX);
-    const movementDistance = Math.abs(movement);
-    const howManySliderToSlide = multipleDrag
-      ? Math.ceil(movementDistance / this.selectorWidth)
-      : 1;
-
-    if (movement > 0 && movementDistance > threshold && len > 1) {
-      this.prev(howManySliderToSlide);
-    } else if (movement < 0 && movementDistance > threshold && len > 1) {
-      this.next(howManySliderToSlide);
-    }
-
-    this.slideToCurrent();
-  }
-
-  autoPlayClear() {
-    if (this.autoPlayTimer) {
-      clearInterval(this.autoPlayTimer);
-    }
-  }
-
-  autoPlay() {
-    const { autoplaySpeed } = this.props;
-    this.enableTransition();
-    this.autoPlayClear();
-    this.autoPlayTimer = setInterval(this.autoPlayIterator, autoplaySpeed);
-  }
-
-  autoPlayIterator = () => {
-    const { loop } = this.props;
-    const { currentSlide } = this.state;
-    const isLastSlide = currentSlide === this.len - 1;
-
-    if (isLastSlide) {
-      if (loop) {
-        this.goTo(0);
+      if (smooth) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            enableTransition();
+            moveX(offset);
+          });
+        });
       } else {
-        this.autoPlayClear();
+        moveX(offset);
+      }
+    },
+    [enableTransition, loop, rtl],
+  );
+
+  const goTo = useCallback(
+    (idx: number) => {
+      if (count <= 1) {
+        return;
+      }
+
+      const nextIndex = getIndex(idx);
+
+      if (nextIndex !== activeIndex) {
+        setActiveIndex(nextIndex);
+        // slideTo(nextIndex, loop);
+      }
+    },
+    [activeIndex, count, getIndex],
+  );
+
+  const prev = useCallback(() => {
+    if (count <= 1) {
+      return;
+    }
+
+    let nextIndex = activeIndex - 1;
+
+    if (loop) {
+      if (nextIndex < 0) {
+        const state = stateRef.current;
+        const moveTo = count + 1;
+        const offset = (rtl ? 1 : -1) * moveTo * state.wrapWidth;
+        const dragDist = draggable ? state.endX - state.startX : 0;
+
+        disableTransition();
+        moveX(offset + dragDist);
+        nextIndex = count - 1;
       }
     } else {
-      this.next();
+      nextIndex = Math.max(nextIndex, 0);
+    }
+
+    if (nextIndex !== activeIndex) {
+      setActiveIndex(nextIndex);
+      // slideTo(nextIndex, loop);
+    }
+  }, [activeIndex, count, draggable, loop, rtl]);
+
+  const next = useCallback(() => {
+    if (count <= 1) {
+      return;
+    }
+
+    let nextIndex = activeIndex + 1;
+
+    if (loop) {
+      const isClone = nextIndex > count - 1;
+      if (isClone) {
+        nextIndex = 0;
+        const state = stateRef.current;
+        const dragDist = draggable ? state.endX - state.startX : 0;
+
+        disableTransition();
+        moveX(dragDist);
+      }
+    } else {
+      nextIndex = Math.min(nextIndex, count - 1);
+    }
+
+    if (nextIndex !== activeIndex) {
+      setActiveIndex(nextIndex);
+      // slideTo(nextIndex, loop);
+    }
+  }, [activeIndex, count, draggable, loop]);
+
+  const doAutoPlay = useCallback(() => {
+    if (!autoPlay || stateRef.current.hover) {
+      return;
+    }
+
+    autoPlayTimerRef.current = setTimeout(() => {
+      enableTransition();
+      next();
+    }, interval);
+  }, [autoPlay, interval, enableTransition, next]);
+
+  const clearAutoPlay = () => {
+    clearTimeout(autoPlayTimerRef.current);
+  };
+
+  const resetToCurrent = () => {
+    slideTo(activeIndex, true);
+    doAutoPlay();
+  };
+
+  const updateAfterDrag = () => {
+    const state = stateRef.current;
+    const offset = (rtl ? -1 : 1) * (state.endX - state.startX);
+    const offsetDist = Math.abs(offset);
+    const isClone1 = offset > 0 && activeIndex - 1 < 0;
+    const isClone2 = offset < 0 && activeIndex + 1 > count - 1;
+
+    if (isClone1 || isClone2) {
+      if (loop) {
+        if (isClone1) {
+          prev();
+        } else {
+          next();
+        }
+      } else {
+        resetToCurrent();
+      }
+    } else if (offset > 0 && offsetDist > threshold && count > 1) {
+      prev();
+    } else if (offset < 0 && offsetDist > threshold && count > 1) {
+      next();
+    } else {
+      resetToCurrent();
     }
   };
 
-  render() {
-    const { className, indicators, children } = this.props;
-    const { currentSlide } = this.state;
-    const len = React.Children.count(children);
+  const resetDrag = () => {
+    stateRef.current = {
+      first: false,
+      wrapWidth: stateRef.current.wrapWidth,
+      hover: false,
+      startX: 0,
+      endX: 0,
+      startY: 0,
+      canMove: null,
+      preventClick: false,
+      pressDown: false,
+    };
+  };
 
-    return (
-      <div className={clsx('Carousel', className)} ref={this.wrapperRef}>
-        <div className="Carousel-inner" style={{ width: `${len}00%` }} ref={this.innerRef}>
-          {React.Children.map(children, (item, i) => (
-            <div className="Carousel-item" style={{ width: `${100 / len}%` }} key={i}>
-              {item}
-            </div>
-          ))}
-        </div>
-        {indicators && (
-          <ol className="Carousel-indicators">
-            {React.Children.map(children, (_, i) => (
-              <li className={clsx({ active: currentSlide === i })} key={i} />
-            ))}
-          </ol>
+  const dragStart = (e: DragEvent) => {
+    if (formElements.includes((e.target as Element).nodeName)) {
+      return;
+    }
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const ev = 'touches' in e ? e.touches[0] : e;
+    const state = stateRef.current;
+
+    state.pressDown = true;
+    state.startX = ev.pageX;
+    state.startY = ev.pageY;
+
+    clearAutoPlay();
+  };
+
+  const dragMove = (e: DragEvent) => {
+    e.stopPropagation();
+
+    const ev = 'touches' in e ? e.touches[0] : e;
+    const state = stateRef.current;
+
+    if (state.pressDown) {
+      if ('touches' in e) {
+        if (state.canMove === null) {
+          state.canMove = Math.abs(state.startY - ev.pageY) < Math.abs(state.startX - ev.pageX);
+        }
+        if (!state.canMove) {
+          return;
+        }
+      } else if ((e.target as Element).nodeName === 'A') {
+        state.preventClick = true;
+      }
+
+      e.preventDefault();
+      disableTransition();
+
+      state.endX = ev.pageX;
+
+      const nextIndex = loop ? activeIndex + 1 : activeIndex;
+      const nextOffset = nextIndex * state.wrapWidth;
+      const dragOffset = state.endX - state.startX;
+
+      // 阻尼
+      // if ((activeIndex === 0 && dragOffset > 0) || (activeIndex === count - 1 && dragOffset < 0)) {
+      //   dragOffset *= 0.35;
+      // }
+
+      const offset = rtl ? nextOffset + dragOffset : dragOffset - nextOffset;
+      moveX(offset);
+    }
+  };
+
+  const dragEnd = (e: DragEvent) => {
+    e.stopPropagation();
+    const state = stateRef.current;
+    state.pressDown = false;
+    enableTransition();
+    if (state.endX) {
+      updateAfterDrag();
+    }
+    resetDrag();
+  };
+
+  const onMouseEnter = () => {
+    stateRef.current.hover = true;
+    clearAutoPlay();
+  };
+
+  const onMouseLeave = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const state = stateRef.current;
+    state.hover = false;
+
+    if (state.pressDown) {
+      state.pressDown = false;
+      state.preventClick = false;
+      state.endX = e.pageX;
+
+      enableTransition();
+      updateAfterDrag();
+      resetDrag();
+    }
+
+    doAutoPlay();
+  };
+
+  const handleClickWrap = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const state = stateRef.current;
+    if (state.preventClick) {
+      e.preventDefault();
+    }
+    state.preventClick = false;
+  };
+
+  const handleClickDot = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const { slideTo: i } = e.currentTarget.dataset;
+    if (i) {
+      const idx = parseInt(i, 10);
+      goTo(idx);
+    }
+    e.preventDefault();
+  };
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      goTo,
+      prev,
+      next,
+    }),
+    [goTo, prev, next],
+  );
+
+  useEffect(() => {
+    // should use ResizeObserver
+    function handleResize() {
+      stateRef.current.wrapWidth = wrapperRef.current.offsetWidth;
+      slideTo(activeIndex);
+    }
+
+    if (stateRef.current.first) {
+      handleResize();
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [activeIndex, slideTo]);
+
+  useEffect(() => {
+    if (onChange && !stateRef.current.first) {
+      onChange(activeIndex);
+    }
+  }, [activeIndex, onChange]);
+
+  useEffect(() => {
+    if (stateRef.current.first) {
+      slideTo(activeIndex);
+      stateRef.current.first = false;
+    } else {
+      slideTo(activeIndex, true);
+    }
+  }, [activeIndex, slideTo]);
+
+  useEffect(() => {
+    doAutoPlay();
+
+    return () => {
+      clearAutoPlay();
+    };
+  }, [autoPlay, activeIndex, doAutoPlay]);
+
+  const events = draggable
+    ? {
+        onTouchStart: dragStart,
+        onTouchMove: dragMove,
+        onTouchEnd: dragEnd,
+        onMouseDown: dragStart,
+        onMouseMove: dragMove,
+        onMouseUp: dragEnd,
+        onMouseEnter,
+        onMouseLeave,
+        onClick: handleClickWrap,
+      }
+    : {
+        onMouseEnter,
+        onMouseLeave,
+      };
+
+  return (
+    <div
+      className={clsx(
+        'Carousel',
+        {
+          'Carousel--draggable': draggable,
+          'Carousel--rtl': rtl,
+        },
+        className,
+      )}
+      ref={wrapperRef}
+      {...events}
+    >
+      <div
+        className="Carousel-inner"
+        style={{ width: `${loop ? count + 2 : count}00%` }}
+        ref={innerRef}
+      >
+        {loop && (
+          <CarouselItem width={itemWith}>
+            {React.Children.toArray(children)[count - 1]}
+          </CarouselItem>
+        )}
+        {React.Children.map(children, (item, i) => (
+          <CarouselItem width={itemWith} key={i}>
+            {item}
+          </CarouselItem>
+        ))}
+        {loop && (
+          <CarouselItem width={itemWith}>{React.Children.toArray(children)[0]}</CarouselItem>
         )}
       </div>
-    );
-  }
-}
-
-export default Carousel;
+      {dots && (
+        <ol className="Carousel-indicators">
+          {React.Children.map(children, (_, i) => (
+            <li key={i}>
+              <button
+                className={clsx('Carousel-dot', { active: activeIndex === i })}
+                type="button"
+                aria-label={`Go to slide ${i + 1}`}
+                data-slide-to={i}
+                onClick={handleClickDot}
+              />
+            </li>
+          ))}
+        </ol>
+      )}
+    </div>
+  );
+});

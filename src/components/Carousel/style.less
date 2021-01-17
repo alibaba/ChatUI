@@ -1,25 +1,41 @@
 .Carousel {
   overflow: hidden;
-}
 
-.Carousel-inner {
-  display: flex;
-}
+  &--draggable {
+    .Carousel-inner {
+      touch-action: pan-y;
+      cursor: grab;
 
-.Carousel-indicators {
-  display: flex;
-  justify-content: center;
-  list-style-type: none;
-
-  li {
-    width: 6px;
-    height: 6px;
-    margin: 0 2px;
+      &:active {
+        cursor: grabbing;
+      }
+    }
+  }
+  &--rtl {
+    direction: rtl;
+  }
+  &-inner {
+    display: flex;
+  }
+  &-indicators {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+  }
+  &-dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin: 0 3px;
+    padding: 0;
+    border: 0;
     border-radius: 50%;
     background: var(--gray-4);
     transition: 0.3s;
-  }
-  .active {
-    background: var(--brand-1);
+    cursor: pointer;
+
+    &.active {
+      background: var(--brand-1);
+    }
   }
 }

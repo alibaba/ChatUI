@@ -23,7 +23,7 @@ export type {
   CardTextProps,
   CardActionsProps,
 } from './components/Card';
-export { default as Carousel } from './components/Carousel';
+export { Carousel } from './components/Carousel';
 export type { CarouselProps } from './components/Carousel';
 export { Checkbox, CheckboxGroup } from './components/Checkbox';
 export type { CheckboxProps, CheckboxGroupProps, CheckboxValue } from './components/Checkbox';
