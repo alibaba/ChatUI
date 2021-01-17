@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0-beta.0](https://github.com/alibaba/ChatUI/compare/v0.2.2...v0.3.0-beta.0) (2021-01-17)
+
+
+### Features
+
+* [Carousel] refactor with hooks ([73a564b](https://github.com/alibaba/ChatUI/commit/73a564b2eeb6c28df3f20a28f1a968498e347ceb))
+* [ErrorBoundary] support `onError` props ([9bb1b73](https://github.com/alibaba/ChatUI/commit/9bb1b7392416179ee33687bf98fdba98c79b1be6))
+* [utils] export `importScript` and `lazyComponent` ([3770ee3](https://github.com/alibaba/ChatUI/commit/3770ee34c61f1ae62a94fbc42d60c7fd9fa9e39e))
+* [utils] export `mountComponent` ([735e869](https://github.com/alibaba/ChatUI/commit/735e869a0140e7bb9dedcc5c0862be4f5d68b33c))
+
 ### [0.2.2](https://github.com/alibaba/ChatUI/compare/v0.2.2-beta.0...v0.2.2) (2021-01-08)
 
 
