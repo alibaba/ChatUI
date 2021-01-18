@@ -241,17 +241,14 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
   };
 
   const resetDrag = () => {
-    stateRef.current = {
-      first: false,
-      wrapWidth: stateRef.current.wrapWidth,
-      hover: false,
-      startX: 0,
-      endX: 0,
-      startY: 0,
-      canMove: null,
-      preventClick: false,
-      pressDown: false,
-    };
+    const state = stateRef.current;
+
+    state.startX = 0;
+    state.endX = 0;
+    state.startY = 0;
+    state.canMove = null;
+    state.preventClick = false;
+    state.pressDown = false;
   };
 
   const dragStart = (e: DragEvent) => {
