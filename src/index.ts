@@ -33,7 +33,7 @@ export type {
   CardActionsProps,
 } from './components/Card';
 export { Carousel } from './components/Carousel';
-export type { CarouselProps } from './components/Carousel';
+export type { CarouselProps, CarouselHandle } from './components/Carousel';
 export { Checkbox, CheckboxGroup } from './components/Checkbox';
 export type { CheckboxProps, CheckboxGroupProps, CheckboxValue } from './components/Checkbox';
 export { ClickOutside } from './components/ClickOutside';
