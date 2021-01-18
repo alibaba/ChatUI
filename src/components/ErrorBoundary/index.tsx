@@ -17,10 +17,13 @@ export class ErrorBoundary extends React.Component<
   React.PropsWithRef<React.PropsWithChildren<ErrorBoundaryProps>>,
   ErrorBoundaryState
 > {
-  state = {
-    error: null,
-    errorInfo: null,
-  };
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = {
+      error: null,
+      errorInfo: null,
+    };
+  }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     const { onError } = this.props;
