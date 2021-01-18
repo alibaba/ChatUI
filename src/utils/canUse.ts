@@ -15,12 +15,8 @@ const testCache = {
     }
     return supportsPassive;
   },
-  smoothScroll: () => {
-    return 'scrollBehavior' in document.documentElement.style;
-  },
-  touch: () => {
-    return 'ontouchstart' in window;
-  },
+  smoothScroll: () => 'scrollBehavior' in document.documentElement.style,
+  touch: () => 'ontouchstart' in window,
 };
 
 export function addTest(name: string, test: Function) {

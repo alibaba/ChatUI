@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 export const setTransform = (el: HTMLElement, value: string) => {
   el.style.transform = value;
   el.style.webkitTransform = value;

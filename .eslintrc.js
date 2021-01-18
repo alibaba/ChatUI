@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   parserOptions: {
     ecmaVersion: 2020,
-    // project: './tsconfig.eslint.json',
+    project: './tsconfig.json',
   },
   extends: [
     'airbnb',
@@ -18,6 +18,7 @@ module.exports = {
   plugins: ['compat', 'react-hooks'],
   rules: {
     'compat/compat': 'error',
+    'import/prefer-default-export': 'off',
     'no-underscore-dangle': 'off',
     'react/jsx-filename-extension': 'off',
     'react/jsx-props-no-spreading': 'off',
@@ -25,6 +26,7 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/prop-types': 'off',
     'react-hooks/rules-of-hooks': 'error',
+    "react-hooks/exhaustive-deps": "warn",
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
     'jsx-a11y/label-has-for': 'off',

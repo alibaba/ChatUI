@@ -35,6 +35,5 @@
   },
 
   /* File Inclusion */
-  "exclude": ["node_modules", "dist", "es", "lib"],
-  "include": ["src", "types"],
+  "exclude": ["node_modules", "dist", "es", "lib", "./*.js"]
 }
