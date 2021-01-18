@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0-beta.1](https://github.com/alibaba/ChatUI/compare/v0.3.0-beta.0...v0.3.0-beta.1) (2021-01-18)
+
+
+### Features
+
+* [Carousel] support `clickDragThreshold` props ([08b6916](https://github.com/alibaba/ChatUI/commit/08b6916acc0b4fc617e03caed4b9b4f26c25b37d))
+
 ## [0.3.0-beta.0](https://github.com/alibaba/ChatUI/compare/v0.2.2...v0.3.0-beta.0) (2021-01-17)
 
 
