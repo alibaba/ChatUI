@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useImperativeHandle } from 'react';
 import clsx from 'clsx';
 import { CarouselItem } from './Item';
+import { setTransform, setTransition } from '../../utils/style';
 
 export interface CarouselProps {
   children: React.ReactNode;
@@ -93,15 +94,15 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
   const [isDragging, setDragging] = useState(false);
 
   const enableTransition = useCallback(() => {
-    innerRef.current.style.transition = `transform ${duration}ms ${easing}`;
+    setTransition(innerRef.current, `transform ${duration}ms ${easing}`);
   }, [duration, easing]);
 
   const disableTransition = () => {
-    innerRef.current.style.transition = 'transform 0s';
+    setTransition(innerRef.current, 'transform 0s');
   };
 
   const moveX = (x: number) => {
-    innerRef.current.style.transform = `translate3d(${x}px, 0, 0)`;
+    setTransform(innerRef.current, `translate3d(${x}px, 0, 0)`);
   };
 
   const slideTo = useCallback(
