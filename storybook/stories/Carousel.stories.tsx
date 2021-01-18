@@ -44,13 +44,19 @@ ManyImages.args = {
 function TestMethods() {
   const carouselRef = React.useRef(null);
 
+  function handleClick(e) {
+    console.log('click item:', e);
+  }
+
   return (
     <div>
       <Carousel ref={carouselRef}>
         {imgs.map((img, i) => (
-          <div key={i}>
+          <div key={i} onClick={handleClick}>
             <p>{i}</p>
-            <img width="320" src={img} alt="" />
+            <a href="javascript:;">
+              <img width="320" src={img} alt="" />
+            </a>
           </div>
         ))}
       </Carousel>

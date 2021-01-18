@@ -7,6 +7,7 @@ export interface CarouselProps {
   className?: string;
   startIndex?: number;
   draggable?: boolean;
+  clickDragThreshold?: number;
   duration?: number;
   easing?: string;
   threshold?: number;
@@ -54,6 +55,7 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
     duration = 300,
     easing = 'ease',
     threshold = 20,
+    clickDragThreshold = 10,
     loop = true,
     rtl = false,
     autoPlay = props.autoplay || false,
@@ -88,6 +90,7 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
   );
 
   const [activeIndex, setActiveIndex] = useState(getIndex(startIndex));
+  const [isDragging, setDragging] = useState(false);
 
   const enableTransition = useCallback(() => {
     innerRef.current.style.transition = `transform ${duration}ms ${easing}`;
@@ -296,6 +299,10 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
       const nextOffset = nextIndex * state.wrapWidth;
       const dragOffset = state.endX - state.startX;
 
+      if (!isDragging && Math.abs(dragOffset) > clickDragThreshold) {
+        setDragging(true);
+      }
+
       // 阻尼
       // if ((activeIndex === 0 && dragOffset > 0) || (activeIndex === count - 1 && dragOffset < 0)) {
       //   dragOffset *= 0.35;
@@ -310,6 +317,7 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
     e.stopPropagation();
     const state = stateRef.current;
     state.pressDown = false;
+    setDragging(false);
     enableTransition();
     if (state.endX) {
       updateAfterDrag();
@@ -430,6 +438,7 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
         {
           'Carousel--draggable': draggable,
           'Carousel--rtl': rtl,
+          'Carousel--dragging': isDragging,
         },
         className,
       )}
