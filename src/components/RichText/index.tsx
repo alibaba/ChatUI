@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import DOMPurify from 'dompurify';
+import './configDOMPurify';
 
 export type RichTextProps = {
   className?: string;
