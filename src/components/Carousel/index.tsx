@@ -462,7 +462,7 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
         )}
       </div>
       {dots && (
-        <ol className="Carousel-indicators">
+        <ol className="Carousel-dots">
           {React.Children.map(children, (_, i) => (
             <li key={i}>
               <button

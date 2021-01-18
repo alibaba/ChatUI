@@ -22,7 +22,7 @@ export const ManyImages = (ars) => (
     {imgs.map((img, i) => (
       <div key={i}>
         <p>{i}</p>
-        <img width="320" src={img} alt="" />
+        <img width="100%" src={img} alt="" />
       </div>
     ))}
   </Carousel>
@@ -52,10 +52,10 @@ function TestMethods() {
     <div>
       <Carousel ref={carouselRef}>
         {imgs.map((img, i) => (
-          <div key={i} onClick={handleClick}>
+          <div key={i}>
             <p>{i}</p>
-            <a href="javascript:;">
-              <img width="320" src={img} alt="" />
+            <a href={img} onClick={handleClick}>
+              <img width="100%" src={img} alt="" />
             </a>
           </div>
         ))}
