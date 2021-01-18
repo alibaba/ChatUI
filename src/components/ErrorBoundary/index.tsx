@@ -1,11 +1,14 @@
 import React from 'react';
 
-export type ErrorBoundaryState = {
+export interface ErrorBoundaryState {
   error: Error | null;
   errorInfo: React.ErrorInfo | null;
-};
+}
 
-type FallbackProps = ErrorBoundaryState;
+interface FallbackProps {
+  error: Error;
+  errorInfo: React.ErrorInfo;
+}
 
 export type ErrorBoundaryProps = {
   FallbackComponent?: React.ComponentType<FallbackProps>;
@@ -39,7 +42,7 @@ export class ErrorBoundary extends React.Component<
 
     if (errorInfo) {
       if (FallbackComponent) {
-        return <FallbackComponent error={error} errorInfo={errorInfo} {...rest} />;
+        return <FallbackComponent error={error!} errorInfo={errorInfo} {...rest} />;
       }
 
       return null;
