@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 
-import { Carousel } from '../../src';
+import { Carousel, CarouselProps, CarouselHandle } from '../../src';
 
 export default {
   title: 'Carousel',
@@ -17,7 +17,7 @@ const imgs = [
 
 // const Template: Story<CarouselProps> = (args) => <Carousel {...args} />;
 
-export const ManyImages = (ars) => (
+export const ManyImages = (ars: CarouselProps) => (
   <Carousel {...ars}>
     {imgs.map((img, i) => (
       <div key={i}>
@@ -42,9 +42,9 @@ ManyImages.args = {
 };
 
 function TestMethods() {
-  const carouselRef = React.useRef(null);
+  const carouselRef = React.useRef<CarouselHandle>(null!);
 
-  function handleClick(e) {
+  function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     console.log('click item:', e);
   }
 

@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React, { useState, useRef } from 'react';
 import clsx from 'clsx';
 
-export interface VideoProps {
+export type VideoProps = React.VideoHTMLAttributes<HTMLVideoElement> & {
   className?: string;
   src?: string;
   cover?: string;
@@ -9,8 +10,8 @@ export interface VideoProps {
   style?: React.CSSProperties;
   videoRef?: React.RefObject<HTMLVideoElement>;
   onClick?: (paused: boolean, event: React.MouseEvent) => void;
-  onCoverLoad?: (event: React.SyntheticEvent) => void;
-}
+  onCoverLoad?: (event: React.SyntheticEvent<HTMLImageElement, Event>) => void;
+};
 
 export const Video: React.FC<VideoProps> = (props) => {
   const {
@@ -21,10 +22,13 @@ export const Video: React.FC<VideoProps> = (props) => {
     onClick,
     onCoverLoad,
     style,
-    videoRef = useRef<HTMLVideoElement>(null),
+    videoRef: outerVideoRef,
     children,
     ...other
   } = props;
+
+  const localVideoRef = useRef<HTMLVideoElement>(null!);
+  const videoRef = outerVideoRef || localVideoRef;
 
   const [isPlayed, setIsPlayed] = useState(false);
   const [paused, setPaused] = useState(true);

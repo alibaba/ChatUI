@@ -4,7 +4,7 @@ import { Meta } from '@storybook/react/types-6-0';
 import * as ChatUI from '../../src';
 import { ComponentsMap } from '../../src';
 
-const { ComponentsProvider, useComponents, LazyComponent } = ChatUI;
+const { ComponentsProvider, LazyComponent } = ChatUI;
 
 export default {
   title: 'ComponentsProvider',
