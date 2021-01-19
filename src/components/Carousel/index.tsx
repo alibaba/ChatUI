@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, useImperativeHandle } 
 import clsx from 'clsx';
 import { CarouselItem } from './Item';
 import { setTransform, setTransition } from '../../utils/style';
+import canUse from '../../utils/canUse';
 
 export interface CarouselProps {
   children: React.ReactNode;
@@ -40,13 +41,13 @@ interface State {
   endX: number;
   startY: number;
   canMove: boolean | null;
-  preventClick: boolean;
   pressDown: boolean;
 }
 
 type DragEvent = React.TouchEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement, MouseEvent>;
 
 const formElements = ['TEXTAREA', 'OPTION', 'INPUT', 'SELECT'];
+const canTouch = canUse('touch');
 
 export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, ref) => {
   const {
@@ -82,7 +83,6 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
     startY: 0,
     canMove: null,
     pressDown: false,
-    preventClick: false,
   });
 
   const getIndex = useCallback(
@@ -248,7 +248,6 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
     state.endX = 0;
     state.startY = 0;
     state.canMove = null;
-    state.preventClick = false;
     state.pressDown = false;
   };
 
@@ -284,8 +283,6 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
         if (!state.canMove) {
           return;
         }
-      } else if ((e.target as Element).nodeName === 'A') {
-        state.preventClick = true;
       }
 
       e.preventDefault();
@@ -319,6 +316,9 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
     enableTransition();
     if (state.endX) {
       updateAfterDrag();
+    } else {
+      // when clicked
+      doAutoPlay();
     }
     resetDrag();
   };
@@ -334,7 +334,6 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
 
     if (state.pressDown) {
       state.pressDown = false;
-      state.preventClick = false;
       state.endX = e.pageX;
 
       enableTransition();
@@ -343,14 +342,6 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
     }
 
     doAutoPlay();
-  };
-
-  const handleClickWrap = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const state = stateRef.current;
-    if (state.preventClick) {
-      e.preventDefault();
-    }
-    state.preventClick = false;
   };
 
   const handleClickDot = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -412,22 +403,28 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
     };
   }, [autoPlay, activeIndex, doAutoPlay]);
 
-  const events = draggable
-    ? {
-        onTouchStart: dragStart,
-        onTouchMove: dragMove,
-        onTouchEnd: dragEnd,
-        onMouseDown: dragStart,
-        onMouseMove: dragMove,
-        onMouseUp: dragEnd,
-        onMouseEnter,
-        onMouseLeave,
-        onClick: handleClickWrap,
-      }
-    : {
-        onMouseEnter,
-        onMouseLeave,
-      };
+  let events;
+
+  if (draggable) {
+    events = canTouch
+      ? {
+          onTouchStart: dragStart,
+          onTouchMove: dragMove,
+          onTouchEnd: dragEnd,
+        }
+      : {
+          onMouseDown: dragStart,
+          onMouseMove: dragMove,
+          onMouseUp: dragEnd,
+          onMouseEnter,
+          onMouseLeave,
+        };
+  } else {
+    events = {
+      onMouseEnter,
+      onMouseLeave,
+    };
+  }
 
   return (
     <div
