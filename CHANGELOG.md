@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0-beta.3](https://github.com/alibaba/ChatUI/compare/v0.3.0-beta.1...v0.3.0-beta.3) (2021-01-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename `.Carousel-indicators` to `.Carousel-dots`
+
+### Features
+
+* [Carousel] apply `will-change: transform` to `.Carousel-inner` ([4961f54](https://github.com/alibaba/ChatUI/commit/4961f54b872fc4acabc270441cfac0a99534f27d))
+* [Carousel] export `CarouselHandle` ([05d9eeb](https://github.com/alibaba/ChatUI/commit/05d9eebd3e662773b49e021eb24ff3915aa40c25))
+* [Carousel] move the dots to the middle bottom of the slide ([1d71888](https://github.com/alibaba/ChatUI/commit/1d71888e1bcd3d8db738f573671626e21b0df24c))
+* [RichText] set `a` element owning target to `target=_blank` ([cb83871](https://github.com/alibaba/ChatUI/commit/cb83871a4b08c91b132349751307234586ce5af1))
+* add `ComponentsProvider`, `LazyComponent` ([53b3802](https://github.com/alibaba/ChatUI/commit/53b38021a862264ec3918878a0a03caff037760f))
+
+
+### Bug Fixes
+
+* [Carousel] pause when hover dot ([424840d](https://github.com/alibaba/ChatUI/commit/424840dcf292dfb8e8c27335f4f757fa81d2aaae))
+* [Carousel] separate touch and mouse events ([a533584](https://github.com/alibaba/ChatUI/commit/a533584bc738d5c73e02e18139b848fc24da9bae))
+* [ErrorBoundary] update `FallbackProps` ([62fe62c](https://github.com/alibaba/ChatUI/commit/62fe62cd76be2348ae08fa9bfa8bfc6f55b1b423))
+
 ## [0.3.0-beta.2](https://github.com/alibaba/ChatUI/compare/v0.3.0-beta.1...v0.3.0-beta.2) (2021-01-18)
 
 
