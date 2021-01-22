@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0-beta.4](https://github.com/alibaba/ChatUI/compare/v0.3.0-beta.3...v0.3.0-beta.4) (2021-01-22)
+
+
+### Bug Fixes
+
+* [Composer] the input box displays one row by default ([2d6d636](https://github.com/alibaba/ChatUI/commit/2d6d6364ce6e4b4459e4cd7d81a9c1ecdce461f9))
+
 ## [0.3.0-beta.3](https://github.com/alibaba/ChatUI/compare/v0.3.0-beta.1...v0.3.0-beta.3) (2021-01-19)
 
 
