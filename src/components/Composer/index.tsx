@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { IconButtonProps } from '../IconButton';
 import { Input } from '../Input';
 import { Recorder, RecorderProps } from '../Recorder';
-import { Toolbar } from '../Toolbar';
+import { Toolbar, ToolbarItemProps } from '../Toolbar';
 import { ClickOutside } from '../ClickOutside';
 import { Popover } from '../Popover';
 import { SendConfirm } from '../SendConfirm';
@@ -13,7 +13,6 @@ import { Action } from './Action';
 import riseInput from './riseInput';
 import parseDataTransfer from '../../utils/parseDataTransfer';
 import toggleClass from '../../utils/toggleClass';
-import { ToolbarItemProps } from '../Toolbar';
 
 const NO_HOME_BAR = 'S--noHomeBar';
 
@@ -238,12 +237,11 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   const inputTypeIcon = isInputText ? 'mic' : 'keyboard';
   const hasToolbar = toolbar.length > 0;
 
-  const renderInput = (minRows: number) => (
+  const renderInput = () => (
     <div className={clsx({ 'S--invisible': !isInputText })}>
       <Input
         className="Composer-input"
         value={text}
-        minRows={minRows}
         rows={1}
         autoSize
         ref={inputRef}
@@ -284,7 +282,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
             {accessoryContent}
           </Popover>
         )}
-        <div className="Composer-inputWrap">{renderInput(3)}</div>
+        <div className="Composer-inputWrap">{renderInput()}</div>
         <Action
           className="Composer-sendBtn"
           icon="paper-plane"
@@ -310,7 +308,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
           />
         )}
         <div className="Composer-inputWrap">
-          {renderInput(1)}
+          {renderInput()}
           {!isInputText && <Recorder {...recorder} />}
         </div>
         {!text && rightAction && <Action {...rightAction} />}
