@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0-beta.5](https://github.com/alibaba/ChatUI/compare/v0.3.0-beta.4...v0.3.0-beta.5) (2021-01-27)
+
+
+### Features
+
+* [RichText] add `data-cui-href` when the `href` of the link is removed ([29fde15](https://github.com/alibaba/ChatUI/commit/29fde15b80b3532c57ff948deeb8b02a3332c8a3))
+
 ## [0.3.0-beta.4](https://github.com/alibaba/ChatUI/compare/v0.3.0-beta.3...v0.3.0-beta.4) (2021-01-22)
 
 
