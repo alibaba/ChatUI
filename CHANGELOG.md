@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1-beta.0](https://github.com/alibaba/ChatUI/compare/v0.3.0...v0.3.1-beta.0) (2021-03-08)
+
+
+### Bug Fixes
+
+* [LazyComponent] add `onLoad` event to decorator, and resolve circular dependencies ([e7d76d1](https://github.com/alibaba/ChatUI/commit/e7d76d12e01732c018ebbe26a36ffea9683d3f52))
+
 ## [0.3.0](https://github.com/alibaba/ChatUI/compare/v0.3.0-beta.5...v0.3.0) (2021-03-01)
 
 ## [0.3.0-beta.5](https://github.com/alibaba/ChatUI/compare/v0.3.0-beta.4...v0.3.0-beta.5) (2021-01-27)
