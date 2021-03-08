@@ -1,8 +1,20 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "rootDir": "src",
     "declaration": true,
     "declarationDir": "lib",
     "emitDeclarationOnly": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "es",
+    "lib",
+    "storybook",
+    "./*.js",
+    "jest.setup.ts",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
 }

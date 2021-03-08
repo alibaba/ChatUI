@@ -31,7 +31,7 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "stripInternal": true,
-    "resolveJsonModule": true,
+    "resolveJsonModule": true
   },
 
   /* File Inclusion */
