@@ -1,64 +1,17 @@
 import React from 'react';
-import { lazyComponent, LazyComponentResult } from '../../utils/lazyComponent';
-// eslint-disable-next-line import/no-cycle
-import { LazyComponent } from '../LazyComponent';
+import { lazyComponent } from '../../utils/lazyComponent';
+import { LazyComponentWithCode } from '../LazyComponent';
+import { ComponentsContext } from './ComponentsContext';
+import {
+  ComponentInterface,
+  GetComponentCallback,
+  ComponentsProviderProps,
+  ComponentsMap,
+} from './interface';
 
-// Interface
-interface ComponentInterfaceWithComponent {
-  component: React.ComponentType<any>;
-}
+export { useComponents } from './useComponents';
+export type { ComponentsProviderProps, ComponentsMap };
 
-interface ComponentInterfaceWithUrl {
-  url: string;
-  name: string;
-}
-
-interface ComponentInterfaceWithDecorator {
-  decorator: string;
-  data: any;
-}
-
-type ComponentInterface =
-  | ComponentInterfaceWithComponent
-  | ComponentInterfaceWithUrl
-  | ComponentInterfaceWithDecorator;
-
-interface CallbackParamsWithAsync {
-  async: boolean;
-  component?: any;
-}
-
-interface CallbackParamsWithError {
-  errCode: string;
-}
-
-interface GetComponentCallback {
-  (e: CallbackParamsWithAsync | CallbackParamsWithError): void;
-}
-
-interface ComponentsContextInterface {
-  addComponent: (code: string, value: ComponentInterface) => void;
-  getComponent: (
-    code: string,
-    callback?: GetComponentCallback,
-  ) => React.ComponentType<any> | LazyComponentResult | null;
-}
-
-export interface ComponentsMap {
-  [k: string]: ComponentInterface;
-}
-
-export interface ComponentsProviderProps {
-  components: ComponentsMap;
-}
-
-// Context
-const ComponentsContext = React.createContext<ComponentsContextInterface>({
-  addComponent: () => {},
-  getComponent: () => null,
-});
-
-// Provider
 export const ComponentsProvider: React.FC<ComponentsProviderProps> = (props) => {
   const { components, children } = props;
   const componentsRef = React.useRef(components || {});
@@ -72,22 +25,28 @@ export const ComponentsProvider: React.FC<ComponentsProviderProps> = (props) => 
 
     // no component
     if (!comp) {
-      callback({ errCode: 'NO_CODE' });
+      callback({ code, errCode: 'NO_CODE' });
       return null;
     }
 
-    //
     if ('component' in comp) {
-      callback({ async: false, component: comp.component });
+      if (comp.type !== 'decorator') {
+        callback({ code, async: false, component: comp.component });
+      }
       return comp.component;
     }
 
     if ('decorator' in comp) {
       const component = (compProps: any) => (
-        <LazyComponent code={comp.decorator} decoratorData={comp.data} {...compProps} />
+        <LazyComponentWithCode
+          code={comp.decorator}
+          decoratorData={comp.data}
+          onLoad={callback}
+          {...compProps}
+        />
       );
 
-      componentsRef.current[code] = { component };
+      componentsRef.current[code] = { component, type: 'decorator' };
       return component;
     }
 
@@ -97,17 +56,17 @@ export const ComponentsProvider: React.FC<ComponentsProviderProps> = (props) => 
         comp.name,
         () => {
           componentsRef.current[code] = { component };
-          callback({ async: true, component });
+          callback({ code, async: true, component });
         },
         () => {
-          callback({ errCode: 'ERR_IMPORT_SCRIPT' });
+          callback({ code, errCode: 'ERR_IMPORT_SCRIPT' });
         },
       );
 
       return component;
     }
 
-    callback({ errCode: 'NO_HANDLER' });
+    callback({ code, errCode: 'NO_HANDLER' });
     return null;
   }
 
@@ -117,8 +76,3 @@ export const ComponentsProvider: React.FC<ComponentsProviderProps> = (props) => 
     </ComponentsContext.Provider>
   );
 };
-
-// Hooks
-export function useComponents() {
-  return React.useContext(ComponentsContext);
-}

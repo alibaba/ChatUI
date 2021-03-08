@@ -60,13 +60,25 @@ const components: ComponentsMap = {
       d2: 'd2',
     },
   },
+  'test-async-decorator': {
+    decorator: 'slot',
+    data: {
+      jsonUrl: 'this is a url',
+      d1: 'd1',
+      d2: 'd2',
+    },
+  },
 };
 
 function TestLocalComponent() {
   return (
     <div>
       <h1>Example:</h1>
-      <LazyComponent code="local-component" onLoad={(a: any) => console.log('onLoad:', a)} />
+      <LazyComponent
+        code="local-component"
+        data="11"
+        onLoad={(a: any) => console.log('onLoad:', a)}
+      />
     </div>
   );
 }
@@ -169,7 +181,14 @@ function TestDecorator() {
   return (
     <div>
       <h1>Example:</h1>
-      <LazyComponent code="test-decorator" data1="foo" data2="bar" />
+      <LazyComponent
+        code="test-decorator"
+        data1="foo"
+        data2="bar"
+        onLoad={(r) => {
+          console.log('decorator onLoad', r);
+        }}
+      />
     </div>
   );
 }
@@ -177,5 +196,28 @@ function TestDecorator() {
 export const Decorator = () => (
   <ComponentsProvider components={components}>
     <TestDecorator />
+  </ComponentsProvider>
+);
+
+function TestAsyncDecorator() {
+  return (
+    <div>
+      <h1>Example:</h1>
+      <LazyComponent
+        code="test-async-decorator"
+        data={{ list: [{ title: 'item-1' }, { title: 'item-2' }] }}
+        meta={{}}
+        ctx={ctx}
+        onLoad={(r) => {
+          console.log('async decorator onLoad', r);
+        }}
+      />
+    </div>
+  );
+}
+
+export const AsyncDecorator = () => (
+  <ComponentsProvider components={components}>
+    <TestAsyncDecorator />
   </ComponentsProvider>
 );

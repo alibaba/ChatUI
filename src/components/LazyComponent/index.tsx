@@ -1,50 +1,36 @@
-import React, { Suspense } from 'react';
-import { ErrorBoundary } from '../..';
-// eslint-disable-next-line import/no-cycle
-import { useComponents } from '../ComponentsProvider';
+import React from 'react';
+import { SuspenseWrap } from './SuspenseWrap';
+import { LazyComponentProps, LazyComponentPropsWithCode } from './interface';
+import { useComponents } from '../ComponentsProvider/useComponents';
 
-interface LazyComponentBaseProps {
-  fallback?: NonNullable<React.ReactNode> | null;
-  onError?: (error: Error, info?: React.ErrorInfo) => void;
-  [k: string]: any;
-}
+export type { LazyComponentProps };
 
-interface LazyComponentPropsWithComponent extends LazyComponentBaseProps {
-  component: React.ComponentType;
-}
+export const LazyComponentWithCode: React.FC<LazyComponentPropsWithCode> = (props) => {
+  const { code, fallback, onLoad, onError, ...rest } = props;
+  const { getComponent } = useComponents();
 
-interface LazyComponentPropsWithCode extends LazyComponentBaseProps {
-  code: string;
-  onLoad?: (e: { async: boolean }) => void;
-}
+  const Comp = getComponent(code, (res) => {
+    if ('async' in res && onLoad) {
+      onLoad(res);
+    } else if ('errCode' in res && onError) {
+      onError(new Error(res.errCode));
+    }
+  });
 
-export type LazyComponentProps = LazyComponentPropsWithComponent | LazyComponentPropsWithCode;
+  return <SuspenseWrap component={Comp} onError={onError} fallback={fallback} {...rest} />;
+};
 
 export const LazyComponent: React.FC<LazyComponentProps> = (props) => {
-  const { getComponent } = useComponents();
-  const { component, code, fallback, onLoad, onError, ...rest } = props;
+  const { component, code, onLoad, ...rest } = props;
 
-  const Comp =
-    component ||
-    getComponent(code, (res) => {
-      if ('async' in res && onLoad) {
-        onLoad(res);
-      } else if ('errCode' in res && onError) {
-        onError(new Error(res.errCode));
-      }
-    });
-
-  if (component && onLoad) {
-    onLoad({ async: false, component });
+  if (component) {
+    if (onLoad) {
+      onLoad({ async: false, component });
+    }
+    return <SuspenseWrap component={component} {...rest} />;
   }
 
-  return Comp ? (
-    <ErrorBoundary onError={onError}>
-      <Suspense fallback={fallback || null}>
-        <Comp {...rest} />
-      </Suspense>
-    </ErrorBoundary>
-  ) : null;
+  return <LazyComponentWithCode code={code} onLoad={onLoad} {...rest} />;
 };
 
 export default LazyComponent;
