@@ -20,6 +20,10 @@ export const ComponentsProvider: React.FC<ComponentsProviderProps> = (props) => 
     componentsRef.current[code] = val;
   }
 
+  function hasComponent(code: string) {
+    return componentsRef.current.hasOwnProperty(code);
+  }
+
   function getComponent(code: string, callback: GetComponentCallback = () => {}) {
     const comp = componentsRef.current[code];
 
@@ -71,7 +75,7 @@ export const ComponentsProvider: React.FC<ComponentsProviderProps> = (props) => 
   }
 
   return (
-    <ComponentsContext.Provider value={{ addComponent, getComponent }}>
+    <ComponentsContext.Provider value={{ addComponent, hasComponent, getComponent }}>
       {children}
     </ComponentsContext.Provider>
   );

@@ -38,6 +38,7 @@ export interface GetComponentCallback {
 
 export interface ComponentsContextInterface {
   addComponent: (code: string, value: ComponentInterface) => void;
+  hasComponent: (code: string) => boolean;
   getComponent: (
     code: string,
     callback?: GetComponentCallback,
