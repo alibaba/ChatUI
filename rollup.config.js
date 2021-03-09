@@ -31,5 +31,6 @@ export default {
       react: 'React',
       'react-dom': 'ReactDOM',
     },
+    intro: `exports.version = '${pkg.version}';`,
   },
 };
