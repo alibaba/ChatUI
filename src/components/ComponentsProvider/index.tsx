@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { lazyComponent } from '../../utils/lazyComponent';
 import { LazyComponentWithCode } from '../LazyComponent';
 import { ComponentsContext } from './ComponentsContext';
@@ -14,7 +14,14 @@ export type { ComponentsProviderProps, ComponentsMap };
 
 export const ComponentsProvider: React.FC<ComponentsProviderProps> = (props) => {
   const { components, children } = props;
-  const componentsRef = React.useRef(components || {});
+  const componentsRef = React.useRef<ComponentsMap>({ ...components });
+
+  useEffect(() => {
+    componentsRef.current = {
+      ...components,
+      ...componentsRef.current,
+    };
+  }, [components]);
 
   function addComponent(code: string, val: ComponentInterface) {
     componentsRef.current[code] = val;
