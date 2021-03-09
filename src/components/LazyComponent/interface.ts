@@ -8,9 +8,14 @@ export interface LazyComponentPropsWithComponent extends LazyComponentBaseProps 
   component: React.ComponentType | null;
 }
 
+export interface LazyComponentOnLoadParams {
+  async: boolean;
+  component: React.ComponentType<any>;
+}
+
 export interface LazyComponentPropsWithCode extends LazyComponentBaseProps {
   code: string;
-  onLoad?: (e: { async: boolean; component: React.ComponentType<any> }) => void;
+  onLoad?: (e: LazyComponentOnLoadParams) => void;
 }
 
 export type LazyComponentProps = LazyComponentPropsWithComponent | LazyComponentPropsWithCode;

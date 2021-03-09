@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 
 import * as ChatUI from '../../src';
-import { ComponentsMap } from '../../src';
+import { ComponentsMap, LazyComponentOnLoadParams } from '../../src';
 
-const { ComponentsProvider, LazyComponent } = ChatUI;
+const { ComponentsProvider, LazyComponent, useComponents } = ChatUI;
 
 export default {
   title: 'ComponentsProvider',
@@ -89,24 +89,51 @@ export const LocalComponent = () => (
   </ComponentsProvider>
 );
 
-function TestAsyncComponent() {
+function LazySlot() {
+  const data = { list: [{ title: 'item-1' }, { title: 'item-2' }] };
   return (
-    <div>
-      <h1>Example:</h1>
-      <LazyComponent
-        code="slot"
-        data={{ list: [{ title: 'item-1' }, { title: 'item-2' }] }}
-        meta={{}}
-        ctx={ctx}
-        onLoad={(a: any) => console.log('onLoad:', a)}
-      />
-    </div>
+    <LazyComponent
+      code="slot"
+      data={data}
+      meta={{}}
+      ctx={ctx}
+      onLoad={(r: LazyComponentOnLoadParams) => console.log('slot - onLoad:', r)}
+    />
+  );
+}
+
+function LazyRecommend() {
+  const data = {
+    recommends: [
+      {
+        knowledgeId: 'q1',
+        title: 'Question 1',
+      },
+      {
+        knowledgeId: 'q2',
+        title: 'Question 2',
+      },
+      {
+        knowledgeId: 'q3',
+        title: 'Question 3',
+      },
+    ],
+  };
+  return (
+    <LazyComponent
+      code="recommend"
+      data={data}
+      meta={{}}
+      ctx={ctx}
+      onLoad={(r: any) => console.log('recommend - onLoad:', r)}
+      onError={(e: Error) => console.log('recommend - onError:', e)}
+    />
   );
 }
 
 export const AsyncComponent = () => (
   <ComponentsProvider components={components}>
-    <TestAsyncComponent />
+    <LazySlot />
   </ComponentsProvider>
 );
 
@@ -141,7 +168,7 @@ function TestComponentHasError() {
         code="slot"
         onError={(err, errInfo) => {
           setErrMsg(err.message);
-          console.log(errInfo);
+          console.log(222, err, errInfo);
         }}
       />
       {errMsg && <pre>Error message: {errMsg}</pre>}
@@ -164,6 +191,7 @@ function TestErrorUrl() {
         code="error-url"
         onError={(err) => {
           setErrMsg(err.message);
+          console.log(222, err.message);
         }}
       />
       {errMsg && <pre>Error message: {errMsg}</pre>}
@@ -221,3 +249,118 @@ export const AsyncDecorator = () => (
     <TestAsyncDecorator />
   </ComponentsProvider>
 );
+
+function TestAddComponent() {
+  const { addComponent, hasComponent } = useComponents();
+  const forceUpdate = useForceUpdate();
+
+  function addRecommend() {
+    if (!hasComponent('recommend')) {
+      addComponent('recommend', {
+        name: 'AlimeComponentRecommend',
+        url: '//g.alicdn.com/alime-components/recommend/0.1.0/index.js',
+      });
+      // forceUpdate();
+    }
+  }
+
+  const onClick = React.useCallback(() => {
+    forceUpdate();
+  }, [forceUpdate]);
+
+  function handleImgLoad(e: any) {
+    console.log('img load', e);
+  }
+
+  return (
+    <div>
+      <img onLoad={handleImgLoad} src="11" alt="" />
+      <button type="button" onClick={onClick}>
+        update inner
+      </button>
+      <button onClick={addRecommend}>add recommend</button>
+      <LazyRecommend />
+    </div>
+  );
+}
+
+function useForceUpdate() {
+  const [, forceUpdate] = React.useState(false);
+
+  return React.useCallback(() => {
+    forceUpdate((s) => !s);
+  }, []);
+}
+
+export const AddComponent = () => {
+  const forceUpdate = useForceUpdate();
+  const renderCount = React.useRef(0);
+
+  React.useEffect(() => {
+    renderCount.current += 1;
+  });
+
+  const onClick = React.useCallback(() => {
+    forceUpdate();
+  }, [forceUpdate]);
+
+  return (
+    <div>
+      <button type="button" onClick={onClick}>
+        update
+      </button>
+      <div>Render count: {renderCount.current}</div>
+
+      <ComponentsProvider components={components}>
+        <TestAddComponent />
+      </ComponentsProvider>
+
+      <ComponentsProvider components={components}>
+        <LazySlot />
+      </ComponentsProvider>
+    </div>
+  );
+};
+
+export const MutableComponents = () => {
+  const [myComponents, setMyMyComponents] = React.useState({});
+  const forceUpdate = useForceUpdate();
+
+  function addSlot() {
+    setMyMyComponents({
+      ...myComponents,
+      slot: {
+        name: 'AlimeComponentSlot',
+        url: '//g.alicdn.com/alime-components/slot/0.1.3/index.js',
+      },
+    });
+  }
+
+  function addRecommend() {
+    setMyMyComponents({
+      ...myComponents,
+      recommend: {
+        name: 'AlimeComponentRecommend',
+        url: '//g.alicdn.com/alime-components/recommend/0.1.0/index.js',
+      },
+    });
+  }
+
+  const onClick = React.useCallback(() => {
+    forceUpdate();
+  }, [forceUpdate]);
+
+  return (
+    <div>
+      <button type="button" onClick={onClick}>
+        update
+      </button>
+      <button onClick={addSlot}>add slot</button>
+      <button onClick={addRecommend}>add recommend</button>
+      <ComponentsProvider components={myComponents}>
+        <LazySlot />
+        <LazyRecommend />
+      </ComponentsProvider>
+    </div>
+  );
+};

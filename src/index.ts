@@ -6,13 +6,11 @@ export { importScript } from './utils/importScript';
 export { lazyComponent } from './utils/lazyComponent';
 export { mountComponent } from './utils/mountComponent';
 
-/* eslint-disable import/no-cycle */
 export { ComponentsProvider, useComponents } from './components/ComponentsProvider';
 export type { ComponentsProviderProps, ComponentsMap } from './components/ComponentsProvider';
 
 export { LazyComponent } from './components/LazyComponent';
-export type { LazyComponentProps } from './components/LazyComponent';
-/* eslint-enable import/no-cycle */
+export type { LazyComponentProps, LazyComponentOnLoadParams } from './components/LazyComponent';
 
 export { Avatar } from './components/Avatar';
 export type { AvatarProps, AvatarSize, AvatarShape } from './components/Avatar';

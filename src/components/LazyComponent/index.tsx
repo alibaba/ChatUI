@@ -1,9 +1,13 @@
 import React from 'react';
 import { SuspenseWrap } from './SuspenseWrap';
-import { LazyComponentProps, LazyComponentPropsWithCode } from './interface';
+import {
+  LazyComponentProps,
+  LazyComponentPropsWithCode,
+  LazyComponentOnLoadParams,
+} from './interface';
 import { useComponents } from '../ComponentsProvider/useComponents';
 
-export type { LazyComponentProps };
+export type { LazyComponentProps, LazyComponentOnLoadParams };
 
 export const LazyComponentWithCode: React.FC<LazyComponentPropsWithCode> = (props) => {
   const { code, fallback, onLoad, onError, ...rest } = props;
