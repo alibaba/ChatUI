@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1-beta.1](https://github.com/alibaba/ChatUI/compare/v0.3.1-beta.0...v0.3.1-beta.1) (2021-03-09)
+
+
+### Features
+
+* [LazyComponent] export `LazyComponentOnLoadParams` ([3bfd3fe](https://github.com/alibaba/ChatUI/commit/3bfd3fe686c272a39e7f4d7648902efce4727b0f))
+* [useComponents] add `hasComponent` method ([d933955](https://github.com/alibaba/ChatUI/commit/d9339559234c9e4515f1a90660d916fb647cb477))
+
+
+### Bug Fixes
+
+* [ComponentsProvider] support updating `props.components` ([524401d](https://github.com/alibaba/ChatUI/commit/524401d18e95a3bb786ef19c246c01bb118fd39c))
+
 ### [0.3.1-beta.0](https://github.com/alibaba/ChatUI/compare/v0.3.0...v0.3.1-beta.0) (2021-03-08)
 
 
