@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/alibaba/ChatUI/compare/v0.3.1-beta.2...v0.3.1) (2021-03-30)
+
+
+### Bug Fixes
+
+* [Bubble] explicitly make the text selectable ([3271079](https://github.com/alibaba/ChatUI/commit/3271079bc9d62d0a2b18205810a499ef8f4a08b7))
+
 ### [0.3.1-beta.2](https://github.com/alibaba/ChatUI/compare/v0.3.1-beta.1...v0.3.1-beta.2) (2021-03-09)
 
 ### [0.3.1-beta.1](https://github.com/alibaba/ChatUI/compare/v0.3.1-beta.0...v0.3.1-beta.1) (2021-03-09)
