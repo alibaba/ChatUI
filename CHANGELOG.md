@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.2](https://github.com/alibaba/ChatUI/compare/v0.3.1...v0.3.2) (2021-04-14)
+
+
+### Features
+
+* [useMessages] add `resetList` method ([5371ea5](https://github.com/alibaba/ChatUI/commit/5371ea52a60bde902cc300b28e245bc769266471))
+
+
+### Bug Fixes
+
+* [importScript] add `crossorigin` to script tag ([935d074](https://github.com/alibaba/ChatUI/commit/935d074b5838d214782ec8854b079f6512abc22e))
+* [Modal] fix  `tabIndex` ([b729ad4](https://github.com/alibaba/ChatUI/commit/b729ad43f8132ac299b57dad632ea92e4fa7655e))
+
 ### [0.3.1](https://github.com/alibaba/ChatUI/compare/v0.3.1-beta.2...v0.3.1) (2021-03-30)
 
 
