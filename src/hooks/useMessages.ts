@@ -59,6 +59,10 @@ export default function useMessages(initialState: MessageWithoutId[] = []) {
     setMessages((prev) => prev.filter((t) => t._id !== id));
   }, []);
 
+  const resetList = useCallback((list = []) => {
+    setMessages(list);
+  }, []);
+
   const setTyping = useCallback(
     (typing: boolean) => {
       if (typing === isTypingRef.current) return;
@@ -83,6 +87,7 @@ export default function useMessages(initialState: MessageWithoutId[] = []) {
     appendMsg,
     updateMsg,
     deleteMsg,
+    resetList,
     setTyping,
   };
 }
