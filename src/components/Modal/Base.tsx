@@ -47,7 +47,7 @@ export const Base: React.FC<ModalProps> = (props) => {
     if (autoFocus && wrapper.current) {
       wrapper.current.focus();
     }
-  }, [didMount]);
+  }, [autoFocus, didMount]);
 
   useEffect(() => {
     toggleClass('S--modalOpen', isShow);
@@ -56,7 +56,7 @@ export const Base: React.FC<ModalProps> = (props) => {
   if (!didMount) return null;
 
   return createPortal(
-    <div className={clsx(baseClass, className, { active: isShow })} ref={wrapper} tabIndex={0}>
+    <div className={clsx(baseClass, className, { active: isShow })} ref={wrapper} tabIndex={-1}>
       {backdrop && (
         <Backdrop active={isShow} onClick={backdrop === true && onClose ? onClose : undefined} />
       )}
