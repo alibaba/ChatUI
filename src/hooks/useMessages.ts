@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { useState, useMemo, useRef, useCallback } from 'react';
 import { getRandomString } from '../utils';
 import { MessageProps, MessageId } from '../components/Message';
@@ -12,7 +13,7 @@ let lastTs = 0;
 
 const makeMsg = (msg: MessageWithoutId, id?: MessageId) => {
   const ts = msg.createdAt || Date.now();
-  const hasTime = ts - lastTs > TIME_GAP;
+  const hasTime = msg.hasTime || ts - lastTs > TIME_GAP;
 
   if (hasTime) {
     lastTs = ts;
