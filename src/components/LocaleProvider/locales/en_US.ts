@@ -1,14 +1,15 @@
 export default {
   Time: {
-    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
-      '_',
-    ),
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
     formats: {
       LT: 'HH:mm',
       lll: 'M/D/YYYY HH:mm',
       WT: 'dddd HH:mm',
       YT: 'Yesterday HH:mm',
     },
+  },
+  Composer: {
+    send: 'Send',
   },
   SendConfirm: {
     title: 'Send photo',

@@ -67,7 +67,9 @@
     text-align: center;
   }
   &-title {
+    margin: 0;
     font-size: @card-title-font-size;
+    font-weight: @card-title-font-weight;
   }
   &-subtitle {
     color: @card-subtitle-color;
@@ -91,6 +93,9 @@
 
   .CardTitle + & {
     padding-top: 0;
+  }
+  p {
+    margin: 0;
   }
 }
 
@@ -122,9 +127,19 @@
     border-top: 1px solid @card-btn-border-color;
     border-radius: 0;
     background: @card-column-btn-bg;
+    color: @card-column-btn-color;
 
     &:last-child {
       border-radius: 0 0 @card-border-radius @card-border-radius;
+    }
+    &:hover {
+      background: @card-column-btn-hover-bg;
+    }
+    &:active {
+      background: @card-column-btn-active-bg;
+    }
+    &:disabled {
+      color: @card-column-btn-disabled-color;
     }
   }
   .Btn + .Btn {

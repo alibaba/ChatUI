@@ -1,17 +1,29 @@
 .QuickReplies {
   position: absolute;
-  left: 8px;
-  right: 8px;
+  left: 0;
+  right: 0;
   z-index: @zindex-quick-replies;
   bottom: 100%;
   overflow: hidden;
-  padding: 4px 0;
-  background: rgba(242, 244, 245, 0.95);
+  padding: @quick-replies-padding;
+  background: @quick-replies-bg;
   transition: opacity 0.3s;
 
   &[data-visible='false'] {
     visibility: hidden;
     opacity: 0;
+  }
+
+  &:not(.ScrollView--hasControls) {
+    padding-left: 0;
+    padding-right: 0;
+
+    .ScrollView-inner {
+      padding: 0 var(--gutter);
+    }
+    .ScrollView-item:last-child {
+      padding-right: var(--gutter);
+    }
   }
 }
 
@@ -25,22 +37,23 @@
   background: var(--white);
   cursor: pointer;
   color: var(--gray-1);
+  font-size: @quick-reply-font-size;
+  font-weight: @quick-reply-font-weight;
   transition: 0.15s ease-in-out;
 
   &.new::after {
     content: '';
     position: absolute;
-    right: -1px;
-    top: 2px;
-    width: 9px;
-    height: 9px;
-    border: 1px solid var(--white);
-    background-color: var(--red);
+    top: @quick-reply-dot-top;
+    right: @quick-reply-dot-right;
+    width: @quick-reply-dot-size;
+    height: @quick-reply-dot-size;
+    background: @quick-reply-dot-bg;
     overflow: hidden;
     border-radius: 50%;
   }
   &.highlight {
-    border-color: var(--brand-2);
+    border-color: @quick-reply-highlight-border-color;
   }
   &-inner {
     display: flex;
@@ -56,7 +69,13 @@
 }
 
 @media (hover: hover) {
-  .QuickReply:hover {
-    border-color: var(--brand-2);
+  .QuickReply {
+    &:hover {
+      background: @quick-reply-hover-bg;
+    }
+    &:not(.highlight):hover {
+      border-color: @quick-reply-hover-border-color;
+      background-clip: padding-box;
+    }
   }
 }

@@ -1,15 +1,16 @@
 .IconBtn {
-  padding: 0;
+  padding: @icon-button-padding;
   border: 0;
-  background: transparent;
-  color: var(--gray-2);
+  border-radius: @icon-button-border-radius;
+  background: @icon-button-bg;
+  color: @icon-button-color;
 
   &.Btn--primary {
-    color: var(--brand-2);
+    color: @icon-button-primary-color;
   }
   &:disabled {
-    border-color: var(--gray-6);
-    color: var(--gray-6);
+    border-color: @icon-button-disabled-border-color;
+    color: @icon-button-disabled-color;
   }
   & > .Icon {
     display: block;

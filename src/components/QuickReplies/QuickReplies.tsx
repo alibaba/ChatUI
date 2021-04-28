@@ -33,7 +33,6 @@ const QuickReplies = (props: QuickRepliesProps) => {
       itemKey="code"
       ref={scroller}
       data-visible={visible}
-      fullWidth
       onScroll={scrollEvent ? onScroll : undefined}
       renderItem={(item: QuickReplyItemProps, index) => (
         <QuickReply item={item} index={index} onClick={onClick} key={item.name} />

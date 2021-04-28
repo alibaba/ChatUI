@@ -8,36 +8,34 @@
   background: @navbar-bg;
   box-shadow: @navbar-box-shadow;
 
+  &-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &-left,
+  &-right {
+    width: (@navbar-height * 2);
+    padding: ((@navbar-height - @navbar-icon-size - @navbar-icon-padding * 2) / 2) 0;
+  }
+  &-right {
+    text-align: right;
+  }
+  &-title {
+    margin: 0;
+    color: @navbar-color;
+    font-size: @navbar-font-size;
+    text-align: center;
+    font-weight: 400;
+  }
+  &-logo {
+    width: auto;
+    height: @navbar-logo-height;
+  }
   .IconBtn {
     padding: @navbar-icon-padding;
     color: @navbar-icon-color;
     font-size: @navbar-icon-size;
   }
-}
-
-.Navbar-main {
-  flex: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.Navbar-left,
-.Navbar-right {
-  flex: 2;
-}
-
-.Navbar-right {
-  text-align: right;
-}
-
-.Navbar-title {
-  color: @navbar-color;
-  font-size: @navbar-font-size;
-  text-align: center;
-}
-
-.Navbar-logo {
-  width: auto;
-  height: @navbar-logo-height;
 }

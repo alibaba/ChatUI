@@ -36,15 +36,18 @@
 }
 
 .Toast-content {
-  min-width: 160px;
-  margin: 0 20px;
-  padding: 18px 20px 18px 28px;
-  border-radius: 8px;
-  background: var(--white);
-  box-shadow: var(--shadow-3);
+  min-width: @toast-content-min-width;
+  margin: @toast-content-margin;
+  padding: @toast-content-padding;
+  border-radius: @toast-content-border-radius;
+  background: @toast-content-bg;
+  box-shadow: @toast-content-box-shadow;
+  box-sizing: border-box;
 }
 
 .Toast-message {
   flex: 1 1 auto;
-  font-size: 16px;
+  margin: @toast-message-margin;
+  color: @toast-message-color;
+  font-size: @toast-message-font-size;
 }

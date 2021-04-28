@@ -1,60 +1,85 @@
 .Notice {
   position: absolute;
   z-index: @zindex-notice;
-  top: 12px;
-  left: 8px;
-  right: 8px;
-  display: flex;
-  align-items: flex-start;
-  padding: 16px;
-  border-radius: 8px;
-  background: var(--yellow-light);
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.03), 0 3px 4px 0 rgba(0, 0, 0, 0.06);
-}
+  top: @notice-top;
+  left: @notice-left;
+  right: @notice-right;
+  padding: @notice-padding;
+  border-radius: @notice-border-radius;
+  background: @notice-bg;
+  box-shadow: @notice-box-shadow;
 
-.Notice-icon,
-.Notice-close {
-  margin-top: 3px;
-  color: var(--gray-2);
-  font-size: 16px;
-}
+  &-text {
+    margin: 0;
 
-.Notice-icon {
-  margin-right: 5px;
-}
+    &.collapsed {
+      overflow: hidden;
+      display: -webkit-box;
+      /* autoprefixer: ignore next */
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      text-overflow: ellipsis;
+    }
+    &:not(.collapsed)::after {
+      content: '';
+      display: inline-block;
+      width: (@notice-more-font-size + 6px);
+      height: @notice-content-font-size;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+  &-icon {
+    float: left;
+    margin: ((@notice-content-font-size * (@notice-content-line-height - 1) / 2))
+      (@notice-content-font-size / 2) 0 0;
+  }
+  &-close {
+    position: absolute;
+    left: @gutter;
+    top: 50%;
+    top: ~'min(50%, 33px)';
+    transform: translateY(-50%);
+    font-size: @notice-close-font-size;
 
-.Notice-close {
-  margin-left: 5px;
+    & + .Notice-content {
+      margin-left: (@notice-close-font-size + @gutter);
+    }
+  }
+  .Icon {
+    color: @notice-icon-color;
+  }
 }
 
 .Notice-content {
   position: relative;
-  flex: 1;
-  min-width: 0;
-  color: var(--gray-dark);
+  color: @notice-content-color;
   word-wrap: break-word;
-
-  .collapsed {
-    overflow: hidden;
-    display: -webkit-box;
-    /* autoprefixer: ignore next */
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    text-overflow: ellipsis;
-  }
+  font-size: @notice-content-font-size;
+  line-height: @notice-content-line-height;
 }
 
 .Notice-actions {
-  margin: 5px 0 -8px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-left: 6px;
+  background: @notice-bg;
 }
 
 .Notice-more {
   display: block;
-  margin: 0 auto;
-  color: var(--gray-2);
+  color: @notice-more-color;
+  font-size: @notice-more-font-size;
   transition: 0.3s;
 
   &[aria-expanded='true'] {
     transform: rotate(180deg);
+  }
+  &:hover,
+  &:active {
+    background: transparent;
   }
 }

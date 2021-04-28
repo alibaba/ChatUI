@@ -12,10 +12,10 @@
     }
   }
   &--fullWidth {
-    margin: 0 -8px;
+    margin: 0 calc(var(--gutter) * -1);
   }
   &--fullWidth:not(&--hasControls) &-inner {
-    padding: 0 8px;
+    padding: 0 var(--gutter);
   }
 }
 
@@ -32,7 +32,7 @@
   }
   .ScrollView-item {
     flex: 0 0 auto;
-    margin-left: 8px;
+    margin-left: @scroll-view-spacing-x;
 
     &:first-child {
       margin-left: 0;

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import clsx from 'clsx';
 import smoothScroll from '../../utils/smoothScroll';
 import useNextId from '../../hooks/useNextId';
@@ -42,7 +42,7 @@ const TabsPane: React.FC<TabsPaneProps> = (props) => {
   const { active, children, ...others } = props;
 
   return (
-    <div className={clsx('Tabs-pane', { active })} {...others}>
+    <div className={clsx('Tabs-pane', { active })} {...others} role="tabpanel">
       {children}
     </div>
   );
@@ -61,7 +61,7 @@ export const Tabs: React.FC<TabsProps> = (props) => {
   const [pointerStyles, setPointerStyles] = useState({});
   const [index, setIndex] = useState(oIndex || 0);
   const indexRef = useRef(index);
-  const navRef = useRef<HTMLElement>(null);
+  const navRef = useRef<HTMLDivElement>(null);
   const headers: Array<React.ReactNode> = [];
   const contents: Array<React.ReactNode> = [];
   const tabPaneId = useNextId('tabs-');
@@ -83,7 +83,7 @@ export const Tabs: React.FC<TabsProps> = (props) => {
       <TabItem
         active={active}
         index={idx}
-        key={idx}
+        key={id}
         onClick={handleIndexChange}
         aria-controls={id}
         tabIndex={active ? -1 : 0}
@@ -94,7 +94,7 @@ export const Tabs: React.FC<TabsProps> = (props) => {
 
     if (item.props.children) {
       contents.push(
-        <TabsPane active={active} key={idx} id={id}>
+        <TabsPane active={active} key={id} id={id}>
           {item.props.children}
         </TabsPane>,
       );
@@ -105,7 +105,7 @@ export const Tabs: React.FC<TabsProps> = (props) => {
     setIndex(oIndex);
   }, [oIndex]);
 
-  function movePointer() {
+  const movePointer = useCallback(() => {
     const nav = navRef.current;
     if (!nav) return;
 
@@ -127,7 +127,7 @@ export const Tabs: React.FC<TabsProps> = (props) => {
         x: true,
       });
     }
-  }
+  }, [scrollable]);
 
   useEffect(() => {
     const nav = navRef.current;
@@ -143,22 +143,22 @@ export const Tabs: React.FC<TabsProps> = (props) => {
         ro.unobserve(nav);
       }
     };
-  }, []);
+  }, [movePointer]);
 
   useEffect(() => {
     indexRef.current = index;
     movePointer();
-  }, [index]);
+  }, [index, movePointer]);
 
   const needNav = headers.length > (hideNavIfOnlyOne ? 1 : 0);
 
   return (
     <div className={clsx('Tabs', { 'Tabs--scrollable': scrollable }, className)}>
       {needNav && (
-        <nav className="Tabs-nav" role="tablist" ref={navRef}>
+        <div className="Tabs-nav" role="tablist" ref={navRef}>
           {headers}
           <span className="Tabs-navPointer" style={pointerStyles} />
-        </nav>
+        </div>
       )}
       <div className="Tabs-content">{contents}</div>
     </div>

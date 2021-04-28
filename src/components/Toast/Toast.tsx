@@ -40,7 +40,7 @@ export const Toast: React.FC<ToastProps> = (props) => {
         }
       }, duration + 300);
     }
-  }, []);
+  }, [duration, onUnmount]);
 
   function handleClick() {
     if (onUnmount) {

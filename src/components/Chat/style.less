@@ -26,54 +26,6 @@
   background: rgba(242, 244, 245, 0.95);
 }
 
-/* common */
-.bordered {
-  border-radius: 12px;
-  box-shadow: var(--shadow-1);
-}
-
-/* utils */
-.animated {
-  animation-duration: 1s;
-  animation-fill-mode: both;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.fadeIn {
-  animation-name: fadeIn;
-}
-
-/* footer */
-.scrollable {
-  overflow: hidden;
-  -webkit-overflow-scrolling: touch;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.scroller {
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  margin-bottom: -18px;
-  padding-bottom: 18px;
-  white-space: nowrap;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
 /* animation */
 .slide-in-right-item {
   animation: slideInRight 0.5s ease-in-out both;

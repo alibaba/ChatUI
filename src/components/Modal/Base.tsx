@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import useMount from '../../hooks/useMount';
 import { Backdrop } from '../Backdrop';
 import { IconButton } from '../IconButton';
-import { Button } from '../Button';
+import { Button, ButtonProps } from '../Button';
 import useNextId from '../../hooks/useNextId';
 import toggleClass from '../../utils/toggleClass';
 
@@ -18,9 +18,10 @@ export type ModalProps = {
   autoFocus?: boolean;
   backdrop?: boolean | 'static';
   overflow?: boolean;
-  actions?: any[]; // TODO
+  actions?: ButtonProps[];
   vertical?: boolean;
   onClose?: () => void;
+  onBackdropClick?: () => void;
 };
 
 export const Base: React.FC<ModalProps> = (props) => {
@@ -37,6 +38,7 @@ export const Base: React.FC<ModalProps> = (props) => {
     actions,
     vertical = true,
     children,
+    onBackdropClick,
     onClose,
   } = props;
 
@@ -58,7 +60,10 @@ export const Base: React.FC<ModalProps> = (props) => {
   return createPortal(
     <div className={clsx(baseClass, className, { active: isShow })} ref={wrapper} tabIndex={-1}>
       {backdrop && (
-        <Backdrop active={isShow} onClick={backdrop === true && onClose ? onClose : undefined} />
+        <Backdrop
+          active={isShow}
+          onClick={backdrop === true ? onBackdropClick || onClose : undefined}
+        />
       )}
       <div className={`${baseClass}-dialog`} role="dialog" aria-labelledby={titleId} aria-modal>
         <div className={`${baseClass}-content`}>

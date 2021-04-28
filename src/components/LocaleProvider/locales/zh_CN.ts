@@ -8,6 +8,9 @@ export default {
       YT: '昨天 HH:mm', // 昨天 00:32
     },
   },
+  Composer: {
+    send: '发送',
+  },
   SendConfirm: {
     title: '发送图片',
     send: '发送',
