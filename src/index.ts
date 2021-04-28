@@ -1,10 +1,14 @@
 import 'intersection-observer';
 
 export { default as clsx } from 'clsx';
+export { default as DOMPurify } from 'dompurify';
 
 export { importScript } from './utils/importScript';
 export { lazyComponent } from './utils/lazyComponent';
 export { mountComponent } from './utils/mountComponent';
+
+export { default as useMessages } from './hooks/useMessages';
+export { default as useQuickReplies } from './hooks/useQuickReplies';
 
 export { ComponentsProvider, useComponents } from './components/ComponentsProvider';
 export type { ComponentsProviderProps, ComponentsMap } from './components/ComponentsProvider';
@@ -110,9 +114,6 @@ export type { TreeProps, TreeNodeProps } from './components/Tree';
 export { Video } from './components/Video';
 export type { VideoProps } from './components/Video';
 export { VisuallyHidden } from './components/VisuallyHidden';
-
-export { default as useMessages } from './hooks/useMessages';
-export { default as useQuickReplies } from './hooks/useQuickReplies';
 
 export { FileCard } from './components/FileCard';
 export type { FileCardProps } from './components/FileCard';
