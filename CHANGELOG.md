@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-alpha.0](https://github.com/alibaba/ChatUI/compare/v0.3.2...v1.0.0-alpha.0) (2021-04-29)
+
+
+### Features
+
+* [RichText] export DOMPurify ([730b626](https://github.com/alibaba/ChatUI/commit/730b626be77f4303108e3f272d646dcb75240fef))
+* UI 5.0 ([898ba2d](https://github.com/alibaba/ChatUI/commit/898ba2de2fe3bec44a7bf6eb3cf77a9f23620399))
+
+
+### Bug Fixes
+
+* [useMessages] support `msg.hasTime` ([bd01305](https://github.com/alibaba/ChatUI/commit/bd013056ac7cdf52b43e030da9670c1c9e07a8fb))
+
 ### [0.3.2](https://github.com/alibaba/ChatUI/compare/v0.3.1...v0.3.2) (2021-04-14)
 
 
