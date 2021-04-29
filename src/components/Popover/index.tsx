@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import useMount from '../../hooks/useMount';
@@ -14,11 +14,11 @@ export type PopoverProps = {
 
 export const Popover: React.FC<PopoverProps> = (props) => {
   const { className, active, target, children, onClose } = props;
-  const wrapper = useClickOutside(onClose);
+  const wrapper = useClickOutside(onClose, 'mousedown');
   const { didMount, isShow } = useMount({ active, ref: wrapper });
   const [style, setStyle] = useState({});
 
-  function updatePos() {
+  const updatePos = useCallback(() => {
     const targetRect = target.getBoundingClientRect();
     const rect = wrapper.current.getBoundingClientRect();
 
@@ -26,14 +26,14 @@ export const Popover: React.FC<PopoverProps> = (props) => {
       top: `${targetRect.top - rect.height}px`,
       left: `${targetRect.left}px`,
     });
-  }
+  }, [target, wrapper]);
 
   useEffect(() => {
     if (wrapper.current) {
       wrapper.current.focus();
       updatePos();
     }
-  }, [didMount]);
+  }, [didMount, updatePos, wrapper]);
 
   useWindowResize(updatePos);
 
