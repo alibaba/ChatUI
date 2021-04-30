@@ -56,9 +56,8 @@
 }
 
 .Modal-close {
-  padding: @modal-close-padding;
+  margin: -@icon-button-lg-padding;
   color: @modal-close-color;
-  font-size: @modal-close-font-size;
 }
 
 .Modal-footer {
@@ -139,8 +138,8 @@
 }
 
 .Popup-close {
+  margin: -@icon-button-lg-padding;
   color: @popup-close-color;
-  font-size: @popup-close-font-size;
 }
 
 .Popup-body {
@@ -157,6 +156,7 @@
   flex-direction: column;
   padding: @popup-footer-padding;
   background: @popup-footer-bg;
+  box-shadow: @popup-footer-box-shadow;
 
   .Btn + .Btn {
     margin-top: @popup-btn-x-spacing;
@@ -184,6 +184,6 @@
   }
   .Popup-dialog {
     width: @popup-wide-width;
-    border-radius: @popup-border-radius;
+    border-radius: @modal-border-radius;
   }
 }

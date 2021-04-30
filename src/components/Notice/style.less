@@ -38,14 +38,14 @@
   }
   &-close {
     position: absolute;
-    left: @gutter;
+    left: (@gutter - @icon-button-lg-padding);
     top: 50%;
     top: ~'min(50%, 33px)';
     transform: translateY(-50%);
     font-size: @notice-close-font-size;
 
     & + .Notice-content {
-      margin-left: (@notice-close-font-size + @gutter);
+      margin-left: (@notice-close-font-size + @gutter - @icon-button-lg-padding);
     }
   }
   .Icon {
@@ -63,8 +63,8 @@
 
 .Notice-actions {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: -@icon-button-lg-padding;
+  right: -@icon-button-lg-padding;
   padding-left: 6px;
   background: @notice-bg;
 }

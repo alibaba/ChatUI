@@ -65,17 +65,19 @@
     background: transparent;
     color: var(--blue);
     vertical-align: initial;
+
+    &:hover,
+    &:active {
+      background: transparent;
+    }
   }
   &--float {
+    padding: @btn-float-padding;
     border: 0;
     background: @btn-float-bg;
     box-shadow: @btn-float-box-shadow;
     color: @btn-float-color;
-
-    &:hover,
-    &:active {
-      background: @btn-float-hover-bg;
-    }
+    font-size: @btn-float-font-size;
   }
   &--sm {
     padding: @btn-padding-sm;

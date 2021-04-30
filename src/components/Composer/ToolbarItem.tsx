@@ -1,7 +1,6 @@
 import React from 'react';
-import { Button } from '../Button';
-import { IconButton } from '../IconButton';
 import { ToolbarItemProps } from '../Toolbar';
+import { Action } from './Action';
 
 type IToolbarItem = {
   item: ToolbarItemProps;
@@ -11,19 +10,12 @@ type IToolbarItem = {
 export const ToolbarItem: React.FC<IToolbarItem> = (props) => {
   const { item, onClick } = props;
 
-  if (item.img) {
-    return (
-      <Button className="IconBtn" data-tooltip aria-label={item.title} onClick={onClick}>
-        <img src={item.img} alt="" />
-      </Button>
-    );
-  }
-
   return (
-    <IconButton
-      icon={item.icon!}
+    <Action
+      icon={item.icon}
+      img={item.img}
       data-icon={item.icon}
-      data-tooltip
+      data-tooltip={item.title || null}
       aria-label={item.title}
       onClick={onClick}
     />

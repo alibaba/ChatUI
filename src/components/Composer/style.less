@@ -14,7 +14,7 @@
   height: @composer-input-min-height;
 
   .IconBtn {
-    border-radius: 50%;
+    margin: 0 -@icon-button-lg-padding;
     font-size: @composer-icon-size;
   }
 }
@@ -22,7 +22,7 @@
 .Composer-toggleBtn {
   transition: transform 0.2s;
 
-  &.active {
+  &.active .Icon {
     transform: rotate(45deg);
   }
 }
@@ -44,42 +44,3 @@
   transition: @composer-input-transition;
   font-size: 16px;
 }
-
-.Composer-toolbar {
-  padding: ((@composer-input-min-height - @composer-icon-size) / 2) 0;
-
-  .Btn {
-    margin-left: var(--gutter);
-    font-size: @composer-icon-size;
-
-    &:first-child {
-      margin: 0;
-    }
-    &:focus:before,
-    &:focus:after {
-      opacity: 0;
-    }
-  }
-  img {
-    display: block;
-    width: @composer-icon-size;
-    height: @composer-icon-size;
-  }
-}
-
-// .Composer--lg {
-//   padding: 12px 20px 16px;
-
-//   .Composer-input {
-//     padding: 10px 38px 10px 16px;
-//     border: 1px solid var(--white);
-//     border-radius: 22px;
-
-//     &:focus {
-//       border-color: var(--brand-1);
-//     }
-//   }
-//   .Composer-actions {
-//     padding: 4px 0;
-//   }
-// }

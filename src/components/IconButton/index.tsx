@@ -4,15 +4,16 @@ import { Button, ButtonProps } from '../Button';
 import { Icon } from '../Icon';
 
 export type IconButtonProps = ButtonProps & {
-  className?: string;
-  icon: string;
+  icon?: string;
+  img?: string;
 };
 
 export const IconButton: React.FC<IconButtonProps> = (props) => {
-  const { className, icon, ...other } = props;
+  const { className, icon, img, ...other } = props;
   return (
     <Button className={clsx('IconBtn', className)} {...other}>
-      <Icon type={icon} />
+      {icon && <Icon type={icon} />}
+      {!icon && img && <img src={img} alt="" />}
     </Button>
   );
 };

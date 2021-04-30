@@ -241,17 +241,10 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   if (isWide) {
     return (
       <div className="Composer Composer--lg" ref={composerRef}>
-        {hasToolbar && (
-          <div className="Composer-toolbar">
-            {toolbar.map((item) => (
-              <ToolbarItem
-                item={item}
-                onClick={(e) => handleToolbarClick(item, e)}
-                key={item.type}
-              />
-            ))}
-          </div>
-        )}
+        {hasToolbar &&
+          toolbar.map((item) => (
+            <ToolbarItem item={item} onClick={(e) => handleToolbarClick(item, e)} key={item.type} />
+          ))}
         {accessoryContent && (
           <Popover
             active={!!accessoryContent}

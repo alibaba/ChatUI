@@ -124,10 +124,12 @@
 @btn-primary-disabled-bg: var(--gray-7);
 @btn-primary-disabled-color: var(--gray-4);
 
+@btn-float-padding: 5px 19px;
 @btn-float-bg: var(--white);
 @btn-float-hover-bg: rgba(0, 0, 0, 0.04);
-@btn-float-box-shadow: var(--shadow-3);
+@btn-float-box-shadow: var(--shadow-2);
 @btn-float-color: var(--brand-1);
+@btn-float-font-size: @font-size-sm;
 
 // Composer
 @composer-padding: (@gutter / 2) var(--gutter);
@@ -147,12 +149,12 @@
 @input-width: 100%;
 @input-min-height: 24px;
 @input-margin: 0;
-@input-padding: 8px 12px;
+@input-padding: 6px @gutter;
 @input-border: 0;
-@input-border-radius: 10px;
+@input-border-radius: 12px;
 @input-bg: var(--light-1);
 @input-font-family: inherit;
-@input-font-size: 14px;
+@input-font-size: 16px;
 @input-line-height: 1.5;
 @input-color: var(--gray-1);
 @input-resize: none;
@@ -178,7 +180,7 @@
 @navbar-height: 44px;
 @navbar-padding: 0 8px;
 @navbar-bg: var(--light-1);
-@navbar-box-shadow: none;
+@navbar-border-color: var(--gray-8);
 
 @navbar-color: var(--gray-1);
 @navbar-font-size: @font-size-md;
@@ -186,7 +188,6 @@
 
 @navbar-icon-padding: 8px;
 @navbar-icon-color: var(--gray-2);
-@navbar-icon-size: 24px;
 
 // Notice
 @notice-top: @gutter;
@@ -268,7 +269,7 @@
 
 @card-btn-padding: 10px;
 @card-btn-line-height: 1.5;
-@card-btn-spacing-x: 6px;
+@card-btn-spacing-x: @gutter;
 @card-btn-spacing-y: 0;
 @card-btn-border-color: var(--gray-6);
 
@@ -303,6 +304,10 @@
 
 @icon-button-primary-color: var(--brand-2);
 
+@icon-button-lg-padding: 4px;
+@icon-button-lg-border-radius: 12px;
+@icon-button-lg-size: 24px;
+
 @icon-button-disabled-border-color: var(--gray-6);
 @icon-button-disabled-color: var(--gray-6);
 
@@ -322,7 +327,6 @@
 
 @modal-close-padding: 0;
 @modal-close-color: var(--gray-1);
-@modal-close-font-size: 24px;
 
 @modal-footer-x-padding: @gutter;
 @modal-btn-x-spacing: @gutter;
@@ -345,7 +349,7 @@
 // Popup
 @popup-border-radius: @modal-border-radius @modal-border-radius 0 0;
 @popup-bg: var(--white);
-@popup-box-shadow: @modal-box-shadow;
+@popup-box-shadow: 0 -4px 8px 0 rgba(0,0,0,0.08);
 
 @popup-max-height: 70vh;
 @popup-wide-width: 480px;
@@ -357,11 +361,11 @@
 @popup-title-font-size: @modal-title-font-size;
 
 @popup-close-color: @modal-close-color;
-@popup-close-font-size: @modal-close-font-size;
 
 @popup-footer-padding: @gutter;
 @popup-footer-bg: @popup-bg;
-@popup-btn-x-spacing: 10px;
+@popup-footer-box-shadow: @popup-box-shadow;
+@popup-btn-x-spacing: @gutter;
 
 // Confirm
 @confirm-color: var(--gray-dark);
@@ -384,7 +388,7 @@
 
 // QuickReplies
 @quick-replies-padding: 4px var(--gutter);
-@quick-replies-bg: #f2f4f5;
+@quick-replies-bg: rgba(#f2f4f5, 0.95);
 
 @quick-reply-color: var(--gray-1);
 @quick-reply-font-size: @font-size-sm;
@@ -427,11 +431,10 @@
 
 // Tag
 @tag-margin: 0 4px 0 0;
-@tag-padding: 2px 3px;
+@tag-padding: 1px 3px;
 @tag-border-radius: 4px;
 @tag-color: var(--brand-1);
 @tag-font-size: 10px;
-@tag-bg-opacity: 0.1;
 
 // Price
 @price-font-size: 10px;
@@ -440,6 +443,7 @@
 // Goods
 @goods-img-width: 80px;
 @goods-img-height: @goods-img-width;
+@goods-padding: @gutter;
 @goods-gap: 8px;
 @goods-desc-color: var(--gray-3);
 @goods-desc-font-size: 12px;

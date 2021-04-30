@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { Icon } from '../Icon';
 
-export type ButtonVariant = 'text';
+export type ButtonVariant = 'text' | 'float';
 
 export type ButtonSize = 'sm' | 'md' | 'lg';
 

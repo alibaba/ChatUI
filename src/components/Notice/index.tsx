@@ -43,7 +43,13 @@ export const Notice: React.FC<NoticeProps> = (props) => {
   return (
     <div className="Notice" role="alert" aria-atomic aria-live="assertive">
       {hasClose && (
-        <IconButton className="Notice-close" icon="close" onClick={onClose} aria-label="关闭通知" />
+        <IconButton
+          className="Notice-close"
+          icon="close"
+          size="lg"
+          onClick={onClose}
+          aria-label="关闭通知"
+        />
       )}
       <div className="Notice-content">
         <p className={clsx('Notice-text', { collapsed })} ref={contentRef}>
@@ -61,6 +67,7 @@ export const Notice: React.FC<NoticeProps> = (props) => {
             <IconButton
               className="Notice-more"
               icon="chevron-down"
+              size="lg"
               aria-expanded={!collapsed}
               onClick={handleToggle}
             />

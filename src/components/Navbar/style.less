@@ -5,8 +5,8 @@
   min-height: @navbar-height;
   padding: @navbar-padding;
   padding-top: var(--safe-top);
+  border-bottom: 1px solid @navbar-border-color;
   background: @navbar-bg;
-  box-shadow: @navbar-box-shadow;
 
   &-main {
     flex: 1;
@@ -17,7 +17,7 @@
   &-left,
   &-right {
     width: (@navbar-height * 2);
-    padding: ((@navbar-height - @navbar-icon-size - @navbar-icon-padding * 2) / 2) 0;
+    padding: ((@navbar-height - @icon-button-lg-size - @navbar-icon-padding * 2) / 2) 0;
   }
   &-right {
     text-align: right;
@@ -36,6 +36,5 @@
   .IconBtn {
     padding: @navbar-icon-padding;
     color: @navbar-icon-color;
-    font-size: @navbar-icon-size;
   }
 }

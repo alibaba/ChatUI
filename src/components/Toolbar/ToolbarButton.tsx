@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../Button';
 import { Icon } from '../Icon';
 
 export interface ToolbarItemProps {
@@ -20,13 +21,13 @@ export const ToolbarButton: React.FC<ToolbarButtonProps> = (props) => {
 
   return (
     <div className="Toolbar-item" data-type={type}>
-      <div className="Toolbar-btn" onClick={(e) => onClick(item, e)} role="button" tabIndex={0}>
+      <Button className="Toolbar-btn" onClick={(e) => onClick(item, e)}>
         <span className="Toolbar-btnIcon">
           {icon && <Icon type={icon} />}
           {img && <img className="Toolbar-img" src={img} alt="" />}
         </span>
         <span className="Toolbar-btnText">{title}</span>
-      </div>
+      </Button>
     </div>
   );
 };

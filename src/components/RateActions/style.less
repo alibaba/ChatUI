@@ -19,7 +19,7 @@
     margin-top: 9px;
   }
   &.active {
-    box-shadow: 0;
+    box-shadow: none;
   }
   &[data-type='good'] {
     &:hover,
@@ -30,7 +30,7 @@
   &[data-type='bad'] {
     &:hover,
     &.active {
-      color: #46c2eb;
+      color: var(--blue);
     }
   }
 }

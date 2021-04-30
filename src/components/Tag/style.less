@@ -3,21 +3,43 @@
   position: relative;
   margin: @tag-margin;
   padding: @tag-padding;
+  border: 1px solid var(--brand-1);
   border-radius: @tag-border-radius;
   color: @tag-color;
   font-size: @tag-font-size;
   line-height: 1.2;
   white-space: nowrap;
 
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: inherit;
-    background: currentColor;
-    opacity: @tag-bg-opacity;
+  &--primary {
+    border-color: transparent;
+    color: var(--orange);
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: -1px;
+      border-radius: inherit;
+      background: currentColor;
+      opacity: 0.2;
+    }
+  }
+  &--success {
+    border-color: var(--green);
+    background: var(--green);
+    color: #fff;
+  }
+  &--danger {
+    border-color: var(--red);
+    background: var(--red);
+    color: #fff;
+  }
+  &--warning {
+    border-color: var(--orange);
+    background: var(--orange);
+    color: #fff;
   }
 }
