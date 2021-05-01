@@ -98,6 +98,8 @@ export { RichText } from './components/RichText';
 export type { RichTextProps } from './components/RichText';
 export { ScrollView } from './components/ScrollView';
 export type { ScrollViewProps } from './components/ScrollView';
+export { Search } from './components/Search';
+export type { SearchProps } from './components/Search';
 export { Stepper, Step } from './components/Stepper';
 export type { StepperProps, StepProps } from './components/Stepper';
 export { Tabs, Tab } from './components/Tabs';
