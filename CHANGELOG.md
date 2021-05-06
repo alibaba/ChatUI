@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-alpha.1](https://github.com/alibaba/ChatUI/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2021-05-06)
+
+
+### Features
+
+* add Search ([cab51f0](https://github.com/alibaba/ChatUI/commit/cab51f054217e57d3adff49b7debcf4c7306d5bb))
+* UI 5.0 ([36de579](https://github.com/alibaba/ChatUI/commit/36de5790042bf1b5543fdb0e27d412a1cb0d3c65))
+
+
+### Bug Fixes
+
+* [Popover] use `useClickOutside` with `mousedown` ([42fb5b7](https://github.com/alibaba/ChatUI/commit/42fb5b7270956b962fa7f64b70175909ac97de65))
+
 ## [1.0.0-alpha.0](https://github.com/alibaba/ChatUI/compare/v0.3.2...v1.0.0-alpha.0) (2021-04-29)
 
 
