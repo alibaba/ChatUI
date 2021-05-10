@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import clsx from 'clsx';
 import { ThemeContext } from '../Form';
+import useForwardRef from '../../hooks/useForwardRef';
 
 function renderCounter(value = '', maxLength?: number) {
   return maxLength ? <div className="Input-counter">{`${value.length}/${maxLength}`}</div> : null;
@@ -57,7 +58,7 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
 
   const [rows, setRows] = useState(initialRows);
   const [lineHeight, setLineHeight] = useState(21);
-  const inputRef = (ref as React.MutableRefObject<InputRef>) || useRef<InputRef>(null);
+  const inputRef = useForwardRef(ref);
   const theme = useContext(ThemeContext);
   const isMultiline = multiline || autoSize || oRows > 1;
   const Element = isMultiline ? 'textarea' : 'input';
@@ -65,18 +66,20 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
   const isLight = theme === 'light';
 
   useEffect(() => {
+    if (!inputRef.current) return;
+
     const lhStr = getComputedStyle(inputRef.current, null).lineHeight;
     const lh = Number(lhStr.replace('px', ''));
 
     if (lh !== lineHeight) {
       setLineHeight(lh);
     }
-  }, []);
+  }, [inputRef, lineHeight]);
 
-  function updateRow() {
-    if (!autoSize) return;
+  const updateRow = useCallback(() => {
+    if (!autoSize || !inputRef.current) return;
 
-    const target = (inputRef as React.MutableRefObject<HTMLTextAreaElement>).current;
+    const target = inputRef.current as HTMLTextAreaElement;
     const prevRows = target.rows;
     target.rows = minRows;
 
@@ -101,7 +104,7 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
     if (placeholder) {
       target.placeholder = placeholder;
     }
-  }
+  }, [autoSize, inputRef, lineHeight, maxRows, minRows, placeholder]);
 
   useEffect(() => {
     if (value === '') {
@@ -109,7 +112,7 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
     } else {
       updateRow();
     }
-  }, [value]);
+  }, [initialRows, updateRow, value]);
 
   function handleChange(e: React.ChangeEvent<InputRef>) {
     updateRow();

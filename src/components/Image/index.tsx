@@ -1,26 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
+import useForwardRef from '../../hooks/useForwardRef';
 
-export interface ImageProps {
-  className?: string,
-  src: string,
-  alt?: string,
-  lazy?: boolean,
-  fluid?: boolean,
-};
+export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  className?: string;
+  src: string;
+  lazy?: boolean;
+  fluid?: boolean;
+}
 
 export const Image = React.forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
-  const {
-    className,
-    src: oSrc,
-    alt = '',
-    lazy,
-    fluid,
-    children,
-    ...other
-  } = props;
+  const { className, src: oSrc, lazy, fluid, children, ...other } = props;
   const [src, setSrc] = useState('');
-  const imgRef = ref || useRef<HTMLImageElement>(null);
+  const imgRef = useForwardRef(ref);
   const savedSrc = useRef('');
   const lazyLoaded = useRef(false);
 
@@ -35,22 +27,25 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>((props, ref)
       }
     });
 
-    observer.observe((imgRef as React.MutableRefObject<HTMLImageElement>).current);
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [imgRef, lazy]);
 
   useEffect(() => {
     savedSrc.current = oSrc;
     setSrc(lazy && !lazyLoaded.current ? '' : oSrc);
-  }, [oSrc]);
+  }, [lazy, oSrc]);
 
   return (
     <img
       className={clsx('Image', { 'Image--fluid': fluid }, className)}
       src={src}
-      alt={alt}
+      alt=""
       ref={imgRef}
       {...other}
     />
