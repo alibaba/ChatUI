@@ -1,4 +1,6 @@
 .Notice {
+  @icon-size: @font-size-root * 1.5;
+
   position: absolute;
   z-index: @zindex-notice;
   top: @notice-top;
@@ -20,10 +22,10 @@
       -webkit-line-clamp: 2;
       text-overflow: ellipsis;
     }
-    &:not(.collapsed)::after {
+    &[data-overflow="true"]:not(.collapsed)::after {
       content: '';
       display: inline-block;
-      width: (@notice-more-font-size + 6px);
+      width: (@icon-size + 6px);
       height: @notice-content-font-size;
     }
     a {
@@ -42,10 +44,9 @@
     top: 50%;
     top: ~'min(50%, 33px)';
     transform: translateY(-50%);
-    font-size: @notice-close-font-size;
 
     & + .Notice-content {
-      margin-left: (@notice-close-font-size + @gutter - @icon-button-lg-padding);
+      margin-left: (@icon-size + $left);
     }
   }
   .Icon {
@@ -70,16 +71,7 @@
 }
 
 .Notice-more {
-  display: block;
-  color: @notice-more-color;
-  font-size: @notice-more-font-size;
-  transition: 0.3s;
-
   &[aria-expanded='true'] {
     transform: rotate(180deg);
-  }
-  &:hover,
-  &:active {
-    background: transparent;
   }
 }

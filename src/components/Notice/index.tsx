@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
+import countLines from '../../utils/countLines';
 
 export interface NoticeProps {
   content: string;
@@ -10,8 +11,6 @@ export interface NoticeProps {
   onClose?: (event: React.MouseEvent) => void;
   onLinkClick?: (url: string) => void;
 }
-
-const COLLAPSED_MAX_HEIGHT = 48;
 
 export const Notice: React.FC<NoticeProps> = (props) => {
   const { content, url, hasClose = true, onLinkClick, onClose } = props;
@@ -34,7 +33,8 @@ export const Notice: React.FC<NoticeProps> = (props) => {
   }
 
   useEffect(() => {
-    if (contentRef.current && contentRef.current.offsetHeight > COLLAPSED_MAX_HEIGHT) {
+    const cont = contentRef.current;
+    if (cont && countLines(cont) > 2) {
       setHasMore(true);
       setCollapsed(true);
     }
@@ -52,7 +52,7 @@ export const Notice: React.FC<NoticeProps> = (props) => {
         />
       )}
       <div className="Notice-content">
-        <p className={clsx('Notice-text', { collapsed })} ref={contentRef}>
+        <p className={clsx('Notice-text', { collapsed })} data-overflow={hasMore} ref={contentRef}>
           <Icon className="Notice-icon" type="bullhorn" />
           {url ? (
             <a href={url} onClick={handleLinkClick}>
@@ -70,6 +70,7 @@ export const Notice: React.FC<NoticeProps> = (props) => {
               size="lg"
               aria-expanded={!collapsed}
               onClick={handleToggle}
+              aria-label="Toggle Notice"
             />
           </div>
         )}
