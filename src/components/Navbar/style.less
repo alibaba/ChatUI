@@ -2,6 +2,7 @@
   position: relative;
   z-index: @zindex-navbar;
   display: flex;
+  align-items: center;
   min-height: @navbar-height;
   padding: @navbar-padding;
   padding-top: var(--safe-top);
@@ -16,8 +17,10 @@
   }
   &-left,
   &-right {
-    width: (@navbar-height * 2);
-    padding: ((@navbar-height - @icon-button-lg-size - @navbar-icon-padding * 2) / 2) 0;
+    @padding-width: @navbar-icon-padding * 2;
+    width: 100px;
+    width: ~'calc((@{icon-button-lg-size} + @{padding-width}) * 2)';
+    padding: 2px 0;
   }
   &-right {
     text-align: right;
