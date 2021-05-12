@@ -5,9 +5,10 @@ export interface ErrorBoundaryState {
   errorInfo: React.ErrorInfo | null;
 }
 
-interface FallbackProps {
+export interface FallbackProps {
   error: Error;
   errorInfo: React.ErrorInfo;
+  [k: string]: any;
 }
 
 export type ErrorBoundaryProps = {

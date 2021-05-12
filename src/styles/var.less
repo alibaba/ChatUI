@@ -48,11 +48,14 @@
   'Noto Color Emoji';
 @font-family-base: @font-family-sans-serif;
 
-@font-size-base: 16px;
-@font-size-xs: 1rem * (12px / @font-size-base);
-@font-size-sm: 1rem * (14px / @font-size-base);
-@font-size-md: 1rem * (16px / @font-size-base);
-@font-size-lg: 1rem * (18px / @font-size-base);
+@font-size-root: 16px;
+@font-size-base: 1rem;
+
+@font-size-xxs: 1rem * (10px / @font-size-root);
+@font-size-xs: 1rem * (12px / @font-size-root);
+@font-size-sm: 1rem * (14px / @font-size-root);
+@font-size-md: 1rem * (16px / @font-size-root);
+@font-size-lg: 1rem * (18px / @font-size-root);
 
 // @font-weight-lighter: lighter;
 // @font-weight-light: 300;
@@ -154,7 +157,7 @@
 @input-border-radius: 12px;
 @input-bg: var(--light-1);
 @input-font-family: inherit;
-@input-font-size: 16px;
+@input-font-size: @font-size-md;
 @input-line-height: 1.5;
 @input-color: var(--gray-1);
 @input-resize: none;
@@ -200,16 +203,12 @@
 @notice-icon-color: var(--gray-1);
 
 @notice-close-margin: 0 @gutter 0 0;
-@notice-close-font-size: 24px;
 
 @notice-content-color: var(--gray-1);
 @notice-content-font-size: @font-size-md;
 @notice-content-line-height: @line-height-base;
 
 @notice-actions-margin: 5px 0 -8px;
-
-@notice-more-color: var(--gray-2);
-@notice-more-font-size: 24px;
 
 // Popover
 @popover-border-radius: 6px;
@@ -247,7 +246,7 @@
 @card-title-padding: @card-padding;
 @card-title-font-size: @font-size-lg;
 @card-title-font-weight: @font-weight-bold;
-@card-subtitle-font-size: 10px;
+@card-subtitle-font-size: @font-size-xxs;
 @card-subtitle-color: var(--gray-3);
 @card-border-width: @border-width;
 @card-border-radius: @border-radius-lg;
@@ -295,6 +294,9 @@
 @carousel-dot-bg: var(--gray-4);
 @carousel-dot-transition: 0.3s;
 
+// Icon
+@icon-size-lg: 1rem * (24px / @font-size-root);
+
 // IconButton
 @icon-button-padding: 0;
 @icon-button-border: 0;
@@ -306,7 +308,7 @@
 
 @icon-button-lg-padding: 4px;
 @icon-button-lg-border-radius: 12px;
-@icon-button-lg-size: 24px;
+@icon-button-lg-size: @icon-size-lg;
 
 @icon-button-disabled-border-color: var(--gray-6);
 @icon-button-disabled-color: var(--gray-6);
@@ -434,36 +436,38 @@
 @tag-padding: 1px 3px;
 @tag-border-radius: 4px;
 @tag-color: var(--brand-1);
-@tag-font-size: 10px;
+@tag-font-size: @font-size-xxs;
 
 // Price
-@price-font-size: 10px;
+@price-font-size: @font-size-xxs;
 @price-integer-font-size: 1.4em;
 
 // Goods
 @goods-img-width: 80px;
 @goods-img-height: @goods-img-width;
+@goods-img-border-radius: 12px;
+
 @goods-padding: @gutter;
 @goods-gap: 8px;
 @goods-desc-color: var(--gray-3);
-@goods-desc-font-size: 12px;
+@goods-desc-font-size: @font-size-xs;
 @goods-meta-color: var(--gray-3);
-@goods-meta-font-size: 10px;
+@goods-meta-font-size: @font-size-xxs;
 @goods-border-width: 1px;
 @goods-border-color: var(--gray-7);
 @goods-count-color: var(--gray-3);
-@goods-count-font-size: 12px;
-@goods-unit-font-size: 10px;
+@goods-count-font-size: @font-size-xs;
+@goods-unit-font-size: @font-size-xxs;
 @goods-buy-btn-bg: var(--brand-1);
 @goods-buy-btn-color: #fff;
 @goods-buy-btn-padding: 2px;
 @goods-detail-btn-min-width: 48px;
 @goods-detail-btn-padding: 0 10px;
 @goods-detail-btn-border-radius: 10px;
-@goods-detail-btn-font-size: 10px;
+@goods-detail-btn-font-size: @font-size-xxs;
 @goods-detail-btn-line-height: 18px;
 @goods-status-color: var(--orange);
-@goods-status-font-size: 12px;
+@goods-status-font-size: @font-size-xs;
 
 // MessageList
 @message-list-padding: var(--gutter);

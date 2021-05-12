@@ -11,13 +11,6 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  // for button start
-  width: 100%;
-  border: 0;
-  background: transparent;
-  text-align: left;
-  appearance: none;
-  // for button end
   padding: @list-item-padding;
   border-top: @list-border-width solid @list-border-color;
   color: @list-item-color;
@@ -36,6 +29,14 @@
   .Icon {
     color: @list-item-icon-color;
   }
+}
+
+button.ListItem {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  appearance: none;
 }
 
 a.ListItem,
