@@ -42,6 +42,8 @@ export const Goods = React.forwardRef<HTMLDivElement, GoodsProps>((props, ref) =
     count,
     unit,
     action,
+    children,
+
     // 商品
     originalPrice,
     meta,
@@ -61,7 +63,9 @@ export const Goods = React.forwardRef<HTMLDivElement, GoodsProps>((props, ref) =
       <Text className="Goods-desc">{desc}</Text>
       <div className="Goods-tags">
         {tags.map((t) => (
-          <Tag key={t.name}>{t.name}</Tag>
+          <Tag color="primary" key={t.name}>
+            {t.name}
+          </Tag>
         ))}
       </div>
     </>
@@ -101,7 +105,10 @@ export const Goods = React.forwardRef<HTMLDivElement, GoodsProps>((props, ref) =
   return (
     <Flex className={clsx('Goods', className)} data-type={type} ref={ref} {...other}>
       {img && <img className="Goods-img" src={img} alt={name} />}
-      <FlexItem className="Goods-main">{mainCont}</FlexItem>
+      <FlexItem className="Goods-main">
+        {mainCont}
+        {children}
+      </FlexItem>
       {isOrder && (
         <div className="Goods-aside">
           {priceCont}
