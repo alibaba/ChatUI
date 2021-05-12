@@ -2,16 +2,12 @@ import React from 'react';
 import clsx from 'clsx';
 import { Icon } from '../Icon';
 
-export type ButtonVariant = 'text' | 'float';
-
-export type ButtonSize = 'sm' | 'md' | 'lg';
-
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   label?: string;
   color?: 'primary';
-  variant?: ButtonVariant;
-  size?: ButtonSize;
+  variant?: 'text' | 'float';
+  size?: 'sm' | 'md' | 'lg';
   block?: boolean;
   icon?: string;
   loading?: boolean;
@@ -30,6 +26,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
     color,
     variant,
     size,
+    icon,
     loading = false,
     block,
     disabled = false,
@@ -43,6 +40,8 @@ export const Button: React.FC<ButtonProps> = (props) => {
       onClick(e);
     }
   }
+
+  const btnIcon = loading ? 'spinner' : icon;
 
   return (
     <button
@@ -61,9 +60,9 @@ export const Button: React.FC<ButtonProps> = (props) => {
       onClick={handleClick}
       {...other}
     >
-      {loading && (
+      {btnIcon && (
         <span className="Btn-icon">
-          <Icon type="spinner" spin />
+          <Icon type={btnIcon} spin={loading} />
         </span>
       )}
       {label || children}
