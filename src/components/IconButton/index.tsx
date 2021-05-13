@@ -3,10 +3,9 @@ import clsx from 'clsx';
 import { Button, ButtonProps } from '../Button';
 import { Icon } from '../Icon';
 
-export type IconButtonProps = ButtonProps & {
-  icon?: string;
+export interface IconButtonProps extends ButtonProps {
   img?: string;
-};
+}
 
 export const IconButton: React.FC<IconButtonProps> = (props) => {
   const { className, icon, img, ...other } = props;

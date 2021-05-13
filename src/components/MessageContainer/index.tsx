@@ -1,15 +1,16 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useRef, useImperativeHandle } from 'react';
 import { PullToRefresh } from '../PullToRefresh';
 import Message, { MessageProps } from '../Message/Message';
 import canUse from '../../utils/canUse';
 
-interface MessageContainerProps {
+export interface MessageContainerProps {
   messages: MessageProps[];
+  renderMessageContent: (message: MessageProps) => React.ReactNode;
   loadMoreText?: string;
   onRefresh?: () => Promise<any>;
-  onScroll?: (event: React.UIEvent) => void;
+  onScroll?: (event: React.UIEvent<HTMLDivElement, UIEvent>) => void;
   renderBeforeMessageList?: () => React.ReactNode;
-  renderMessageContent: (message: MessageProps) => React.ReactNode;
 }
 
 interface MessageContainerHandle {
@@ -40,7 +41,7 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
 
     useEffect(() => {
       const wrapper = messagesRef.current;
-      if (!wrapper) return;
+      if (!wrapper) return undefined;
 
       const willPreventDefault = canUse('passiveListener') ? { passive: false } : false;
       let needBlur = false;
@@ -88,18 +89,12 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       [],
     );
 
-    function handleScroll(e: React.UIEvent<HTMLDivElement, UIEvent>) {
-      if (onScroll) {
-        onScroll(e);
-      }
-    }
-
     return (
       <div className="MessageContainer" ref={messagesRef} tabIndex={-1}>
         {renderBeforeMessageList && renderBeforeMessageList()}
         <PullToRefresh
           onRefresh={onRefresh}
-          onScroll={handleScroll}
+          onScroll={onScroll}
           loadMoreText={loadMoreText}
           ref={scroller}
         >

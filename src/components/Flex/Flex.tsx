@@ -28,66 +28,56 @@ const mapAlign = {
   center: 'Flex--ai-c',
 };
 
-export type FlexProps = {
-  as?: React.ElementType;
+export type As<T = any> = React.ElementType<T>;
+
+export interface FlexProps extends React.HTMLAttributes<HTMLElement> {
+  as?: As;
   className?: string;
   center?: boolean;
   inline?: boolean;
   direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
   wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
-  justify?:
-    | 'flex-start'
-    | 'flex-end'
-    | 'center'
-    | 'space-between'
-    | 'space-around';
-  justifyContent?:
-    | 'flex-start'
-    | 'flex-end'
-    | 'center'
-    | 'space-between'
-    | 'space-around';
+  justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
+  justifyContent?: FlexProps['justify'];
   align?: 'flex-start' | 'flex-end' | 'center';
-  alignItems?: 'flex-start' | 'flex-end' | 'center';
+  alignItems?: FlexProps['align'];
   children?: React.ReactNode;
-};
+}
 
-export const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
-  (props, ref) => {
-    const {
-      as: Element = 'div',
-      className,
-      inline,
-      center,
-      direction,
-      wrap,
-      justifyContent,
-      justify = justifyContent,
-      alignItems,
-      align = alignItems,
-      children,
-      ...other
-    } = props;
+export const Flex = React.forwardRef<HTMLElement, FlexProps>((props, ref) => {
+  const {
+    as: Element = 'div',
+    className,
+    inline,
+    center,
+    direction,
+    wrap,
+    justifyContent,
+    justify = justifyContent,
+    alignItems,
+    align = alignItems,
+    children,
+    ...other
+  } = props;
 
-    return (
-      <Element
-        className={clsx(
-          'Flex',
-          direction && mapDirection[direction],
-          justify && mapJustify[justify],
-          align && mapAlign[align],
-          wrap && mapWrap[wrap],
-          {
-            'Flex--inline': inline,
-            'Flex--center': center,
-          },
-          className,
-        )}
-        ref={ref}
-        {...other}
-      >
-        {children}
-      </Element>
-    );
-  },
-);
+  return (
+    <Element
+      className={clsx(
+        'Flex',
+        direction && mapDirection[direction],
+        justify && mapJustify[justify],
+        align && mapAlign[align],
+        wrap && mapWrap[wrap],
+        {
+          'Flex--inline': inline,
+          'Flex--center': center,
+        },
+        className,
+      )}
+      ref={ref}
+      {...other}
+    >
+      {children}
+    </Element>
+  );
+});

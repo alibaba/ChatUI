@@ -1,19 +1,20 @@
 import React from 'react';
 import clsx from 'clsx';
 
-export type FlexItemProps = {
+export interface FlexItemProps extends React.HTMLAttributes<HTMLElement> {
   className?: string;
   flex?: string;
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   order?: number;
-};
+}
 
 export const FlexItem: React.FC<FlexItemProps> = (props) => {
-  const { className, flex, alignSelf, order, children, ...other } = props;
+  const { className, flex, alignSelf, order, style, children, ...other } = props;
   return (
     <div
       className={clsx('FlexItem', className)}
       style={{
+        ...style,
         flex,
         alignSelf,
         order,

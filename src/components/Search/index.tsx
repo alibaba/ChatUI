@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
-import { Input } from '../Input';
+import { Input, InputProps } from '../Input';
 
-export interface SearchProps {
+export interface SearchProps extends Omit<InputProps, 'value'> {
   className?: string;
   value?: string;
   placeholder?: string;

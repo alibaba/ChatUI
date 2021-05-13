@@ -23,7 +23,7 @@ export type { BackdropProps } from './components/Backdrop';
 export { Bubble } from './components/Bubble';
 export type { BubbleProps } from './components/Bubble';
 export { Button } from './components/Button';
-export type { ButtonProps, ButtonVariant, ButtonSize } from './components/Button';
+export type { ButtonProps } from './components/Button';
 export { Card, CardMedia, CardTitle, CardContent, CardText, CardActions } from './components/Card';
 export type {
   CardProps,
@@ -45,7 +45,7 @@ export type { DividerProps } from './components/Divider';
 export { Empty } from './components/Empty';
 export type { EmptyProps } from './components/Empty';
 export { ErrorBoundary } from './components/ErrorBoundary';
-export type { ErrorBoundaryProps } from './components/ErrorBoundary';
+export type { ErrorBoundaryProps, FallbackProps } from './components/ErrorBoundary';
 export { Flex, FlexItem } from './components/Flex';
 export type { FlexProps, FlexItemProps } from './components/Flex';
 export { Form, FormActions, FormItem } from './components/Form';
@@ -90,7 +90,7 @@ export type {
   QuickReplyItemProps,
 } from './components/QuickReplies';
 export { Radio, RadioGroup } from './components/Radio';
-export type { RadioProps, RadioGroupProps } from './components/Radio';
+export type { RadioProps, RadioGroupProps, RadioValue } from './components/Radio';
 export { RateActions } from './components/RateActions';
 export type { RateActionsProps } from './components/RateActions';
 export type { RecorderHandle } from './components/Recorder';
