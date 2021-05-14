@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-alpha.2](https://github.com/alibaba/ChatUI/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-05-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* [RateActions] change `good/bad` to `up/down`
+
+### Features
+
+* [Button] support `icon` prop ([dc03585](https://github.com/alibaba/ChatUI/commit/dc035851ddec48ce92bddbf40ccfbdb1da379976))
+* [Goods] support `children` ([f0f7ef0](https://github.com/alibaba/ChatUI/commit/f0f7ef03c0f7da254488f1183c5beedc0561cc6e))
+* [Navbar] support all IconButton's props ([4096ee3](https://github.com/alibaba/ChatUI/commit/4096ee30febbe85b82232fe908965661e91466f3))
+* [Portal] `container` support ref object ([a372694](https://github.com/alibaba/ChatUI/commit/a372694f33becd776e80760c6a1f314cc276b799))
+* [Toast]  add `aria` attrs ([8bcfe25](https://github.com/alibaba/ChatUI/commit/8bcfe252cf82c31a2f9f00c5b0674b03bbb8586b))
+* [useLocale] support fallback ([f0aebb5](https://github.com/alibaba/ChatUI/commit/f0aebb5bd4d87a3d00863323c252c94560c75df2))
+* add `useForwardRef` ([669531a](https://github.com/alibaba/ChatUI/commit/669531aa726855df06f68f665d5c9e947a101b36))
+* UI 5.0 ([9d981c0](https://github.com/alibaba/ChatUI/commit/9d981c0e834601bf3b592153944b8b04a7e13bc2))
+
+
+### Bug Fixes
+
+* [Message] apply `user.name` to avatar ([3346bf9](https://github.com/alibaba/ChatUI/commit/3346bf94a0953d08db516ebf293d563f948b5ac2))
+* [Notice] update the logic of checking the number of lines ([1fcd117](https://github.com/alibaba/ChatUI/commit/1fcd117762057dce7bb284168f0dd6ee4deb037a))
+* [RateActions] set default title ([fb4d2aa](https://github.com/alibaba/ChatUI/commit/fb4d2aa8927d867c52170d3c84289154c68e0130))
+* types ([4223bd6](https://github.com/alibaba/ChatUI/commit/4223bd6854631513d7426ee997a19f4e7419bcb5))
+
 ## [1.0.0-alpha.1](https://github.com/alibaba/ChatUI/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2021-05-06)
 
 
