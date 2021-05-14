@@ -42,6 +42,25 @@ export default () => (
         />
       </Card>
     </DemoSection>
+    <DemoSection title="渲染 children">
+      <Card size="xl">
+        <Goods
+          type="order"
+          img="//gw.alicdn.com/tfs/TB1p_nirYr1gK0jSZR0XXbP8XXa-300-300.png"
+          name="Air Joden2019限定倒勾棕色高帮篮球鞋最多字…"
+          desc="颜色分类：棕色；42码"
+          currency="¥"
+          price="30000.04"
+          status="交易关闭"
+          count={1}
+          onClick={() => {
+            console.log(111);
+          }}
+        >
+          <p>children content</p>
+        </Goods>
+      </Card>
+    </DemoSection>
     <DemoSection title="订单列表">
       <Card size="xl">
         <Goods

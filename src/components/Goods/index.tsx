@@ -11,7 +11,9 @@ type TagProps = {
   name: string;
 };
 
-export interface GoodsProps {
+export type GoodsRef = HTMLDivElement;
+
+export interface GoodsProps extends React.HTMLAttributes<GoodsRef> {
   className?: string;
   type?: 'goods' | 'order';
   img?: string;
@@ -26,9 +28,10 @@ export interface GoodsProps {
   unit?: string;
   status?: string;
   action?: ButtonProps | IconButtonProps;
+  children?: React.ReactNode;
 }
 
-export const Goods = React.forwardRef<HTMLDivElement, GoodsProps>((props, ref) => {
+export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
   const {
     // 通用
     className,
