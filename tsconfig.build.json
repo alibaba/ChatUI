@@ -11,6 +11,7 @@
     "dist",
     "es",
     "lib",
+    "demo",
     "storybook",
     "./*.js",
     "jest.setup.ts",
