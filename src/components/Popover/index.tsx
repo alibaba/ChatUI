@@ -14,7 +14,7 @@ export type PopoverProps = {
 
 export const Popover: React.FC<PopoverProps> = (props) => {
   const { className, active, target, children, onClose } = props;
-  const wrapper = useClickOutside(onClose);
+  const wrapper = useClickOutside(onClose, 'mousedown');
   const { didMount, isShow } = useMount({ active, ref: wrapper });
   const [style, setStyle] = useState({});
 
