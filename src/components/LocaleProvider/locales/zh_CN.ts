@@ -16,6 +16,10 @@ export default {
     send: '发送',
     cancel: '取消',
   },
+  RateActions: {
+    up: '赞同',
+    down: '反对',
+  },
   Recorder: {
     hold2talk: '按住 说话',
     release2send: '松开 发送',

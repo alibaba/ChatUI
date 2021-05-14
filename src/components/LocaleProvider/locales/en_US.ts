@@ -16,6 +16,10 @@ export default {
     send: 'Send',
     cancel: 'Cancel',
   },
+  RateActions: {
+    up: 'Up vote',
+    down: 'Down vote',
+  },
   Recorder: {
     hold2talk: 'Hold to Talk',
     release2send: 'Release to Send',
