@@ -25,5 +25,5 @@ export default function useWindowResize(handler: () => void) {
     return () => {
       window.removeEventListener('resize', resizeThrottler);
     };
-  }, []);
+  }, [handler]);
 }

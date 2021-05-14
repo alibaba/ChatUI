@@ -27,12 +27,16 @@ type PullToRefreshState = {
 
 export class PullToRefresh extends React.Component<PullToRefreshProps, PullToRefreshState> {
   wrapperRef = createRef<HTMLDivElement>();
+
   contentRef = createRef<HTMLDivElement>();
 
   startY = 0;
+
   useFallback: boolean;
+
   canPull: boolean = false;
 
+  // eslint-disable-next-line react/static-property-placement
   static defaultProps = {
     distance: 30,
     loadingDistance: 30,

@@ -6,12 +6,11 @@ export default function useClickOutside(
   handler: (event: EventType) => void,
   eventName: string = 'click',
 ) {
-  const ref = useRef<HTMLDivElement>(null!);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    // FIXME
     const listener = (e: any) => {
-      const targetElement = ref.current as HTMLElement;
+      const targetElement = ref.current;
 
       if (!targetElement || targetElement.contains(e.target)) {
         return;

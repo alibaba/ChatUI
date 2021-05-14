@@ -3,7 +3,7 @@ import { DemoPage, DemoSection } from '../components';
 import { Flex, FlexItem } from '../../../src';
 import '../../../src/styles/index.less';
 
-function FluidLayout({ n }) {
+function FluidLayout({ n }: { n: number }) {
   return (
     <div>
       <h5>{`${n}个`}</h5>

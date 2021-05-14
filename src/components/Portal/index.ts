@@ -1,12 +1,14 @@
 import { useState, useEffect, useLayoutEffect } from 'react';
 import { createPortal } from 'react-dom';
 
+type Container = React.RefObject<any> | Element | (() => Element) | null;
+
 export interface PortalProps {
-  container?: React.RefObject<any> | Element | (() => Element) | null;
+  container?: Container;
   onRendered?: () => void;
 }
 
-function getEl(el: any) {
+function getEl(el: Container) {
   if (!el) return null;
 
   if (el instanceof Element) {

@@ -24,7 +24,9 @@ export type MessageProps = {
   /**
    * 消息内容
    */
-  content: any; // FIXME
+  content: {
+    [k: string]: any;
+  };
   /**
    * 消息创建时间
    */
@@ -44,7 +46,7 @@ export type MessageProps = {
   /**
    * 消息内容渲染函数
    */
-  renderMessageContent?: (message: MessageProps) => void;
+  renderMessageContent?: (message: MessageProps) => React.ReactNode;
 };
 
 const Message = (props: MessageProps) => {
