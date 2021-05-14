@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.3](https://github.com/alibaba/ChatUI/compare/v0.3.2...v0.3.3) (2021-05-14)
+
+
+### Bug Fixes
+
+* [Composer] fix the condition of render `SendConfirm` ([0aea136](https://github.com/alibaba/ChatUI/commit/0aea1367866903d06d500753d7aa5aa107d6c198))
+* [Popover] use `useClickOutside` with `mousedown` ([a8119d6](https://github.com/alibaba/ChatUI/commit/a8119d69704583a1babaa8848b5acfa46674aa75))
+
 ### [0.3.2](https://github.com/alibaba/ChatUI/compare/v0.3.1...v0.3.2) (2021-04-14)
 
 
