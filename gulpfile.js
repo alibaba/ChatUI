@@ -15,11 +15,7 @@ const paths = {
 };
 
 function fullStyle(cb) {
-  gulp
-    .src(['./src/styles/index.less', './src/styles/chatui.less'])
-    .pipe(less())
-    .pipe(postcss())
-    .pipe(gulp.dest(paths.dest.dist));
+  gulp.src('./src/styles/index.less').pipe(less()).pipe(postcss()).pipe(gulp.dest(paths.dest.dist));
 
   cb();
 }
