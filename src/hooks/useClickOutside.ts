@@ -1,12 +1,10 @@
 import { useEffect, useRef } from 'react';
 
-type EventType = MouseEvent | TouchEvent;
-
-export default function useClickOutside(
-  handler: (event: EventType) => void,
+export default function useClickOutside<T extends HTMLElement = any>(
+  handler: (event: any) => void,
   eventName: string = 'click',
 ) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<T>();
 
   useEffect(() => {
     const listener = (e: any) => {
@@ -25,7 +23,7 @@ export default function useClickOutside(
     return () => {
       document.removeEventListener(eventName, listener);
     };
-  }, [handler, eventName]);
+  }, [eventName, handler]);
 
   return ref;
 }

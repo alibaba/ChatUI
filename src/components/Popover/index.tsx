@@ -19,6 +19,8 @@ export const Popover: React.FC<PopoverProps> = (props) => {
   const [style, setStyle] = useState({});
 
   const updatePos = useCallback(() => {
+    if (!wrapper.current) return;
+
     const targetRect = target.getBoundingClientRect();
     const rect = wrapper.current.getBoundingClientRect();
 

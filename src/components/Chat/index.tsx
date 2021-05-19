@@ -4,7 +4,6 @@ import { Navbar, NavbarProps } from '../Navbar';
 import { MessageContainer, MessageContainerProps } from '../MessageContainer';
 import { QuickReplies, QuickReplyItemProps } from '../QuickReplies';
 import { Composer as DComposer, ComposerProps } from '../Composer';
-import { MessageProps } from '../Message/Message';
 
 export type ChatProps = ComposerProps &
   MessageContainerProps & {
