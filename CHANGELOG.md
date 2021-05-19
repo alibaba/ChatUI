@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-beta.0](https://github.com/alibaba/ChatUI/compare/v1.0.0-alpha.2...v1.0.0-beta.0) (2021-05-19)
+
+
+### Features
+
+* [style] remove reboot.less ([0992f81](https://github.com/alibaba/ChatUI/commit/0992f8108086796f45049ea02ab07cf2ac72290c))
+
+
+### Bug Fixes
+
+* [Goods] update `.Goods-name`'s `font-size` to `[@font-size-sm](https://github.com/font-size-sm)` ([11c222a](https://github.com/alibaba/ChatUI/commit/11c222a01609f03b543cb3ad576f75594bbaf8da))
+* [Message] adjust the spacing ([a8fb76b](https://github.com/alibaba/ChatUI/commit/a8fb76b259749aa7008983e213714c92a69ac3c7))
+* types ([d06821e](https://github.com/alibaba/ChatUI/commit/d06821e599308ad1f70d6789baaa21507a3fe10e))
+
 ## [1.0.0-alpha.2](https://github.com/alibaba/ChatUI/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-05-14)
 
 
