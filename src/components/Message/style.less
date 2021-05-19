@@ -2,17 +2,17 @@
   position: relative;
 
   & + & {
-    margin-top: 12px;
+    margin-top: @message-spacer-y;
   }
   &.left {
-    animation: msgLeft .5s ease-in-out;
+    animation: msgLeft 0.5s ease-in-out;
 
     .Bubble {
       margin-right: @bubble-left-gutter;
     }
   }
   &.right {
-    animation: msgRight .5s ease-in-out;
+    animation: msgRight 0.5s ease-in-out;
 
     .Message-content {
       flex-direction: row-reverse;
@@ -26,9 +26,6 @@
       margin-left: @bubble-right-gutter;
       border-radius: @bubble-right-border-radius;
       background: @bubble-right-bg;
-    }
-    .Avatar + .Bubble {
-      margin-left: 18%;
     }
   }
 }
@@ -48,7 +45,7 @@
   }
 }
 
-/* SystemMessage */
+// SystemMessage
 .SystemMessage {
   padding: 0 16px;
   font-size: @font-size-xs;

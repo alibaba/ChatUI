@@ -5,14 +5,15 @@ import { Avatar } from '../Avatar';
 import { Time } from '../Time';
 import { Typing } from '../Typing';
 
-type User = {
+export interface User {
   avatar?: string;
   name?: string;
-};
+  [k: string]: any;
+}
 
 export type MessageId = string | number;
 
-export type MessageProps = {
+export interface MessageProps {
   /**
    * 唯一ID
    */
@@ -47,7 +48,7 @@ export type MessageProps = {
    * 消息内容渲染函数
    */
   renderMessageContent?: (message: MessageProps) => React.ReactNode;
-};
+}
 
 const Message = (props: MessageProps) => {
   const { renderMessageContent = () => null, ...msg } = props;
