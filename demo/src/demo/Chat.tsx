@@ -19,7 +19,9 @@ import Chat, {
 import OrderSelector from './OrdderSelector';
 import '../../../src/styles/index.less';
 
-const initialMessages = [
+type MessageWithoutId = Omit<MessageProps, '_id'>;
+
+const initialMessages: MessageWithoutId[] = [
   {
     type: 'text',
     content: { text: 'Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },

@@ -4,6 +4,7 @@ import { getRandomString } from '../utils';
 import { MessageProps, MessageId } from '../components/Message';
 
 type Messages = MessageProps[];
+
 type MessageWithoutId = Omit<MessageProps, '_id'> & {
   _id?: MessageId;
 };
@@ -31,7 +32,7 @@ const makeMsg = (msg: MessageWithoutId, id?: MessageId) => {
 const TYPING_ID = '_TYPING_';
 
 export default function useMessages(initialState: MessageWithoutId[] = []) {
-  const initialMsgs: Messages = useMemo(() => initialState.map(makeMsg), [initialState]);
+  const initialMsgs: Messages = useMemo(() => initialState.map((t) => makeMsg(t)), [initialState]);
   const [messages, setMessages] = useState(initialMsgs);
   const isTypingRef = useRef(false);
 
@@ -72,7 +73,6 @@ export default function useMessages(initialState: MessageWithoutId[] = []) {
         appendMsg({
           _id: TYPING_ID,
           type: 'typing',
-          content: {},
         });
       } else {
         deleteMsg(TYPING_ID);

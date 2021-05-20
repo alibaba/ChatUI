@@ -25,9 +25,7 @@ export interface MessageProps {
   /**
    * 消息内容
    */
-  content: {
-    [k: string]: any;
-  };
+  content?: any;
   /**
    * 消息创建时间
    */
@@ -52,14 +50,14 @@ export interface MessageProps {
 
 const Message = (props: MessageProps) => {
   const { renderMessageContent = () => null, ...msg } = props;
-  const { _id: id, type, content, user } = msg;
+  const { type, content, user } = msg;
 
   if (type === 'system') {
-    return <SystemMessage content={content.text} action={content.action} key={id} />;
+    return <SystemMessage content={content.text} action={content.action} />;
   }
 
   return (
-    <div className={clsx('Message', msg.position)} data-type={type} key={id}>
+    <div className={clsx('Message', msg.position)} data-type={type} data-id={msg._id}>
       {msg.hasTime && msg.createdAt && (
         <div className="Message-meta">
           <Time date={msg.createdAt} />
