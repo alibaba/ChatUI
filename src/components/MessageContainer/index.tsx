@@ -1,8 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useRef, useImperativeHandle } from 'react';
 import { PullToRefresh } from '../PullToRefresh';
-import Message, { MessageProps } from '../Message/Message';
+import { Message, MessageProps } from '../Message';
 import canUse from '../../utils/canUse';
+
+const listenerOpts = canUse('passiveListener') ? { passive: true } : false;
 
 export interface MessageContainerProps {
   messages: MessageProps[];
@@ -29,7 +31,7 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       renderMessageContent,
     } = props;
 
-    const messagesRef = useRef<HTMLDivElement>(null!);
+    const messagesRef = useRef<HTMLDivElement>(null);
     const scroller = useRef<PullToRefresh>(null!);
     const lastMessage = messages[messages.length - 1];
 
@@ -43,7 +45,6 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       const wrapper = messagesRef.current;
       if (!wrapper) return undefined;
 
-      const willPreventDefault = canUse('passiveListener') ? { passive: false } : false;
       let needBlur = false;
       let startY = 0;
 
@@ -67,8 +68,8 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
         }
       }
 
-      wrapper.addEventListener('touchstart', touchStart);
-      wrapper.addEventListener('touchmove', touchMove, willPreventDefault);
+      wrapper.addEventListener('touchstart', touchStart, listenerOpts);
+      wrapper.addEventListener('touchmove', touchMove, listenerOpts);
       wrapper.addEventListener('touchend', reset);
       wrapper.addEventListener('touchcancel', reset);
 
