@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-beta.1](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.0...v1.0.0-beta.1) (2021-05-21)
+
+
+### Bug Fixes
+
+* [useClickOutside] fix types ([0ca4d86](https://github.com/alibaba/ChatUI/commit/0ca4d86826cb0d10be032a48267ec28fcd49862f))
+* [useMessages] fix message id of the `initialMsgs` ([f5ee9eb](https://github.com/alibaba/ChatUI/commit/f5ee9ebcbae318971245cb6e1f73b4d7054b436c))
+* use passive listeners ([d534cf9](https://github.com/alibaba/ChatUI/commit/d534cf9c0990242b63939378e9be0390905864cf))
+
 ## [1.0.0-beta.0](https://github.com/alibaba/ChatUI/compare/v1.0.0-alpha.2...v1.0.0-beta.0) (2021-05-19)
 
 
