@@ -20,6 +20,7 @@ export interface GoodsProps extends React.HTMLAttributes<GoodsRef> {
   name: string;
   desc?: string;
   tags?: TagProps[];
+  locale?: string;
   currency?: string;
   price?: number;
   originalPrice?: number;
@@ -40,6 +41,7 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
     name,
     desc,
     tags = [],
+    locale,
     currency,
     price,
     count,
@@ -74,7 +76,8 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
     </>
   );
 
-  const priceCont = price && <Price price={price} currency={currency} />;
+  const priceProps = { currency, locale };
+  const priceCont = price && <Price price={price} {...priceProps} />;
 
   const countUnit = (
     <div className="Goods-countUnit">
@@ -97,7 +100,7 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
       <Flex alignItems="flex-end">
         <FlexItem>
           {priceCont}
-          {originalPrice && <Price price={originalPrice} currency={currency} original />}
+          {originalPrice && <Price price={originalPrice} original {...priceProps} />}
           {meta && <span className="Goods-meta">{meta}</span>}
         </FlexItem>
         {countUnit}
