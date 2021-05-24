@@ -21,9 +21,9 @@ export interface GoodsProps extends React.HTMLAttributes<GoodsRef> {
   desc?: string;
   tags?: TagProps[];
   currency?: string;
-  price?: string | number;
-  originalPrice?: string | number;
-  meta?: string;
+  price?: number;
+  originalPrice?: number;
+  meta?: React.ReactNode;
   count?: number;
   unit?: string;
   status?: string;
