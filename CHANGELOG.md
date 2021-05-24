@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-beta.2](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2021-05-24)
+
+
+### Features
+
+* [Price] support `locale` ([731ad59](https://github.com/alibaba/ChatUI/commit/731ad59d60058d869b72bc15b8ff1e31751550db))
+* [Time] export `Time` ([1e6ad64](https://github.com/alibaba/ChatUI/commit/1e6ad6476eaa6b0c64226c1332c20cc2ba57e9e9))
+
+
+### Bug Fixes
+
+* [Recorder] use passive listeners ([5cb0d7a](https://github.com/alibaba/ChatUI/commit/5cb0d7a2277e7dd651de06ec41acc89be2e9aad4))
+* [SendConfirm] remove `S--modalOpen` after close SendConfirm ([f0b95da](https://github.com/alibaba/ChatUI/commit/f0b95da19b307a669e224e95c766486e76183522))
+* [useMount] update `useEffect`'s deps ([d44f686](https://github.com/alibaba/ChatUI/commit/d44f6864a18654acde787d8ef5cd127640e9eeb8))
+* reset `p` `ul` `ol` `h1-5` ([ef8c817](https://github.com/alibaba/ChatUI/commit/ef8c817aebcadbe83226ee7af00acc27a968d3c4))
+
 ## [1.0.0-beta.1](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.0...v1.0.0-beta.1) (2021-05-21)
 
 
