@@ -45,6 +45,7 @@ export const navConfig = [
       { name: '标签', code: 'tag' },
       { name: '文本', code: 'text' },
       { name: '视频', code: 'video' },
+      { name: '媒体对象（废弃）', code: 'media-object' },
     ],
   },
   {

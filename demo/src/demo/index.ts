@@ -18,6 +18,7 @@ export { default as InfiniteScroll } from './InfiniteScroll';
 export { default as Input } from './Input';
 export { default as List } from './List';
 export { default as Loading } from './Loading';
+export { default as MediaObject } from './MediaObject';
 export { default as Modal } from './Modal';
 export { default as Notice } from './Notice';
 export { default as Popup } from './Popup';
