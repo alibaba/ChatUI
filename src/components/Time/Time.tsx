@@ -14,4 +14,4 @@ export const Time: React.FC<TimeProps> = ({ date }) => {
       {formatDate(date, trans())}
     </time>
   );
-  }
+};

@@ -108,6 +108,8 @@ export { Tag } from './components/Tag';
 export type { TagProps } from './components/Tag';
 export { Text } from './components/Text';
 export type { TextProps } from './components/Text';
+export { Time } from './components/Time';
+export type { TimeProps } from './components/Time';
 export { toast } from './components/Toast';
 export { Toolbar } from './components/Toolbar';
 export type { ToolbarProps, ToolbarItemProps } from './components/Toolbar';

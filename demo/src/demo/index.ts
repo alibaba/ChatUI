@@ -35,6 +35,7 @@ export { default as Stepper } from './Stepper';
 export { default as Tabs } from './Tabs';
 export { default as Tag } from './Tag';
 export { default as Text } from './Text';
+export { default as Time } from './Time';
 export { default as Toast } from './Toast';
 export { default as Video } from './Video';
 export { default as VisuallyHidden } from './VisuallyHidden';
