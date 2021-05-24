@@ -30,6 +30,10 @@ export const Search = ({
 
   function handleClear() {
     setQuery('');
+
+    if (onCancel) {
+      onCancel();
+    }
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
