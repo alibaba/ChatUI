@@ -286,6 +286,7 @@ export default () => {
             quickReplies={quickReplies}
             onQuickReplyClick={handleQuickReplyClick}
             onSend={handleSend}
+            onImageSend={() => Promise.resolve()}
           />
         </div>
       </DemoSection>

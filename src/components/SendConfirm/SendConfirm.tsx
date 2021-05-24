@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from '../Modal';
 import { Flex } from '../Flex';
 import { useLocale } from '../LocaleProvider';
+import toggleClass from '../../utils/toggleClass';
 
 export type SendConfirmProps = {
   file: Blob;
@@ -15,11 +16,6 @@ export const SendConfirm: React.FC<SendConfirmProps> = (props) => {
   const { trans } = useLocale('SendConfirm');
 
   useEffect(() => {
-    if (!file) {
-      setImg('');
-      return;
-    }
-
     const reader = new FileReader();
     reader.onload = (e: ProgressEvent<FileReader>) => {
       if (e.target) {
@@ -27,6 +23,10 @@ export const SendConfirm: React.FC<SendConfirmProps> = (props) => {
       }
     };
     reader.readAsDataURL(file);
+
+    return () => {
+      toggleClass('S--modalOpen', false);
+    };
   }, [file]);
 
   return (
