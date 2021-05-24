@@ -1,20 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { reflow } from '../utils';
 
-type useMountProps = {
+interface UseMountOptions {
   active?: boolean;
   ref: React.RefObject<any>;
   delay?: number;
-};
+}
 
-function useMount({ active = false, ref, delay = 300 }: useMountProps) {
+function useMount({ active = false, ref, delay = 300 }: UseMountOptions) {
   const [isShow, setIsShow] = useState(false);
   const [didMount, setDidMount] = useState(false);
-  const timeout = useRef<ReturnType<typeof setTimeout>>(null!);
+  const timeout = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     if (active) {
-      clearTimeout(timeout.current);
+      if (timeout.current) {
+        clearTimeout(timeout.current);
+      }
       setDidMount(active);
     } else {
       setIsShow(active);
@@ -22,14 +24,14 @@ function useMount({ active = false, ref, delay = 300 }: useMountProps) {
         setDidMount(active);
       }, delay);
     }
-  }, [active]);
+  }, [active, delay]);
 
   useEffect(() => {
     if (ref.current) {
       reflow(ref.current);
     }
     setIsShow(didMount);
-  }, [didMount]);
+  }, [didMount, ref]);
 
   return {
     didMount,
