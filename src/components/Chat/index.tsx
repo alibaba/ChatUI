@@ -163,6 +163,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     onInputBlur,
     onSend,
     onImageSend,
+    inputOptions,
     composerRef,
     inputType,
     onInputTypeChange,
@@ -203,6 +204,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
             ref={composerRef}
             inputType={inputType}
             text={text}
+            inputOptions={inputOptions}
             placeholder={placeholder}
             onAccessoryToggle={onAccessoryToggle}
             recorder={recorder}

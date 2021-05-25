@@ -5,6 +5,7 @@ import { Recorder, RecorderProps } from '../Recorder';
 import { Toolbar, ToolbarItemProps } from '../Toolbar';
 import { AccessoryWrap } from './AccessoryWrap';
 import { Popover } from '../Popover';
+import { InputProps } from '../Input';
 import { ToolbarItem } from './ToolbarItem';
 import { ComposerInput } from './ComposerInput';
 import { SendButton } from './SendButton';
@@ -19,6 +20,7 @@ export type InputType = 'voice' | 'text';
 export type ComposerProps = {
   wideBreakpoint?: string;
   text?: string;
+  inputOptions?: InputProps;
   placeholder?: string;
   inputType?: InputType;
   onInputTypeChange?: (inputType: InputType) => void;
@@ -55,6 +57,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     toolbar = [],
     onToolbarClick,
     rightAction,
+    inputOptions,
   } = props;
 
   const [text, setText] = useState(initialText);
@@ -62,7 +65,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   const [isAccessoryOpen, setAccessoryOpen] = useState(false);
   const [accessoryContent, setAccessoryContent] = useState('');
   const composerRef = useRef<HTMLDivElement>(null!);
-  const inputRef = useRef<HTMLInputElement>(null!);
+  const inputRef = useRef<HTMLTextAreaElement>(null!);
   const focused = useRef(false);
   const blurTimer = useRef<any>();
   const popoverTarget = useRef<any>();
@@ -228,6 +231,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   const hasToolbar = toolbar.length > 0;
 
   const inputProps = {
+    ...inputOptions,
     value: text,
     inputRef,
     placeholder,

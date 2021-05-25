@@ -1,18 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import clsx from 'clsx';
-import { Input } from '../Input';
+import { Input, InputProps } from '../Input';
 import { SendConfirm } from '../SendConfirm';
 import parseDataTransfer from '../../utils/parseDataTransfer';
 
-interface ComposerInputProps {
-  value: string;
+interface ComposerInputProps extends InputProps {
   invisible: boolean;
-  placeholder: string;
-  inputRef: React.MutableRefObject<HTMLInputElement>;
-  onFocus: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
-  onBlur: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
-  onKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  onChange: (value: string, e: React.ChangeEvent) => void;
+  inputRef: React.MutableRefObject<HTMLTextAreaElement>;
   onImageSend?: (file: File) => Promise<any>;
 }
 
@@ -45,7 +39,6 @@ export const ComposerInput = ({
     <div className={clsx({ 'S--invisible': invisible })}>
       <Input
         className="Composer-input"
-        value={value}
         rows={1}
         autoSize
         enterKeyHint="send"
