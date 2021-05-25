@@ -26,7 +26,8 @@
     "prepublishOnly": "npm run build & npm run build:umd",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@babel/runtime": "^7.14.0",
@@ -92,11 +93,6 @@
     "not dead",
     "not op_mini all"
   ],
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "keywords": [
     "react",
     "react-component",
