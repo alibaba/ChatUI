@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-beta.3](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2021-05-25)
+
+
+### Features
+
+* [Chat] support `inputOptions` ([3743eaf](https://github.com/alibaba/ChatUI/commit/3743eaf3f6f3a5764bb7d790397a19ea7af85d0c))
+* [Goods] add `locale` prop for the price ([45dff02](https://github.com/alibaba/ChatUI/commit/45dff028b77cd4a06eecd5370d3fcd1b5b20adb7))
+* [Input] support `showCount` ([a092097](https://github.com/alibaba/ChatUI/commit/a092097d2eaa135a57f0a403dce170d2e2e21c9f))
+
+
+### Bug Fixes
+
+* [Search] execute onCancel when click clear button ([464fc04](https://github.com/alibaba/ChatUI/commit/464fc04d06dd9206927d65d4b0b9c2cb65d7d30b))
+
 ## [1.0.0-beta.2](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2021-05-24)
 
 
