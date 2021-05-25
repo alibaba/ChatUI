@@ -3,35 +3,22 @@ import clsx from 'clsx';
 import { ThemeContext } from '../Form';
 import useForwardRef from '../../hooks/useForwardRef';
 
-function renderCounter(value = '', maxLength?: number) {
-  return maxLength ? <div className="Input-counter">{`${value.length}/${maxLength}`}</div> : null;
+function getCount(value: InputProps['value'], maxLength?: number) {
+  return `${`${value}`.length}${maxLength ? `/${maxLength}` : ''}`;
 }
 
 export type InputRef = HTMLInputElement | HTMLTextAreaElement;
 
-export type InputProps = {
-  className?: string;
-  type?: string;
-  value: string;
-  placeholder?: string;
+export interface InputProps extends Omit<React.InputHTMLAttributes<InputRef>, 'onChange'> {
   rows?: number;
   minRows?: number;
   maxRows?: number;
   maxLength?: number;
+  showCount?: boolean;
   multiline?: boolean;
   autoSize?: boolean;
-  disabled?: boolean;
-  enterKeyHint?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
-  onChange?: (
-    value: string,
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  onFocus?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onBlur?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onPaste?: (event: React.ClipboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-};
+  onChange?: (value: string, event: React.ChangeEvent<InputRef>) => void;
+}
 
 export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
   const {
@@ -43,6 +30,7 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
     minRows = oRows,
     maxRows = 5,
     maxLength,
+    showCount = !!maxLength,
     multiline,
     autoSize,
     onChange,
@@ -62,7 +50,6 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
   const theme = useContext(ThemeContext);
   const isMultiline = multiline || autoSize || oRows > 1;
   const Element = isMultiline ? 'textarea' : 'input';
-  const hasCounter = !!maxLength;
   const isLight = theme === 'light';
 
   useEffect(() => {
@@ -119,7 +106,7 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
 
     if (onChange) {
       const valueFromEvent = e.target.value;
-      const shouldTrim = isMultiline && maxLength && valueFromEvent.length > maxLength;
+      const shouldTrim = maxLength && valueFromEvent.length > maxLength;
       const val = shouldTrim ? valueFromEvent.substr(0, maxLength) : valueFromEvent;
       onChange(val, e);
     }
@@ -137,17 +124,17 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
     onChange: handleChange,
   };
 
-  if (isLight || hasCounter) {
+  if (isLight || showCount) {
     return (
       <div
         className={clsx('InputWrapper', {
           'is-light': isLight,
-          'has-counter': hasCounter,
+          'has-counter': showCount,
         })}
       >
         <Element {...inputProps} />
         {isLight && <div className="Input-line" />}
-        {renderCounter(value, maxLength)}
+        {showCount && <div className="Input-counter">{getCount(value, maxLength)}</div>}
       </div>
     );
   }

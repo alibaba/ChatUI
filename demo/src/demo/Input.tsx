@@ -8,6 +8,8 @@ export default () => {
   const [value2, setValue2] = useState('');
   const [value3, setValue3] = useState('');
   const [value4, setValue4] = useState('');
+  const [value5, setValue5] = useState('');
+  const [value6, setValue6] = useState('');
 
   return (
     <DemoPage>
@@ -27,6 +29,18 @@ export default () => {
           onChange={(val) => setValue4(val)}
           placeholder="请输入..."
         />
+      </DemoSection>
+      <DemoSection title="限制字数（不显示）">
+        <Input
+          maxLength={10}
+          value={value5}
+          onChange={(val) => setValue5(val)}
+          placeholder="请输入..."
+          showCount={false}
+        />
+      </DemoSection>
+      <DemoSection title="显示字数">
+        <Input value={value6} onChange={setValue6} placeholder="请输入..." showCount />
       </DemoSection>
     </DemoPage>
   );
