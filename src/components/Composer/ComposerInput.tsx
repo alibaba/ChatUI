@@ -11,7 +11,6 @@ interface ComposerInputProps extends InputProps {
 }
 
 export const ComposerInput = ({
-  value,
   inputRef,
   invisible,
   onImageSend,
