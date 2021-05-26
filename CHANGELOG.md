@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-beta.4](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-05-26)
+
+
+### Bug Fixes
+
+* [Composer] fix the value of `ComposerInput` ([7dc769a](https://github.com/alibaba/ChatUI/commit/7dc769a7668ebe7c8c086298dc75bbd64f357383))
+
 ## [1.0.0-beta.3](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2021-05-25)
 
 
