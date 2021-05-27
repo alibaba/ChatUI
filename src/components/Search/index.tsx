@@ -52,6 +52,7 @@ export const Search = ({
         className="Search-input"
         type="search"
         value={query}
+        enterKeyHint="search"
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         {...other}
