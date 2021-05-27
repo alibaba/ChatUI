@@ -59,7 +59,7 @@ export type { ImageProps } from './components/Image';
 export { InfiniteScroll } from './components/InfiniteScroll';
 export type { InfiniteScrollProps } from './components/InfiniteScroll';
 export { Input } from './components/Input';
-export type { InputProps } from './components/Input';
+export type { InputProps, InputVariant } from './components/Input';
 export { List, ListItem } from './components/List';
 export type { ListProps, ListItemProps } from './components/List';
 export { Loading } from './components/Loading';

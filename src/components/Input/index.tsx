@@ -7,9 +7,12 @@ function getCount(value: InputProps['value'], maxLength?: number) {
   return `${`${value}`.length}${maxLength ? `/${maxLength}` : ''}`;
 }
 
+export type InputVariant = 'outline' | 'filled' | 'flushed';
+
 export type InputRef = HTMLInputElement | HTMLTextAreaElement;
 
 export interface InputProps extends Omit<React.InputHTMLAttributes<InputRef>, 'onChange'> {
+  variant?: InputVariant;
   rows?: number;
   minRows?: number;
   maxRows?: number;
@@ -24,6 +27,7 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
   const {
     className,
     type = 'text',
+    variant: oVariant,
     value,
     placeholder,
     rows: oRows = 1,
@@ -46,11 +50,11 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
 
   const [rows, setRows] = useState(initialRows);
   const [lineHeight, setLineHeight] = useState(21);
-  const inputRef = useForwardRef(ref);
+  const inputRef = useForwardRef<any>(ref);
   const theme = useContext(ThemeContext);
+  const variant = oVariant || theme === 'light' ? 'flushed' : 'outline';
   const isMultiline = multiline || autoSize || oRows > 1;
   const Element = isMultiline ? 'textarea' : 'input';
-  const isLight = theme === 'light';
 
   useEffect(() => {
     if (!inputRef.current) return;
@@ -101,42 +105,41 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
     }
   }, [initialRows, updateRow, value]);
 
-  function handleChange(e: React.ChangeEvent<InputRef>) {
-    updateRow();
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<InputRef>) => {
+      updateRow();
 
-    if (onChange) {
-      const valueFromEvent = e.target.value;
-      const shouldTrim = maxLength && valueFromEvent.length > maxLength;
-      const val = shouldTrim ? valueFromEvent.substr(0, maxLength) : valueFromEvent;
-      onChange(val, e);
-    }
-  }
+      if (onChange) {
+        const valueFromEvent = e.target.value;
+        const shouldTrim = maxLength && valueFromEvent.length > maxLength;
+        const val = shouldTrim ? valueFromEvent.substr(0, maxLength) : valueFromEvent;
+        onChange(val, e);
+      }
+    },
+    [maxLength, onChange, updateRow],
+  );
 
-  const inputProps = {
-    ...other,
-    className: clsx('Input', className),
-    type,
-    ref: inputRef as any,
-    rows,
-    value,
-    placeholder,
-    maxLength,
-    onChange: handleChange,
-  };
+  const input = (
+    <Element
+      className={clsx('Input', `Input--${variant}`, className)}
+      type={type}
+      value={value}
+      placeholder={placeholder}
+      maxLength={maxLength}
+      ref={inputRef}
+      rows={rows}
+      onChange={handleChange}
+      {...other}
+    />
+  );
 
-  if (isLight || showCount) {
+  if (showCount) {
     return (
-      <div
-        className={clsx('InputWrapper', {
-          'is-light': isLight,
-          'has-counter': showCount,
-        })}
-      >
-        <Element {...inputProps} />
-        {isLight && <div className="Input-line" />}
+      <div className={clsx('InputWrapper', { 'has-counter': showCount })}>
+        {input}
         {showCount && <div className="Input-counter">{getCount(value, maxLength)}</div>}
       </div>
     );
   }
-  return <Element {...inputProps} />;
+  return input;
 });
