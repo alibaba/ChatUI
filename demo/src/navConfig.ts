@@ -26,6 +26,7 @@ export const navConfig = [
       { name: '点赞点踩', code: 'rate-actions' },
       { name: '输入框', code: 'input' },
       { name: '搜索框', code: 'search' },
+      { name: '选择器', code: 'select' },
     ],
   },
   {

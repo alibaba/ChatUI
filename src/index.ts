@@ -100,6 +100,8 @@ export { ScrollView } from './components/ScrollView';
 export type { ScrollViewProps } from './components/ScrollView';
 export { Search } from './components/Search';
 export type { SearchProps } from './components/Search';
+export { Select } from './components/Select';
+export type { SelectProps } from './components/Select';
 export { Stepper, Step } from './components/Stepper';
 export type { StepperProps, StepProps } from './components/Stepper';
 export { Tabs, Tab } from './components/Tabs';
