@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-beta.5](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-05-28)
+
+
+### Features
+
+* [Input] support `variant` ([f39bed8](https://github.com/alibaba/ChatUI/commit/f39bed8019e5d412f0903d3100a34eb614416ee9))
+* [root.less] add `--font-size-xx` & `--radius-xx` ([062e74d](https://github.com/alibaba/ChatUI/commit/062e74dfa821d2a2ff4aee094f78afea74e1d015))
+* [Search] set `enterKeyHint` to `search` ([1eea387](https://github.com/alibaba/ChatUI/commit/1eea3876f33b361b099375bfc5f20ab70aefd547))
+* [Select] add `Select` ([9b52bf0](https://github.com/alibaba/ChatUI/commit/9b52bf0b8aa201045bf0405330ca63d0fa93b1d9))
+
 ## [1.0.0-beta.4](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-05-26)
 
 
