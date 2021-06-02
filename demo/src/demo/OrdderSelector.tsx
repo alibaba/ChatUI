@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Popup, Card, Goods, Tabs, Tab, Button, Search } from '../../../src';
+import { Popup, Card, Goods, Tabs, Tab, Button, Search, Modal } from '../../../src';
 import '../../../src/styles/index.less';
 
 export default () => {
   const [active, setActive] = useState(true);
+  const [open, setOpen] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
 
   return (
@@ -41,8 +42,11 @@ export default () => {
                     name="Air Joden2019限定倒勾棕色高帮篮球鞋最多字…"
                     desc="颜色分类：棕色；42码"
                     currency="¥"
-                    price="30000.04"
+                    price={30000.04}
                     count={1}
+                    onClick={() => {
+                      setOpen(true);
+                    }}
                   />
                 </div>
                 <div className="OrderGroup-actions">
@@ -62,6 +66,25 @@ export default () => {
             <p>内容3</p>
           </Tab>
         </Tabs>
+        <Modal
+          active={open}
+          title="确认要发送吗？"
+          showClose={false}
+          onClose={() => {
+            setOpen(false);
+          }}
+          actions={[
+            {
+              label: '确认',
+              color: 'primary',
+            },
+            {
+              label: '取消',
+            },
+          ]}
+        >
+          <p style={{ paddingLeft: '15px' }}>Content 1</p>
+        </Modal>
       </div>
     </Popup>
   );

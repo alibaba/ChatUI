@@ -52,8 +52,19 @@ export const Base: React.FC<ModalProps> = (props) => {
   }, [autoFocus, didMount]);
 
   useEffect(() => {
-    toggleClass('S--modalOpen', isShow);
+    if (isShow) {
+      toggleClass('S--modalOpen', isShow);
+    }
   }, [isShow]);
+
+  useEffect(
+    () => () => {
+      if (!document.querySelector('.Modal') && !document.querySelector('.Popup')) {
+        toggleClass('S--modalOpen', false);
+      }
+    },
+    [],
+  );
 
   if (!didMount) return null;
 
