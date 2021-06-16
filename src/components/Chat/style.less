@@ -1,15 +1,10 @@
 & when (@global-style = true) {
-  html,
+  html {
+    height: calc(100vh - calc(100vh - 100%));
+  }
   body,
   #root {
     height: 100%;
-  }
-
-  @supports (top: constant(safe-area-inset-top)) or
-    (top: env(safe-area-inset-top)) {
-    body:not(.S--noHomeBar) {
-      height: calc(100% - var(--safe-bottom));
-    }
   }
 }
 
@@ -24,13 +19,17 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+.S--noHomeBar {
+  --safe-bottom: 0px;
+}
+
 .ChatFooter {
   position: relative;
   z-index: @zindex-footer;
+  padding-bottom: var(--safe-bottom);
   background: rgba(242, 244, 245, 0.95);
 }
 
-/* animation */
 .slide-in-right-item {
   animation: slideInRight 0.5s ease-in-out both;
 }
