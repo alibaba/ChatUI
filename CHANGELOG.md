@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-beta.6](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-06-16)
+
+
+### Bug Fixes
+
+* [Chat] fix the style for safe-area ([af797e9](https://github.com/alibaba/ChatUI/commit/af797e99b5ff33f9743b9d3aecb5dace4bf4ec24))
+* [Input] add `-webkit-appearance: none` ([5f683f8](https://github.com/alibaba/ChatUI/commit/5f683f895af234f5f08565d2f659ec5fd80e5bd4))
+* [Input] fix the `variant` variable ([dc76d84](https://github.com/alibaba/ChatUI/commit/dc76d84486a13b63ca5edec29ad93f2355156e82))
+* [Modal] remove `.S--modalOpen` after close modal ([45ccf0a](https://github.com/alibaba/ChatUI/commit/45ccf0a67a82b0795b79ec497e80fcfec67c47aa))
+* [Notice] fix the style of the bullhorn icon ([d208c5a](https://github.com/alibaba/ChatUI/commit/d208c5a2fad2b91433cba78231d7ddedd8de8055))
+* [RateActions] fix the active styles ([395616d](https://github.com/alibaba/ChatUI/commit/395616d9c7ab15d6ba37726134f2fcb73b471ea6))
+
 ## [1.0.0-beta.5](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-05-28)
 
 
