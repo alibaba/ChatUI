@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-beta.7](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2021-06-24)
+
+
+### Bug Fixes
+
+* [Goods] update demo ([f3f3f2a](https://github.com/alibaba/ChatUI/commit/f3f3f2ab1c4a850f86baa94e019dcddd3169d3be))
+* [Modal] clear `.S--modalOpen` after close modal ([4caab40](https://github.com/alibaba/ChatUI/commit/4caab40de51efb0d4719f957775b8382e6e792e6))
+
 ## [1.0.0-beta.6](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-06-16)
 
 
