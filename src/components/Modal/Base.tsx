@@ -24,13 +24,18 @@ export type ModalProps = {
   onBackdropClick?: () => void;
 };
 
+function clearModal() {
+  if (!document.querySelector('.Modal') && !document.querySelector('.Popup')) {
+    toggleClass('S--modalOpen', false);
+  }
+}
+
 export const Base: React.FC<ModalProps> = (props) => {
   const {
     baseClass,
     active,
     className,
     title,
-    titleId = useNextId('modal-'),
     showClose = true,
     autoFocus = true,
     backdrop = true,
@@ -42,6 +47,9 @@ export const Base: React.FC<ModalProps> = (props) => {
     onClose,
   } = props;
 
+  const mid = useNextId('modal-');
+  const titleId = props.titleId || mid;
+
   const wrapper = useRef<HTMLDivElement>(null);
   const { didMount, isShow } = useMount({ active, ref: wrapper });
 
@@ -49,7 +57,7 @@ export const Base: React.FC<ModalProps> = (props) => {
     if (autoFocus && wrapper.current) {
       wrapper.current.focus();
     }
-  }, [autoFocus, didMount]);
+  }, [autoFocus]);
 
   useEffect(() => {
     if (isShow) {
@@ -57,11 +65,15 @@ export const Base: React.FC<ModalProps> = (props) => {
     }
   }, [isShow]);
 
+  useEffect(() => {
+    if (!active && !didMount) {
+      clearModal();
+    }
+  }, [active, didMount]);
+
   useEffect(
     () => () => {
-      if (!document.querySelector('.Modal') && !document.querySelector('.Popup')) {
-        toggleClass('S--modalOpen', false);
-      }
+      clearModal();
     },
     [],
   );
