@@ -11,7 +11,7 @@ export default {
     },
   },
   SendConfirm: {
-    title: 'Send photo',
+    title: 'Resim Gönder',
     send: 'Gönder',
     cancel: 'İptal',
   },
