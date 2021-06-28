@@ -45,17 +45,17 @@ describe('<RateActions />', () => {
     }
   });
 
-  it('should call onClick callback (good)', (done) => {
+  it('should call onClick callback (up)', (done) => {
     const { container } = render(
       <RateActions
         onClick={(val) => {
-          if (val === 'good') {
+          if (val === 'up') {
             done();
           }
         }}
       />,
     );
-    const btn = container.querySelector('.RateBtn[data-type="good"]');
+    const btn = container.querySelector('.RateBtn[data-type="up"]');
 
     if (btn) {
       expect(btn).not.toHaveClass('active');
@@ -64,17 +64,17 @@ describe('<RateActions />', () => {
     }
   });
 
-  it('should call onClick callback (bad)', (done) => {
+  it('should call onClick callback (down)', (done) => {
     const { container } = render(
       <RateActions
         onClick={(val) => {
-          if (val === 'bad') {
+          if (val === 'down') {
             done();
           }
         }}
       />,
     );
-    const btn = container.querySelector('.RateBtn[data-type="bad"]');
+    const btn = container.querySelector('.RateBtn[data-type="down"]');
 
     if (btn) {
       expect(btn).not.toHaveClass('active');

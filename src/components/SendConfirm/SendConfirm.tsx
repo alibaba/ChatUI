@@ -15,11 +15,6 @@ export const SendConfirm: React.FC<SendConfirmProps> = (props) => {
   const { trans } = useLocale('SendConfirm');
 
   useEffect(() => {
-    if (!file) {
-      setImg('');
-      return;
-    }
-
     const reader = new FileReader();
     reader.onload = (e: ProgressEvent<FileReader>) => {
       if (e.target) {

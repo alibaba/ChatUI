@@ -1,6 +1,7 @@
 .Tabs-nav {
   position: relative;
   display: flex;
+  margin-bottom: @gutter;
 
   &::-webkit-scrollbar {
     display: none;
@@ -14,7 +15,7 @@
     -webkit-overflow-scrolling: touch;
   }
   .Tabs-navItem {
-    flex: 0 0 22%;
+    flex: 1 0 auto;
   }
 }
 
@@ -24,22 +25,29 @@
 }
 
 .Tabs-navLink {
-  display: inline-block;
-  margin: 0;
-  padding: 8px 3px;
-  border: 0;
-  background: transparent;
-  color: var(--gray-dark);
-  line-height: 20px;
-  font-weight: 300;
-  transition: 0.3s;
+  display: block;
+  width: @tabs-nav-link-width;
+  margin: @tabs-nav-link-margin;
+  padding: @tabs-nav-link-padding;
+  border: @tabs-nav-link-border;
+  border-radius: @tabs-nav-link-border-radius;
+  background: @tabs-nav-link-bg;
+  color: @tabs-nav-link-color;
+  font-size: @tabs-nav-link-font-size;
+  transition: @tabs-nav-link-transition;
 
+  &:focus:not(:focus-visible) {
+    outline: 0;
+  }
   &:hover {
+    background: @tabs-nav-link-hover-bg;
     cursor: pointer;
+    color: @tabs-nav-link-hover-color;
   }
   &.active {
-    color: var(--brand-1);
-    font-weight: 400;
+    position: relative;
+    z-index: 1;
+    color: @tabs-nav-link-active-color;
   }
 }
 
@@ -47,10 +55,11 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 2px;
-  border-radius: 1px;
-  background: var(--brand-2);
-  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: @tabs-nav-pointer-height;
+  background-image: @tabs-nav-pointer-bg;
+  box-shadow: @tabs-nav-pointer-box-shadow;
+  border-radius: @tabs-nav-pointer-border-radius;
+  transition: @tabs-nav-pointer-transition;
 }
 
 .Tabs-pane {

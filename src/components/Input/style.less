@@ -1,23 +1,11 @@
 .InputWrapper {
   position: relative;
 
-  &.is-light {
-    &.has-counter {
-      padding-bottom: 20px;
+  &.has-counter {
+    padding-bottom: 20px;
 
-      & + .HelpText {
-        margin-top: -18px;
-      }
-    }
-    .Input {
-      padding: 2px 12px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-      border-radius: 0;
-      background-color: transparent;
-    }
-    .Input-counter {
-      bottom: 0;
-      margin-top: 0;
+    & + .HelpText {
+      margin-top: -20px;
     }
   }
 }
@@ -25,20 +13,25 @@
 .Input {
   display: block;
   box-sizing: border-box;
-  width: 100%;
-  min-height: 24px;
-  padding: 8px 12px;
-  border: 0;
-  border-radius: 10px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--gray-1);
-  background-color: var(--light-1);
-  background-clip: padding-box;
+  width: @input-width;
+  min-height: @input-min-height;
+  margin: @input-margin;
+  padding: @input-padding;
+  border: @input-border;
+  border-radius: @input-border-radius;
+  font-family: @input-font-family;
+  font-size: @input-font-size;
+  line-height: @input-line-height;
+  color: @input-color;
+  background: @input-bg;
+  resize: @input-resize;
   -webkit-tap-highlight-color: transparent;
+  transition: .2s ease-in-out;
+  -webkit-appearance: none;
 
   &:focus {
     outline: none;
+    border-color: var(--brand-1);
   }
   &:focus:not([disabled]):not([readonly]) {
     & ~ .Input-line {
@@ -51,36 +44,28 @@
   &::placeholder {
     color: #ccc;
   }
-}
-
-.Input-line {
-  position: relative;
-  width: 100%;
-
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    width: 0;
-    height: 1px;
-    background: var(--brand-1);
-    transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  &--filled {
+    border-color: transparent;
+    background-color: var(--light-1);
   }
-  &:before {
-    left: 50%;
-  }
-  &:after {
-    right: 50%;
+  &--flushed {
+    padding: 2px var(--gutter);
+    border-width: 0 0 1px;
+    border-radius: 0;
+    background: none;
+
+    &:focus {
+      box-shadow: var(--brand-1) 0px 1px 0px 0px;
+    }
   }
 }
 
 .Input-counter {
-  /* absolute 在iOS下有坑，在消息列表里的输入框，输入文字后，页面卡片下移 */
+  // absolute 在iOS下有坑，在消息列表里的输入框，输入文字后，页面卡片下移
   position: relative;
-  z-index: @zindex-input-counter;
+  z-index: 1;
   float: right;
-  margin: -26px 12px 0 0;
+  margin-right: var(--gutter);
   color: var(--gray-3);
-  font-size: 12px;
+  font-size: @font-size-xs;
 }

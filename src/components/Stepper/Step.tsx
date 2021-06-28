@@ -41,8 +41,8 @@ export const Step = React.forwardRef<HTMLLIElement, StepProps>((props, ref) => {
       <div className="Step-dot" />
       <div className="Step-line" />
       <div className="Step-content">
-        {title && <p className="Step-title">{title}</p>}
-        {desc && <p className="Step-desc">{desc}</p>}
+        {title && <div className="Step-title">{title}</div>}
+        {desc && <div className="Step-desc">{desc}</div>}
         {children}
       </div>
     </li>

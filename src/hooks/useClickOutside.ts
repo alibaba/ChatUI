@@ -1,17 +1,14 @@
 import { useEffect, useRef } from 'react';
 
-type EventType = MouseEvent | TouchEvent;
-
-export default function useClickOutside(
-  handler: (event: EventType) => void,
+export default function useClickOutside<T extends HTMLElement = any>(
+  handler: (event: any) => void,
   eventName: string = 'click',
 ) {
-  const ref = useRef<HTMLDivElement>(null!);
+  const ref = useRef<T>();
 
   useEffect(() => {
-    // FIXME
     const listener = (e: any) => {
-      const targetElement = ref.current as HTMLElement;
+      const targetElement = ref.current;
 
       if (!targetElement || targetElement.contains(e.target)) {
         return;
@@ -26,7 +23,7 @@ export default function useClickOutside(
     return () => {
       document.removeEventListener(eventName, listener);
     };
-  }, [handler, eventName]);
+  }, [eventName, handler]);
 
   return ref;
 }

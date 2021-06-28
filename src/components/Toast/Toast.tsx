@@ -40,7 +40,7 @@ export const Toast: React.FC<ToastProps> = (props) => {
         }
       }, duration + 300);
     }
-  }, []);
+  }, [duration, onUnmount]);
 
   function handleClick() {
     if (onUnmount) {
@@ -49,7 +49,13 @@ export const Toast: React.FC<ToastProps> = (props) => {
   }
 
   return (
-    <div className={clsx('Toast', { show })} data-type={type} role="alert">
+    <div
+      className={clsx('Toast', { show })}
+      data-type={type}
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
       <div className="Toast-content" role="presentation" onClick={handleClick}>
         {renderIcon(type)}
         <p className="Toast-message">{content}</p>

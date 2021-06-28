@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    [index: string]: any;
+  }
+}
+
 export function importScript(url: string, name: string) {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
@@ -8,13 +14,13 @@ export function importScript(url: string, name: string) {
       if (script.parentNode) {
         script.parentNode.removeChild(script);
       }
-      if (name && window[name as any]) {
-        delete window[name as any];
+      if (name && window[name]) {
+        delete window[name];
       }
     };
 
     script.onload = () => {
-      resolve(window[name as any]);
+      resolve(window[name]);
       destroy();
     };
 

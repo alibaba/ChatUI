@@ -2,10 +2,149 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [0.3.3](https://github.com/alibaba/ChatUI/compare/v0.3.2...v0.3.3) (2021-05-14)
+## [1.0.0-beta.7](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2021-06-24)
 
 
 ### Bug Fixes
+
+* [Goods] update demo ([f3f3f2a](https://github.com/alibaba/ChatUI/commit/f3f3f2ab1c4a850f86baa94e019dcddd3169d3be))
+* [Modal] clear `.S--modalOpen` after close modal ([4caab40](https://github.com/alibaba/ChatUI/commit/4caab40de51efb0d4719f957775b8382e6e792e6))
+
+## [1.0.0-beta.6](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-06-16)
+
+
+### Bug Fixes
+
+* [Chat] fix the style for safe-area ([af797e9](https://github.com/alibaba/ChatUI/commit/af797e99b5ff33f9743b9d3aecb5dace4bf4ec24))
+* [Input] add `-webkit-appearance: none` ([5f683f8](https://github.com/alibaba/ChatUI/commit/5f683f895af234f5f08565d2f659ec5fd80e5bd4))
+* [Input] fix the `variant` variable ([dc76d84](https://github.com/alibaba/ChatUI/commit/dc76d84486a13b63ca5edec29ad93f2355156e82))
+* [Modal] remove `.S--modalOpen` after close modal ([45ccf0a](https://github.com/alibaba/ChatUI/commit/45ccf0a67a82b0795b79ec497e80fcfec67c47aa))
+* [Notice] fix the style of the bullhorn icon ([d208c5a](https://github.com/alibaba/ChatUI/commit/d208c5a2fad2b91433cba78231d7ddedd8de8055))
+* [RateActions] fix the active styles ([395616d](https://github.com/alibaba/ChatUI/commit/395616d9c7ab15d6ba37726134f2fcb73b471ea6))
+
+## [1.0.0-beta.5](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-05-28)
+
+
+### Features
+
+* [Input] support `variant` ([f39bed8](https://github.com/alibaba/ChatUI/commit/f39bed8019e5d412f0903d3100a34eb614416ee9))
+* [root.less] add `--font-size-xx` & `--radius-xx` ([062e74d](https://github.com/alibaba/ChatUI/commit/062e74dfa821d2a2ff4aee094f78afea74e1d015))
+* [Search] set `enterKeyHint` to `search` ([1eea387](https://github.com/alibaba/ChatUI/commit/1eea3876f33b361b099375bfc5f20ab70aefd547))
+* [Select] add `Select` ([9b52bf0](https://github.com/alibaba/ChatUI/commit/9b52bf0b8aa201045bf0405330ca63d0fa93b1d9))
+
+## [1.0.0-beta.4](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-05-26)
+
+
+### Bug Fixes
+
+* [Composer] fix the value of `ComposerInput` ([7dc769a](https://github.com/alibaba/ChatUI/commit/7dc769a7668ebe7c8c086298dc75bbd64f357383))
+
+## [1.0.0-beta.3](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2021-05-25)
+
+
+### Features
+
+* [Chat] support `inputOptions` ([3743eaf](https://github.com/alibaba/ChatUI/commit/3743eaf3f6f3a5764bb7d790397a19ea7af85d0c))
+* [Goods] add `locale` prop for the price ([45dff02](https://github.com/alibaba/ChatUI/commit/45dff028b77cd4a06eecd5370d3fcd1b5b20adb7))
+* [Input] support `showCount` ([a092097](https://github.com/alibaba/ChatUI/commit/a092097d2eaa135a57f0a403dce170d2e2e21c9f))
+
+
+### Bug Fixes
+
+* [Search] execute onCancel when click clear button ([464fc04](https://github.com/alibaba/ChatUI/commit/464fc04d06dd9206927d65d4b0b9c2cb65d7d30b))
+
+## [1.0.0-beta.2](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2021-05-24)
+
+
+### Features
+
+* [Price] support `locale` ([731ad59](https://github.com/alibaba/ChatUI/commit/731ad59d60058d869b72bc15b8ff1e31751550db))
+* [Time] export `Time` ([1e6ad64](https://github.com/alibaba/ChatUI/commit/1e6ad6476eaa6b0c64226c1332c20cc2ba57e9e9))
+
+
+### Bug Fixes
+
+* [Recorder] use passive listeners ([5cb0d7a](https://github.com/alibaba/ChatUI/commit/5cb0d7a2277e7dd651de06ec41acc89be2e9aad4))
+* [SendConfirm] remove `S--modalOpen` after close SendConfirm ([f0b95da](https://github.com/alibaba/ChatUI/commit/f0b95da19b307a669e224e95c766486e76183522))
+* [useMount] update `useEffect`'s deps ([d44f686](https://github.com/alibaba/ChatUI/commit/d44f6864a18654acde787d8ef5cd127640e9eeb8))
+* reset `p` `ul` `ol` `h1-5` ([ef8c817](https://github.com/alibaba/ChatUI/commit/ef8c817aebcadbe83226ee7af00acc27a968d3c4))
+
+## [1.0.0-beta.1](https://github.com/alibaba/ChatUI/compare/v1.0.0-beta.0...v1.0.0-beta.1) (2021-05-21)
+
+
+### Bug Fixes
+
+* [useClickOutside] fix types ([0ca4d86](https://github.com/alibaba/ChatUI/commit/0ca4d86826cb0d10be032a48267ec28fcd49862f))
+* [useMessages] fix message id of the `initialMsgs` ([f5ee9eb](https://github.com/alibaba/ChatUI/commit/f5ee9ebcbae318971245cb6e1f73b4d7054b436c))
+* use passive listeners ([d534cf9](https://github.com/alibaba/ChatUI/commit/d534cf9c0990242b63939378e9be0390905864cf))
+
+## [1.0.0-beta.0](https://github.com/alibaba/ChatUI/compare/v1.0.0-alpha.2...v1.0.0-beta.0) (2021-05-19)
+
+
+### Features
+
+* [style] remove reboot.less ([0992f81](https://github.com/alibaba/ChatUI/commit/0992f8108086796f45049ea02ab07cf2ac72290c))
+
+
+### Bug Fixes
+
+* [Goods] update `.Goods-name`'s `font-size` to `[@font-size-sm](https://github.com/font-size-sm)` ([11c222a](https://github.com/alibaba/ChatUI/commit/11c222a01609f03b543cb3ad576f75594bbaf8da))
+* [Message] adjust the spacing ([a8fb76b](https://github.com/alibaba/ChatUI/commit/a8fb76b259749aa7008983e213714c92a69ac3c7))
+* types ([d06821e](https://github.com/alibaba/ChatUI/commit/d06821e599308ad1f70d6789baaa21507a3fe10e))
+
+## [1.0.0-alpha.2](https://github.com/alibaba/ChatUI/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-05-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* [RateActions] change `good/bad` to `up/down`
+
+### Features
+
+* [Button] support `icon` prop ([dc03585](https://github.com/alibaba/ChatUI/commit/dc035851ddec48ce92bddbf40ccfbdb1da379976))
+* [Goods] support `children` ([f0f7ef0](https://github.com/alibaba/ChatUI/commit/f0f7ef03c0f7da254488f1183c5beedc0561cc6e))
+* [Navbar] support all IconButton's props ([4096ee3](https://github.com/alibaba/ChatUI/commit/4096ee30febbe85b82232fe908965661e91466f3))
+* [Portal] `container` support ref object ([a372694](https://github.com/alibaba/ChatUI/commit/a372694f33becd776e80760c6a1f314cc276b799))
+* [Toast]  add `aria` attrs ([8bcfe25](https://github.com/alibaba/ChatUI/commit/8bcfe252cf82c31a2f9f00c5b0674b03bbb8586b))
+* [useLocale] support fallback ([f0aebb5](https://github.com/alibaba/ChatUI/commit/f0aebb5bd4d87a3d00863323c252c94560c75df2))
+* add `useForwardRef` ([669531a](https://github.com/alibaba/ChatUI/commit/669531aa726855df06f68f665d5c9e947a101b36))
+* UI 5.0 ([9d981c0](https://github.com/alibaba/ChatUI/commit/9d981c0e834601bf3b592153944b8b04a7e13bc2))
+
+
+### Bug Fixes
+
+* [Message] apply `user.name` to avatar ([3346bf9](https://github.com/alibaba/ChatUI/commit/3346bf94a0953d08db516ebf293d563f948b5ac2))
+* [Notice] update the logic of checking the number of lines ([1fcd117](https://github.com/alibaba/ChatUI/commit/1fcd117762057dce7bb284168f0dd6ee4deb037a))
+* [RateActions] set default title ([fb4d2aa](https://github.com/alibaba/ChatUI/commit/fb4d2aa8927d867c52170d3c84289154c68e0130))
+* types ([4223bd6](https://github.com/alibaba/ChatUI/commit/4223bd6854631513d7426ee997a19f4e7419bcb5))
+
+## [1.0.0-alpha.1](https://github.com/alibaba/ChatUI/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2021-05-06)
+
+
+### Features
+
+* add Search ([cab51f0](https://github.com/alibaba/ChatUI/commit/cab51f054217e57d3adff49b7debcf4c7306d5bb))
+* UI 5.0 ([36de579](https://github.com/alibaba/ChatUI/commit/36de5790042bf1b5543fdb0e27d412a1cb0d3c65))
+
+
+### Bug Fixes
+
+* [Popover] use `useClickOutside` with `mousedown` ([42fb5b7](https://github.com/alibaba/ChatUI/commit/42fb5b7270956b962fa7f64b70175909ac97de65))
+
+## [1.0.0-alpha.0](https://github.com/alibaba/ChatUI/compare/v0.3.2...v1.0.0-alpha.0) (2021-04-29)
+
+
+### Features
+
+* [RichText] export DOMPurify ([730b626](https://github.com/alibaba/ChatUI/commit/730b626be77f4303108e3f272d646dcb75240fef))
+* UI 5.0 ([898ba2d](https://github.com/alibaba/ChatUI/commit/898ba2de2fe3bec44a7bf6eb3cf77a9f23620399))
+
+
+### Bug Fixes
+
+* [useMessages] support `msg.hasTime` ([bd01305](https://github.com/alibaba/ChatUI/commit/bd013056ac7cdf52b43e030da9670c1c9e07a8fb))
+
+### [0.3.3](https://github.com/alibaba/ChatUI/compare/v0.3.2...v0.3.3) (2021-05-14)
 
 * [Composer] fix the condition of render `SendConfirm` ([0aea136](https://github.com/alibaba/ChatUI/commit/0aea1367866903d06d500753d7aa5aa107d6c198))
 * [Popover] use `useClickOutside` with `mousedown` ([a8119d6](https://github.com/alibaba/ChatUI/commit/a8119d69704583a1babaa8848b5acfa46674aa75))

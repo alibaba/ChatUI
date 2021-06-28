@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import useMount from '../../hooks/useMount';
 import { Backdrop } from '../Backdrop';
 import { IconButton } from '../IconButton';
-import { Button } from '../Button';
+import { Button, ButtonProps } from '../Button';
 import useNextId from '../../hooks/useNextId';
 import toggleClass from '../../utils/toggleClass';
 
@@ -18,10 +18,17 @@ export type ModalProps = {
   autoFocus?: boolean;
   backdrop?: boolean | 'static';
   overflow?: boolean;
-  actions?: any[]; // TODO
+  actions?: ButtonProps[];
   vertical?: boolean;
   onClose?: () => void;
+  onBackdropClick?: () => void;
 };
+
+function clearModal() {
+  if (!document.querySelector('.Modal') && !document.querySelector('.Popup')) {
+    toggleClass('S--modalOpen', false);
+  }
+}
 
 export const Base: React.FC<ModalProps> = (props) => {
   const {
@@ -29,7 +36,6 @@ export const Base: React.FC<ModalProps> = (props) => {
     active,
     className,
     title,
-    titleId = useNextId('modal-'),
     showClose = true,
     autoFocus = true,
     backdrop = true,
@@ -37,8 +43,12 @@ export const Base: React.FC<ModalProps> = (props) => {
     actions,
     vertical = true,
     children,
+    onBackdropClick,
     onClose,
   } = props;
+
+  const mid = useNextId('modal-');
+  const titleId = props.titleId || mid;
 
   const wrapper = useRef<HTMLDivElement>(null);
   const { didMount, isShow } = useMount({ active, ref: wrapper });
@@ -47,18 +57,36 @@ export const Base: React.FC<ModalProps> = (props) => {
     if (autoFocus && wrapper.current) {
       wrapper.current.focus();
     }
-  }, [autoFocus, didMount]);
+  }, [autoFocus]);
 
   useEffect(() => {
-    toggleClass('S--modalOpen', isShow);
+    if (isShow) {
+      toggleClass('S--modalOpen', isShow);
+    }
   }, [isShow]);
+
+  useEffect(() => {
+    if (!active && !didMount) {
+      clearModal();
+    }
+  }, [active, didMount]);
+
+  useEffect(
+    () => () => {
+      clearModal();
+    },
+    [],
+  );
 
   if (!didMount) return null;
 
   return createPortal(
     <div className={clsx(baseClass, className, { active: isShow })} ref={wrapper} tabIndex={-1}>
       {backdrop && (
-        <Backdrop active={isShow} onClick={backdrop === true && onClose ? onClose : undefined} />
+        <Backdrop
+          active={isShow}
+          onClick={backdrop === true ? onBackdropClick || onClose : undefined}
+        />
       )}
       <div className={`${baseClass}-dialog`} role="dialog" aria-labelledby={titleId} aria-modal>
         <div className={`${baseClass}-content`}>
@@ -70,6 +98,7 @@ export const Base: React.FC<ModalProps> = (props) => {
               <IconButton
                 className={`${baseClass}-close`}
                 icon="close"
+                size="lg"
                 onClick={onClose}
                 aria-label="关闭"
               />

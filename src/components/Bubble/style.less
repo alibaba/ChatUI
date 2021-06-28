@@ -1,8 +1,7 @@
 .Bubble {
-  max-width: 680px;
+  max-width: @bubble-max-width;
   // min-width: 0;
-  // for IE bug
-  min-width: 1px;
+  min-width: 1px; // for IE bug
   background: @bubble-left-bg;
   border-radius: @bubble-left-border-radius;
 
@@ -17,12 +16,16 @@
   &.image {
     img {
       display: block;
-      max-width: 100%;
+      max-width: @bubble-img-max-width;
+      max-height: @bubble-img-max-height;
       height: auto;
       border-radius: inherit;
     }
   }
   &.typing {
-    padding: 8px 16px;
+    padding: @bubble-typing-padding;
+  }
+  p {
+    margin: 0;
   }
 }

@@ -3,11 +3,11 @@ import clsx from 'clsx';
 import DOMPurify from 'dompurify';
 import './configDOMPurify';
 
-export type RichTextProps = {
-  className?: string;
+export interface RichTextProps {
   content: string;
+  className?: string;
   options?: DOMPurify.Config;
-};
+}
 
 export const RichText = React.forwardRef<HTMLDivElement, RichTextProps>((props, ref) => {
   const { className, content, options = {}, ...other } = props;

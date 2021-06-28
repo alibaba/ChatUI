@@ -6,8 +6,9 @@ import { Flex } from '../Flex';
 import { Button } from '../Button';
 import canUse from '../../utils/canUse';
 
-const willPreventDefault = canUse('passiveListener') ? { passive: false } : false;
-// const willNotPreventDefault = supportsPassive ? { passive: true } : false;
+const canPassive = canUse('passiveListener');
+const listenerOpts = canPassive ? { passive: true } : false;
+const listenerOptsWithoutPassive = canPassive ? { passive: false } : false;
 
 type PullToRefreshStatus = 'pending' | 'pull' | 'active' | 'loading';
 
@@ -27,12 +28,16 @@ type PullToRefreshState = {
 
 export class PullToRefresh extends React.Component<PullToRefreshProps, PullToRefreshState> {
   wrapperRef = createRef<HTMLDivElement>();
+
   contentRef = createRef<HTMLDivElement>();
 
   startY = 0;
+
   useFallback: boolean;
+
   canPull: boolean = false;
 
+  // eslint-disable-next-line react/static-property-placement
   static defaultProps = {
     distance: 30,
     loadingDistance: 30,
@@ -63,8 +68,8 @@ export class PullToRefresh extends React.Component<PullToRefreshProps, PullToRef
 
     const wrapper = this.wrapperRef.current;
     if (wrapper) {
-      wrapper.addEventListener('touchstart', this.touchStart);
-      wrapper.addEventListener('touchmove', this.touchMove, willPreventDefault);
+      wrapper.addEventListener('touchstart', this.touchStart, listenerOpts);
+      wrapper.addEventListener('touchmove', this.touchMove, listenerOptsWithoutPassive);
       wrapper.addEventListener('touchend', this.touchEnd);
       wrapper.addEventListener('touchcancel', this.touchEnd);
     }

@@ -1,47 +1,40 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import clsx from 'clsx';
 import { ThemeContext } from '../Form';
+import useForwardRef from '../../hooks/useForwardRef';
 
-function renderCounter(value = '', maxLength?: number) {
-  return maxLength ? <div className="Input-counter">{`${value.length}/${maxLength}`}</div> : null;
+function getCount(value: InputProps['value'], maxLength?: number) {
+  return `${`${value}`.length}${maxLength ? `/${maxLength}` : ''}`;
 }
+
+export type InputVariant = 'outline' | 'filled' | 'flushed';
 
 export type InputRef = HTMLInputElement | HTMLTextAreaElement;
 
-export type InputProps = {
-  className?: string;
-  type?: string;
-  value: string;
-  placeholder?: string;
+export interface InputProps extends Omit<React.InputHTMLAttributes<InputRef>, 'onChange'> {
+  variant?: InputVariant;
   rows?: number;
   minRows?: number;
   maxRows?: number;
   maxLength?: number;
+  showCount?: boolean;
   multiline?: boolean;
   autoSize?: boolean;
-  disabled?: boolean;
-  enterKeyHint?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
-  onChange?: (
-    value: string,
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  onFocus?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onBlur?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onPaste?: (event: React.ClipboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-};
+  onChange?: (value: string, event: React.ChangeEvent<InputRef>) => void;
+}
 
 export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
   const {
     className,
     type = 'text',
+    variant: oVariant,
     value,
     placeholder,
     rows: oRows = 1,
     minRows = oRows,
     maxRows = 5,
     maxLength,
+    showCount = !!maxLength,
     multiline,
     autoSize,
     onChange,
@@ -57,26 +50,27 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
 
   const [rows, setRows] = useState(initialRows);
   const [lineHeight, setLineHeight] = useState(21);
-  const inputRef = (ref as React.MutableRefObject<InputRef>) || useRef<InputRef>(null);
+  const inputRef = useForwardRef<any>(ref);
   const theme = useContext(ThemeContext);
+  const variant = oVariant || (theme === 'light' ? 'flushed' : 'outline');
   const isMultiline = multiline || autoSize || oRows > 1;
   const Element = isMultiline ? 'textarea' : 'input';
-  const hasCounter = !!maxLength;
-  const isLight = theme === 'light';
 
   useEffect(() => {
+    if (!inputRef.current) return;
+
     const lhStr = getComputedStyle(inputRef.current, null).lineHeight;
     const lh = Number(lhStr.replace('px', ''));
 
     if (lh !== lineHeight) {
       setLineHeight(lh);
     }
-  }, []);
+  }, [inputRef, lineHeight]);
 
-  function updateRow() {
-    if (!autoSize) return;
+  const updateRow = useCallback(() => {
+    if (!autoSize || !inputRef.current) return;
 
-    const target = (inputRef as React.MutableRefObject<HTMLTextAreaElement>).current;
+    const target = inputRef.current as HTMLTextAreaElement;
     const prevRows = target.rows;
     target.rows = minRows;
 
@@ -101,7 +95,7 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
     if (placeholder) {
       target.placeholder = placeholder;
     }
-  }
+  }, [autoSize, inputRef, lineHeight, maxRows, minRows, placeholder]);
 
   useEffect(() => {
     if (value === '') {
@@ -109,44 +103,43 @@ export const Input = React.forwardRef<InputRef, InputProps>((props, ref) => {
     } else {
       updateRow();
     }
-  }, [value]);
+  }, [initialRows, updateRow, value]);
 
-  function handleChange(e: React.ChangeEvent<InputRef>) {
-    updateRow();
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<InputRef>) => {
+      updateRow();
 
-    if (onChange) {
-      const valueFromEvent = e.target.value;
-      const shouldTrim = isMultiline && maxLength && valueFromEvent.length > maxLength;
-      const val = shouldTrim ? valueFromEvent.substr(0, maxLength) : valueFromEvent;
-      onChange(val, e);
-    }
-  }
+      if (onChange) {
+        const valueFromEvent = e.target.value;
+        const shouldTrim = maxLength && valueFromEvent.length > maxLength;
+        const val = shouldTrim ? valueFromEvent.substr(0, maxLength) : valueFromEvent;
+        onChange(val, e);
+      }
+    },
+    [maxLength, onChange, updateRow],
+  );
 
-  const inputProps = {
-    ...other,
-    className: clsx('Input', className),
-    type,
-    ref: inputRef as any,
-    rows,
-    value,
-    placeholder,
-    maxLength,
-    onChange: handleChange,
-  };
+  const input = (
+    <Element
+      className={clsx('Input', `Input--${variant}`, className)}
+      type={type}
+      value={value}
+      placeholder={placeholder}
+      maxLength={maxLength}
+      ref={inputRef}
+      rows={rows}
+      onChange={handleChange}
+      {...other}
+    />
+  );
 
-  if (isLight || hasCounter) {
+  if (showCount) {
     return (
-      <div
-        className={clsx('InputWrapper', {
-          'is-light': isLight,
-          'has-counter': hasCounter,
-        })}
-      >
-        <Element {...inputProps} />
-        {isLight && <div className="Input-line" />}
-        {renderCounter(value, maxLength)}
+      <div className={clsx('InputWrapper', { 'has-counter': showCount })}>
+        {input}
+        {showCount && <div className="Input-counter">{getCount(value, maxLength)}</div>}
       </div>
     );
   }
-  return <Element {...inputProps} />;
+  return input;
 });

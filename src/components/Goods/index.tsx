@@ -11,24 +11,28 @@ type TagProps = {
   name: string;
 };
 
-export interface GoodsProps {
+export type GoodsRef = HTMLDivElement;
+
+export interface GoodsProps extends React.HTMLAttributes<GoodsRef> {
   className?: string;
   type?: 'goods' | 'order';
   img?: string;
   name: string;
   desc?: string;
   tags?: TagProps[];
+  locale?: string;
   currency?: string;
-  price?: string | number;
-  originalPrice?: string | number;
-  meta?: string;
+  price?: number;
+  originalPrice?: number;
+  meta?: React.ReactNode;
   count?: number;
   unit?: string;
   status?: string;
   action?: ButtonProps | IconButtonProps;
+  children?: React.ReactNode;
 }
 
-export const Goods = React.forwardRef<HTMLDivElement, GoodsProps>((props, ref) => {
+export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
   const {
     // 通用
     className,
@@ -37,11 +41,14 @@ export const Goods = React.forwardRef<HTMLDivElement, GoodsProps>((props, ref) =
     name,
     desc,
     tags = [],
+    locale,
     currency,
     price,
     count,
     unit,
     action,
+    children,
+
     // 商品
     originalPrice,
     meta,
@@ -61,13 +68,16 @@ export const Goods = React.forwardRef<HTMLDivElement, GoodsProps>((props, ref) =
       <Text className="Goods-desc">{desc}</Text>
       <div className="Goods-tags">
         {tags.map((t) => (
-          <Tag key={t.name}>{t.name}</Tag>
+          <Tag color="primary" key={t.name}>
+            {t.name}
+          </Tag>
         ))}
       </div>
     </>
   );
 
-  const priceCont = price && <Price price={price} currency={currency} />;
+  const priceProps = { currency, locale };
+  const priceCont = price && <Price price={price} {...priceProps} />;
 
   const countUnit = (
     <div className="Goods-countUnit">
@@ -90,7 +100,7 @@ export const Goods = React.forwardRef<HTMLDivElement, GoodsProps>((props, ref) =
       <Flex alignItems="flex-end">
         <FlexItem>
           {priceCont}
-          {originalPrice && <Price price={originalPrice} currency={currency} original />}
+          {originalPrice && <Price price={originalPrice} original {...priceProps} />}
           {meta && <span className="Goods-meta">{meta}</span>}
         </FlexItem>
         {countUnit}
@@ -101,7 +111,10 @@ export const Goods = React.forwardRef<HTMLDivElement, GoodsProps>((props, ref) =
   return (
     <Flex className={clsx('Goods', className)} data-type={type} ref={ref} {...other}>
       {img && <img className="Goods-img" src={img} alt={name} />}
-      <FlexItem className="Goods-main">{mainCont}</FlexItem>
+      <FlexItem className="Goods-main">
+        {mainCont}
+        {children}
+      </FlexItem>
       {isOrder && (
         <div className="Goods-aside">
           {priceCont}

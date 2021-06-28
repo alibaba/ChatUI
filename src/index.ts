@@ -1,10 +1,14 @@
 import 'intersection-observer';
 
 export { default as clsx } from 'clsx';
+export { default as DOMPurify } from 'dompurify';
 
 export { importScript } from './utils/importScript';
 export { lazyComponent } from './utils/lazyComponent';
 export { mountComponent } from './utils/mountComponent';
+
+export { default as useMessages } from './hooks/useMessages';
+export { default as useQuickReplies } from './hooks/useQuickReplies';
 
 export { ComponentsProvider, useComponents } from './components/ComponentsProvider';
 export type { ComponentsProviderProps, ComponentsMap } from './components/ComponentsProvider';
@@ -19,7 +23,7 @@ export type { BackdropProps } from './components/Backdrop';
 export { Bubble } from './components/Bubble';
 export type { BubbleProps } from './components/Bubble';
 export { Button } from './components/Button';
-export type { ButtonProps, ButtonVariant, ButtonSize } from './components/Button';
+export type { ButtonProps } from './components/Button';
 export { Card, CardMedia, CardTitle, CardContent, CardText, CardActions } from './components/Card';
 export type {
   CardProps,
@@ -41,7 +45,7 @@ export type { DividerProps } from './components/Divider';
 export { Empty } from './components/Empty';
 export type { EmptyProps } from './components/Empty';
 export { ErrorBoundary } from './components/ErrorBoundary';
-export type { ErrorBoundaryProps } from './components/ErrorBoundary';
+export type { ErrorBoundaryProps, FallbackProps } from './components/ErrorBoundary';
 export { Flex, FlexItem } from './components/Flex';
 export type { FlexProps, FlexItemProps } from './components/Flex';
 export { Form, FormActions, FormItem } from './components/Form';
@@ -55,7 +59,7 @@ export type { ImageProps } from './components/Image';
 export { InfiniteScroll } from './components/InfiniteScroll';
 export type { InfiniteScrollProps } from './components/InfiniteScroll';
 export { Input } from './components/Input';
-export type { InputProps } from './components/Input';
+export type { InputProps, InputVariant } from './components/Input';
 export { List, ListItem } from './components/List';
 export type { ListProps, ListItemProps } from './components/List';
 export { Loading } from './components/Loading';
@@ -86,7 +90,7 @@ export type {
   QuickReplyItemProps,
 } from './components/QuickReplies';
 export { Radio, RadioGroup } from './components/Radio';
-export type { RadioProps, RadioGroupProps } from './components/Radio';
+export type { RadioProps, RadioGroupProps, RadioValue } from './components/Radio';
 export { RateActions } from './components/RateActions';
 export type { RateActionsProps } from './components/RateActions';
 export type { RecorderHandle } from './components/Recorder';
@@ -94,6 +98,10 @@ export { RichText } from './components/RichText';
 export type { RichTextProps } from './components/RichText';
 export { ScrollView } from './components/ScrollView';
 export type { ScrollViewProps } from './components/ScrollView';
+export { Search } from './components/Search';
+export type { SearchProps } from './components/Search';
+export { Select } from './components/Select';
+export type { SelectProps } from './components/Select';
 export { Stepper, Step } from './components/Stepper';
 export type { StepperProps, StepProps } from './components/Stepper';
 export { Tabs, Tab } from './components/Tabs';
@@ -102,6 +110,8 @@ export { Tag } from './components/Tag';
 export type { TagProps } from './components/Tag';
 export { Text } from './components/Text';
 export type { TextProps } from './components/Text';
+export { Time } from './components/Time';
+export type { TimeProps } from './components/Time';
 export { toast } from './components/Toast';
 export { Toolbar } from './components/Toolbar';
 export type { ToolbarProps, ToolbarItemProps } from './components/Toolbar';
@@ -110,9 +120,6 @@ export type { TreeProps, TreeNodeProps } from './components/Tree';
 export { Video } from './components/Video';
 export type { VideoProps } from './components/Video';
 export { VisuallyHidden } from './components/VisuallyHidden';
-
-export { default as useMessages } from './hooks/useMessages';
-export { default as useQuickReplies } from './hooks/useQuickReplies';
 
 export { FileCard } from './components/FileCard';
 export type { FileCardProps } from './components/FileCard';

@@ -1,15 +1,10 @@
 & when (@global-style = true) {
-  html,
+  html {
+    height: calc(100vh - calc(100vh - 100%));
+  }
   body,
   #root {
     height: 100%;
-  }
-
-  @supports (top: constant(safe-area-inset-top)) or
-    (top: env(safe-area-inset-top)) {
-    body:not(.S--noHomeBar) {
-      height: calc(100% - var(--safe-bottom));
-    }
   }
 }
 
@@ -18,63 +13,23 @@
   flex-direction: column;
   height: 100%;
   background: var(--light-1);
+  color: @body-color;
+  font-family: @font-family-base;
+  line-height: @line-height-base;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.S--noHomeBar {
+  --safe-bottom: 0px;
 }
 
 .ChatFooter {
   position: relative;
   z-index: @zindex-footer;
+  padding-bottom: var(--safe-bottom);
   background: rgba(242, 244, 245, 0.95);
 }
 
-/* common */
-.bordered {
-  border-radius: 12px;
-  box-shadow: var(--shadow-1);
-}
-
-/* utils */
-.animated {
-  animation-duration: 1s;
-  animation-fill-mode: both;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.fadeIn {
-  animation-name: fadeIn;
-}
-
-/* footer */
-.scrollable {
-  overflow: hidden;
-  -webkit-overflow-scrolling: touch;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.scroller {
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  margin-bottom: -18px;
-  padding-bottom: 18px;
-  white-space: nowrap;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-/* animation */
 .slide-in-right-item {
   animation: slideInRight 0.5s ease-in-out both;
 }

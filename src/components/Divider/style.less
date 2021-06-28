@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   margin: 12px 0;
-  font-size: 12px;
+  font-size: @font-size-xs;
   color: var(--gray-3);
 
   &:before,
@@ -18,10 +18,10 @@
 .Divider--text-left,
 .Divider--text-right {
   &:before {
-    margin-right: 12px;
+    margin-right: var(--gutter);
   }
   &:after {
-    margin-left: 12px;
+    margin-left: var(--gutter);
   }
 }
 

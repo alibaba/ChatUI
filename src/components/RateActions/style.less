@@ -9,28 +9,26 @@
 .RateBtn {
   padding: 4px;
   border-radius: 50%;
-  background: var(--white);
-  box-shadow: var(--shadow-1);
-  color: var(--gray-2);
-  font-size: 24px;
-  transition: 0.2s;
+  background: @rate-btn-bg;
+  box-shadow: @rate-btn-box-shadow;
+  font-size: @icon-button-lg-size;
 
   & + .RateBtn {
     margin-top: 9px;
   }
   &.active {
-    box-shadow: 0;
+    box-shadow: none;
   }
-  &[data-type='good'] {
+  &[data-type='up'] {
     &:hover,
     &.active {
       color: var(--brand-1);
     }
   }
-  &[data-type='bad'] {
+  &[data-type='down'] {
     &:hover,
     &.active {
-      color: #46c2eb;
+      color: var(--blue);
     }
   }
 }

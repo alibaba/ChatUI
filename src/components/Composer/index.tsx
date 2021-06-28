@@ -1,17 +1,16 @@
-/* eslint-disable react/forbid-prop-types */
-import React, { useState, useRef, useEffect, useImperativeHandle } from 'react';
+import React, { useState, useRef, useEffect, useImperativeHandle, useCallback } from 'react';
 import clsx from 'clsx';
 import { IconButtonProps } from '../IconButton';
-import { Input } from '../Input';
 import { Recorder, RecorderProps } from '../Recorder';
 import { Toolbar, ToolbarItemProps } from '../Toolbar';
-import { ClickOutside } from '../ClickOutside';
+import { AccessoryWrap } from './AccessoryWrap';
 import { Popover } from '../Popover';
-import { SendConfirm } from '../SendConfirm';
+import { InputProps } from '../Input';
 import { ToolbarItem } from './ToolbarItem';
+import { ComposerInput } from './ComposerInput';
+import { SendButton } from './SendButton';
 import { Action } from './Action';
 import riseInput from './riseInput';
-import parseDataTransfer from '../../utils/parseDataTransfer';
 import toggleClass from '../../utils/toggleClass';
 
 const NO_HOME_BAR = 'S--noHomeBar';
@@ -21,6 +20,7 @@ export type InputType = 'voice' | 'text';
 export type ComposerProps = {
   wideBreakpoint?: string;
   text?: string;
+  inputOptions?: InputProps;
   placeholder?: string;
   inputType?: InputType;
   onInputTypeChange?: (inputType: InputType) => void;
@@ -57,15 +57,15 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     toolbar = [],
     onToolbarClick,
     rightAction,
+    inputOptions,
   } = props;
 
   const [text, setText] = useState(initialText);
   const [inputType, setInputType] = useState(initialInputType || 'text');
   const [isAccessoryOpen, setAccessoryOpen] = useState(false);
   const [accessoryContent, setAccessoryContent] = useState('');
-  const [pastedImage, setPastedImage] = useState<File | null>(null);
   const composerRef = useRef<HTMLDivElement>(null!);
-  const inputRef = useRef<HTMLInputElement>(null!);
+  const inputRef = useRef<HTMLTextAreaElement>(null!);
   const focused = useRef(false);
   const blurTimer = useRef<any>();
   const popoverTarget = useRef<any>();
@@ -105,7 +105,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     if (isMountRef.current && onAccessoryToggle) {
       onAccessoryToggle(isAccessoryOpen);
     }
-  }, [isAccessoryOpen]);
+  }, [isAccessoryOpen, onAccessoryToggle]);
 
   useEffect(() => {
     isMountRef.current = true;
@@ -114,12 +114,10 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   }, []);
 
   useImperativeHandle(ref, () => ({
-    setText(val) {
-      setText(val);
-    },
+    setText,
   }));
 
-  function handleInputTypeChange() {
+  const handleInputTypeChange = useCallback(() => {
     const isVoice = inputType === 'voice';
     const nextType = isVoice ? 'text' : 'voice';
     setInputType(nextType);
@@ -133,146 +131,124 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     if (onInputTypeChange) {
       onInputTypeChange(nextType);
     }
-  }
+  }, [inputType, onInputTypeChange]);
 
-  function handleInputFocus(e: React.FocusEvent<HTMLTextAreaElement>) {
-    clearTimeout(blurTimer.current);
-    toggleClass(NO_HOME_BAR, true);
-    focused.current = true;
+  const handleInputFocus = useCallback(
+    (e: React.FocusEvent<HTMLTextAreaElement>) => {
+      clearTimeout(blurTimer.current);
+      toggleClass(NO_HOME_BAR, true);
+      focused.current = true;
 
-    if (onFocus) {
-      onFocus(e);
-    }
-  }
+      if (onFocus) {
+        onFocus(e);
+      }
+    },
+    [onFocus],
+  );
 
-  function handleInputBlur(e: React.FocusEvent<HTMLTextAreaElement>) {
-    blurTimer.current = setTimeout(() => {
-      toggleClass(NO_HOME_BAR, false);
-      focused.current = false;
-    }, 0);
+  const handleInputBlur = useCallback(
+    (e: React.FocusEvent<HTMLTextAreaElement>) => {
+      blurTimer.current = setTimeout(() => {
+        toggleClass(NO_HOME_BAR, false);
+        focused.current = false;
+      }, 0);
 
-    if (onBlur) {
-      onBlur(e);
-    }
-  }
+      if (onBlur) {
+        onBlur(e);
+      }
+    },
+    [onBlur],
+  );
 
-  function send() {
+  const send = useCallback(() => {
     onSend('text', text);
     setText('');
 
     if (focused.current) {
       inputRef.current.focus();
     }
-  }
+  }, [onSend, text]);
 
-  function handleInputKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
-    if (!e.shiftKey && e.keyCode === 13) {
+  const handleInputKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (!e.shiftKey && e.keyCode === 13) {
+        send();
+        e.preventDefault();
+      }
+    },
+    [send],
+  );
+
+  const handleTextChange = useCallback(
+    (value: string, e: React.ChangeEvent) => {
+      setText(value);
+
+      if (onChange) {
+        onChange(value, e);
+      }
+    },
+    [onChange],
+  );
+
+  const handleSendBtnClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
       send();
       e.preventDefault();
-    }
-  }
+    },
+    [send],
+  );
 
-  function handleTextChange(value: string, e: React.ChangeEvent) {
-    setText(value);
-
-    if (onChange) {
-      onChange(value, e);
-    }
-  }
-
-  function handlePaste(e: React.ClipboardEvent<any>) {
-    parseDataTransfer(e, (file) => {
-      setPastedImage(file);
-    });
-  }
-
-  function handleImageCancel() {
-    setPastedImage(null);
-  }
-
-  function handleImageSend() {
-    if (onImageSend && pastedImage) {
-      onImageSend(pastedImage).then(() => {
-        setPastedImage(null);
-      });
-    }
-  }
-
-  function handleSendBtnClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    send();
-    e.preventDefault();
-  }
-
-  function handleAccessoryToggle() {
+  const handleAccessoryToggle = useCallback(() => {
     setAccessoryOpen(!isAccessoryOpen);
-  }
+  }, [isAccessoryOpen]);
 
-  function handleAccessoryBlur() {
+  const handleAccessoryBlur = useCallback(() => {
     setTimeout(() => {
       setAccessoryOpen(false);
       setAccessoryContent('');
     });
-  }
+  }, []);
 
-  function handleToolbarClick(item: ToolbarItemProps, e: React.MouseEvent) {
-    if (onToolbarClick) {
-      onToolbarClick(item, e);
-    }
-    if (item.render) {
-      popoverTarget.current = e.currentTarget;
-      setAccessoryContent(item.render);
-    }
-  }
+  const handleToolbarClick = useCallback(
+    (item: ToolbarItemProps, e: React.MouseEvent) => {
+      if (onToolbarClick) {
+        onToolbarClick(item, e);
+      }
+      if (item.render) {
+        popoverTarget.current = e.currentTarget;
+        setAccessoryContent(item.render);
+      }
+    },
+    [onToolbarClick],
+  );
 
-  function handlePopoverClose() {
+  const handlePopoverClose = useCallback(() => {
     setAccessoryContent('');
-  }
-
-  function renderExtra() {
-    const accessory = accessoryContent || <Toolbar items={toolbar} onClick={handleToolbarClick} />;
-    return <ClickOutside onClick={handleAccessoryBlur}>{accessory}</ClickOutside>;
-  }
+  }, []);
 
   const isInputText = inputType === 'text';
-  const inputTypeIcon = isInputText ? 'mic' : 'keyboard';
+  const inputTypeIcon = isInputText ? 'volume-circle' : 'keyboard-circle';
   const hasToolbar = toolbar.length > 0;
 
-  const renderInput = () => (
-    <div className={clsx({ 'S--invisible': !isInputText })}>
-      <Input
-        className="Composer-input"
-        value={text}
-        rows={1}
-        autoSize
-        ref={inputRef}
-        placeholder={placeholder}
-        enterKeyHint="send"
-        onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
-        onKeyDown={handleInputKeyDown}
-        onChange={handleTextChange}
-        onPaste={onImageSend ? handlePaste : undefined}
-      />
-      {pastedImage && (
-        <SendConfirm file={pastedImage} onCancel={handleImageCancel} onSend={handleImageSend} />
-      )}
-    </div>
-  );
+  const inputProps = {
+    ...inputOptions,
+    value: text,
+    inputRef,
+    placeholder,
+    onFocus: handleInputFocus,
+    onBlur: handleInputBlur,
+    onKeyDown: handleInputKeyDown,
+    onChange: handleTextChange,
+    onImageSend,
+  };
 
   if (isWide) {
     return (
       <div className="Composer Composer--lg" ref={composerRef}>
-        {hasToolbar && (
-          <div className="Composer-toolbar">
-            {toolbar.map((item) => (
-              <ToolbarItem
-                item={item}
-                onClick={(e) => handleToolbarClick(item, e)}
-                key={item.type}
-              />
-            ))}
-          </div>
-        )}
+        {hasToolbar &&
+          toolbar.map((item) => (
+            <ToolbarItem item={item} onClick={(e) => handleToolbarClick(item, e)} key={item.type} />
+          ))}
         {accessoryContent && (
           <Popover
             active={!!accessoryContent}
@@ -282,15 +258,10 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
             {accessoryContent}
           </Popover>
         )}
-        <div className="Composer-inputWrap">{renderInput()}</div>
-        <Action
-          className="Composer-sendBtn"
-          icon="paper-plane"
-          color="primary"
-          disabled={!text}
-          onMouseDown={handleSendBtnClick}
-          aria-label="发送"
-        />
+        <div className="Composer-inputWrap">
+          <ComposerInput invisible={false} {...inputProps} />
+        </div>
+        <SendButton onClick={handleSendBtnClick} disabled={!text} />
       </div>
     );
   }
@@ -308,7 +279,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
           />
         )}
         <div className="Composer-inputWrap">
-          {renderInput()}
+          <ComposerInput invisible={!isInputText} {...inputProps} />
           {!isInputText && <Recorder {...recorder} />}
         </div>
         {!text && rightAction && <Action {...rightAction} />}
@@ -317,22 +288,18 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
             className={clsx('Composer-toggleBtn', {
               active: isAccessoryOpen,
             })}
-            icon="plus"
+            icon="plus-circle"
             onClick={handleAccessoryToggle}
             aria-label={isAccessoryOpen ? '关闭工具栏' : '展开工具栏'}
           />
         )}
-        {text && (
-          <Action
-            className="Composer-sendBtn"
-            icon="paper-plane"
-            color="primary"
-            onMouseDown={handleSendBtnClick}
-            aria-label="发送"
-          />
-        )}
+        {text && <SendButton onClick={handleSendBtnClick} disabled={false} />}
       </div>
-      {isAccessoryOpen && renderExtra()}
+      {isAccessoryOpen && (
+        <AccessoryWrap onClickOutside={handleAccessoryBlur}>
+          {accessoryContent || <Toolbar items={toolbar} onClick={handleToolbarClick} />}
+        </AccessoryWrap>
+      )}
     </>
   );
 });

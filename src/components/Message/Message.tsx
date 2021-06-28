@@ -5,13 +5,15 @@ import { Avatar } from '../Avatar';
 import { Time } from '../Time';
 import { Typing } from '../Typing';
 
-type User = {
+export interface User {
   avatar?: string;
-};
+  name?: string;
+  [k: string]: any;
+}
 
 export type MessageId = string | number;
 
-export type MessageProps = {
+export interface MessageProps {
   /**
    * 唯一ID
    */
@@ -23,7 +25,7 @@ export type MessageProps = {
   /**
    * 消息内容
    */
-  content: any; // FIXME
+  content?: any;
   /**
    * 消息创建时间
    */
@@ -43,26 +45,26 @@ export type MessageProps = {
   /**
    * 消息内容渲染函数
    */
-  renderMessageContent?: (message: MessageProps) => void;
-};
+  renderMessageContent?: (message: MessageProps) => React.ReactNode;
+}
 
 const Message = (props: MessageProps) => {
   const { renderMessageContent = () => null, ...msg } = props;
-  const { _id: id, type, content, user } = msg;
+  const { type, content, user } = msg;
 
   if (type === 'system') {
-    return <SystemMessage content={content.text} action={content.action} key={id} />;
+    return <SystemMessage content={content.text} action={content.action} />;
   }
 
   return (
-    <div className={clsx('Message', msg.position)} data-type={type} key={id}>
+    <div className={clsx('Message', msg.position)} data-type={type} data-id={msg._id}>
       {msg.hasTime && msg.createdAt && (
         <div className="Message-meta">
           <Time date={msg.createdAt} />
         </div>
       )}
       <div className="Message-content" role="alert" aria-live="assertive" aria-atomic="false">
-        {user && user.avatar && <Avatar src={user.avatar} shape="square" />}
+        {user && user.avatar && <Avatar src={user.avatar} shape="square" alt={user.name} />}
         {type === 'typing' ? <Typing /> : renderMessageContent(msg)}
       </div>
     </div>

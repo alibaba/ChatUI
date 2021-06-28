@@ -4,16 +4,19 @@
   &.is-light {
     background: var(--light-2);
 
-    .InputWrapper {
-      margin: 0 -12px;
+    .FormItem {
+      padding: 0;
+    }
+    .Label,
+    .HelpText {
+      padding: 0 var(--gutter);
     }
   }
 }
 
-/* FormItem */
 .FormItem {
   position: relative;
-  padding: 0 12px;
+  padding: 0 var(--gutter);
 
   & + & {
     margin-top: 20px;
@@ -23,7 +26,7 @@
       content: '*';
       display: inline-block;
       color: var(--red);
-      font-size: 14px;
+      font-size: @font-size-sm;
       font-family: SimSun,sans-serif;
       line-height: 1;
       vertical-align: middle;
@@ -34,8 +37,8 @@
     .HelpText {
       color: var(--red);
     }
-    .InputWrapper.is-light .Input {
-      border-bottom-color: var(--red);
+    .Input {
+      border-color: var(--red);
     }
   }
   .RadioGroup,
@@ -47,15 +50,13 @@
   }
 }
 
-/* FormActions */
 .FormActions {
   display: flex;
-  padding: 10px 12px;
+  padding: 10px var(--gutter);
   background: var(--white);
 
   .Btn {
     flex: 1;
-    line-height: 20px;
   }
   .Btn + .Btn {
     margin-left: 6px;

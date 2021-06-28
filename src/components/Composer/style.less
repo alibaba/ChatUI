@@ -1,37 +1,28 @@
 .Composer {
   display: flex;
   align-items: flex-end;
-  padding: 8px;
+  padding: @composer-padding;
 
   > div + div {
-    margin-left: 8px;
+    margin-left: var(--gutter);
   }
 }
 
 .Composer-actions {
+  display: flex;
+  align-items: center;
+  height: @composer-input-min-height;
+
   .IconBtn {
-    padding: 6px;
-    border-radius: 50%;
-    font-size: 26px;
-  }
-  .IconBtn:not(:disabled) {
-    &,
-    &:hover,
-    &:active {
-      background: var(--white);
-      color: var(--brand-1);
-    }
-  }
-  .Btn--primary:not(:disabled) {
-    background: var(--brand-1);
-    color: var(--white);
+    margin: 0 -@icon-button-lg-padding;
+    font-size: @composer-icon-size;
   }
 }
 
 .Composer-toggleBtn {
   transition: transform 0.2s;
 
-  &.active {
+  &.active .Icon {
     transform: rotate(45deg);
   }
 }
@@ -43,61 +34,12 @@
 
 .Composer-input {
   overflow: hidden;
-  max-height: 126px;
-  line-height: 22px;
-  padding: 8px 32px 8px 16px;
-  border: 0;
-  background-color: var(--white);
-  border-radius: 20px;
+  max-height: @composer-input-max-height;
+  padding: @composer-input-padding;
+  border: @composer-input-border;
+  border-radius: @composer-input-border-radius;
+  background: @composer-input-bg;
   word-break: break-all;
-  caret-color: var(--brand-2);
-  transition: border-color .15s ease-in-out;
-
-  &:placeholder-shown + .Composer-sendBtn {
-    visibility: hidden;
-    opacity: 0;
-  }
-}
-
-.Composer-toolbar {
-  margin-right: 20px;
-  padding: 8px 0;
-
-  .Btn {
-    margin-left: 20px;
-    font-size: 28px;
-
-    &:first-child {
-      margin: 0;
-    }
-    &:hover {
-      color: var(--brand-1);
-    }
-    &:focus:before,
-    &:focus:after {
-      opacity: 0;
-    }
-  }
-  img {
-    display: block;
-    width: 28px;
-    height: 28px;
-  }
-}
-
-.Composer--lg {
-  padding: 12px 20px 16px;
-
-  .Composer-input {
-    padding: 10px 38px 10px 16px;
-    border: 1px solid var(--white);
-    border-radius: 22px;
-
-    &:focus {
-      border-color: var(--brand-1);
-    }
-  }
-  .Composer-actions {
-    padding: 4px 0;
-  }
+  caret-color: @composer-input-caret-color;
+  transition: @composer-input-transition;
 }

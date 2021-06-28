@@ -10,20 +10,45 @@
 .ListItem {
   display: flex;
   align-items: center;
+  box-sizing: border-box;
   padding: @list-item-padding;
   border-top: @list-border-width solid @list-border-color;
   color: @list-item-color;
+  font-size: @list-item-font-size;
+  font-weight: @list-item-font-weight;
+  line-height: @list-item-line-height;
+  text-decoration: none;
   transition: 0.3s;
 
+  &:focus:not(:focus-visible) {
+    outline: 0;
+  }
   &:first-child {
     border-top: 0;
   }
+  .Icon {
+    color: @list-item-icon-color;
+  }
 }
 
-a.ListItem:hover {
-  background: @list-item-hover-bg;
-  color: @list-item-hover-color;
-  cursor: pointer;
+button.ListItem {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  appearance: none;
+}
+
+a.ListItem,
+button.ListItem {
+  &:hover {
+    background: @list-item-hover-bg;
+    background-clip: padding-box;
+    cursor: pointer;
+  }
+  &:active {
+    background: @list-item-active-bg;
+  }
 }
 
 .ListItem-content {

@@ -12,10 +12,10 @@
     }
   }
   &--fullWidth {
-    margin: 0 -8px;
+    margin: 0 calc(var(--gutter) * -1);
   }
   &--fullWidth:not(&--hasControls) &-inner {
-    padding: 0 8px;
+    padding: 0 var(--gutter);
   }
 }
 
@@ -32,7 +32,7 @@
   }
   .ScrollView-item {
     flex: 0 0 auto;
-    margin-left: 8px;
+    margin-left: @scroll-view-spacing-x;
 
     &:first-child {
       margin-left: 0;
@@ -52,7 +52,7 @@
 .ScrollView-control {
   padding: 6px;
   color: var(--gray-3);
-  font-size: 16px;
+  font-size: @font-size-md;
 
   &:not(:disabled):hover {
     color: var(--brand-1);

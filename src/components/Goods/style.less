@@ -1,5 +1,5 @@
 .Goods {
-  padding: @goods-gap;
+  padding: @goods-padding;
 
   & + & {
     border-top: @goods-border-width solid @goods-border-color;
@@ -9,6 +9,12 @@
     height: @goods-img-height;
     margin-right: @goods-gap;
     object-fit: contain;
+    border-radius: @goods-img-border-radius;
+  }
+  &-name {
+    margin: 0 0 5px;
+    font-size: @font-size-sm;
+    font-weight: 400;
   }
   &-main {
     .Price {
@@ -36,6 +42,10 @@
     background: @goods-buy-btn-bg;
     color: @goods-buy-btn-color;
     padding: @goods-buy-btn-padding;
+
+    &:hover {
+      background: @goods-buy-btn-bg;
+    }
   }
   &-detailBtn {
     min-width: @goods-detail-btn-min-width;

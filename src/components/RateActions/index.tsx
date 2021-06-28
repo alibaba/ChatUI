@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import { IconButton } from '../IconButton';
+import { useLocale } from '../LocaleProvider';
 
-const GOOD = 'good';
-const BAD = 'bad';
+const UP = 'up';
+const DOWN = 'down';
 
 export type RateActionsProps = {
-  goodTitle?: string;
-  badTitle?: string;
+  upTitle?: string;
+  downTitle?: string;
   onClick: (value: string) => void;
 };
 
 export const RateActions: React.FC<RateActionsProps> = (props) => {
-  const { goodTitle, badTitle, onClick } = props;
+  const { trans } = useLocale('RateActions', {
+    up: '赞同',
+    down: '反对',
+  });
+
+  const { upTitle = trans('up'), downTitle = trans('down'), onClick } = props;
   const [value, setValue] = useState('');
 
   function handleClick(val: string) {
@@ -22,32 +28,32 @@ export const RateActions: React.FC<RateActionsProps> = (props) => {
     }
   }
 
-  function handleGoodClick() {
-    handleClick(GOOD);
+  function handleUpClick() {
+    handleClick(UP);
   }
 
-  function handleBadClick() {
-    handleClick(BAD);
+  function handleDownClick() {
+    handleClick(DOWN);
   }
 
   return (
     <div className="RateActions">
-      {value !== BAD && (
+      {value !== DOWN && (
         <IconButton
-          className={clsx('RateBtn', { active: value === GOOD })}
-          title={goodTitle}
-          data-type="good"
+          className={clsx('RateBtn', { active: value === UP })}
+          title={upTitle}
+          data-type={UP}
           icon="thumbs-up"
-          onClick={handleGoodClick}
+          onClick={handleUpClick}
         />
       )}
-      {value !== GOOD && (
+      {value !== UP && (
         <IconButton
-          className={clsx('RateBtn', { active: value === BAD })}
-          title={badTitle}
-          data-type="bad"
+          className={clsx('RateBtn', { active: value === DOWN })}
+          title={downTitle}
+          data-type={DOWN}
           icon="thumbs-down"
-          onClick={handleBadClick}
+          onClick={handleDownClick}
         />
       )}
     </div>
