@@ -15,13 +15,19 @@ const QuickReplies = (props: QuickRepliesProps) => {
   const [scrollEvent, setScrollEvent] = useState(!!onScroll);
 
   useLayoutEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+
     if (scroller.current) {
       setScrollEvent(false);
       scroller.current.scrollTo({ x: 0, y: 0 });
-      setTimeout(() => {
+      timer = setTimeout(() => {
         setScrollEvent(true);
       }, 500);
     }
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [items]);
 
   if (!items.length) return null;
