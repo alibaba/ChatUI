@@ -69,6 +69,8 @@ export { MediaObject } from './components/MediaObject';
 export type { MediaObjectProps } from './components/MediaObject';
 export { Message, SystemMessage } from './components/Message';
 export type { MessageProps, SystemMessageProps } from './components/Message';
+export { MessageStatus } from './components/MessageStatus';
+export type { MessageStatusProps } from './components/MessageStatus';
 export { Modal, Confirm, Popup } from './components/Modal';
 export type { ModalProps } from './components/Modal';
 export { Navbar } from './components/Navbar';

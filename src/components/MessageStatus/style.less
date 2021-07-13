@@ -1,0 +1,22 @@
+.MessageStatus {
+  align-self: center;
+  margin-right: @gutter;
+
+  &[data-status='loading'] {
+    .Icon {
+      color: var(--gray-4);
+    }
+  }
+  &[data-status='fail'] {
+    .IconBtn {
+      color: #ff5959;
+    }
+  }
+  .IconBtn,
+  .Icon {
+    display: block;
+  }
+  .Message.right .Bubble + & {
+    margin-right: (@gutter - @bubble-right-gutter);
+  }
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { SystemMessage } from './SystemMessage';
+import { IMessageStatus } from '../MessageStatus';
 import { Avatar } from '../Avatar';
 import { Time } from '../Time';
 import { Typing } from '../Typing';
@@ -43,6 +44,10 @@ export interface MessageProps {
    */
   hasTime?: boolean;
   /**
+   * 状态
+   */
+  status?: IMessageStatus;
+  /**
    * 消息内容渲染函数
    */
   renderMessageContent?: (message: MessageProps) => React.ReactNode;
@@ -50,14 +55,14 @@ export interface MessageProps {
 
 const Message = (props: MessageProps) => {
   const { renderMessageContent = () => null, ...msg } = props;
-  const { type, content, user } = msg;
+  const { type, content, user, _id: id } = msg;
 
   if (type === 'system') {
     return <SystemMessage content={content.text} action={content.action} />;
   }
 
   return (
-    <div className={clsx('Message', msg.position)} data-type={type} data-id={msg._id}>
+    <div className={clsx('Message', msg.position)} data-id={id} data-type={type}>
       {msg.hasTime && msg.createdAt && (
         <div className="Message-meta">
           <Time date={msg.createdAt} />
