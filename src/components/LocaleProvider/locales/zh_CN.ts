@@ -26,4 +26,8 @@ export default {
     releaseOrSwipe: '松开发送，上滑取消',
     release2cancel: '松开手指，取消发送',
   },
+  ScrollView: {
+    prev: '上一页',
+    next: '下一页',
+  },
 };

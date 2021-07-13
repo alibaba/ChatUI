@@ -6,18 +6,19 @@ export type ScrollViewEffect = 'slide';
 export type ScrollViewItemProps = {
   item: any;
   effect?: ScrollViewEffect;
-  onIntersect?: (item: any, entry: IntersectionObserverEntry) => boolean;
+  onIntersect?: (item?: any, entry?: IntersectionObserverEntry) => boolean | void;
+};
+
+const observerOptions = {
+  threshold: [0, 0.1],
 };
 
 export const Item: React.FC<ScrollViewItemProps> = (props) => {
   const { item, effect, children, onIntersect } = props;
   const itemRef = useRef<HTMLDivElement>(null);
-  const options = {
-    threshold: [0, 0.1],
-  };
 
   useEffect(() => {
-    if (!onIntersect) return () => {};
+    if (!onIntersect) return undefined;
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.intersectionRatio > 0) {
@@ -26,7 +27,7 @@ export const Item: React.FC<ScrollViewItemProps> = (props) => {
           observer.unobserve(entry.target);
         }
       }
-    }, options);
+    }, observerOptions);
 
     if (itemRef.current) {
       observer.observe(itemRef.current);
@@ -34,7 +35,7 @@ export const Item: React.FC<ScrollViewItemProps> = (props) => {
     return () => {
       observer.disconnect();
     };
-  }, [children]);
+  }, [item, onIntersect]);
 
   return (
     <div

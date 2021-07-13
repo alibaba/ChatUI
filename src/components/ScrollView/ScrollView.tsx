@@ -1,7 +1,8 @@
-import React, { useRef, useImperativeHandle } from 'react';
+import React, { useRef, useImperativeHandle, useCallback } from 'react';
 import clsx from 'clsx';
 import { Item, ScrollViewItemProps } from './Item';
 import { IconButton } from '../IconButton';
+import { useLocale } from '../LocaleProvider';
 import canUse from '../../utils/canUse';
 
 export type ScrollViewProps<T> = Pick<ScrollViewItemProps, 'effect' | 'onIntersect'> & {
@@ -37,6 +38,10 @@ export const ScrollView = React.forwardRef<ScrollViewHandle, ScrollViewProps<any
   } = props;
 
   const scrollerRef = useRef<HTMLDivElement>(null!);
+  const { trans } = useLocale('ScrollView', {
+    prev: 'Previous',
+    next: 'Next',
+  });
 
   function handlePrev() {
     const el = scrollerRef.current;
@@ -48,13 +53,16 @@ export const ScrollView = React.forwardRef<ScrollViewHandle, ScrollViewProps<any
     el.scrollLeft += el.offsetWidth;
   }
 
-  function getItemKey(item: any, index: number) {
-    let key;
-    if (itemKey) {
-      key = typeof itemKey === 'function' ? itemKey(item, index) : item[itemKey];
-    }
-    return key || index;
-  }
+  const getItemKey = useCallback(
+    (item: any, index: number) => {
+      let key;
+      if (itemKey) {
+        key = typeof itemKey === 'function' ? itemKey(item, index) : item[itemKey];
+      }
+      return key || index;
+    },
+    [itemKey],
+  );
 
   useImperativeHandle(ref, () => ({
     scrollTo: ({ x, y }: { x?: number; y?: number }) => {
@@ -82,7 +90,12 @@ export const ScrollView = React.forwardRef<ScrollViewHandle, ScrollViewProps<any
       {...other}
     >
       {hasControls && (
-        <IconButton className="ScrollView-control" icon="chevron-left" onClick={handlePrev} />
+        <IconButton
+          className="ScrollView-control"
+          icon="chevron-left"
+          aria-label={trans('prev')}
+          onClick={handlePrev}
+        />
       )}
       <div className="ScrollView-scroller" ref={scrollerRef} onScroll={onScroll}>
         <div className="ScrollView-inner">
@@ -99,7 +112,12 @@ export const ScrollView = React.forwardRef<ScrollViewHandle, ScrollViewProps<any
         </div>
       </div>
       {hasControls && (
-        <IconButton className="ScrollView-control" icon="chevron-right" onClick={handleNext} />
+        <IconButton
+          className="ScrollView-control"
+          icon="chevron-right"
+          aria-label={trans('next')}
+          onClick={handleNext}
+        />
       )}
     </div>
   );
