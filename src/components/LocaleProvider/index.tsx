@@ -31,7 +31,7 @@ const useLocale = (comp?: string, fallback?: any) => {
   if (!localeContext) {
     strings = fallback;
   } else if (comp) {
-    strings = strings[comp];
+    strings = strings[comp] || {};
   }
 
   return {
