@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/alibaba/ChatUI/compare/v1.0.2...v1.1.0) (2021-07-13)
+
+
+### Features
+
+* add `MessageStatus` ([b145305](https://github.com/alibaba/ChatUI/commit/b145305026b47a5ba0eff4e92e66a2e323cc9fa7))
+
+
+### Bug Fixes
+
+* [Chat] remove `body`'s margin ([2b8deed](https://github.com/alibaba/ChatUI/commit/2b8deedf346c8f663c163cc7fb4561d141b5772d))
+* [PullToRefresh] update fallback's padding ([f8456f2](https://github.com/alibaba/ChatUI/commit/f8456f22fe15c7cf4edf8303edd01803417ae355))
+
 ### [1.0.2](https://github.com/alibaba/ChatUI/compare/v1.0.1...v1.0.2) (2021-06-30)
 
 ### [1.0.1](https://github.com/alibaba/ChatUI/compare/v1.0.0...v1.0.1) (2021-06-30)
