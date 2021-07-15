@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/alibaba/ChatUI/compare/v1.1.0...v1.1.1) (2021-07-15)
+
+
+### Bug Fixes
+
+* [LocaleProvider] add fallback ([8948912](https://github.com/alibaba/ChatUI/commit/89489127aee5cbf97a26450e648cd5568152ea67))
+* [ScrollView] a11y ([8adf043](https://github.com/alibaba/ChatUI/commit/8adf04337d0721956a8e587bd068c28a5dfae72f))
+
 ## [1.1.0](https://github.com/alibaba/ChatUI/compare/v1.0.2...v1.1.0) (2021-07-13)
 
 
