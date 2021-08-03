@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://github.com/alibaba/ChatUI/compare/v1.1.1...v1.1.2) (2021-08-03)
+
+
+### Bug Fixes
+
+* [List] fix border ([184d554](https://github.com/alibaba/ChatUI/commit/184d55462f51918e15087ecc1c9a4147d96e7a92))
+* [QuickReplies] use `name` as `itemKey` ([5bf61c1](https://github.com/alibaba/ChatUI/commit/5bf61c14fe548fee150fdee1e2348e94ca31e301))
+
 ### [1.1.1](https://github.com/alibaba/ChatUI/compare/v1.1.0...v1.1.1) (2021-07-15)
 
 
