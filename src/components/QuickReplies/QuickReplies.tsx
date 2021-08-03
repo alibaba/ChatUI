@@ -36,7 +36,7 @@ const QuickReplies = (props: QuickRepliesProps) => {
     <ScrollView
       className="QuickReplies"
       data={items}
-      itemKey="code"
+      itemKey="name"
       ref={scroller}
       data-visible={visible}
       onScroll={scrollEvent ? onScroll : undefined}
