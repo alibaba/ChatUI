@@ -15,11 +15,15 @@ const canFormat =
 
 export const Price = React.forwardRef<HTMLDivElement, PriceProps>((props, ref) => {
   const { className, price, currency, locale, original, ...other } = props;
-  let parts = [];
+  let parts: any[] | void = [];
 
   if (locale && currency && canFormat) {
     parts = new Intl.NumberFormat(locale, { style: 'currency', currency }).formatToParts(price);
   } else {
+    parts = undefined;
+  }
+
+  if (!parts) {
     const decimal = '.';
     const [integer, fraction] = `${price}`.split(decimal);
     parts = [
