@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://github.com/alibaba/ChatUI/compare/v1.1.2...v1.1.3) (2021-09-14)
+
+
+### Bug Fixes
+
+* [Price] fallback for `Intl.Numberformat.prototype.formatToParts` ([ae12bd5](https://github.com/alibaba/ChatUI/commit/ae12bd5aaea77670553e611198b968e5d032143e))
+
 ### [1.1.2](https://github.com/alibaba/ChatUI/compare/v1.1.1...v1.1.2) (2021-08-03)
 
 
