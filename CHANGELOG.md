@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/alibaba/ChatUI/compare/v1.1.3...v1.2.0) (2021-09-18)
+
+
+### Features
+
+* [Chat] Scroll to the bottom while focusing ([e8c4107](https://github.com/alibaba/ChatUI/commit/e8c410736d4ab2f3892b586383fa252c75ea5361))
+
 ### [1.1.3](https://github.com/alibaba/ChatUI/compare/v1.1.2...v1.1.3) (2021-09-14)
 
 
