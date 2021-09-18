@@ -50,32 +50,32 @@ const initialMessages: MessageWithoutId[] = [
 const defaultQuickReplies = [
   {
     icon: 'message',
-    name: '联系人工服务',
+    name: '1联系人工服务',
     code: 'q1',
     isNew: true,
     isHighlight: true,
   },
   {
-    name: '短语1',
+    name: '2短语',
     code: 'q2',
     isNew: true,
   },
   {
-    name: '强快捷短语',
+    name: '3强快捷短语',
     code: 'q3',
     isHighlight: true,
   },
   {
-    name: '弱快捷短语',
+    name: '4弱快捷短语',
     code: 'q4',
   },
   {
-    name: '强快捷短语',
+    name: '5强快捷短语',
     code: 'q5',
     isHighlight: true,
   },
   {
-    name: '弱快捷短语',
+    name: '6弱快捷短语',
     code: 'q6',
   },
 ];
@@ -92,6 +92,7 @@ export default () => {
   // 消息列表
   const { messages, appendMsg, setTyping, prependMsgs } = useMessages(initialMessages);
   const { quickReplies, replace } = useQuickReplies(defaultQuickReplies);
+  const msgRef = React.useRef(null);
 
   // 发送回调
   function handleSend(type: string, val: string) {
@@ -278,6 +279,7 @@ export default () => {
                 img: 'https://gw.alicdn.com/tfs/TB1eDjNj.T1gK0jSZFrXXcNCXXa-80-80.png',
               },
             ]}
+            messagesRef={msgRef}
             onToolbarClick={handleToolbarClick}
             recorder={{ canRecord: true }}
             wideBreakpoint="600px"

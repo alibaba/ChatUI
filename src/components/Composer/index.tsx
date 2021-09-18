@@ -13,7 +13,7 @@ import { Action } from './Action';
 import riseInput from './riseInput';
 import toggleClass from '../../utils/toggleClass';
 
-const NO_HOME_BAR = 'S--noHomeBar';
+const FOCUSING_CLASS = 'S--focusing';
 
 export type InputType = 'voice' | 'text';
 
@@ -136,7 +136,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   const handleInputFocus = useCallback(
     (e: React.FocusEvent<HTMLTextAreaElement>) => {
       clearTimeout(blurTimer.current);
-      toggleClass(NO_HOME_BAR, true);
+      toggleClass(FOCUSING_CLASS, true);
       focused.current = true;
 
       if (onFocus) {
@@ -149,7 +149,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   const handleInputBlur = useCallback(
     (e: React.FocusEvent<HTMLTextAreaElement>) => {
       blurTimer.current = setTimeout(() => {
-        toggleClass(NO_HOME_BAR, false);
+        toggleClass(FOCUSING_CLASS, false);
         focused.current = false;
       }, 0);
 

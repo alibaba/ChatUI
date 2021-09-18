@@ -1,11 +1,15 @@
 import React from 'react';
 import { LocaleProvider } from '../LocaleProvider';
 import { Navbar, NavbarProps } from '../Navbar';
-import { MessageContainer, MessageContainerProps } from '../MessageContainer';
+import {
+  MessageContainer,
+  MessageContainerProps,
+  MessageContainerHandle,
+} from '../MessageContainer';
 import { QuickReplies, QuickReplyItemProps } from '../QuickReplies';
-import { Composer as DComposer, ComposerProps } from '../Composer';
+import { Composer as DComposer, ComposerProps, ComposerHandle } from '../Composer';
 
-export type ChatProps = ComposerProps &
+export type ChatProps = Omit<ComposerProps, 'onFocus' | 'onChange' | 'onBlur'> &
   MessageContainerProps & {
     /**
      * 宽版模式断点
@@ -38,7 +42,7 @@ export type ChatProps = ComposerProps &
     /**
      * 消息列表 ref
      */
-    messagesRef?: any; // FIXME
+    messagesRef?: React.RefObject<MessageContainerHandle>;
     /**
      * 下拉加载回调
      */
@@ -78,7 +82,7 @@ export type ChatProps = ComposerProps &
     /**
      * 输入区 ref
      */
-    composerRef?: any;
+    composerRef?: React.RefObject<ComposerHandle>;
     /**
      * 输入框初始内容
      */
@@ -90,15 +94,15 @@ export type ChatProps = ComposerProps &
     /**
      * 输入框聚焦回调
      */
-    onInputFocus?: () => void;
+    onInputFocus?: ComposerProps['onFocus'];
     /**
      * 输入框更新回调
      */
-    onInputChange?: () => void;
+    onInputChange?: ComposerProps['onChange'];
     /**
      * 输入框失去焦点回调
      */
-    onInputBlur?: () => void;
+    onInputBlur?: ComposerProps['onBlur'];
     /**
      * 发送消息回调
      */
@@ -175,6 +179,15 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     Composer = DComposer,
   } = props;
 
+  function handleInputFocus(e: React.FocusEvent<HTMLTextAreaElement>) {
+    if (messagesRef && messagesRef.current) {
+      messagesRef.current.scrollToEnd({ animated: false });
+    }
+    if (onInputFocus) {
+      onInputFocus(e);
+    }
+  }
+
   return (
     <LocaleProvider locale={locale} locales={locales}>
       <div className="ChatApp" ref={ref}>
@@ -211,7 +224,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
             toolbar={toolbar}
             onToolbarClick={onToolbarClick}
             onInputTypeChange={onInputTypeChange}
-            onFocus={onInputFocus}
+            onFocus={handleInputFocus}
             onChange={onInputChange}
             onBlur={onInputBlur}
             onSend={onSend}

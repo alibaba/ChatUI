@@ -15,9 +15,9 @@ export interface MessageContainerProps {
   renderBeforeMessageList?: () => React.ReactNode;
 }
 
-interface MessageContainerHandle {
+export interface MessageContainerHandle {
   ref: React.RefObject<HTMLDivElement>;
-  scrollToEnd: () => void;
+  scrollToEnd: (options?: { animated?: boolean }) => void;
 }
 
 export const MessageContainer = React.forwardRef<MessageContainerHandle, MessageContainerProps>(
