@@ -1,1 +1,0 @@
-export { Typing } from './Typing';

@@ -1,1 +1,0 @@
-export { SendConfirm } from './SendConfirm';
