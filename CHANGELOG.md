@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/alibaba/ChatUI/compare/v1.2.0...v1.2.1) (2021-09-26)
+
+
+### Bug Fixes
+
+* [Chat] use `100vh`, except the Safari ([05a6401](https://github.com/alibaba/ChatUI/commit/05a64018c460753fb17168a7627484b2c8f4846c))
+
 ## [1.2.0](https://github.com/alibaba/ChatUI/compare/v1.1.3...v1.2.0) (2021-09-18)
 
 
