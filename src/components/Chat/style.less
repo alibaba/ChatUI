@@ -1,6 +1,10 @@
 & when (@global-style = true) {
   html {
-    height: calc(100vh - calc(100vh - 100%));
+    height: 100vh;
+
+    &[data-safari] {
+      height: calc(100vh - calc(100vh - 100%));
+    }
   }
   body,
   #root {

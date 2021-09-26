@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { LocaleProvider } from '../LocaleProvider';
 import { Navbar, NavbarProps } from '../Navbar';
 import {
@@ -8,6 +8,7 @@ import {
 } from '../MessageContainer';
 import { QuickReplies, QuickReplyItemProps } from '../QuickReplies';
 import { Composer as DComposer, ComposerProps, ComposerHandle } from '../Composer';
+import isSafari from '../../utils/isSafari';
 
 export type ChatProps = Omit<ComposerProps, 'onFocus' | 'onChange' | 'onBlur'> &
   MessageContainerProps & {
@@ -187,6 +188,12 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
       onInputFocus(e);
     }
   }
+
+  useEffect(() => {
+    if (isSafari()) {
+      document.documentElement.dataset.safari = '';
+    }
+  }, []);
 
   return (
     <LocaleProvider locale={locale} locales={locales}>
