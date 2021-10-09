@@ -116,7 +116,7 @@ npm run storybook
 
 ## 交流讨论
 
-<img width="414" height="534" src="https://img.alicdn.com/tfs/TB1xyv7U7L0gK0jSZFAXXcA9pXa-828-1068.jpg">
+<img width="400" height="515" src="https://img.alicdn.com/imgextra/i2/O1CN01yO0rNg1ZDKHKIulc8_!!6000000003160-0-tps-828-1068.jpg">
 
 ## License
 
