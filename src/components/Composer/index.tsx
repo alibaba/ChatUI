@@ -10,7 +10,6 @@ import { ToolbarItem } from './ToolbarItem';
 import { ComposerInput } from './ComposerInput';
 import { SendButton } from './SendButton';
 import { Action } from './Action';
-import riseInput from './riseInput';
 import toggleClass from '../../utils/toggleClass';
 
 const FOCUSING_CLASS = 'S--focusing';
@@ -64,7 +63,6 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   const [inputType, setInputType] = useState(initialInputType || 'text');
   const [isAccessoryOpen, setAccessoryOpen] = useState(false);
   const [accessoryContent, setAccessoryContent] = useState('');
-  const composerRef = useRef<HTMLDivElement>(null!);
   const inputRef = useRef<HTMLTextAreaElement>(null!);
   const focused = useRef(false);
   const blurTimer = useRef<any>();
@@ -109,8 +107,6 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
 
   useEffect(() => {
     isMountRef.current = true;
-
-    riseInput(inputRef.current, composerRef.current);
   }, []);
 
   useImperativeHandle(ref, () => ({
@@ -244,7 +240,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
 
   if (isWide) {
     return (
-      <div className="Composer Composer--lg" ref={composerRef}>
+      <div className="Composer Composer--lg">
         {hasToolbar &&
           toolbar.map((item) => (
             <ToolbarItem item={item} onClick={(e) => handleToolbarClick(item, e)} key={item.type} />
@@ -268,7 +264,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
 
   return (
     <>
-      <div className="Composer" ref={composerRef}>
+      <div className="Composer">
         {recorder.canRecord && (
           <Action
             className="Composer-inputTypeBtn"
