@@ -18,7 +18,7 @@ export interface GoodsProps extends React.HTMLAttributes<GoodsRef> {
   type?: 'goods' | 'order';
   img?: string;
   name: string;
-  desc?: string;
+  desc?: React.ReactNode;
   tags?: TagProps[];
   locale?: string;
   currency?: string;
