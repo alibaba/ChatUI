@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/alibaba/ChatUI/compare/v1.2.1...v1.2.2) (2021-11-15)
+
+
+### Bug Fixes
+
+* [Composer] scrollIntoView when touch is supported ([ecbad5d](https://github.com/alibaba/ChatUI/commit/ecbad5d0cb065b4ed7d552101c203b927bc07da4))
+* [dependencies] update dompurify to 2.3.3 ([f7209b6](https://github.com/alibaba/ChatUI/commit/f7209b6f670937cd9d653373e50b61c534cc654c))
+* [Goods] apply `cover` to the image ([03f5694](https://github.com/alibaba/ChatUI/commit/03f569400a913b3e2ec84ec06d81c527bb7cae90))
+* [Goods] fix desc ([ff864a8](https://github.com/alibaba/ChatUI/commit/ff864a8cf0bac2a7c1e804d27f11a55c0840dba9))
+
 ### [1.2.1](https://github.com/alibaba/ChatUI/compare/v1.2.0...v1.2.1) (2021-09-26)
 
 
