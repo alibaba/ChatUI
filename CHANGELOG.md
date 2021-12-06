@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.3](https://github.com/alibaba/ChatUI/compare/v1.2.2...v1.2.3) (2021-12-06)
+
+
+### Bug Fixes
+
+* [ScrollView] don't use `useLocale` ([dc74295](https://github.com/alibaba/ChatUI/commit/dc742950e71df7a8d7e4b659fe91a4f5405f897d))
+
 ### [1.2.2](https://github.com/alibaba/ChatUI/compare/v1.2.1...v1.2.2) (2021-11-15)
 
 
