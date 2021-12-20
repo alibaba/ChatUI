@@ -77,7 +77,7 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
   );
 
   const priceProps = { currency, locale };
-  const priceCont = price && <Price price={price} {...priceProps} />;
+  const priceCont = price != null && <Price price={price} {...priceProps} />;
 
   const countUnit = (
     <div className="Goods-countUnit">
