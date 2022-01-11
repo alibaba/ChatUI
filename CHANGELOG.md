@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.4](https://github.com/alibaba/ChatUI/compare/v1.2.3...v1.2.4) (2022-01-11)
+
+
+### Bug Fixes
+
+* [Bubble] rest props ([2ada2a6](https://github.com/alibaba/ChatUI/commit/2ada2a6b4f52540233e8b9f0eb9321ca23da8429))
+* [Goods] fix price ([c9893fc](https://github.com/alibaba/ChatUI/commit/c9893fc9a0944a359c634255005f19171a38a09b))
+
 ### [1.2.3](https://github.com/alibaba/ChatUI/compare/v1.2.2...v1.2.3) (2021-12-06)
 
 
