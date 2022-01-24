@@ -9,6 +9,7 @@ export type StepProps = {
   index?: number;
   title?: string;
   desc?: string;
+  children?: React.ReactNode;
 };
 
 export const Step = React.forwardRef<HTMLLIElement, StepProps>((props, ref) => {
