@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/alibaba/ChatUI/compare/v1.2.4...v1.3.0) (2022-01-25)
+
+
+### Features
+
+* [Notice] support rich-text ([55160f0](https://github.com/alibaba/ChatUI/commit/55160f0f047138a68e97fdd99bd2356a178c734e))
+
+
+### Bug Fixes
+
+* [Modal] fix autoFocus ([f902b50](https://github.com/alibaba/ChatUI/commit/f902b50309642cd65148ca2f724fb67ce4579a6d))
+* [Step] fix StepProps ([e8b5a0c](https://github.com/alibaba/ChatUI/commit/e8b5a0cf8af858db94eceef3c52ebcbd4c6b5274))
+
 ### [1.2.4](https://github.com/alibaba/ChatUI/compare/v1.2.3...v1.2.4) (2022-01-11)
 
 
