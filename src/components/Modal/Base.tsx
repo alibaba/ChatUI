@@ -54,9 +54,11 @@ export const Base: React.FC<ModalProps> = (props) => {
   const { didMount, isShow } = useMount({ active, ref: wrapper });
 
   useEffect(() => {
-    if (autoFocus && wrapper.current) {
-      wrapper.current.focus();
-    }
+    setTimeout(() => {
+      if (autoFocus && wrapper.current) {
+        wrapper.current.focus();
+      }
+    });
   }, [autoFocus]);
 
   useEffect(() => {
