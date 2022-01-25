@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
+import { RichText } from '../RichText';
 import countLines from '../../utils/countLines';
 
 export interface NoticeProps {
@@ -20,17 +21,17 @@ export const Notice: React.FC<NoticeProps> = (props) => {
   const [hasMore, setHasMore] = useState(false);
   const contentRef = useRef<HTMLParagraphElement>(null);
 
-  function handleToggle(e: React.MouseEvent) {
+  const handleToggle = (e: React.MouseEvent) => {
     setCollapsed(!collapsed);
     e.stopPropagation();
-  }
+  };
 
-  function handleLinkClick(e: React.MouseEvent<HTMLAnchorElement>) {
+  const handleLinkClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (url && onLinkClick) {
       onLinkClick(url);
     }
     e.preventDefault();
-  }
+  };
 
   useEffect(() => {
     const cont = contentRef.current;
@@ -52,16 +53,14 @@ export const Notice: React.FC<NoticeProps> = (props) => {
         />
       )}
       <div className="Notice-content">
-        <p className={clsx('Notice-text', { collapsed })} data-overflow={hasMore} ref={contentRef}>
+        <div
+          className={clsx('Notice-text', { collapsed })}
+          data-overflow={hasMore}
+          ref={contentRef}
+        >
           <Icon className="Notice-icon" type="bullhorn" />
-          {url ? (
-            <a href={url} onClick={handleLinkClick}>
-              {content}
-            </a>
-          ) : (
-            content
-          )}
-        </p>
+          <RichText content={content} onClick={handleLinkClick} />
+        </div>
         {hasMore && (
           <div className="Notice-actions">
             <IconButton

@@ -44,5 +44,10 @@ export default () => (
         />
       </div>
     </DemoSection>
+    <DemoSection title="富文本">
+      <div style={{ position: 'relative', height: '150px' }}>
+        <Notice content="小蜜公告内容小蜜公告内容小<br>蜜公告内容<strong>小蜜</strong>公告内容<br>小蜜公告内容<em>小蜜公告</em>内容<br>小蜜公告内容" />
+      </div>
+    </DemoSection>
   </DemoPage>
 );
