@@ -30,11 +30,11 @@
 .QuickReply {
   position: relative;
   margin: 0;
-  padding: 5px 11px;
-  border: 1px solid var(--white);
-  border-radius: 20px;
-  line-height: 1.43;
-  background: var(--white);
+  padding: 4px 12px;
+  border: 1px solid var(--gray-4);
+  border-radius: 15px;
+  line-height: 20px;
+  background: transparent;
   cursor: pointer;
   color: var(--gray-1);
   font-size: @quick-reply-font-size;
@@ -72,10 +72,6 @@
   .QuickReply {
     &:hover {
       background: @quick-reply-hover-bg;
-    }
-    &:not(.highlight):hover {
-      border-color: @quick-reply-hover-border-color;
-      background-clip: padding-box;
     }
   }
 }

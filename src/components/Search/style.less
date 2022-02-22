@@ -1,17 +1,22 @@
 .Search {
   position: relative;
-  margin-bottom: @gutter;
+  margin-bottom: 9px;
 
-  &-icon {
+  &-icon,
+  &-clear {
     position: absolute;
-    top: ((36px - 16px) / 2);
-    left: @gutter;
-    font-size: @font-size-md;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: @font-size-lg;
+  }
+  &-icon {
+    left: 15px;
+    color: var(--gray-3);
   }
   &-input {
-    border-radius: 18px;
+    border-radius: 50px;
     background: #fff;
-    padding: 6px 36px;
+    padding: 4px (15px + 18px + 9px);
 
     &::-webkit-search-cancel-button {
       display: none;
@@ -21,9 +26,7 @@
     }
   }
   &-clear {
-    position: absolute;
-    top: ((36px - 24px) / 2);
-    right: $top;
+    right: 15px;
     padding: 4px;
     border-radius: 24px;
     opacity: 0;

@@ -20,6 +20,7 @@ export { default as List } from './List';
 export { default as Loading } from './Loading';
 export { default as MediaObject } from './MediaObject';
 export { default as Modal } from './Modal';
+export { default as Navbar } from './Navbar';
 export { default as Notice } from './Notice';
 export { default as Popup } from './Popup';
 export { default as Portal } from './Portal';

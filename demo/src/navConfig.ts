@@ -37,6 +37,7 @@ export const navConfig = [
       { name: '分割线', code: 'divider' },
       { name: '空状态', code: 'empty' },
       { name: '列表', code: 'list' },
+      { name: '导航', code: 'navbar' },
       { name: '公告', code: 'notice' },
       { name: '进度条', code: 'progress' },
       { name: '富文本', code: 'rich-text' },

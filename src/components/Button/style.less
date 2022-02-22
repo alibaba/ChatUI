@@ -36,8 +36,6 @@
   }
   &:disabled {
     pointer-events: none;
-    border-color: @btn-disabled-border-color;
-    background-color: @btn-disabled-bg;
     color: @btn-disabled-color;
   }
   &--primary {
@@ -45,6 +43,7 @@
     background: @btn-primary-bg;
     background-origin: border-box;
     color: @btn-primary-color;
+    box-shadow: 0 3px 5px 0 rgba(255, 80, 0, 0.3);
 
     &:hover {
       background: @btn-primary-hover-bg;
@@ -54,8 +53,6 @@
       background: @btn-primary-active-bg;
     }
     &:disabled {
-      border-color: @btn-primary-disabled-border-color;
-      background: @btn-primary-disabled-bg;
       color: @btn-primary-disabled-color;
     }
   }

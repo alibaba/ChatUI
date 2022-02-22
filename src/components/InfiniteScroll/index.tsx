@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import clsx from 'clsx';
+import useForwardRef from '../../hooks/useForwardRef';
 
 export interface InfiniteScrollProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -8,28 +9,36 @@ export interface InfiniteScrollProps extends React.HTMLAttributes<HTMLDivElement
   onLoadMore: () => void;
 }
 
-export const InfiniteScroll: React.FC<InfiniteScrollProps> = (props) => {
-  const { className, disabled, distance = 0, children, onLoadMore, ...other } = props;
-  const wrapperRef = useRef<HTMLDivElement>(null!);
+export const InfiniteScroll = React.forwardRef<HTMLDivElement, InfiniteScrollProps>(
+  (props, ref) => {
+    const { className, disabled, distance = 0, children, onLoadMore, onScroll, ...other } = props;
+    const wrapperRef = useForwardRef(ref);
 
-  function handleScroll() {
-    const el = wrapperRef.current;
-    const nearBottom = el.scrollHeight - el.scrollTop - el.clientHeight <= distance;
+    function handleScroll(e: React.UIEvent<HTMLDivElement>) {
+      if (onScroll) {
+        onScroll(e);
+      }
 
-    if (nearBottom) {
-      onLoadMore();
+      const el = wrapperRef.current;
+      if (!el) return;
+
+      const nearBottom = el.scrollHeight - el.scrollTop - el.clientHeight <= distance;
+
+      if (nearBottom) {
+        onLoadMore();
+      }
     }
-  }
 
-  return (
-    <div
-      className={clsx('InfiniteScroll', className)}
-      role="feed"
-      onScroll={!disabled ? handleScroll : undefined}
-      ref={wrapperRef}
-      {...other}
-    >
-      {children}
-    </div>
-  );
-};
+    return (
+      <div
+        className={clsx('InfiniteScroll', className)}
+        role="feed"
+        onScroll={!disabled ? handleScroll : undefined}
+        ref={wrapperRef}
+        {...other}
+      >
+        {children}
+      </div>
+    );
+  },
+);

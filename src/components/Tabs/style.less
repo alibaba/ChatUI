@@ -1,7 +1,7 @@
 .Tabs-nav {
   position: relative;
   display: flex;
-  margin-bottom: @gutter;
+  margin: 7px 0;;
 
   &::-webkit-scrollbar {
     display: none;
@@ -25,9 +25,6 @@
 }
 
 .Tabs-navLink {
-  display: block;
-  width: @tabs-nav-link-width;
-  margin: @tabs-nav-link-margin;
   padding: @tabs-nav-link-padding;
   border: @tabs-nav-link-border;
   border-radius: @tabs-nav-link-border-radius;
@@ -40,7 +37,6 @@
     outline: 0;
   }
   &:hover {
-    background: @tabs-nav-link-hover-bg;
     cursor: pointer;
     color: @tabs-nav-link-hover-color;
   }
@@ -48,6 +44,7 @@
     position: relative;
     z-index: 1;
     color: @tabs-nav-link-active-color;
+    font-weight: bold;
   }
 }
 
@@ -56,8 +53,7 @@
   left: 0;
   bottom: 0;
   height: @tabs-nav-pointer-height;
-  background-image: @tabs-nav-pointer-bg;
-  box-shadow: @tabs-nav-pointer-box-shadow;
+  background: @tabs-nav-pointer-bg;
   border-radius: @tabs-nav-pointer-border-radius;
   transition: @tabs-nav-pointer-transition;
 }

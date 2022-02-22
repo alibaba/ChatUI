@@ -90,7 +90,12 @@ export const Base: React.FC<ModalProps> = (props) => {
           onClick={backdrop === true ? onBackdropClick || onClose : undefined}
         />
       )}
-      <div className={`${baseClass}-dialog`} role="dialog" aria-labelledby={titleId} aria-modal>
+      <div
+        className={clsx(`${baseClass}-dialog`, { 'pb-safe': !actions })}
+        role="dialog"
+        aria-labelledby={titleId}
+        aria-modal
+      >
         <div className={`${baseClass}-content`}>
           <div className={`${baseClass}-header`}>
             <h5 className={`${baseClass}-title`} id={titleId}>

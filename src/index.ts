@@ -7,7 +7,10 @@ export { importScript } from './utils/importScript';
 export { lazyComponent } from './utils/lazyComponent';
 export { mountComponent } from './utils/mountComponent';
 
+export { default as useClickOutside } from './hooks/useClickOutside';
+export { default as useForwardRef } from './hooks/useForwardRef';
 export { default as useMessages } from './hooks/useMessages';
+export { default as useMount } from './hooks/useMount';
 export { default as useQuickReplies } from './hooks/useQuickReplies';
 
 export { ComponentsProvider, useComponents } from './components/ComponentsProvider';

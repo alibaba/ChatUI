@@ -56,8 +56,8 @@ const defaultQuickReplies = [
     isHighlight: true,
   },
   {
-    name: '2短语',
-    code: 'q2',
+    name: '如何申请退款',
+    code: 'orderSelector',
     isNew: true,
   },
   {
@@ -132,6 +132,11 @@ export default () => {
           code: 'qb',
         },
       ]);
+    } else if (item.code === 'orderSelector') {
+      appendMsg({
+        type: 'order-selector',
+        content: {},
+      });
     }
   }
 

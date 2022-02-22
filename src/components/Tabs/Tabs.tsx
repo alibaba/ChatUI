@@ -27,7 +27,7 @@ const TabItem: React.FC<TabItemProps> = (props) => {
         onClick={handleClick}
         {...others}
       >
-        {children}
+        <span>{children}</span>
       </button>
     </div>
   );
@@ -112,18 +112,24 @@ export const Tabs: React.FC<TabsProps> = (props) => {
     const currentNav = nav.children[indexRef.current];
     if (!currentNav) return;
 
-    const tab = currentNav.firstChild;
-    const { offsetWidth: tabWidth, offsetLeft: tabOffsetLeft } = tab as HTMLElement;
+    const text = currentNav.querySelector('span');
+    if (!text) return;
+
+    const { offsetWidth: navWidth, offsetLeft: navOffsetLeft } = currentNav as HTMLElement;
+    const { offsetWidth: textWidth } = text as HTMLElement;
+    const pointerWidth = Math.max(textWidth - 16, 26);
+    // 中心位的偏移量
+    const offsetLeftOfCenter = navOffsetLeft + navWidth / 2;
 
     setPointerStyles({
-      transform: `translateX(${tabOffsetLeft}px)`,
-      width: `${tabWidth}px`,
+      transform: `translateX(${offsetLeftOfCenter - pointerWidth / 2}px)`,
+      width: `${pointerWidth}px`,
     });
 
     if (scrollable) {
       smoothScroll({
         el: nav,
-        to: tabOffsetLeft + tabWidth / 2 - nav.offsetWidth / 2,
+        to: offsetLeftOfCenter - nav.offsetWidth / 2,
         x: true,
       });
     }
