@@ -1,7 +1,10 @@
+@tabs-nav-margin: 7px;
+@scrollable-width: 18px;
+
 .Tabs-nav {
   position: relative;
   display: flex;
-  margin: 7px 0;;
+  margin: @tabs-nav-margin 0;;
 
   &::-webkit-scrollbar {
     display: none;
@@ -13,6 +16,12 @@
     overflow: hidden;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    // 隐藏滚动条
+    margin-bottom: -(@scrollable-width - @tabs-nav-margin);
+    padding-bottom: @scrollable-width;
+  }
+  .Tabs-navPointer {
+    bottom: @scrollable-width;
   }
   .Tabs-navItem {
     flex: 1 0 auto;

@@ -87,31 +87,33 @@
 
 // Button
 @btn-padding: 3px 12px;
+@btn-border-radius: 15px;
 @btn-bg: var(--white);
 @btn-font-family: inherit;
 @btn-font-size: @font-size-sm;
 @btn-font-weight: @font-weight-normal;
 @btn-line-height: @line-height-base;
 
-@btn-hover-bg: var(--gray-7);
-@btn-active-bg: var(--gray-6);
+@btn-hover-bg: rgba(0, 0, 0, 0.04);
+@btn-active-bg: rgba(0, 0, 0, 0.08);
 
 @btn-padding-sm: 0 6px;
+@btn-border-radius-sm: 12px;
 @btn-font-size-sm: @font-size-sm;
 
-@btn-padding-lg: 6px 27px;
+@btn-padding-lg: 4px 24px;
+@btn-border-radius-lg: 20px;
 @btn-font-size-lg: @font-size-md;
 
-@btn-block-spacing-y: 10px;
+@btn-padding-xl: 9px 24px;
+@btn-border-radius-xl: 20px;
+@btn-font-size-xl: 16px;
 
-@btn-disabled-color: rgba(17, 17, 17, 0.5);
+@btn-block-spacing-y: 9px;
 
 @btn-border-width: @border-width;
 @btn-border-color: var(--gray-4);
 
-@btn-border-radius: 16px;
-@btn-border-radius-lg: 20px;
-@btn-border-radius-sm: 12px;
 @btn-transition: 0.15s ease-in-out;
 
 @btn-primary-border-color: transparent;
@@ -119,14 +121,6 @@
 @btn-primary-bg: linear-gradient(90deg, var(--brand-2) 0%, var(--brand-1) 98%);
 @btn-primary-hover-bg: @btn-primary-bg right/200%;
 @btn-primary-active-bg: @btn-primary-bg right/400%;
-@btn-primary-disabled-color: rgba(255, 255, 255, 0.5);
-
-@btn-float-padding: 5px 19px;
-@btn-float-bg: var(--white);
-@btn-float-hover-bg: rgba(0, 0, 0, 0.04);
-@btn-float-box-shadow: var(--shadow-2);
-@btn-float-color: var(--brand-1);
-@btn-float-font-size: @font-size-sm;
 
 // Composer
 @composer-padding: 9px var(--gutter);
@@ -187,22 +181,13 @@
 @navbar-icon-color: var(--gray-2);
 
 // Notice
-@notice-top: @gutter;
-@notice-left: @gutter;
-@notice-right: @gutter;
-@notice-padding: 9px @gutter;
-@notice-border-radius: @border-radius-lg;
-@notice-bg: var(--yellow-light);
-@notice-box-shadow: var(--shadow-2);
-@notice-icon-color: var(--gray-1);
-
-@notice-close-margin: 0 @gutter 0 0;
+@notice-padding: @gutter;
+@notice-border-radius: 12px;
+@notice-bg: var(--white);
+@notice-icon-color: var(--brand-1);
 
 @notice-content-color: var(--gray-1);
-@notice-content-font-size: @font-size-md;
-@notice-content-line-height: @line-height-base;
-
-@notice-actions-margin: 5px 0 -8px;
+@notice-content-font-size: 13px;
 
 // Popover
 @popover-border-radius: 6px;
@@ -485,6 +470,5 @@
 @zindex-footer: 10;
 @zindex-quick-replies: 110;
 @zindex-rate-actions: 10;
-@zindex-notice: 30;
 
 @zindex-step-dot: 2;

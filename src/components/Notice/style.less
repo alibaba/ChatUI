@@ -1,76 +1,25 @@
 .Notice {
-  @icon-size: @font-size-root * 1.5;
-
-  position: absolute;
-  z-index: @zindex-notice;
-  top: @notice-top;
-  left: @notice-left;
-  right: @notice-right;
+  display: flex;
+  align-items: center;
   padding: @notice-padding;
   border-radius: @notice-border-radius;
   background: @notice-bg;
-  box-shadow: @notice-box-shadow;
 
-  &-text {
-    margin: 0;
-
-    &.collapsed {
-      overflow: hidden;
-      display: -webkit-box;
-      /* autoprefixer: ignore next */
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      text-overflow: ellipsis;
-    }
-    &[data-overflow="true"]:not(.collapsed)::after {
-      content: '';
-      display: inline-block;
-      width: (@icon-size + 6px);
-      height: @notice-content-font-size;
-    }
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-  }
   &-icon {
-    float: left;
-    margin: 4px 5px 0 0;
+    margin-right: 6px;
   }
   &-close {
-    position: absolute;
-    left: (@gutter - @icon-button-lg-padding);
-    top: 50%;
-    top: ~'min(50%, 33px)';
-    transform: translateY(-50%);
-
-    & + .Notice-content {
-      margin-left: (@icon-size + $left);
-    }
+    margin-left: 6px;
   }
   .Icon {
     color: @notice-icon-color;
+    font-size: 16px;
   }
 }
 
 .Notice-content {
-  position: relative;
+  flex: 1;
+  min-width: 0;
   color: @notice-content-color;
-  word-wrap: break-word;
   font-size: @notice-content-font-size;
-  line-height: @notice-content-line-height;
-}
-
-.Notice-actions {
-  position: absolute;
-  bottom: -@icon-button-lg-padding;
-  right: -@icon-button-lg-padding;
-  padding-left: 6px;
-  background: @notice-bg;
-}
-
-.Notice-more {
-  &[aria-expanded='true'] {
-    transform: rotate(180deg);
-  }
 }

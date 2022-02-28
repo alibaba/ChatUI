@@ -114,8 +114,14 @@ export const Base: React.FC<ModalProps> = (props) => {
           <div className={clsx(`${baseClass}-body`, { overflow })}>{children}</div>
           {actions && (
             <div className={`${baseClass}-footer ${baseClass}-footer--${vertical ? 'v' : 'h'}`}>
-              {actions.map((item, i) => (
-                <Button {...item} key={i} />
+              {actions.map((item) => (
+                <Button
+                  block
+                  size={baseClass === 'Modal' ? 'lg' : 'xl'}
+                  variant={vertical ? 'outline' : undefined}
+                  {...item}
+                  key={item.label}
+                />
               ))}
             </div>
           )}

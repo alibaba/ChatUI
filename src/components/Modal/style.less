@@ -1,6 +1,6 @@
 .Modal,
 .Popup {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -159,13 +159,6 @@
   padding-bottom: calc(9px + var(--safe-bottom));
   background: var(--white);
 
-  .Btn {
-    padding: 7px 12px;
-    border-radius: 20px;
-    outline: none;
-    font-size: 16px;
-    font-weight: 400;
-  }
   .Btn + .Btn {
     margin-top: @popup-btn-x-spacing;
   }

@@ -6,8 +6,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   className?: string;
   label?: string;
   color?: 'primary';
-  variant?: 'text' | 'float';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: 'text' | 'outline';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   block?: boolean;
   icon?: string;
   loading?: boolean;
@@ -19,29 +19,30 @@ function composeClass(type?: string) {
   return type && `Btn--${type}`;
 }
 
-export const Button: React.FC<ButtonProps> = (props) => {
+export const Button = (props: ButtonProps) => {
   const {
     className,
     label,
     color,
     variant,
-    size,
-    icon,
-    loading = false,
+    size: oSize,
+    icon: oIcon,
+    loading,
     block,
-    disabled = false,
+    disabled,
     children,
     onClick,
     ...other
   } = props;
+
+  const icon = oIcon || (loading && 'spinner');
+  const size = oSize || (block ? 'xl' : '');
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     if (!disabled && !loading && onClick) {
       onClick(e);
     }
   }
-
-  const btnIcon = loading ? 'spinner' : icon;
 
   return (
     <button
@@ -60,9 +61,9 @@ export const Button: React.FC<ButtonProps> = (props) => {
       onClick={handleClick}
       {...other}
     >
-      {btnIcon && (
+      {icon && (
         <span className="Btn-icon">
-          <Icon type={btnIcon} spin={loading} />
+          <Icon type={icon} spin={loading} />
         </span>
       )}
       {label || children}
