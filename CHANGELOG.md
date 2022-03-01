@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-alpha.1](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2022-03-01)
+
+
+### Features
+
+* pxtorem ([d92d5a6](https://github.com/alibaba/ChatUI/commit/d92d5a69649e7e9ab516a2771748bb3c7599da96))
+
+
+### Bug Fixes
+
+* [Modal] fix safe area ([6beae88](https://github.com/alibaba/ChatUI/commit/6beae88720f0f794db75b62fc6bceba058352bef))
+* ui 5.1 ([62b6863](https://github.com/alibaba/ChatUI/commit/62b686366924ad4bb57111dcb426cadb87c44a5a))
+
 ## [2.0.0-alpha.0](https://github.com/alibaba/ChatUI/compare/v1.3.0...v2.0.0-alpha.0) (2022-02-22)
 
 
