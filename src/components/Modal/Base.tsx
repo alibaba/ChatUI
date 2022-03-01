@@ -82,6 +82,8 @@ export const Base: React.FC<ModalProps> = (props) => {
 
   if (!didMount) return null;
 
+  const needSafeArea = baseClass === 'Popup' && !actions;
+
   return createPortal(
     <div className={clsx(baseClass, className, { active: isShow })} ref={wrapper} tabIndex={-1}>
       {backdrop && (
@@ -91,7 +93,7 @@ export const Base: React.FC<ModalProps> = (props) => {
         />
       )}
       <div
-        className={clsx(`${baseClass}-dialog`, { 'pb-safe': !actions })}
+        className={clsx(`${baseClass}-dialog`, { 'pb-safe': needSafeArea })}
         role="dialog"
         aria-labelledby={titleId}
         aria-modal
