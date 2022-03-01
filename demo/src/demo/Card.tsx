@@ -11,8 +11,10 @@ export default () => (
           气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情
         </CardText>
         <CardActions>
-          <Button>前去留言</Button>
-          <Button color="primary">提交评价</Button>
+          <Button size="lg">前去留言</Button>
+          <Button color="primary" size="lg">
+            提交评价
+          </Button>
         </CardActions>
       </Card>
     </DemoSection>
