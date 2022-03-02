@@ -36,15 +36,11 @@ export default () => (
         <Button color="primary" size="lg">
           大号按钮
         </Button>
-        <Button color="primary" size="xl">
-          特大号按钮
-        </Button>
       </div>
       <div>
         <Button size="sm">小号按钮</Button>
         <Button>普通按钮</Button>
         <Button size="lg">大号按钮</Button>
-        <Button size="xl">特大号按钮</Button>
       </div>
     </DemoSection>
     <DemoSection title="按钮变体">

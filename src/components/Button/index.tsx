@@ -7,7 +7,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   label?: string;
   color?: 'primary';
   variant?: 'text' | 'outline';
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'sm' | 'md' | 'lg';
   block?: boolean;
   icon?: string;
   loading?: boolean;
@@ -36,7 +36,7 @@ export const Button = (props: ButtonProps) => {
   } = props;
 
   const icon = oIcon || (loading && 'spinner');
-  const size = oSize || (block ? 'xl' : '');
+  const size = oSize || (block ? 'lg' : '');
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     if (!disabled && !loading && onClick) {
