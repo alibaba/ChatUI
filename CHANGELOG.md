@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-alpha.2](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2022-03-04)
+
+
+### Bug Fixes
+
+* [Button] remove `xl` size, add `--link-color` ([75f6b01](https://github.com/alibaba/ChatUI/commit/75f6b012e130ddb9462cc6edabb5204d117c7780))
+* [IconButton] size ([f506f7e](https://github.com/alibaba/ChatUI/commit/f506f7e6c014db9836afbe1abc5bea82482d50f2))
+* [MessageList] font-size ([615a8e1](https://github.com/alibaba/ChatUI/commit/615a8e1ee34b194a141bb3a29ebca80aa433f982))
+* [Popup] fix actions ([b8fbd9b](https://github.com/alibaba/ChatUI/commit/b8fbd9bf9a282012fe9d039cd882594aace16f87))
+
 ## [2.0.0-alpha.1](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2022-03-01)
 
 
