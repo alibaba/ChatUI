@@ -14,7 +14,7 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
   const { className, title, logo, leftContent, rightContent = [] } = props;
   return (
     <header className={clsx('Navbar', className)}>
-      <div className="Navbar-left">{leftContent && <IconButton size="lg" {...leftContent} />}</div>
+      <div className="Navbar-left">{leftContent && <IconButton {...leftContent} />}</div>
       <div className="Navbar-main">
         {logo ? (
           <img className="Navbar-logo" src={logo} alt={title} />
@@ -24,7 +24,7 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
       </div>
       <div className="Navbar-right">
         {rightContent.map((item) => (
-          <IconButton size="lg" {...item} key={item.icon} />
+          <IconButton {...item} key={item.icon} />
         ))}
       </div>
     </header>

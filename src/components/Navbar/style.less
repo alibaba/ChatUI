@@ -17,13 +17,11 @@
   }
   &-left,
   &-right {
-    @padding-width: @navbar-icon-padding * 2;
-    width: 100px;
-    width: ~'calc((@{icon-button-lg-size} + @{padding-width}) * 2)';
-    padding: 2px 0;
+    width: 58px;
   }
   &-right {
     text-align: right;
+    white-space: nowrap;
   }
   &-title {
     margin: 0;
@@ -35,8 +33,7 @@
     width: auto;
     height: @navbar-logo-height;
   }
-  .IconBtn {
-    padding: @navbar-icon-padding;
-    color: @navbar-icon-color;
+  .IconBtn + .IconBtn {
+    margin-left: 9px;
   }
 }
