@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Form, FormItem, FormActions, Input, Button, RadioGroup } from '../../../src';
-import '../../../src/styles/index.less';
 
 export default () => {
   const [usename, setUsername] = useState('');

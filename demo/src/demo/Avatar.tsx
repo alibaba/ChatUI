@@ -1,7 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Avatar } from '../../../src';
-import '../../../src/styles/index.less';
 
 const img = '//gw.alicdn.com/tfs/TB1U7FBiAT2gK0jSZPcXXcKkpXa-108-108.jpg';
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Icon } from '../../../src';
-import '../../../src/styles/index.less';
 
 const symbols = document.getElementById('__CHATUI_ICONS__')?.querySelectorAll('symbol') || [];
 

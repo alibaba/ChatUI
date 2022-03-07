@@ -1,7 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Flex, FlexItem } from '../../../src';
-import '../../../src/styles/index.less';
 
 function FluidLayout({ n }: { n: number }) {
   return (

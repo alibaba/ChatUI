@@ -9,7 +9,7 @@ const cssnanoConfig = {
 };
 
 module.exports = (ctx) => ({
-  map: ctx.env === 'development' ? ctx.options.map : false,
+  map: ctx.env === 'development' && ctx.options ? ctx.options.map : false,
   plugins: {
     autoprefixer: {},
     'postcss-pxtorem': {

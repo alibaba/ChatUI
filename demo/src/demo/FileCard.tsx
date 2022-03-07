@@ -1,7 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { FileCard } from '../../../src';
-import '../../../src/styles/index.less';
 
 const file = new File(['foo'], 'foo.txt', {
   type: 'text/plain',

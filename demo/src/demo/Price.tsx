@@ -1,7 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Price } from '../../../src';
-import '../../../src/styles/index.less';
 
 const number = 1234567.89;
 

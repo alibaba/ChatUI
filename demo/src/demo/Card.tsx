@@ -1,7 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Card, CardMedia, CardTitle, CardText, CardActions, Button } from '../../../src';
-import '../../../src/styles/index.less';
 
 export default () => (
   <DemoPage>
@@ -11,10 +10,8 @@ export default () => (
           气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情
         </CardText>
         <CardActions>
-          <Button size="lg">前去留言</Button>
-          <Button color="primary" size="lg">
-            提交评价
-          </Button>
+          <Button>前去留言</Button>
+          <Button color="primary">提交评价</Button>
         </CardActions>
       </Card>
     </DemoSection>

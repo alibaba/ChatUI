@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Popup, Card, List, ListItem } from '../../../src';
-import '../../../src/styles/index.less';
 
 export default () => {
   const [open1, setOpen1] = useState(false);

@@ -1,7 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Card, List, ListItem } from '../../../src';
-import '../../../src/styles/index.less';
 
 export default () => (
   <DemoPage>

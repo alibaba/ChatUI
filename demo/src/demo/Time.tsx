@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DemoPage, DemoSection, LangSwitcher } from '../components';
 import { Time, LocaleProvider } from '../../../src';
-import '../../../src/styles/index.less';
 
 const now = Date.now();
 const MS_A_DAY = 24 * 60 * 60 * 1000;

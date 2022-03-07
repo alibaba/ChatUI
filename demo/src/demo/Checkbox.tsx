@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Checkbox, CheckboxGroup, CheckboxValue } from '../../../src';
-import '../../../src/styles/index.less';
 
 const options = [
   { label: 'Apple', value: 'Apple' },
@@ -25,16 +24,16 @@ export default () => {
 
   return (
     <DemoPage>
-      <DemoSection title="基础用法">
+      <DemoSection title="基础用法" bg="gray-5">
         <Checkbox value="abc" label="ABC" checked={checked} onChange={() => setChecked(!checked)} />
       </DemoSection>
-      <DemoSection title="禁用状态">
+      <DemoSection title="禁用状态" bg="gray-5">
         <Checkbox value="abc" label="ABC" disabled />
       </DemoSection>
-      <DemoSection title="复选框组">
+      <DemoSection title="复选框组" bg="gray-5">
         <CheckboxGroup value={value1} options={options} onChange={handleChange} />
       </DemoSection>
-      <DemoSection title="块级显示">
+      <DemoSection title="块级显示" bg="gray-5">
         <CheckboxGroup value={value2} options={options} onChange={handleChange2} block />
       </DemoSection>
     </DemoPage>

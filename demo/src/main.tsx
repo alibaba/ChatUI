@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.less';
+import '../../src/styles/index.less';
 import App from './App';
 
 ReactDOM.render(

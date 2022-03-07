@@ -1,7 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { ScrollView, Button } from '../../../src';
-import '../../../src/styles/index.less';
 
 // const list = [{ text: '内容1' }, { text: '内容2' }, { text: '内容3' }];
 

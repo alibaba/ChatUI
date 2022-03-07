@@ -17,7 +17,6 @@ import Chat, {
   ToolbarItemProps,
 } from '../../../src';
 import OrderSelector from './OrdderSelector';
-import '../../../src/styles/index.less';
 
 type MessageWithoutId = Omit<MessageProps, '_id'>;
 

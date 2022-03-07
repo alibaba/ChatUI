@@ -1,7 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Carousel, Image } from '../../../src';
-import '../../../src/styles/index.less';
 
 const imgs = [
   '//gw.alicdn.com/tfs/TB1GRW3voY1gK0jSZFMXXaWcVXa-620-320.jpg',

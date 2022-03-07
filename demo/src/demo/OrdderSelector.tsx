@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Popup, Card, Goods, Tabs, Tab, Button, Search, Modal } from '../../../src';
-import '../../../src/styles/index.less';
 
 export default () => {
   const [active, setActive] = useState(true);

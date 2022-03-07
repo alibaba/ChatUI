@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Progress, Button } from '../../../src';
-import '../../../src/styles/index.less';
 
 export default () => {
   const [percentage, setPercentage] = useState(20);
