@@ -72,6 +72,7 @@ export const navConfig = [
   {
     title: '其它组件',
     list: [
+      { name: '组件加载器', code: 'component-provider' },
       { name: '错误边界', code: 'error-boundary' },
       { name: '传送门', code: 'portal' },
       { name: '视觉上隐藏', code: 'visually-hidden' },

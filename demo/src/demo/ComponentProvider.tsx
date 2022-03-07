@@ -1,22 +1,9 @@
-import React, { useEffect } from 'react';
-import { Meta } from '@storybook/react/types-6-0';
-
-import * as ChatUI from '../../src';
-import { ComponentsMap, LazyComponentOnLoadParams } from '../../src';
+import React from 'react';
+import { DemoPage, DemoSection } from '../components';
+import * as ChatUI from '../../../src';
+import { ComponentsMap, LazyComponentOnLoadParams } from '../../../src';
 
 const { ComponentsProvider, LazyComponent, useComponents } = ChatUI;
-
-export default {
-  title: 'ComponentsProvider',
-  component: ComponentsProvider,
-} as Meta;
-
-// for Alime Component
-declare global {
-  interface Window {
-    ChatUI: any;
-  }
-}
 
 window.React = React;
 window.ChatUI = ChatUI;
@@ -83,12 +70,6 @@ function TestLocalComponent() {
   );
 }
 
-export const LocalComponent = () => (
-  <ComponentsProvider components={components}>
-    <TestLocalComponent />
-  </ComponentsProvider>
-);
-
 function LazySlot() {
   const data = { list: [{ title: 'item-1' }, { title: 'item-2' }] };
   return (
@@ -131,12 +112,6 @@ function LazyRecommend() {
   );
 }
 
-export const AsyncComponent = () => (
-  <ComponentsProvider components={components}>
-    <LazySlot />
-  </ComponentsProvider>
-);
-
 function TestNotFoundCode() {
   const [errMsg, setErrMsg] = React.useState('');
   return (
@@ -152,12 +127,6 @@ function TestNotFoundCode() {
     </div>
   );
 }
-
-export const NotFoundCode = () => (
-  <ComponentsProvider components={components}>
-    <TestNotFoundCode />
-  </ComponentsProvider>
-);
 
 function TestComponentHasError() {
   const [errMsg, setErrMsg] = React.useState('');
@@ -176,12 +145,6 @@ function TestComponentHasError() {
   );
 }
 
-export const ComponentHasError = () => (
-  <ComponentsProvider components={components}>
-    <TestComponentHasError />
-  </ComponentsProvider>
-);
-
 function TestErrorUrl() {
   const [errMsg, setErrMsg] = React.useState('');
   return (
@@ -199,12 +162,6 @@ function TestErrorUrl() {
   );
 }
 
-export const ErrorUrl = () => (
-  <ComponentsProvider components={components}>
-    <TestErrorUrl />
-  </ComponentsProvider>
-);
-
 function TestDecorator() {
   return (
     <div>
@@ -220,12 +177,6 @@ function TestDecorator() {
     </div>
   );
 }
-
-export const Decorator = () => (
-  <ComponentsProvider components={components}>
-    <TestDecorator />
-  </ComponentsProvider>
-);
 
 function TestAsyncDecorator() {
   return (
@@ -244,11 +195,13 @@ function TestAsyncDecorator() {
   );
 }
 
-export const AsyncDecorator = () => (
-  <ComponentsProvider components={components}>
-    <TestAsyncDecorator />
-  </ComponentsProvider>
-);
+function useForceUpdate() {
+  const [, forceUpdate] = React.useState(false);
+
+  return React.useCallback(() => {
+    forceUpdate((s) => !s);
+  }, []);
+}
 
 function TestAddComponent() {
   const { addComponent, hasComponent } = useComponents();
@@ -284,15 +237,7 @@ function TestAddComponent() {
   );
 }
 
-function useForceUpdate() {
-  const [, forceUpdate] = React.useState(false);
-
-  return React.useCallback(() => {
-    forceUpdate((s) => !s);
-  }, []);
-}
-
-export const AddComponent = () => {
+function AddComponent() {
   const forceUpdate = useForceUpdate();
   const renderCount = React.useRef(0);
 
@@ -320,9 +265,8 @@ export const AddComponent = () => {
       </ComponentsProvider>
     </div>
   );
-};
-
-export const MutableComponents = () => {
+}
+const MutableComponents = () => {
   const [myComponents, setMyMyComponents] = React.useState({});
   const forceUpdate = useForceUpdate();
 
@@ -362,5 +306,57 @@ export const MutableComponents = () => {
         <LazyRecommend />
       </ComponentsProvider>
     </div>
+  );
+};
+
+export default () => {
+  return (
+    <DemoPage>
+      <DemoSection title="本地加载">
+        <ComponentsProvider components={components}>
+          <TestLocalComponent />
+        </ComponentsProvider>
+      </DemoSection>
+      <DemoSection title="异步加载 slot">
+        <ComponentsProvider components={components}>
+          <LazySlot />
+        </ComponentsProvider>
+      </DemoSection>
+      <DemoSection title="找不到 code">
+        <ComponentsProvider components={components}>
+          <TestNotFoundCode />
+        </ComponentsProvider>
+      </DemoSection>
+      <DemoSection title="组件报错">
+        <ComponentsProvider components={components}>
+          <TestComponentHasError />
+        </ComponentsProvider>
+      </DemoSection>
+      <DemoSection title="URL 有误">
+        <ComponentsProvider components={components}>
+          <TestErrorUrl />
+        </ComponentsProvider>
+      </DemoSection>
+      <DemoSection title="Decorator">
+        <ComponentsProvider components={components}>
+          <TestDecorator />
+        </ComponentsProvider>
+      </DemoSection>
+      <DemoSection title="异步 Decorator">
+        <ComponentsProvider components={components}>
+          <TestAsyncDecorator />
+        </ComponentsProvider>
+      </DemoSection>
+      <DemoSection title="AddComponent">
+        <ComponentsProvider components={components}>
+          <AddComponent />
+        </ComponentsProvider>
+      </DemoSection>
+      <DemoSection title="MutableComponents">
+        <ComponentsProvider components={components}>
+          <MutableComponents />
+        </ComponentsProvider>
+      </DemoSection>
+    </DemoPage>
   );
 };
