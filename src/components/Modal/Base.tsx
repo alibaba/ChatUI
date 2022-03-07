@@ -107,7 +107,6 @@ export const Base: React.FC<ModalProps> = (props) => {
               <IconButton
                 className={`${baseClass}-close`}
                 icon="close"
-                size="lg"
                 onClick={onClose}
                 aria-label="关闭"
               />
@@ -119,7 +118,7 @@ export const Base: React.FC<ModalProps> = (props) => {
               {actions.map((item) => (
                 <Button
                   block={isPopup}
-                  variant={vertical ? 'outline' : undefined}
+                  variant={!isPopup && vertical ? 'outline' : undefined}
                   {...item}
                   key={item.label}
                 />
