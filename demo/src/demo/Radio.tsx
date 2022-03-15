@@ -18,12 +18,12 @@ export default () => {
 
   return (
     <DemoPage>
-      <DemoSection title="基础用法" bg="gray-5">
+      <DemoSection title="基础用法" bg="gray">
         <Radio label="备选项A" value="a" />
         <Radio label="备选项B" value="b" checked />
         <Radio label="备选项C" value="c" disabled />
       </DemoSection>
-      <DemoSection title="单选框组" bg="gray-5">
+      <DemoSection title="单选框组" bg="gray">
         <RadioGroup value={value} options={options} onChange={handleChange} />
       </DemoSection>
     </DemoPage>

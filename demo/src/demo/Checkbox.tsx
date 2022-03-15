@@ -24,16 +24,16 @@ export default () => {
 
   return (
     <DemoPage>
-      <DemoSection title="基础用法" bg="gray-5">
+      <DemoSection title="基础用法" bg="gray">
         <Checkbox value="abc" label="ABC" checked={checked} onChange={() => setChecked(!checked)} />
       </DemoSection>
-      <DemoSection title="禁用状态" bg="gray-5">
+      <DemoSection title="禁用状态" bg="gray">
         <Checkbox value="abc" label="ABC" disabled />
       </DemoSection>
-      <DemoSection title="复选框组" bg="gray-5">
+      <DemoSection title="复选框组" bg="gray">
         <CheckboxGroup value={value1} options={options} onChange={handleChange} />
       </DemoSection>
-      <DemoSection title="块级显示" bg="gray-5">
+      <DemoSection title="块级显示" bg="gray">
         <CheckboxGroup value={value2} options={options} onChange={handleChange2} block />
       </DemoSection>
     </DemoPage>

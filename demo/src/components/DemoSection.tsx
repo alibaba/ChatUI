@@ -2,7 +2,7 @@ import React from 'react';
 
 interface DemoSectionProps {
   title: string;
-  bg?: 'white' | 'gray-5';
+  bg?: 'white' | 'gray';
   children: React.ReactNode;
 }
 

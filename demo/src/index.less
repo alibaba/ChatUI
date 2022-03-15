@@ -124,8 +124,8 @@ body {
   &.bg-white {
     background: var(--white);
   }
-  &.bg-gray-5 {
-    background: var(--gray-5);
+  &.bg-gray {
+    background: #fafafa;
   }
   &-title {
     margin: 10px 0;
@@ -155,18 +155,21 @@ body {
 
 // Chat Demo
 .guess-you-aside {
-  width: 90px;
+  width: 72px;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  background: #FAFAFA;
 
   h1 {
     margin: 8px 0;
     color: #424754;
-    font-size: 24;
+    font-size: 21px;
     font-weight: 700;
     line-height: 1.1;
     text-align: center;
 
     &::first-line {
-      color: #f9bc00;
+      color: var(--brand-1);
     }
   }
 }
