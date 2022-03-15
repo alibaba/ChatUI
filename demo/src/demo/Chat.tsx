@@ -22,6 +22,10 @@ type MessageWithoutId = Omit<MessageProps, '_id'>;
 
 const initialMessages: MessageWithoutId[] = [
   {
+    type: 'system',
+    content: { text: '88VIP专属智能客服小蜜 为您服务' },
+  },
+  {
     type: 'text',
     content: { text: 'Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
     user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg', name: '小小蜜' },

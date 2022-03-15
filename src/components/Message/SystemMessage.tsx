@@ -14,12 +14,14 @@ export const SystemMessage: React.FC<SystemMessageProps> = (props) => {
   const { className, content, action } = props;
   return (
     <div className={clsx('Message SystemMessage', className)}>
-      <span>{content}</span>
-      {action && (
-        <a href="javascript:;" onClick={action.onClick}>
-          {action.text}
-        </a>
-      )}
+      <div className="SystemMessage-inner">
+        <span>{content}</span>
+        {action && (
+          <a href="javascript:;" onClick={action.onClick}>
+            {action.text}
+          </a>
+        )}
+      </div>
     </div>
   );
 };

@@ -47,7 +47,6 @@
 
 // SystemMessage
 .SystemMessage {
-  padding: 0 16px;
   font-size: @font-size-xs;
   color: var(--gray-2);
   text-align: center;
@@ -55,6 +54,13 @@
   a {
     margin-left: 5px;
   }
+}
+
+.SystemMessage-inner {
+  display: inline-block;
+  padding: 6px 9px;
+  border-radius: 6px;
+  background: var(--gray-8);
 }
 
 @keyframes msgLeft {
