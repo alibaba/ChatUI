@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-alpha.3](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2022-03-15)
+
+
+### Bug Fixes
+
+* [DEMO] fix styles ([b0225e0](https://github.com/alibaba/ChatUI/commit/b0225e0415718032b7922f01692c4f8e32713d3a))
+* [List] update styles ([f85c911](https://github.com/alibaba/ChatUI/commit/f85c91118c98337046b754adb774b01ea07c5cd1))
+* [Modal] fix actions ([5ce52ed](https://github.com/alibaba/ChatUI/commit/5ce52edf5aae3d9f7952dbc33f26655aff6076b7))
+* [SystemMessage] update styles ([f40e313](https://github.com/alibaba/ChatUI/commit/f40e3134f87284f9b6cae85a366091177885b192))
+* rm storybook ([709e1fc](https://github.com/alibaba/ChatUI/commit/709e1fceaf1ac46056aaf239e22d654259e6d5fb))
+
 ## [2.0.0-alpha.2](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2022-03-04)
 
 
