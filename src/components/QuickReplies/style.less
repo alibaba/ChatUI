@@ -38,7 +38,6 @@
   cursor: pointer;
   color: var(--gray-1);
   font-size: @quick-reply-font-size;
-  font-weight: @quick-reply-font-weight;
   transition: 0.15s ease-in-out;
 
   &.new::after {
@@ -53,7 +52,7 @@
     border-radius: 50%;
   }
   &.highlight {
-    border-color: @quick-reply-highlight-border-color;
+    font-weight: bold;
   }
   &-inner {
     display: flex;
@@ -65,6 +64,10 @@
   &-inner > .Icon,
   &-img {
     margin-right: 3px;
+  }
+  .Icon {
+    color: var(--brand-1);
+    font-size: 15px;
   }
 }
 

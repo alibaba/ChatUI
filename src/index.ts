@@ -121,6 +121,7 @@ export { toast } from './components/Toast';
 export { Toolbar } from './components/Toolbar';
 export type { ToolbarProps, ToolbarItemProps } from './components/Toolbar';
 export { Tree, TreeNode } from './components/Tree';
+export { Typing } from './components/Typing';
 export type { TreeProps, TreeNodeProps } from './components/Tree';
 export { Video } from './components/Video';
 export type { VideoProps } from './components/Video';

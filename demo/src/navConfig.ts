@@ -6,6 +6,9 @@ export const navConfig = [
       { name: '气泡', code: 'bubble' },
       { name: '卡片', code: 'card' },
       { name: '文件卡片', code: 'file-card' },
+      { name: '消息状态', code: 'message-status' },
+      { name: '系统消息', code: 'system-message' },
+      { name: '输入中', code: 'typing' },
     ],
   },
   {

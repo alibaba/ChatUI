@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   overflow: visible;
+  min-width: 80px;
   margin: 0;
   padding: @btn-padding;
   border: @btn-border-width solid @btn-border-color;
@@ -36,6 +37,7 @@
   }
   &:disabled {
     pointer-events: none;
+    color: var(--gray-4);
     opacity: 0.5;
   }
   &--primary:not(.Btn--outline) {

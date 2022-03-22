@@ -107,6 +107,7 @@ export const Base: React.FC<ModalProps> = (props) => {
               <IconButton
                 className={`${baseClass}-close`}
                 icon="close"
+                size="lg"
                 onClick={onClose}
                 aria-label="关闭"
               />

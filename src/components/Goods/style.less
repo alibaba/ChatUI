@@ -1,5 +1,6 @@
 .Goods {
   padding: @goods-padding;
+  font-size: 14px;
 
   & + & {
     border-top: @goods-border-width solid @goods-border-color;
@@ -12,7 +13,7 @@
     border-radius: @goods-img-border-radius;
   }
   &-name {
-    margin: 0 0 5px;
+    margin: 0 0 3px;
     font-size: @font-size-sm;
     font-weight: 400;
   }
@@ -22,8 +23,8 @@
     }
   }
   &-desc {
+    margin-bottom: 3px;
     color: @goods-desc-color;
-    font-size: @goods-desc-font-size;
     word-break: break-all;
   }
   &-meta {
@@ -31,6 +32,7 @@
     font-size: @goods-meta-font-size;
   }
   &-countUnit {
+    margin: 3px 0;
     color: @goods-count-color;
     font-size: @goods-count-font-size;
   }
@@ -59,10 +61,10 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin-left: @goods-gap;
+    margin-left: 9px;
   }
   &-status {
     color: @goods-status-color;
-    font-size: @goods-status-font-size;
+    font-size: 12px;
   }
 }

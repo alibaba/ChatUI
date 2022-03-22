@@ -101,10 +101,11 @@
 /* CardActions */
 .CardActions {
   display: flex;
-  padding: @card-padding;
+  padding: @card-padding @card-padding 18px;
 
   .CardTitle + &,
-  .CardText + & {
+  .CardText + &,
+  .CardContent + & {
     padding-top: 0;
   }
   .Btn {

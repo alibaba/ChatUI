@@ -52,30 +52,36 @@ const initialMessages: MessageWithoutId[] = [
 
 const defaultQuickReplies = [
   {
+    icon: 'shopping-bag',
+    name: '咨询订单问题（高亮）',
+    code: 'orderSelector',
+    isHighlight: true,
+  },
+  {
+    icon: 'shopping-bag',
+    name: '如何申请退款（高亮）',
+    code: 'orderSelector',
+    isHighlight: true,
+  },
+  {
     icon: 'message',
-    name: '1联系人工服务',
+    name: '联系人工服务（高亮+新）',
     code: 'q1',
     isNew: true,
     isHighlight: true,
   },
   {
-    name: '如何申请退款',
-    code: 'orderSelector',
+    name: '质量问题（新）',
+    code: 'q3',
     isNew: true,
   },
   {
-    name: '3强快捷短语',
-    code: 'q3',
-    isHighlight: true,
-  },
-  {
-    name: '4弱快捷短语',
+    name: '卖家文案',
     code: 'q4',
   },
   {
     name: '5强快捷短语',
     code: 'q5',
-    isHighlight: true,
   },
   {
     name: '6弱快捷短语',
@@ -89,6 +95,39 @@ const skillList = [
   { title: '联系商家', desc: '急速联系' },
   { title: '红包卡券', desc: '使用优惠' },
   { title: '修改地址', desc: '修改地址' },
+];
+
+const toolbar = [
+  {
+    type: 'smile',
+    icon: 'smile',
+    title: '表情',
+  },
+  {
+    type: 'orderSelector',
+    icon: 'shopping-bag',
+    title: '宝贝',
+  },
+  {
+    type: 'image',
+    icon: 'image',
+    title: '图片',
+  },
+  {
+    type: 'camera',
+    icon: 'camera',
+    title: '拍照',
+  },
+  {
+    type: 'orderSelector',
+    icon: 'shopping-bag',
+    title: 'OrdderSelector',
+  },
+  {
+    type: 'photo',
+    title: 'Photo',
+    img: 'https://gw.alicdn.com/tfs/TB1eDjNj.T1gK0jSZFrXXcNCXXa-80-80.png',
+  },
 ];
 
 export default () => {
@@ -254,52 +293,39 @@ export default () => {
 
   return (
     <DemoPage>
-      <DemoSection title="基础用法">
-        <div style={{ height: '60vh' }}>
-          <Chat
-            onRefresh={handleRefresh}
-            navbar={{
-              leftContent: {
-                icon: 'chevron-left',
-                title: 'Back',
-              },
-              rightContent: [
-                {
-                  icon: 'apps',
-                  title: 'Applications',
-                },
-                {
-                  icon: 'ellipsis-h',
-                  title: 'More',
-                },
-              ],
-              title: '智能助理',
-            }}
-            toolbar={[
+      <div style={{ height: 'calc(100vh - 48px)', marginTop: '-12px' }}>
+        <Chat
+          onRefresh={handleRefresh}
+          navbar={{
+            leftContent: {
+              icon: 'chevron-left',
+              title: 'Back',
+            },
+            rightContent: [
               {
-                type: 'orderSelector',
-                icon: 'shopping-bag',
-                title: 'OrdderSelector',
+                icon: 'apps',
+                title: 'Applications',
               },
               {
-                type: 'photo',
-                title: 'Photo',
-                img: 'https://gw.alicdn.com/tfs/TB1eDjNj.T1gK0jSZFrXXcNCXXa-80-80.png',
+                icon: 'ellipsis-h',
+                title: 'More',
               },
-            ]}
-            messagesRef={msgRef}
-            onToolbarClick={handleToolbarClick}
-            recorder={{ canRecord: true }}
-            wideBreakpoint="600px"
-            messages={messages}
-            renderMessageContent={renderMessageContent}
-            quickReplies={quickReplies}
-            onQuickReplyClick={handleQuickReplyClick}
-            onSend={handleSend}
-            onImageSend={() => Promise.resolve()}
-          />
-        </div>
-      </DemoSection>
+            ],
+            title: '智能助理',
+          }}
+          toolbar={toolbar}
+          messagesRef={msgRef}
+          onToolbarClick={handleToolbarClick}
+          recorder={{ canRecord: true }}
+          wideBreakpoint="600px"
+          messages={messages}
+          renderMessageContent={renderMessageContent}
+          quickReplies={quickReplies}
+          onQuickReplyClick={handleQuickReplyClick}
+          onSend={handleSend}
+          onImageSend={() => Promise.resolve()}
+        />
+      </div>
     </DemoPage>
   );
 };

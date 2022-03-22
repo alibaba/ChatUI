@@ -1,11 +1,12 @@
 .Toolbar {
-  padding: 10px 12px 25px;
+  padding: var(--gutter);
+  padding-top: 0;
 }
 
 .Toolbar-item {
   display: inline-block;
   width: 25%;
-  margin-top: 20px;
+  margin-top: var(--gutter);
   text-align: center;
 }
 
@@ -13,31 +14,45 @@
   position: relative;
   display: inline-block;
   overflow: hidden;
-  width: 72px;
+  width: 76px;
   padding: 6px;
   border: 0;
   background: transparent;
-  color: var(--gray-1);
+  color: var(--gray-2);
   vertical-align: top;
+
+  &:hover {
+    background: transparent;
+
+    .Toolbar-btnIcon {
+      background: @btn-hover-bg;
+    }
+  }
 }
+
+@toolbar-icon-size: 36px;
 
 .Toolbar-btnIcon {
   display: inline-block;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--white);
+  transition: 0.3s;
 
   .Icon {
-    font-size: 40px;
-    transition: 0.3s;
+    font-size: @toolbar-icon-size;
+    vertical-align: top;
   }
 }
 
 .Toolbar-img {
-  width: 40px;
-  height: 40px;
+  width: @toolbar-icon-size;
+  height: @toolbar-icon-size;
+  vertical-align: top;
 }
 
 .Toolbar-btnText {
   display: block;
-  margin-top: 12px;
-  font-size: @font-size-xs;
-  transition: 0.3s;
+  margin-top: 6px;
+  font-size: 14px;
 }

@@ -56,7 +56,7 @@ export default () => (
             console.log(111);
           }}
         >
-          <p>children content</p>
+          <div>children content</div>
         </Goods>
       </Card>
     </DemoSection>

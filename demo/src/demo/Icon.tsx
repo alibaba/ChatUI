@@ -10,7 +10,9 @@ export default () => (
       <Icon type="bullhorn" />
     </DemoSection>
     <DemoSection title="旋转动画">
-      <Icon type="spinner" spin />
+      <div style={{ fontSize: '64px' }}>
+        <Icon type="spinner" spin />
+      </div>
     </DemoSection>
     <DemoSection title="旋转动画">
       <div className="icon-list">
