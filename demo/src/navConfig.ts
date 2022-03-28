@@ -59,6 +59,7 @@ export const navConfig = [
     list: [
       { name: '无限滚动', code: 'infinite-scroll' },
       { name: '加载', code: 'Loading' },
+      { name: '确认框', code: 'confirm' },
       { name: '模态框', code: 'modal' },
       { name: '上拉弹窗', code: 'popup' },
       { name: '下拉刷新', code: 'pull-to-refresh' },

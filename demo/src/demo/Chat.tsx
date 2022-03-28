@@ -29,6 +29,8 @@ const initialMessages: MessageWithoutId[] = [
     type: 'text',
     content: { text: 'Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
     user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg', name: '小小蜜' },
+    createdAt: Date.now(),
+    hasTime: true,
   },
   {
     type: 'guess-you',
@@ -46,6 +48,12 @@ const initialMessages: MessageWithoutId[] = [
     type: 'image',
     content: {
       picUrl: '//img.alicdn.com/tfs/TB1p_nirYr1gK0jSZR0XXbP8XXa-300-300.png',
+    },
+  },
+  {
+    type: 'system',
+    content: {
+      text: '由于您长时间未说话或退出小蜜（离开页面、锁屏等）已自动结束本次服务',
     },
   },
 ];
@@ -313,6 +321,7 @@ export default () => {
             ],
             title: '智能助理',
           }}
+          rightAction={{ icon: 'compass' }}
           toolbar={toolbar}
           messagesRef={msgRef}
           onToolbarClick={handleToolbarClick}

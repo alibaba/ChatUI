@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Popup, Card, Goods, Tabs, Tab, Button, Search, Modal } from '../../../src';
+import { Popup, Card, Goods, Tabs, Tab, Button, Search, Confirm } from '../../../src';
 
 export default () => {
   const [active, setActive] = useState(true);
@@ -32,7 +32,7 @@ export default () => {
               <Card className="OrderGroup">
                 <div className="OrderGroup-header">
                   <h3>耐克官方旗舰店最多字数…</h3>
-                  <span>交易状态</span>
+                  <span className="OrderGroup-status">交易状态</span>
                 </div>
                 <div className="OrderGroup-list">
                   <Goods
@@ -49,8 +49,10 @@ export default () => {
                   />
                 </div>
                 <div className="OrderGroup-actions">
-                  <Button>订单详情</Button>
-                  <Button color="primary">发送</Button>
+                  <Button size="sm">订单详情</Button>
+                  <Button color="primary" size="sm">
+                    发送
+                  </Button>
                 </div>
               </Card>
             </div>
@@ -65,10 +67,9 @@ export default () => {
             <p>内容3</p>
           </Tab>
         </Tabs>
-        <Modal
+        <Confirm
           active={open}
           title="确认要发送吗？"
-          showClose={false}
           onClose={() => {
             setOpen(false);
           }}
@@ -82,8 +83,8 @@ export default () => {
             },
           ]}
         >
-          <p style={{ paddingLeft: '15px' }}>Content 1</p>
-        </Modal>
+          <div>Content 1</div>
+        </Confirm>
       </div>
     </Popup>
   );

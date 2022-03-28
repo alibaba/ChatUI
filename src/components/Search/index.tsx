@@ -58,7 +58,7 @@ export const Search = ({
         {...other}
       />
       {clearable && query && (
-        <IconButton className="Search-clear" icon="close" onClick={handleClear} />
+        <IconButton className="Search-clear" icon="x-circle-fill" onClick={handleClear} />
       )}
     </div>
   );

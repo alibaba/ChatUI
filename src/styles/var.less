@@ -101,7 +101,7 @@
 @btn-border-radius-sm: 15px;
 @btn-font-size-sm: @font-size-sm;
 
-@btn-padding-lg: 9px 24px;
+@btn-padding-lg: 7px 24px;
 @btn-border-radius-lg: 50px;
 @btn-font-size-lg: @font-size-md;
 
@@ -126,7 +126,7 @@
 @composer-input-padding: 8px 12px;
 @composer-input-border: 0;
 @composer-input-bg: var(--white);
-@composer-input-border-radius: 9px;
+@composer-input-border-radius: 12px;
 @composer-input-caret-color: var(--brand-2);
 @composer-input-transition: border-color 0.15s ease-in-out;
 
@@ -150,10 +150,10 @@
 @list-border-color: var(--gray-7);
 @list-border-radius: 2px;
 
-@list-item-padding: 12px;
+@list-item-padding: 10px var(--gutter);
 @list-item-color: var(--gray-1);
 @list-item-font-size: 15px;
-@list-item-line-height: 1.5;
+@list-item-line-height: 1.6;
 @list-item-icon-color: var(--gray-4);
 
 @list-item-hover-bg: @btn-hover-bg;
@@ -280,7 +280,7 @@
 
 // Modals
 @modal-width: 320px;
-@modal-border-radius: @border-radius-lg;
+@modal-border-radius: 12px;
 
 @modal-bg: var(--white);
 @modal-box-shadow: var(--shadow-3);
@@ -298,14 +298,12 @@
 @modal-footer-x-padding: @gutter;
 @modal-btn-x-spacing: @gutter;
 
-@modal-footer-y-padding-top: @gutter;
 @modal-btn-y-padding: 12px;
 @modal-btn-y-border-width: 1px;
 @modal-btn-y-border-color: var(--gray-6);
 @modal-btn-y-bg: var(--white);
 @modal-btn-y-color: var(--gray-2);
 @modal-btn-y-primary-color: var(--brand-1);
-@modal-btn-y-font-weight: @font-weight-bold;
 
 @modal-fade-transform: translate(0, -50px);
 @modal-show-transform: none;
@@ -315,7 +313,7 @@
 
 // Popup
 @popup-border-radius: 27px 27px 0 0;
-@popup-bg: var(--gray-7);
+@popup-bg: var(--white);
 
 @popup-max-height: 70vh;
 @popup-wide-width: 480px;
@@ -329,12 +327,7 @@
 @popup-close-color: @modal-close-color;
 
 @popup-footer-padding: 9px @gutter;
-@popup-footer-bg: @popup-bg;
 @popup-btn-x-spacing: 9px;
-
-// Confirm
-@confirm-color: var(--gray-dark);
-@confirm-body-padding: 0 16px;
 
 // SendConfirm
 @send-confirm-dialog-width: 480px;
@@ -352,7 +345,7 @@
 @progress-bar-bg-error: var(--red);
 
 // QuickReplies
-@quick-replies-padding: var(--gutter);
+@quick-replies-padding: 9px var(--gutter);
 @quick-replies-bg: var(--gray-7);
 
 @quick-reply-color: var(--gray-1);
@@ -424,7 +417,7 @@
 // MessageList
 @message-list-padding: var(--gutter);
 
-@message-spacer-y: 15px;
+@message-spacer-y: 12px;
 
 // Toast
 @toast-content-min-width: 160px;

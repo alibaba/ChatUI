@@ -17,6 +17,7 @@ export type ModalProps = {
   showClose?: boolean;
   autoFocus?: boolean;
   backdrop?: boolean | 'static';
+  height?: number | string;
   overflow?: boolean;
   actions?: ButtonProps[];
   vertical?: boolean;
@@ -39,6 +40,7 @@ export const Base: React.FC<ModalProps> = (props) => {
     showClose = true,
     autoFocus = true,
     backdrop = true,
+    height,
     overflow,
     actions,
     vertical = true,
@@ -94,6 +96,7 @@ export const Base: React.FC<ModalProps> = (props) => {
       )}
       <div
         className={clsx(`${baseClass}-dialog`, { 'pb-safe': isPopup && !actions })}
+        data-height={isPopup && height ? height : undefined}
         role="dialog"
         aria-labelledby={titleId}
         aria-modal
@@ -118,6 +121,7 @@ export const Base: React.FC<ModalProps> = (props) => {
             <div className={`${baseClass}-footer ${baseClass}-footer--${vertical ? 'v' : 'h'}`}>
               {actions.map((item) => (
                 <Button
+                  size="lg"
                   block={isPopup}
                   variant={!isPopup && vertical ? 'outline' : undefined}
                   {...item}
