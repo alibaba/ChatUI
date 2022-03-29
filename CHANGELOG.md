@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-alpha.6](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.5...v2.0.0-alpha.6) (2022-03-29)
+
+
+### Bug Fixes
+
+* ui5.1 ([30a51c9](https://github.com/alibaba/ChatUI/commit/30a51c93487ab3e6153fa1fa73b47de7736c0287))
+
 ## [2.0.0-alpha.5](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.4...v2.0.0-alpha.5) (2022-03-28)
 
 
