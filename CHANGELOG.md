@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-beta.0](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.7...v2.0.0-beta.0) (2022-03-30)
+
+
+### Bug Fixes
+
+* [Bubble] min-width ([bcad4bb](https://github.com/alibaba/ChatUI/commit/bcad4bb8c05af67383ad4ca590f7d64ba7f35404))
+* [Popup] abs ([5f32761](https://github.com/alibaba/ChatUI/commit/5f32761e942e506116e13485ab5c168858b4474c))
+
 ## [2.0.0-alpha.7](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.6...v2.0.0-alpha.7) (2022-03-30)
 
 
