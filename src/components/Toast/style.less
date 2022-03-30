@@ -1,15 +1,10 @@
-.Toast,
-.Toast-content {
-  display: flex;
-  align-items: center;
-}
-
 .Toast {
   position: fixed;
-  top: 50%;
+  top: 30%;
   left: 0;
   right: 0;
   z-index: @zindex-toast;
+  display: flex;
   justify-content: center;
   transition: all 300ms ease 0s;
   transform: translateY(-50%);
@@ -23,30 +18,29 @@
     color: var(--red);
   }
   &[data-type='loading'] .Icon {
-    color: var(--yellow);
+    color: var(--brand-1);
   }
   &.show {
     opacity: 1;
     visibility: visible;
   }
   .Icon {
-    margin-right: 8px;
-    font-size: @icon-size-lg;
+    margin-right: 6px;
+    font-size: 24px;
   }
 }
 
 .Toast-content {
-  min-width: @toast-content-min-width;
-  margin: @toast-content-margin;
+  display: flex;
+  max-width: 300px;
   padding: @toast-content-padding;
   border-radius: @toast-content-border-radius;
   background: @toast-content-bg;
-  box-shadow: @toast-content-box-shadow;
   box-sizing: border-box;
 }
 
 .Toast-message {
-  flex: 1 1 auto;
+  flex: 1;
   margin: @toast-message-margin;
   color: @toast-message-color;
   font-size: @toast-message-font-size;

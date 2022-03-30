@@ -35,7 +35,15 @@ export default () => (
             content="加载提示"
             as="button"
             onClick={() => {
-              toast.loading('加载中...');
+              toast.loading('加载中...', -1);
+            }}
+            rightIcon="chevron-right"
+          />
+          <ListItem
+            content="长文案"
+            as="button"
+            onClick={() => {
+              toast.success('很高兴能帮助到您文案，到您文案您文案到您文案到您文案');
             }}
             rightIcon="chevron-right"
           />
