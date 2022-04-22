@@ -66,6 +66,8 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
     const [disabled, setDisabled] = useState(!props.onRefresh);
     const sharedRef = useRef<any>({});
     const statusRef = useRef<PullToRefreshStatus>(status);
+    const timer1 = useRef<ReturnType<typeof setTimeout>>();
+    const timer2 = useRef<ReturnType<typeof setTimeout>>();
 
     const useFallback = !canUse('touch');
 
@@ -123,15 +125,16 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
         onRefresh!().then((res) => {
           const handleOffset = () => {
             scrollTo({
-              y: scroller!.scrollHeight - sh - 50,
+              y: scroller.scrollHeight - sh - 50,
               animated: false,
             });
           };
 
-          // 考虑做成可配置
+          clearTimeout(timer1.current);
+          clearTimeout(timer2.current);
           handleOffset();
-          setTimeout(handleOffset, 150);
-          setTimeout(handleOffset, 300);
+          timer1.current = setTimeout(handleOffset, 150);
+          timer2.current = setTimeout(handleOffset, 250);
 
           reset();
 
