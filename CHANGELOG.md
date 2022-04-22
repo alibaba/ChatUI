@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/alibaba/ChatUI/compare/v1.4.0...v1.4.1) (2022-04-22)
+
+
+### Bug Fixes
+
+* [InfiniteScroll] fix handleOffset ([3ec9b83](https://github.com/alibaba/ChatUI/commit/3ec9b831130803f7f5916d5aa1cad9032096066a))
+
 ## [1.4.0](https://github.com/alibaba/ChatUI/compare/v1.3.0...v1.4.0) (2022-04-19)
 
 
