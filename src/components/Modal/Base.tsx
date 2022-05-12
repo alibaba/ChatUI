@@ -21,6 +21,7 @@ export type ModalProps = {
   overflow?: boolean;
   actions?: ButtonProps[];
   vertical?: boolean;
+  bgColor?: string;
   onClose?: () => void;
   onBackdropClick?: () => void;
 };
@@ -44,6 +45,7 @@ export const Base: React.FC<ModalProps> = (props) => {
     overflow,
     actions,
     vertical = true,
+    bgColor,
     children,
     onBackdropClick,
     onClose,
@@ -96,6 +98,7 @@ export const Base: React.FC<ModalProps> = (props) => {
       )}
       <div
         className={clsx(`${baseClass}-dialog`, { 'pb-safe': isPopup && !actions })}
+        data-bg-color={bgColor}
         data-height={isPopup && height ? height : undefined}
         role="dialog"
         aria-labelledby={titleId}

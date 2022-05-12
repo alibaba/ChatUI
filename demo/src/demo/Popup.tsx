@@ -8,6 +8,7 @@ export default () => {
   const [open3, setOpen3] = useState(false);
   const [open4, setOpen4] = useState(false);
   const [open5, setOpen5] = useState(false);
+  const [open6, setOpen6] = useState(false);
 
   return (
     <DemoPage>
@@ -51,6 +52,14 @@ export default () => {
               as="button"
               onClick={() => {
                 setOpen5(true);
+              }}
+              rightIcon="chevron-right"
+            />
+            <ListItem
+              content="灰色背景"
+              as="button"
+              onClick={() => {
+                setOpen6(true);
               }}
               rightIcon="chevron-right"
             />
@@ -112,6 +121,18 @@ export default () => {
         }}
         height={80}
         actions={[{ label: '主要按钮', color: 'primary' }, { label: '次要按钮' }]}
+      >
+        <div style={{ padding: '15px' }}>
+          <p>内容详情内容详情内容详情内容详情内容详情内容详情</p>
+        </div>
+      </Popup>
+      <Popup
+        active={open6}
+        title="标题"
+        onClose={() => {
+          setOpen6(false);
+        }}
+        bgColor="gray"
       >
         <div style={{ padding: '15px' }}>
           <p>内容详情内容详情内容详情内容详情内容详情内容详情</p>
