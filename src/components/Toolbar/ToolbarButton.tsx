@@ -7,7 +7,7 @@ export interface ToolbarItemProps {
   title: string;
   icon?: string;
   img?: string;
-  render?: any; // FIXME
+  render?: () => React.ReactNode;
 }
 
 export interface ToolbarButtonProps {
@@ -17,17 +17,18 @@ export interface ToolbarButtonProps {
 
 export const ToolbarButton: React.FC<ToolbarButtonProps> = (props) => {
   const { item, onClick } = props;
-  const { type, icon, img, title } = item;
+  const { type, icon, img, title, render } = item;
 
   return (
-    <div className="Toolbar-item" data-type={type}>
-      <Button className="Toolbar-btn" onClick={(e) => onClick(item, e)}>
-        <span className="Toolbar-btnIcon">
+    <div className='Toolbar-item' data-type={type}>
+      {render ? render() :
+        <Button className='Toolbar-btn' onClick={(e) => onClick(item, e)}>
+        <span className='Toolbar-btnIcon'>
           {icon && <Icon type={icon} />}
-          {img && <img className="Toolbar-img" src={img} alt="" />}
+          {img && <img className='Toolbar-img' src={img} alt='' />}
         </span>
-        <span className="Toolbar-btnText">{title}</span>
-      </Button>
+          <span className='Toolbar-btnText'>{title}</span>
+        </Button>}
     </div>
   );
 };
