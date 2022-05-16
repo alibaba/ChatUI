@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-beta.1](https://github.com/alibaba/ChatUI/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2022-05-16)
+
+
+### Features
+
+* [Button] support `--btn-primary-*` css vars ([e120f38](https://github.com/alibaba/ChatUI/commit/e120f3872bd14bfb6cbfbc6635fc8b0e11bee3b1))
+* [Popup] support `bgColor` ([b3ca197](https://github.com/alibaba/ChatUI/commit/b3ca197a485a7b0c76b601364e2add0df2fd57d0))
+
+
+### Bug Fixes
+
+* [Button] fix hover & border-color ([6ed10e3](https://github.com/alibaba/ChatUI/commit/6ed10e3e6e9f894e38e687178f6291d83d4f3229))
+* [Button] fix padding ([7a1a594](https://github.com/alibaba/ChatUI/commit/7a1a5941a29749e2d48b11d9b531a85fbc842c8e))
+* [Card]  use `flex: 1` to button ([1fcd90f](https://github.com/alibaba/ChatUI/commit/1fcd90fd38f91f689f6342d495b47bd0b76ac417))
+* [Navbar] apply `min-height` to .Navbar-main ([de28610](https://github.com/alibaba/ChatUI/commit/de28610cda52bf236de36089f5f114a51b3f118c))
+* [Tabs] fix textWidth ([515917f](https://github.com/alibaba/ChatUI/commit/515917f881304fa0aa0265080ef83c9f006612dd))
+
 ## [2.0.0-beta.0](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.7...v2.0.0-beta.0) (2022-03-30)
 
 
