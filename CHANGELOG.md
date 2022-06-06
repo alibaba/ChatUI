@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-beta.2](https://github.com/alibaba/ChatUI/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2022-06-06)
+
+
+### Bug Fixes
+
+* [Button] fix `.Btn--text`'s `font-size` ([8514431](https://github.com/alibaba/ChatUI/commit/8514431f6d291c12357c9db3abf539d46503bd0e))
+* [Card] fix size ([3328857](https://github.com/alibaba/ChatUI/commit/3328857b03dd593b832594677f50639e42f398ef))
+* [Tabs] fix pointer ([b3fe423](https://github.com/alibaba/ChatUI/commit/b3fe423e55088ffa396b87671de1f91fa278e038))
+
 ## [2.0.0-beta.1](https://github.com/alibaba/ChatUI/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2022-05-16)
 
 
