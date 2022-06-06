@@ -1,11 +1,53 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
-import { Card, CardMedia, CardTitle, CardText, CardActions, Button } from '../../../src';
+import {
+  Card,
+  CardMedia,
+  CardTitle,
+  CardContent,
+  CardText,
+  CardActions,
+  Button,
+} from '../../../src';
 
 export default () => (
   <DemoPage>
     <DemoSection title="基础用法">
       <Card size="xl">
+        <CardMedia image="//gw.alicdn.com/tfs/TB1Xv5_vlr0gK0jSZFnXXbRRXXa-427-240.png" />
+        <CardTitle subtitle="subtitle">Card title</CardTitle>
+        <CardText>Card content</CardText>
+        <CardContent>Card content</CardContent>
+        <CardActions>
+          <Button>Default button</Button>
+          <Button color="primary">Primary button</Button>
+        </CardActions>
+      </Card>
+      <Card fluid>
+        <CardMedia
+          aspectRatio="wide"
+          image="//gw.alicdn.com/tfs/TB1pLWVTAT2gK0jSZFkXXcIQFXa-620-320.jpg"
+        />
+        <CardTitle>我的标题我的标题我的标题我的标题</CardTitle>
+        <CardText>
+          气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情
+        </CardText>
+        <CardActions>
+          <Button>前去留言</Button>
+          <Button color="primary">提交评价</Button>
+        </CardActions>
+      </Card>
+      <Card fluid>
+        <CardTitle>我的标题我的标题我的标题我的标题</CardTitle>
+        <CardText>
+          气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情
+        </CardText>
+        <CardActions>
+          <Button>前去留言</Button>
+          <Button color="primary">提交评价</Button>
+        </CardActions>
+      </Card>
+      <Card fluid>
         <CardText>
           气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情气泡内容详情
         </CardText>
