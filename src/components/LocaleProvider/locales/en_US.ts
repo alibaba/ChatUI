@@ -26,8 +26,7 @@ export default {
     releaseOrSwipe: 'Release to send, swipe up to cancel',
     release2cancel: 'Release to cancel',
   },
-  ScrollView: {
-    prev: 'Previous',
-    next: 'Next',
+  Search: {
+    search: 'Search',
   },
 };

@@ -28,7 +28,7 @@ const useLocale = (comp?: string, fallback?: any) => {
     (locale && (defaultLocales as ILocales)[locale]) || defaultLocales[DEFAULT_LOCALE];
   let strings = locales ? { ...defaultStrings, ...locales } : defaultStrings;
 
-  if (!localeContext) {
+  if (!localeContext && fallback) {
     strings = fallback;
   } else if (comp) {
     strings = strings[comp] || {};

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
+import { Button } from '../Button';
 import { Input, InputProps } from '../Input';
+import { useLocale } from '../LocaleProvider';
 
 export interface SearchProps extends Omit<InputProps, 'value'> {
   className?: string;
@@ -10,40 +12,58 @@ export interface SearchProps extends Omit<InputProps, 'value'> {
   placeholder?: string;
   disabled?: boolean;
   clearable?: boolean;
-  onSearch?: (query: string) => void;
-  onCancel?: () => void;
+  showSearch?: boolean;
+  onSearch: (
+    query: string,
+    event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => void;
+  onChange?: (value: string) => void;
+  onClear?: () => void;
 }
 
 export const Search = ({
   className,
   onSearch,
-  onCancel,
+  onChange,
+  onClear,
   value,
   clearable = true,
+  showSearch = true,
   ...other
 }: SearchProps) => {
   const [query, setQuery] = useState(value || '');
+  const { trans } = useLocale('Search');
 
-  function handleChange(val: string) {
+  const handleChange = (val: string) => {
     setQuery(val);
-  }
 
-  function handleClear() {
+    if (onChange) {
+      onChange(val);
+    }
+  };
+
+  const handleClear = () => {
     setQuery('');
 
-    if (onCancel) {
-      onCancel();
+    if (onClear) {
+      onClear();
     }
-  }
+  };
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.keyCode === 13) {
       if (onSearch) {
-        onSearch(query);
+        onSearch(query, e);
       }
       e.preventDefault();
     }
-  }
+  };
+
+  const handleSearchClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (onSearch) {
+      onSearch(query, e);
+    }
+  };
 
   return (
     <div className={clsx('Search', className)}>
@@ -59,6 +79,11 @@ export const Search = ({
       />
       {clearable && query && (
         <IconButton className="Search-clear" icon="x-circle-fill" onClick={handleClear} />
+      )}
+      {showSearch && (
+        <Button className="Search-btn" color="primary" onClick={handleSearchClick}>
+          {trans('search')}
+        </Button>
       )}
     </div>
   );
