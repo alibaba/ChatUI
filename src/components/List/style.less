@@ -39,13 +39,19 @@ button.ListItem {
 
 a.ListItem,
 button.ListItem {
-  &:hover {
-    background: @list-item-hover-bg;
-    background-clip: padding-box;
-    cursor: pointer;
-  }
   &:active {
     background: @list-item-active-bg;
+  }
+}
+
+@media (hover: hover) {
+  a.ListItem,
+  button.ListItem {
+    &:hover {
+      background: @list-item-hover-bg;
+      background-clip: padding-box;
+      cursor: pointer;
+    }
   }
 }
 

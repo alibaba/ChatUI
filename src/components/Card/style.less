@@ -133,9 +133,6 @@
     &:last-child {
       border-radius: 0 0 @card-border-radius @card-border-radius;
     }
-    &:hover {
-      background: @card-column-btn-hover-bg;
-    }
     &:active {
       background: @card-column-btn-active-bg;
     }
@@ -148,5 +145,15 @@
   }
   .Btn--primary {
     color: @card-column-btn-primary-color;
+  }
+}
+
+@media (hover: hover) {
+  .CardActions--column {
+    .Btn {
+      &:hover {
+        background: @card-column-btn-hover-bg;
+      }
+    }
   }
 }
