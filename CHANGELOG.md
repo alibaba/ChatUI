@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/alibaba/ChatUI/compare/v2.0.0-beta.2...v2.0.0) (2022-06-20)
+
+
+### Features
+
+* [Search] support `showSearch` ([4c9509b](https://github.com/alibaba/ChatUI/commit/4c9509ba8e78b2210ff27b596cd2f66cead22cd7))
+
+
+### Bug Fixes
+
+* [Composer] fix send button's padding ([8ffbe2e](https://github.com/alibaba/ChatUI/commit/8ffbe2edc4804efa271736f42f58b30232addf9a))
+* [Divider] fix color ([ed846e8](https://github.com/alibaba/ChatUI/commit/ed846e8e56f490b5cebcd73670cc99416db4049d))
+* [Video] fix display ([8e3ffb8](https://github.com/alibaba/ChatUI/commit/8e3ffb891c9241a2793c9e8b893664522829b04a))
+* fix hover ([031ada1](https://github.com/alibaba/ChatUI/commit/031ada10c12fcb8ac59d09418a0ab16c973b1089))
+
 ## [2.0.0-beta.2](https://github.com/alibaba/ChatUI/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2022-06-06)
 
 
