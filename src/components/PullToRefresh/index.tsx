@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useImperativeHandle } from 'react';
 import clsx from 'clsx';
 import { setTransform } from '../../utils/style';
 import { Icon } from '../Icon';
@@ -12,217 +12,238 @@ const listenerOptsWithoutPassive = canPassive ? { passive: false } : false;
 
 type PullToRefreshStatus = 'pending' | 'pull' | 'active' | 'loading';
 
-export type PullToRefreshProps = typeof PullToRefresh.defaultProps & {
+export interface PullToRefreshProps {
+  distance?: number;
+  loadingDistance?: number;
+  distanceRatio?: number;
+  loadMoreText?: string;
   maxDistance?: number;
   onRefresh?: () => Promise<any>;
   onScroll?: (event: React.UIEvent<HTMLDivElement, UIEvent>) => void;
   renderIndicator?: (status: PullToRefreshStatus, distance: number) => React.ReactNode;
-};
+  children: React.ReactNode;
+}
 
-type PullToRefreshState = {
-  distance: number;
-  status: PullToRefreshStatus;
-  dropped: boolean;
-  disabled: boolean;
-};
+export interface ScrollToEndOptions {
+  animated?: boolean;
+}
 
-export class PullToRefresh extends React.Component<PullToRefreshProps, PullToRefreshState> {
-  wrapperRef = createRef<HTMLDivElement>();
+interface PTRScrollToOptions extends ScrollToEndOptions {
+  y: number;
+}
 
-  contentRef = createRef<HTMLDivElement>();
+export interface PullToRefreshHandle {
+  scrollTo: (opts: PTRScrollToOptions) => void;
+  scrollToEnd: (opts?: ScrollToEndOptions) => void;
+  wrapperRef: React.RefObject<HTMLDivElement>;
+}
 
-  startY = 0;
-
-  useFallback: boolean;
-
-  canPull: boolean = false;
-
-  // eslint-disable-next-line react/static-property-placement
-  static defaultProps = {
-    distance: 30,
-    loadingDistance: 30,
-    distanceRatio: 2,
-    loadMoreText: '点击加载更多',
-    renderIndicator(status: PullToRefreshStatus) {
-      if (status === 'active' || status === 'loading') {
-        return <Icon className="PullToRefresh-spinner" type="spinner" spin />;
-      }
-      return null;
-    },
-  };
-
-  constructor(props: PullToRefreshProps) {
-    super(props);
-    this.state = {
-      distance: 0,
-      status: 'pending', // pending | pull | active | loading
-      dropped: false,
-      disabled: !props.onRefresh,
-    };
-    this.useFallback = !canUse('touch');
-  }
-
-  componentDidMount() {
-    const { disabled } = this.state;
-    if (disabled || this.useFallback) return;
-
-    const wrapper = this.wrapperRef.current;
-    if (wrapper) {
-      wrapper.addEventListener('touchstart', this.touchStart, listenerOpts);
-      wrapper.addEventListener('touchmove', this.touchMove, listenerOptsWithoutPassive);
-      wrapper.addEventListener('touchend', this.touchEnd);
-      wrapper.addEventListener('touchcancel', this.touchEnd);
-    }
-  }
-
-  setContentStyle(y: number) {
-    const content = this.contentRef.current;
-    if (content) {
-      setTransform(content, `translate3d(0px,${y}px,0)`);
-    }
-  }
-
-  touchStart = (e: TouchEvent) => {
-    this.startY = e.touches[0].clientY;
-    this.canPull = this.wrapperRef.current!.scrollTop === 0;
-
-    if (this.canPull) {
-      this.setState({
-        status: 'pull',
-        dropped: false,
-      });
-    }
-  };
-
-  touchMove = (e: TouchEvent) => {
-    const { distance, maxDistance, distanceRatio } = this.props;
-    const { status } = this.state;
-    const currentY = e.touches[0].clientY;
-
-    if (!this.canPull || currentY < this.startY || status === 'loading') return;
-
-    let dist = (currentY - this.startY) / distanceRatio;
-
-    if (maxDistance && dist > maxDistance) {
-      dist = maxDistance;
-    }
-
-    if (dist > 0) {
-      if (e.cancelable) {
-        e.preventDefault();
-      }
-      e.stopPropagation();
-
-      this.setContentStyle(dist);
-
-      this.setState({
-        distance: dist,
-        status: dist >= distance ? 'active' : 'pull',
-      });
-    }
-  };
-
-  touchEnd = () => {
-    const { status } = this.state;
-
-    this.setState({ dropped: true });
-
-    if (status === 'active') {
-      this.handleLoadMore();
-    } else {
-      this.reset();
-    }
-  };
-
-  scrollTo = ({ y, animated = true }: { y: number; animated: boolean }) => {
-    const scroller = this.wrapperRef.current;
-
-    if (canUse('smoothScroll') && animated) {
-      scroller!.scrollTo({
-        top: y,
-        behavior: 'smooth',
-      });
-    } else {
-      scroller!.scrollTop = y;
-    }
-  };
-
-  scrollToEnd = ({ animated = true } = {}) => {
-    const scroller = this.wrapperRef.current;
-    const y = scroller!.scrollHeight - scroller!.offsetHeight;
-
-    this.scrollTo({ y, animated });
-  };
-
-  handleLoadMore = () => {
-    const { loadingDistance, onRefresh } = this.props;
-    const scroller = this.wrapperRef.current;
-
-    this.setState({ status: 'loading' }, () => {
-      if (!this.useFallback) {
-        this.setContentStyle(loadingDistance);
-      }
-    });
-
-    try {
-      const sh = scroller!.scrollHeight;
-
-      onRefresh!().then((res) => {
-        const handleOffset = () => {
-          this.scrollTo({
-            y: scroller!.scrollHeight - sh - 50,
-            animated: false,
-          });
-        };
-
-        // 考虑做成可配置
-        handleOffset();
-        setTimeout(handleOffset, 150);
-        setTimeout(handleOffset, 300);
-
-        this.reset();
-
-        if (res && res.noMore) {
-          this.setState({ disabled: true });
+export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefreshProps>(
+  (props, ref) => {
+    const {
+      distance: oDistance = 30,
+      loadingDistance = 30,
+      maxDistance,
+      distanceRatio = 2,
+      loadMoreText = '点击加载更多',
+      children,
+      onScroll,
+      onRefresh,
+      renderIndicator = (status: PullToRefreshStatus) => {
+        if (status === 'active' || status === 'loading') {
+          return <Icon className="PullToRefresh-spinner" type="spinner" spin />;
         }
-      });
-    } catch (ex) {
-      // eslint-disable-next-line no-console
-      console.error(ex);
-      this.reset();
-    }
-  };
+        return null;
+      },
+    } = props;
 
-  reset() {
-    this.setState({
-      distance: 0,
-      status: 'pending',
-    });
-    this.setContentStyle(0);
-  }
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
 
-  render() {
-    const { renderIndicator, loadMoreText, children, onScroll } = this.props;
-    const { status, distance, dropped, disabled } = this.state;
+    const [distance, setDistance] = useState(0);
+    const [status, setStatus] = useState<PullToRefreshStatus>('pending');
+    const [dropped, setDropped] = useState(false);
+    const [disabled, setDisabled] = useState(!props.onRefresh);
+    const sharedRef = useRef<any>({});
+    const statusRef = useRef<PullToRefreshStatus>(status);
+    const timer1 = useRef<ReturnType<typeof setTimeout>>();
+    const timer2 = useRef<ReturnType<typeof setTimeout>>();
+
+    const useFallback = !canUse('touch');
+
+    useEffect(() => {
+      statusRef.current = status;
+    }, [status]);
+
+    const setContentStyle = (y: number) => {
+      const content = contentRef.current;
+      if (content) {
+        setTransform(content, `translate3d(0px,${y}px,0)`);
+      }
+    };
+
+    const scrollTo = ({ y, animated = true }: PTRScrollToOptions) => {
+      const scroller = wrapperRef.current;
+
+      if (!scroller) return;
+
+      if (canUse('smoothScroll') && animated) {
+        scroller.scrollTo({
+          top: y,
+          behavior: 'smooth',
+        });
+      } else {
+        scroller.scrollTop = y;
+      }
+    };
+
+    const scrollToEnd = useCallback(({ animated = true }: ScrollToEndOptions = {}) => {
+      const scroller = wrapperRef.current;
+      if (!scroller) return;
+
+      const y = scroller.scrollHeight - scroller.offsetHeight;
+
+      scrollTo({ y, animated });
+    }, []);
+
+    const reset = useCallback(() => {
+      setDistance(0);
+      setStatus('pending');
+      setContentStyle(0);
+    }, []);
+
+    const handleLoadMore = useCallback(() => {
+      const scroller = wrapperRef.current;
+
+      if (!scroller) return;
+
+      setStatus('loading');
+
+      try {
+        const sh = scroller.scrollHeight;
+
+        onRefresh!().then((res) => {
+          const handleOffset = () => {
+            scrollTo({
+              y: scroller.scrollHeight - sh - 50,
+              animated: false,
+            });
+          };
+
+          clearTimeout(timer1.current);
+          clearTimeout(timer2.current);
+          handleOffset();
+          timer1.current = setTimeout(handleOffset, 150);
+          timer2.current = setTimeout(handleOffset, 250);
+
+          reset();
+
+          if (res && res.noMore) {
+            setDisabled(true);
+          }
+        });
+      } catch (ex) {
+        // eslint-disable-next-line no-console
+        console.error(ex);
+        reset();
+      }
+    }, [onRefresh, reset]);
+
+    const touchStart = (e: TouchEvent) => {
+      sharedRef.current.startY = e.touches[0].clientY;
+      sharedRef.current.canPull = wrapperRef.current && wrapperRef.current.scrollTop <= 0;
+
+      if (sharedRef.current.canPull) {
+        setStatus('pull');
+        setDropped(false);
+      }
+    };
+
+    const touchMove = useCallback(
+      (e: TouchEvent) => {
+        const currentY = e.touches[0].clientY;
+
+        const { canPull, startY } = sharedRef.current;
+
+        if (!canPull || currentY < startY || statusRef.current === 'loading') return;
+
+        let dist = (currentY - startY) / distanceRatio;
+        if (maxDistance && dist > maxDistance) {
+          dist = maxDistance;
+        }
+
+        if (dist > 0) {
+          if (e.cancelable) {
+            e.preventDefault();
+          }
+          e.stopPropagation();
+
+          setContentStyle(dist);
+          setDistance(dist);
+          setStatus(dist >= oDistance ? 'active' : 'pull');
+        }
+      },
+      [distanceRatio, maxDistance, oDistance],
+    );
+
+    const touchEnd = useCallback(() => {
+      setDropped(true);
+
+      if (statusRef.current === 'active') {
+        handleLoadMore();
+      } else {
+        reset();
+      }
+    }, [handleLoadMore, reset]);
+
+    useEffect(() => {
+      const wrapper = wrapperRef.current;
+
+      if (!wrapper || useFallback) return;
+
+      if (disabled) {
+        wrapper.removeEventListener('touchstart', touchStart);
+        wrapper.removeEventListener('touchmove', touchMove);
+        wrapper.removeEventListener('touchend', touchEnd);
+        wrapper.removeEventListener('touchcancel', touchEnd);
+      } else {
+        wrapper.addEventListener('touchstart', touchStart, listenerOpts);
+        wrapper.addEventListener('touchmove', touchMove, listenerOptsWithoutPassive);
+        wrapper.addEventListener('touchend', touchEnd);
+        wrapper.addEventListener('touchcancel', touchEnd);
+      }
+    }, [disabled, touchEnd, touchMove, useFallback]);
+
+    useEffect(() => {
+      if (status === 'loading' && !useFallback) {
+        setContentStyle(loadingDistance);
+      }
+    }, [loadingDistance, status, useFallback]);
+
+    useImperativeHandle(
+      ref,
+      () => ({
+        scrollTo,
+        scrollToEnd,
+        wrapperRef,
+      }),
+      [scrollToEnd],
+    );
 
     return (
-      <div className="PullToRefresh" ref={this.wrapperRef} onScroll={onScroll}>
+      <div className="PullToRefresh" ref={wrapperRef} onScroll={onScroll}>
         <div className="PullToRefresh-inner">
           <div
             className={clsx('PullToRefresh-content', {
               'PullToRefresh-transition': dropped,
             })}
-            ref={this.contentRef}
+            ref={contentRef}
           >
             <div className="PullToRefresh-indicator">{renderIndicator(status, distance)}</div>
-            {!disabled && this.useFallback && (
+            {!disabled && useFallback && (
               <Flex className="PullToRefresh-fallback" center>
-                {renderIndicator(status, distance)}
-                <Button
-                  className="PullToRefresh-loadMore"
-                  variant="text"
-                  onClick={this.handleLoadMore}
-                >
+                {renderIndicator(status, oDistance)}
+                <Button className="PullToRefresh-loadMore" variant="text" onClick={handleLoadMore}>
                   {loadMoreText}
                 </Button>
               </Flex>
@@ -232,5 +253,5 @@ export class PullToRefresh extends React.Component<PullToRefreshProps, PullToRef
         </div>
       </div>
     );
-  }
-}
+  },
+);

@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useRef, useImperativeHandle } from 'react';
-import { PullToRefresh } from '../PullToRefresh';
+import { PullToRefresh, PullToRefreshHandle, ScrollToEndOptions } from '../PullToRefresh';
 import { Message, MessageProps } from '../Message';
 import canUse from '../../utils/canUse';
 
@@ -17,7 +17,7 @@ export interface MessageContainerProps {
 
 export interface MessageContainerHandle {
   ref: React.RefObject<HTMLDivElement>;
-  scrollToEnd: (options?: { animated?: boolean }) => void;
+  scrollToEnd: (options?: ScrollToEndOptions) => void;
 }
 
 export const MessageContainer = React.forwardRef<MessageContainerHandle, MessageContainerProps>(
@@ -32,13 +32,16 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
     } = props;
 
     const messagesRef = useRef<HTMLDivElement>(null);
-    const scroller = useRef<PullToRefresh>(null!);
+    const scrollerRef = useRef<PullToRefreshHandle>(null);
     const lastMessage = messages[messages.length - 1];
 
     useEffect(() => {
-      const wrapper = scroller.current.wrapperRef.current!;
+      const scroller = scrollerRef.current;
+      if (!scroller) return;
+
+      const wrapper = scroller.wrapperRef.current!;
       const animated = !!wrapper.scrollTop;
-      scroller.current.scrollToEnd({ animated });
+      scroller.scrollToEnd({ animated });
     }, [lastMessage]);
 
     useEffect(() => {
@@ -85,7 +88,7 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       ref,
       () => ({
         ref: messagesRef,
-        scrollToEnd: scroller.current.scrollToEnd,
+        scrollToEnd: scrollerRef.current!.scrollToEnd,
       }),
       [],
     );
@@ -97,7 +100,7 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
           onRefresh={onRefresh}
           onScroll={onScroll}
           loadMoreText={loadMoreText}
-          ref={scroller}
+          ref={scrollerRef}
         >
           <div className="MessageList">
             {messages.map((msg) => (
