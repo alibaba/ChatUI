@@ -23,9 +23,20 @@
 
   &:hover {
     background: transparent;
-
+  }
+  &:active {
     .Toolbar-btnIcon {
       background: @btn-hover-bg;
+    }
+  }
+}
+
+@media (hover: hover) {
+  .Toolbar-btn {
+    &:hover {
+      .Toolbar-btnIcon {
+        background: @btn-hover-bg;
+      }
     }
   }
 }
