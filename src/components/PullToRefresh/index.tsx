@@ -29,7 +29,7 @@ export interface ScrollToEndOptions {
 }
 
 interface PTRScrollToOptions extends ScrollToEndOptions {
-  y: number;
+  y: number | '100%';
 }
 
 export interface PullToRefreshHandle {
@@ -87,23 +87,20 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
 
       if (!scroller) return;
 
+      const offsetTop = y === '100%' ? scroller.scrollHeight : y;
+
       if (canUse('smoothScroll') && animated) {
         scroller.scrollTo({
-          top: y,
+          top: offsetTop,
           behavior: 'smooth',
         });
       } else {
-        scroller.scrollTop = y;
+        scroller.scrollTop = offsetTop;
       }
     };
 
     const scrollToEnd = useCallback(({ animated = true }: ScrollToEndOptions = {}) => {
-      const scroller = wrapperRef.current;
-      if (!scroller) return;
-
-      const y = scroller.scrollHeight - scroller.offsetHeight;
-
-      scrollTo({ y, animated });
+      scrollTo({ y: '100%', animated });
     }, []);
 
     const reset = useCallback(() => {

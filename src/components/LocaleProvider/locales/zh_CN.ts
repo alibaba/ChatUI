@@ -1,4 +1,9 @@
 export default {
+  BackBottom: {
+    newMsgOne: '{n}条新消息',
+    newMsgOther: '{n}条新消息',
+    bottom: '回到底部',
+  },
   Time: {
     weekdays: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
     formats: {

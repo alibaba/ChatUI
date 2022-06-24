@@ -1,4 +1,9 @@
 export default {
+  BackBottom: {
+    newMsgOne: '{n} new message',
+    newMsgOther: '{n} new messages',
+    bottom: 'Bottom',
+  },
   Time: {
     weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
     formats: {

@@ -1,8 +1,10 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useImperativeHandle } from 'react';
 import { PullToRefresh, PullToRefreshHandle, ScrollToEndOptions } from '../PullToRefresh';
 import { Message, MessageProps } from '../Message';
+import { BackBottom } from '../BackBottom';
 import canUse from '../../utils/canUse';
+import getToBottom from '../../utils/getToBottom';
 
 const listenerOpts = canUse('passiveListener') ? { passive: true } : false;
 
@@ -20,6 +22,10 @@ export interface MessageContainerHandle {
   scrollToEnd: (options?: ScrollToEndOptions) => void;
 }
 
+function getMaxOffsetHeight(wrapper: HTMLElement) {
+  return wrapper.offsetHeight * 1.5;
+}
+
 export const MessageContainer = React.forwardRef<MessageContainerHandle, MessageContainerProps>(
   (props, ref) => {
     const {
@@ -31,22 +37,79 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       renderMessageContent,
     } = props;
 
+    const [showBackBottom, setShowBackBottom] = useState(false);
+    const [newCount, setNewCount] = useState(0);
     const messagesRef = useRef<HTMLDivElement>(null);
     const scrollerRef = useRef<PullToRefreshHandle>(null);
+    const bottomRef = useRef<HTMLDivElement>(null);
+    const isTouching = useRef(false);
     const lastMessage = messages[messages.length - 1];
+
+    const scrollToEnd = useCallback((opts?: ScrollToEndOptions) => {
+      if (scrollerRef.current) {
+        scrollerRef.current.scrollToEnd(opts);
+      }
+    }, []);
+
+    const handleScrollToEnd = () => {
+      scrollToEnd({ animated: false });
+      setShowBackBottom(false);
+      setNewCount(0);
+    };
 
     useEffect(() => {
       const scroller = scrollerRef.current;
-      if (!scroller) return;
+      const wrapper = scroller && scroller.wrapperRef.current;
 
-      const wrapper = scroller.wrapperRef.current!;
-      const animated = !!wrapper.scrollTop;
-      scroller.scrollToEnd({ animated });
-    }, [lastMessage]);
+      if (!wrapper) {
+        return;
+      }
+
+      if (lastMessage.position === 'right') {
+        scrollToEnd();
+      } else if (getToBottom(wrapper) < getMaxOffsetHeight(wrapper)) {
+        const animated = !!wrapper.scrollTop;
+        scrollToEnd({ animated });
+      } else {
+        setShowBackBottom(true);
+        setNewCount((c) => c + 1);
+      }
+    }, [lastMessage, scrollToEnd]);
 
     useEffect(() => {
-      const wrapper = messagesRef.current;
-      if (!wrapper) return undefined;
+      const scroller = scrollerRef.current;
+      const wrapper = scroller && scroller.wrapperRef.current;
+
+      if (!wrapper) {
+        return;
+      }
+
+      const options = {
+        root: wrapper,
+        rootMargin: `0px 0px ${getMaxOffsetHeight(wrapper)}px 0px`,
+        threshold: 1.0,
+      };
+
+      const observer = new IntersectionObserver(([entry]) => {
+        if (!isTouching.current) {
+          if (entry.isIntersecting) {
+            setShowBackBottom(false);
+            setNewCount(0);
+          } else {
+            setShowBackBottom(true);
+          }
+        }
+      }, options);
+
+      observer.observe(bottomRef.current!);
+
+      return () => {
+        observer.disconnect();
+      };
+    }, []);
+
+    useEffect(() => {
+      const wrapper = messagesRef.current!;
 
       let needBlur = false;
       let startY = 0;
@@ -54,6 +117,7 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       function reset() {
         needBlur = false;
         startY = 0;
+        isTouching.current = false;
       }
 
       function touchStart(e: TouchEvent) {
@@ -62,6 +126,7 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
           needBlur = true;
           startY = e.touches[0].clientY;
         }
+        isTouching.current = true;
       }
 
       function touchMove(e: TouchEvent) {
@@ -84,14 +149,7 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       };
     }, []);
 
-    useImperativeHandle(
-      ref,
-      () => ({
-        ref: messagesRef,
-        scrollToEnd: scrollerRef.current!.scrollToEnd,
-      }),
-      [],
-    );
+    useImperativeHandle(ref, () => ({ ref: messagesRef, scrollToEnd }), [scrollToEnd]);
 
     return (
       <div className="MessageContainer" ref={messagesRef} tabIndex={-1}>
@@ -106,8 +164,10 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
             {messages.map((msg) => (
               <Message {...msg} renderMessageContent={renderMessageContent} key={msg._id} />
             ))}
+            <div ref={bottomRef} />
           </div>
         </PullToRefresh>
+        {showBackBottom && <BackBottom count={newCount} onClick={handleScrollToEnd} />}
       </div>
     );
   },

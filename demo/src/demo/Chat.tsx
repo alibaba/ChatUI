@@ -127,11 +127,6 @@ const toolbar = [
     title: '拍照',
   },
   {
-    type: 'orderSelector',
-    icon: 'shopping-bag',
-    title: 'OrdderSelector',
-  },
-  {
     type: 'photo',
     title: 'Photo',
     img: 'https://gw.alicdn.com/tfs/TB1eDjNj.T1gK0jSZFrXXcNCXXa-80-80.png',
@@ -143,6 +138,8 @@ export default () => {
   const { messages, appendMsg, setTyping, prependMsgs } = useMessages(initialMessages);
   const { quickReplies, replace } = useQuickReplies(defaultQuickReplies);
   const msgRef = React.useRef(null);
+
+  window.appendMsg = appendMsg;
 
   // 发送回调
   function handleSend(type: string, val: string) {
