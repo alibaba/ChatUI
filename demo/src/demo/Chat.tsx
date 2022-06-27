@@ -188,51 +188,57 @@ export default () => {
   }
 
   function handleRefresh() {
-    prependMsgs([
-      {
-        _id: '1111',
-        type: 'text',
-        content: { text: '11111Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-      {
-        _id: '2222',
-        type: 'text',
-        content: { text: '22222 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-      {
-        _id: '3333',
-        type: 'text',
-        content: { text: '333 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-      {
-        _id: '4444',
-        type: 'text',
-        content: { text: '444 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-      {
-        _id: '5555',
-        type: 'text',
-        content: { text: '555 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-      {
-        _id: '6666',
-        type: 'text',
-        content: { text: '666 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-      {
-        _id: '7777',
-        type: 'text',
-        content: { text: '777 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-    ]);
-    return Promise.resolve({});
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const now = Date.now();
+
+        prependMsgs([
+          {
+            _id: now + '1111',
+            type: 'text',
+            content: { text: '11111Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '2222',
+            type: 'text',
+            content: { text: '22222 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '3333',
+            type: 'text',
+            content: { text: '333 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '4444',
+            type: 'text',
+            content: { text: '444 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '5555',
+            type: 'text',
+            content: { text: '555 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '6666',
+            type: 'text',
+            content: { text: '666 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '7777',
+            type: 'text',
+            content: { text: '777 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+        ]);
+        resolve({});
+      }, 800);
+    });
   }
 
   function handleToolbarClick(item: ToolbarItemProps) {

@@ -4,6 +4,7 @@ import { PullToRefresh, PullToRefreshHandle, ScrollToEndOptions } from '../PullT
 import { Message, MessageProps } from '../Message';
 import { BackBottom } from '../BackBottom';
 import canUse from '../../utils/canUse';
+import throttle from '../../utils/throttle';
 import getToBottom from '../../utils/getToBottom';
 
 const listenerOpts = canUse('passiveListener') ? { passive: true } : false;
@@ -22,8 +23,8 @@ export interface MessageContainerHandle {
   scrollToEnd: (options?: ScrollToEndOptions) => void;
 }
 
-function getMaxOffsetHeight(wrapper: HTMLElement) {
-  return wrapper.offsetHeight * 1.5;
+function isNearBottom(el: HTMLElement) {
+  return getToBottom(el) < el.offsetHeight * 1.5;
 }
 
 export const MessageContainer = React.forwardRef<MessageContainerHandle, MessageContainerProps>(
@@ -42,7 +43,6 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
     const messagesRef = useRef<HTMLDivElement>(null);
     const scrollerRef = useRef<PullToRefreshHandle>(null);
     const bottomRef = useRef<HTMLDivElement>(null);
-    const isTouching = useRef(false);
     const lastMessage = messages[messages.length - 1];
 
     const scrollToEnd = useCallback((opts?: ScrollToEndOptions) => {
@@ -57,17 +57,36 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       setNewCount(0);
     };
 
+    const checkShowBottomRef = useRef(
+      throttle((el: HTMLElement) => {
+        if (isNearBottom(el)) {
+          setShowBackBottom(false);
+          setNewCount(0);
+        } else {
+          setShowBackBottom(true);
+        }
+      }),
+    );
+
+    const handleScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+      checkShowBottomRef.current(e.target);
+
+      if (onScroll) {
+        onScroll(e);
+      }
+    };
+
     useEffect(() => {
       const scroller = scrollerRef.current;
       const wrapper = scroller && scroller.wrapperRef.current;
 
-      if (!wrapper) {
+      if (!wrapper || !lastMessage) {
         return;
       }
 
       if (lastMessage.position === 'right') {
         scrollToEnd();
-      } else if (getToBottom(wrapper) < getMaxOffsetHeight(wrapper)) {
+      } else if (isNearBottom(wrapper)) {
         const animated = !!wrapper.scrollTop;
         scrollToEnd({ animated });
       } else {
@@ -75,38 +94,6 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
         setNewCount((c) => c + 1);
       }
     }, [lastMessage, scrollToEnd]);
-
-    useEffect(() => {
-      const scroller = scrollerRef.current;
-      const wrapper = scroller && scroller.wrapperRef.current;
-
-      if (!wrapper) {
-        return;
-      }
-
-      const options = {
-        root: wrapper,
-        rootMargin: `0px 0px ${getMaxOffsetHeight(wrapper)}px 0px`,
-        threshold: 1.0,
-      };
-
-      const observer = new IntersectionObserver(([entry]) => {
-        if (!isTouching.current) {
-          if (entry.isIntersecting) {
-            setShowBackBottom(false);
-            setNewCount(0);
-          } else {
-            setShowBackBottom(true);
-          }
-        }
-      }, options);
-
-      observer.observe(bottomRef.current!);
-
-      return () => {
-        observer.disconnect();
-      };
-    }, []);
 
     useEffect(() => {
       const wrapper = messagesRef.current!;
@@ -117,7 +104,6 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       function reset() {
         needBlur = false;
         startY = 0;
-        isTouching.current = false;
       }
 
       function touchStart(e: TouchEvent) {
@@ -126,7 +112,6 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
           needBlur = true;
           startY = e.touches[0].clientY;
         }
-        isTouching.current = true;
       }
 
       function touchMove(e: TouchEvent) {
@@ -156,7 +141,7 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
         {renderBeforeMessageList && renderBeforeMessageList()}
         <PullToRefresh
           onRefresh={onRefresh}
-          onScroll={onScroll}
+          onScroll={handleScroll}
           loadMoreText={loadMoreText}
           ref={scrollerRef}
         >
