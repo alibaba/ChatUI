@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/alibaba/ChatUI/compare/v2.0.0...v2.1.0) (2022-06-27)
+
+
+### Features
+
+* [BackBottom] ([28810a9](https://github.com/alibaba/ChatUI/commit/28810a9e375be708681be6bf8687c54525578cf5))
+
+
+### Bug Fixes
+
+* [Radio] fix styles ([b71d4d3](https://github.com/alibaba/ChatUI/commit/b71d4d37d78c10c92d16944fdd608d74f92ed065))
+* [Toolbar] fix hover ([a6a97e7](https://github.com/alibaba/ChatUI/commit/a6a97e7a92cb01f42ba9fe7301765dcdedd3c0dd))
+
+### [1.4.1](https://github.com/alibaba/ChatUI/compare/v1.4.0...v1.4.1) (2022-04-22)
+
+
+### Bug Fixes
+
+* [InfiniteScroll] fix handleOffset ([3ec9b83](https://github.com/alibaba/ChatUI/commit/3ec9b831130803f7f5916d5aa1cad9032096066a))
+
+## [1.4.0](https://github.com/alibaba/ChatUI/compare/v2.0.0-beta.0...v1.4.0) (2022-04-19)
+
+
+### Bug Fixes
+
+* [InfiniteScroll] forwardRef ([5e3e1cc](https://github.com/alibaba/ChatUI/commit/5e3e1ccb054913b099d40d17f5cfd518f7f72cd1))
+
 ## [2.0.0](https://github.com/alibaba/ChatUI/compare/v2.0.0-beta.2...v2.0.0) (2022-06-20)
 
 
