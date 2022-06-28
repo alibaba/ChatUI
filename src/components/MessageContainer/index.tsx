@@ -16,6 +16,8 @@ export interface MessageContainerProps {
   onRefresh?: () => Promise<any>;
   onScroll?: (event: React.UIEvent<HTMLDivElement, UIEvent>) => void;
   renderBeforeMessageList?: () => React.ReactNode;
+  onBackBottomShow?: () => void;
+  onBackBottomClick?: () => void;
 }
 
 export interface MessageContainerHandle {
@@ -23,8 +25,8 @@ export interface MessageContainerHandle {
   scrollToEnd: (options?: ScrollToEndOptions) => void;
 }
 
-function isNearBottom(el: HTMLElement) {
-  return getToBottom(el) < el.offsetHeight * 1.5;
+function isNearBottom(el: HTMLElement, n: number) {
+  return getToBottom(el) < el.offsetHeight * n;
 }
 
 export const MessageContainer = React.forwardRef<MessageContainerHandle, MessageContainerProps>(
@@ -36,10 +38,13 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       onScroll,
       renderBeforeMessageList,
       renderMessageContent,
+      onBackBottomShow,
+      onBackBottomClick,
     } = props;
 
     const [showBackBottom, setShowBackBottom] = useState(false);
     const [newCount, setNewCount] = useState(0);
+    const newCountRef = useRef(0);
     const messagesRef = useRef<HTMLDivElement>(null);
     const scrollerRef = useRef<PullToRefreshHandle>(null);
     const bottomRef = useRef<HTMLDivElement>(null);
@@ -51,18 +56,30 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       }
     }, []);
 
-    const handleScrollToEnd = () => {
+    const handleBackBottomClick = () => {
       scrollToEnd({ animated: false });
-      setShowBackBottom(false);
       setNewCount(0);
+      setShowBackBottom(false);
+
+      if (onBackBottomClick) {
+        onBackBottomClick();
+      }
     };
 
     const checkShowBottomRef = useRef(
       throttle((el: HTMLElement) => {
-        if (isNearBottom(el)) {
-          setShowBackBottom(false);
-          setNewCount(0);
+        if (isNearBottom(el, 2)) {
+          if (newCountRef.current) {
+            // 如果有新消息，离底部0.5屏-隐藏提示
+            if (isNearBottom(el, 0.5)) {
+              setNewCount(0);
+              setShowBackBottom(false);
+            }
+          } else {
+            setShowBackBottom(false);
+          }
         } else {
+          // 2屏+显示回到底部
           setShowBackBottom(true);
         }
       }),
@@ -77,6 +94,10 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
     };
 
     useEffect(() => {
+      newCountRef.current = newCount;
+    }, [newCount]);
+
+    useEffect(() => {
       const scroller = scrollerRef.current;
       const wrapper = scroller && scroller.wrapperRef.current;
 
@@ -86,12 +107,12 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
 
       if (lastMessage.position === 'right') {
         scrollToEnd();
-      } else if (isNearBottom(wrapper)) {
+      } else if (isNearBottom(wrapper, 1)) {
         const animated = !!wrapper.scrollTop;
         scrollToEnd({ animated });
       } else {
-        setShowBackBottom(true);
         setNewCount((c) => c + 1);
+        setShowBackBottom(true);
       }
     }, [lastMessage, scrollToEnd]);
 
@@ -152,7 +173,13 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
             <div ref={bottomRef} />
           </div>
         </PullToRefresh>
-        {showBackBottom && <BackBottom count={newCount} onClick={handleScrollToEnd} />}
+        {showBackBottom && (
+          <BackBottom
+            count={newCount}
+            onClick={handleBackBottomClick}
+            onDidMount={onBackBottomShow}
+          />
+        )}
       </div>
     );
   },
