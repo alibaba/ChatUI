@@ -184,7 +184,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
 
   function handleInputFocus(e: React.FocusEvent<HTMLTextAreaElement>) {
     if (messagesRef && messagesRef.current) {
-      messagesRef.current.scrollToEnd({ animated: false });
+      messagesRef.current.scrollToEnd({ animated: false, force: true });
     }
     if (onInputFocus) {
       onInputFocus(e);

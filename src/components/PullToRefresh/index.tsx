@@ -26,6 +26,7 @@ export interface PullToRefreshProps {
 
 export interface ScrollToEndOptions {
   animated?: boolean;
+  force?: boolean;
 }
 
 interface PTRScrollToOptions extends ScrollToEndOptions {

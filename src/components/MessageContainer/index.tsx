@@ -44,7 +44,8 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
 
     const [showBackBottom, setShowBackBottom] = useState(false);
     const [newCount, setNewCount] = useState(0);
-    const newCountRef = useRef(0);
+    const showBackBottomtRef = useRef(showBackBottom);
+    const newCountRef = useRef(newCount);
     const messagesRef = useRef<HTMLDivElement>(null);
     const scrollerRef = useRef<PullToRefreshHandle>(null);
     const bottomRef = useRef<HTMLDivElement>(null);
@@ -52,12 +53,14 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
 
     const scrollToEnd = useCallback((opts?: ScrollToEndOptions) => {
       if (scrollerRef.current) {
-        scrollerRef.current.scrollToEnd(opts);
+        if (!showBackBottomtRef.current || (opts && opts.force)) {
+          scrollerRef.current.scrollToEnd(opts);
+        }
       }
     }, []);
 
     const handleBackBottomClick = () => {
-      scrollToEnd({ animated: false });
+      scrollToEnd({ animated: false, force: true });
       setNewCount(0);
       setShowBackBottom(false);
 
@@ -98,6 +101,10 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
     }, [newCount]);
 
     useEffect(() => {
+      showBackBottomtRef.current = showBackBottom;
+    }, [showBackBottom]);
+
+    useEffect(() => {
       const scroller = scrollerRef.current;
       const wrapper = scroller && scroller.wrapperRef.current;
 
@@ -106,10 +113,10 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       }
 
       if (lastMessage.position === 'right') {
-        scrollToEnd();
+        scrollToEnd({ force: true });
       } else if (isNearBottom(wrapper, 1)) {
         const animated = !!wrapper.scrollTop;
-        scrollToEnd({ animated });
+        scrollToEnd({ animated, force: true });
       } else {
         setNewCount((c) => c + 1);
         setShowBackBottom(true);

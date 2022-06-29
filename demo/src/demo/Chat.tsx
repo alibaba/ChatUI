@@ -140,6 +140,7 @@ export default () => {
   const msgRef = React.useRef(null);
 
   window.appendMsg = appendMsg;
+  window.msgRef = msgRef;
 
   // 发送回调
   function handleSend(type: string, val: string) {
@@ -151,7 +152,9 @@ export default () => {
         position: 'right',
       });
 
-      setTyping(true);
+      setTimeout(() => {
+        setTyping(true);
+      }, 10);
 
       // 模拟回复消息
       setTimeout(() => {
