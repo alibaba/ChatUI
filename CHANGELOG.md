@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.3](https://github.com/alibaba/ChatUI/compare/v2.1.2...v2.1.3) (2022-06-29)
+
+
+### Bug Fixes
+
+* [MessageContainer] `scrollToEnd` support `force` ([ea8566b](https://github.com/alibaba/ChatUI/commit/ea8566be1285d9ceb5b9969d3e1bbc2a34190fb9))
+
 ### [2.1.2](https://github.com/alibaba/ChatUI/compare/v2.1.1...v2.1.2) (2022-06-28)
 
 
