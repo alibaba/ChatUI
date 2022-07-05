@@ -9,6 +9,7 @@ import { Typing } from '../Typing';
 export interface User {
   avatar?: string;
   name?: string;
+  url?: string;
   [k: string]: any;
 }
 
@@ -69,7 +70,9 @@ const Message = (props: MessageProps) => {
         </div>
       )}
       <div className="Message-content" role="alert" aria-live="assertive" aria-atomic="false">
-        {user && user.avatar && <Avatar src={user.avatar} shape="square" alt={user.name} />}
+        {user && user.avatar && (
+          <Avatar src={user.avatar} shape="square" alt={user.name} url={user.url} />
+        )}
         {type === 'typing' ? <Typing /> : renderMessageContent(msg)}
       </div>
     </div>
