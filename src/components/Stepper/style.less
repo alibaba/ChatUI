@@ -1,3 +1,5 @@
+@step-icon-width: 24px;
+
 .Stepper {
   margin: 0;
   padding: 0;
@@ -6,8 +8,8 @@
 
 .Step {
   position: relative;
-  padding-left: 24px;
-  padding-bottom: 10px;
+  padding-left: (@step-icon-width + 5px);
+  padding-bottom: 18px;
 
   &:last-child {
     padding-bottom: 0;
@@ -20,54 +22,77 @@
 
 .Step--active {
   .Step-dot {
-    transform: scale(1.5);
     background: var(--brand-1);
   }
-  .Step-line {
-    background: var(--gray-6);
+  .Step-title {
+    span {
+      color: var(--brand-1);
+      font-weight: 500;
+    }
   }
-  .Step-title,
   .Step-desc {
     color: var(--gray-1);
   }
+  &[data-status] {
+    .Step-line {
+      top: (@step-icon-width + 2px);
+    }
+    .Step-icon {
+      color: var(--red);
+    }
+  }
+  &[data-status='success'] {
+    .Step-icon {
+      color: var(--green);
+    }
+  }
 }
 
-.Step--disabled {
-  .Step-dot,
-  .Step-line {
-    background: var(--gray-6);
-  }
-  .Step-title,
-  .Step-desc {
-    color: var(--gray-4);
-  }
+.Step-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: @step-icon-width;
+  height: @step-icon-width;
+  font-size: @step-icon-width;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .Step-dot {
-  position: absolute;
-  top: 6px;
-  left: 2px;
-  z-index: @zindex-step-dot;
   width: 8px;
   height: 8px;
+  background: var(--white);
+  border: 1px solid var(--brand-1);
   border-radius: 50%;
-  background: var(--brand-3);
 }
 
 .Step-line {
   position: absolute;
-  top: 13px;
-  left: 5px;
-  bottom: -7px;
-  width: 2px;
-  background: var(--brand-3);
+  top: (@step-icon-width / 2 + 5px + 3px);
+  left: (@step-icon-width / 2);
+  bottom: -4px;
+  width: 1px;
+  background: var(--brand-1);
+  opacity: 0.5;
 }
 
 .Step-title {
-  color: var(--gray-2);
+  display: flex;
+  align-items: center;
+  color: var(--gray-1);
+  font-size: var(--font-size-md);
+
+  small {
+    margin-left: 12px;
+    color: var(--gray-3);
+    font-size: var(--font-size-xs);
+  }
 }
 
 .Step-desc {
+  margin-top: 3px;
   color: var(--gray-3);
-  font-size: @font-size-xs;
+  font-size: var(--font-size-sm);
 }
