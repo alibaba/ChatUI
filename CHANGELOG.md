@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/alibaba/ChatUI/compare/v2.1.3...v2.2.0) (2022-07-06)
+
+
+### Features
+
+* [Message] support `user.url` ([069664f](https://github.com/alibaba/ChatUI/commit/069664f3ff5c7ae5f937cfd377341f767eed2535))
+* [Stepper] support `inverted` ([29eacf4](https://github.com/alibaba/ChatUI/commit/29eacf4b7f172fa11dca7e3db6c57cc3bd0142a5))
+
+
+### Bug Fixes
+
+* [Message] use circle avatar ([e397592](https://github.com/alibaba/ChatUI/commit/e3975929a2876be6252408e9cbf8d2b606c7c009))
+* [Typing] fix color ([d49a0cf](https://github.com/alibaba/ChatUI/commit/d49a0cf832ba64d542d16612e37205fc546be191))
+
 ### [2.1.3](https://github.com/alibaba/ChatUI/compare/v2.1.2...v2.1.3) (2022-06-29)
 
 
