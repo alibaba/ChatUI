@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.1](https://github.com/alibaba/ChatUI/compare/v2.2.0...v2.2.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* [Button] fix hover ([56aaaae](https://github.com/alibaba/ChatUI/commit/56aaaaecec667eb2bca9e4a2e2051d8f3bcb5fa1))
+* [css] update `--red`'s value ([1ead654](https://github.com/alibaba/ChatUI/commit/1ead654a9063a0023e95cf8a373aa9bc20035997))
+* [Toast] fix icon ([e23f952](https://github.com/alibaba/ChatUI/commit/e23f9521211a185037eb43059ed6e4da0c881271))
+
 ## [2.2.0](https://github.com/alibaba/ChatUI/compare/v2.1.3...v2.2.0) (2022-07-06)
 
 
