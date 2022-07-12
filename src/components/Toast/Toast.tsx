@@ -14,7 +14,7 @@ function renderIcon(type: string) {
     case 'success':
       return <Icon type="check-circle" />;
     case 'error':
-      return <Icon type="close-circle" />;
+      return <Icon type="warning-circle" />;
     case 'loading':
       return <Icon type="spinner" spin />;
     default:
