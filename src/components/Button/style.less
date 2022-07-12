@@ -51,19 +51,6 @@
     border-color: var(--brand-1);
     color: var(--brand-1);
   }
-  &--text {
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: var(--link-color);
-    font-size: inherit;
-    vertical-align: initial;
-
-    &:hover,
-    &:active {
-      background: transparent;
-    }
-  }
   &--sm {
     padding: @btn-padding-sm;
     // border-radius: @btn-border-radius-sm;
@@ -96,5 +83,19 @@
         background: @btn-primary-hover-bg;
       }
     }
+  }
+}
+
+.Btn--text {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--link-color);
+  font-size: inherit;
+  vertical-align: initial;
+
+  &:hover,
+  &:active {
+    background: transparent;
   }
 }
