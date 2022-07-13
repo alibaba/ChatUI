@@ -25,7 +25,7 @@ export default () => {
                 onSearch={(q) => {
                   console.log(q);
                 }}
-                onCancel={() => {
+                onClear={() => {
                   console.log('cancel');
                 }}
               />

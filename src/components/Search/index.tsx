@@ -13,7 +13,7 @@ export interface SearchProps extends Omit<InputProps, 'value'> {
   disabled?: boolean;
   clearable?: boolean;
   showSearch?: boolean;
-  onSearch: (
+  onSearch?: (
     query: string,
     event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => void;
