@@ -31,10 +31,10 @@
   position: relative;
   margin: 0;
   padding: 4px 12px;
-  border: 1px solid var(--gray-4);
+  border: 1px solid transparent;
   border-radius: 15px;
   line-height: 20px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.6);
   cursor: pointer;
   color: var(--gray-1);
   font-size: @quick-reply-font-size;
@@ -49,10 +49,13 @@
     height: @quick-reply-dot-size;
     background: @quick-reply-dot-bg;
     overflow: hidden;
+    border: 1px solid #fff;
     border-radius: 50%;
   }
   &.highlight {
-    font-weight: bold;
+    background: #fff;
+    border-color: #FFD0BF;
+    font-weight: 500;
   }
   &-inner {
     display: flex;
@@ -68,13 +71,5 @@
   .Icon {
     color: var(--brand-1);
     font-size: 15px;
-  }
-}
-
-@media (hover: hover) {
-  .QuickReply {
-    &:hover {
-      background: @quick-reply-hover-bg;
-    }
   }
 }
