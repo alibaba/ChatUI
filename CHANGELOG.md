@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.2](https://github.com/alibaba/ChatUI/compare/v2.2.1...v2.2.2) (2022-07-19)
+
+
+### Bug Fixes
+
+* [QuickReplies] update styles ([5c622b1](https://github.com/alibaba/ChatUI/commit/5c622b1a478129d5b08537953216634622ee3bfa))
+* [Search] fix type ([794a482](https://github.com/alibaba/ChatUI/commit/794a482040878b678470f4936001b34b1508e206))
+* [SystemMessage] fix padding ([1abbbf3](https://github.com/alibaba/ChatUI/commit/1abbbf30841a757111db89543e53801ead83f2b2))
+* [Typing] remove useless style ([062cf95](https://github.com/alibaba/ChatUI/commit/062cf9514c3a4da002ca914f494381333e706adf))
+* update brand-3 ([0fbeb8e](https://github.com/alibaba/ChatUI/commit/0fbeb8e3e5040d0bb9eed7f38a835573f53b414b))
+
 ### [2.2.1](https://github.com/alibaba/ChatUI/compare/v2.2.0...v2.2.1) (2022-07-12)
 
 
