@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/alibaba/ChatUI/compare/v2.2.2...v2.3.0) (2022-07-19)
+
+
+### Features
+
+* [Modal] support `btnVariant` ([0d86cde](https://github.com/alibaba/ChatUI/commit/0d86cde80cd49b4568aa807806d622d164d8cc47))
+
 ### [2.2.2](https://github.com/alibaba/ChatUI/compare/v2.2.1...v2.2.2) (2022-07-19)
 
 
