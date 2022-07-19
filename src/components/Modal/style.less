@@ -25,6 +25,7 @@
 .Modal-dialog {
   position: relative;
   z-index: @zindex-modal;
+  overflow: hidden;
   width: @modal-width;
   border-radius: @modal-border-radius;
   background: @modal-bg;
@@ -55,38 +56,40 @@
 
 .Modal-footer {
   display: flex;
+
+  .Btn--outline {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-width: 1px 0 0;
+    border-color: var(--gray-6);
+    border-radius: 0;
+
+    &:not(.Btn--primary) {
+      color: var(--gray-2);
+    }
+  }
 }
 
 .Modal-footer--h {
-  padding: 0 15px 18px;
+  &[data-variant='round'] {
+    padding: 0 15px 18px;
 
+    .Btn + .Btn {
+      margin-left: @modal-btn-x-spacing;
+    }
+  }
+  &[data-variant='outline'] {
+    .Btn + .Btn {
+      border-left-width: 1px;
+    }
+  }
   .Btn {
     flex: 1;
-  }
-  .Btn + .Btn {
-    margin-left: @modal-btn-x-spacing;
   }
 }
 
 .Modal-footer--v {
   flex-direction: column;
-
-  .Btn {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border: 0;
-    border-top: @modal-btn-y-border-width solid @modal-btn-y-border-color;
-    border-radius: 0;
-    background: @modal-btn-y-bg;
-    color: @modal-btn-y-color;
-
-    &:last-child {
-      border-radius: 0 0 @modal-border-radius @modal-border-radius;
-    }
-  }
-  .Btn--primary {
-    color: @modal-btn-y-primary-color;
-  }
 }
 
 // Confirm

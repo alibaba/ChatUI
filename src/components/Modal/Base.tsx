@@ -21,6 +21,7 @@ export type ModalProps = {
   overflow?: boolean;
   actions?: ButtonProps[];
   vertical?: boolean;
+  btnVariant?: ButtonProps['variant'];
   bgColor?: string;
   onClose?: () => void;
   onBackdropClick?: () => void;
@@ -45,6 +46,7 @@ export const Base: React.FC<ModalProps> = (props) => {
     overflow,
     actions,
     vertical = true,
+    btnVariant,
     bgColor,
     children,
     onBackdropClick,
@@ -121,15 +123,12 @@ export const Base: React.FC<ModalProps> = (props) => {
           </div>
           <div className={clsx(`${baseClass}-body`, { overflow })}>{children}</div>
           {actions && (
-            <div className={`${baseClass}-footer ${baseClass}-footer--${vertical ? 'v' : 'h'}`}>
+            <div
+              className={`${baseClass}-footer ${baseClass}-footer--${vertical ? 'v' : 'h'}`}
+              data-variant={btnVariant || 'round'}
+            >
               {actions.map((item) => (
-                <Button
-                  size="lg"
-                  block={isPopup}
-                  variant={!isPopup && vertical ? 'outline' : undefined}
-                  {...item}
-                  key={item.label}
-                />
+                <Button size="lg" block={isPopup} variant={btnVariant} {...item} key={item.label} />
               ))}
             </div>
           )}
