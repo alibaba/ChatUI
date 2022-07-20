@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useCallback, useImperativeHandle } 
 import { PullToRefresh, PullToRefreshHandle, ScrollToEndOptions } from '../PullToRefresh';
 import { Message, MessageProps } from '../Message';
 import { BackBottom } from '../BackBottom';
+import { CLASS_NAME_FOCUSING } from '../Composer';
 import canUse from '../../utils/canUse';
 import throttle from '../../utils/throttle';
 import getToBottom from '../../utils/getToBottom';
@@ -48,7 +49,6 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
     const newCountRef = useRef(newCount);
     const messagesRef = useRef<HTMLDivElement>(null);
     const scrollerRef = useRef<PullToRefreshHandle>(null);
-    const bottomRef = useRef<HTMLDivElement>(null);
     const lastMessage = messages[messages.length - 1];
 
     const scrollToEnd = useCallback((opts?: ScrollToEndOptions) => {
@@ -112,7 +112,11 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
         return;
       }
 
-      if (lastMessage.position === 'right') {
+      if (
+        lastMessage.position === 'right' ||
+        document.body.classList.contains(CLASS_NAME_FOCUSING)
+      ) {
+        // 自己发的消息 或 输入框聚焦，则滚动到底部
         scrollToEnd({ force: true });
       } else if (isNearBottom(wrapper, 1)) {
         const animated = !!wrapper.scrollTop;
@@ -177,7 +181,6 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
             {messages.map((msg) => (
               <Message {...msg} renderMessageContent={renderMessageContent} key={msg._id} />
             ))}
-            <div ref={bottomRef} />
           </div>
         </PullToRefresh>
         {showBackBottom && (

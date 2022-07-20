@@ -12,7 +12,7 @@ import { SendButton } from './SendButton';
 import { Action } from './Action';
 import toggleClass from '../../utils/toggleClass';
 
-const FOCUSING_CLASS = 'S--focusing';
+export const CLASS_NAME_FOCUSING = 'S--focusing';
 
 export type InputType = 'voice' | 'text';
 
@@ -132,7 +132,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   const handleInputFocus = useCallback(
     (e: React.FocusEvent<HTMLTextAreaElement>) => {
       clearTimeout(blurTimer.current);
-      toggleClass(FOCUSING_CLASS, true);
+      toggleClass(CLASS_NAME_FOCUSING, true);
       focused.current = true;
 
       if (onFocus) {
@@ -145,7 +145,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   const handleInputBlur = useCallback(
     (e: React.FocusEvent<HTMLTextAreaElement>) => {
       blurTimer.current = setTimeout(() => {
-        toggleClass(FOCUSING_CLASS, false);
+        toggleClass(CLASS_NAME_FOCUSING, false);
         focused.current = false;
       }, 0);
 
