@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { Icon } from '../Icon';
 
-interface ToastProps {
+export interface ToastProps {
   content: React.ReactNode;
-  type: string;
+  type?: 'success' | 'error' | 'loading';
   duration: number;
   onUnmount?: () => void;
 }
 
-function renderIcon(type: string) {
+function renderIcon(type: ToastProps['type']) {
   switch (type) {
     case 'success':
       return <Icon type="check-circle" />;

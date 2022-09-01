@@ -5,7 +5,8 @@
   background: @bubble-left-bg;
   border-radius: @bubble-left-border-radius;
 
-  &.text {
+  &.text,
+  &.typing {
     min-width: 40px;
     padding: @bubble-text-padding;
     box-sizing: border-box;
@@ -22,9 +23,6 @@
       height: auto;
       border-radius: inherit;
     }
-  }
-  &.typing {
-    padding: @bubble-typing-padding;
   }
   p {
     margin: 0;

@@ -7,17 +7,17 @@ interface Props {
   x?: boolean;
 }
 
-export default function smoothScroll({
-  el,
-  to,
-  duration = 300,
-  x,
-}: Props) {
+export default function smoothScroll({ el, to, duration = 300, x }: Props) {
   let count = 0;
   const attr = x ? 'scrollLeft' : 'scrollTop';
   const from = el[attr];
-  const frames = duration === 0 ? 1 : Math.round(duration / 16);
+  const frames = Math.round(duration / 16);
   const step = (to - from) / frames;
+
+  if (!rAF) {
+    el[attr] = to;
+    return;
+  }
 
   function animate() {
     // eslint-disable-next-line no-param-reassign

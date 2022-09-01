@@ -5,6 +5,7 @@ import { Icon } from '../Icon';
 import { Flex } from '../Flex';
 import { Button } from '../Button';
 import canUse from '../../utils/canUse';
+import smoothScroll from '../../utils/smoothScroll';
 
 const canPassive = canUse('passiveListener');
 const listenerOpts = canPassive ? { passive: true } : false;
@@ -88,12 +89,13 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
 
       if (!scroller) return;
 
-      const offsetTop = y === '100%' ? scroller.scrollHeight : y;
+      const offsetTop = y === '100%' ? scroller.scrollHeight - scroller.offsetHeight : y;
 
-      if (canUse('smoothScroll') && animated) {
-        scroller.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth',
+      if (animated) {
+        smoothScroll({
+          el: scroller,
+          to: offsetTop,
+          x: false,
         });
       } else {
         scroller.scrollTop = offsetTop;

@@ -44,7 +44,8 @@
     color: var(--btn-primary-color);
 
     &:active {
-      background: @btn-primary-active-bg;
+      // background: @btn-primary-active-bg;
+      opacity: 0.8;
     }
   }
   &--outline&--primary {
@@ -80,7 +81,8 @@
     }
     &--primary:not(.Btn--outline) {
       &:hover {
-        background: @btn-primary-hover-bg;
+        background: var(--btn-primary-bg);
+        opacity: 0.9;
       }
     }
   }

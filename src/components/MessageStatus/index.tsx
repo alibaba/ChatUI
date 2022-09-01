@@ -4,11 +4,14 @@ import { IconButton } from '../IconButton';
 
 export type IMessageStatus = 'pending' | 'sent' | 'fail';
 
+type StatusType = '' | 'loading' | 'fail';
+
 export interface MessageStatusProps {
   status: IMessageStatus;
   delay?: number;
   maxDelay?: number;
   onRetry?: () => void;
+  onChange?: (type: StatusType) => void;
 }
 
 export const MessageStatus = ({
@@ -16,8 +19,9 @@ export const MessageStatus = ({
   delay = 1500,
   maxDelay = 5000,
   onRetry,
+  onChange,
 }: MessageStatusProps) => {
-  const [type, setType] = useState('');
+  const [type, setType] = useState<StatusType>('');
   const loadingTimerRef = useRef<ReturnType<typeof setTimeout>>();
   const failTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
@@ -52,6 +56,12 @@ export const MessageStatus = ({
 
     return clear;
   }, [status, doTimeout]);
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(type);
+    }
+  }, [onChange, type]);
 
   function handleRetry() {
     setType('loading');

@@ -1,8 +1,8 @@
 import React from 'react';
 import { mountComponent } from '../../utils/mountComponent';
-import { Toast } from './Toast';
+import { Toast, ToastProps } from './Toast';
 
-function show(content: string, type: string, duration = 2000) {
+function show(content: string, type: ToastProps['type'], duration = 2000) {
   mountComponent(<Toast content={content} type={type} duration={duration} />);
 }
 
@@ -18,3 +18,6 @@ export const toast = {
     show(content, 'loading', duration);
   },
 };
+
+export { Toast };
+export type { ToastProps };

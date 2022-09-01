@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef, useCallback, useImperativeHandle } 
 import { PullToRefresh, PullToRefreshHandle, ScrollToEndOptions } from '../PullToRefresh';
 import { Message, MessageProps } from '../Message';
 import { BackBottom } from '../BackBottom';
-import { CLASS_NAME_FOCUSING } from '../Composer';
 import canUse from '../../utils/canUse';
 import throttle from '../../utils/throttle';
 import getToBottom from '../../utils/getToBottom';
@@ -27,7 +26,8 @@ export interface MessageContainerHandle {
 }
 
 function isNearBottom(el: HTMLElement, n: number) {
-  return getToBottom(el) < el.offsetHeight * n;
+  const offsetHeight = Math.max(el.offsetHeight, 600);
+  return getToBottom(el) < offsetHeight * n;
 }
 
 export const MessageContainer = React.forwardRef<MessageContainerHandle, MessageContainerProps>(
@@ -51,18 +51,26 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
     const scrollerRef = useRef<PullToRefreshHandle>(null);
     const lastMessage = messages[messages.length - 1];
 
+    const clearBackBottom = () => {
+      setNewCount(0);
+      setShowBackBottom(false);
+    };
+
     const scrollToEnd = useCallback((opts?: ScrollToEndOptions) => {
       if (scrollerRef.current) {
         if (!showBackBottomtRef.current || (opts && opts.force)) {
           scrollerRef.current.scrollToEnd(opts);
+          if (showBackBottomtRef.current) {
+            clearBackBottom();
+          }
         }
       }
     }, []);
 
     const handleBackBottomClick = () => {
       scrollToEnd({ animated: false, force: true });
-      setNewCount(0);
-      setShowBackBottom(false);
+      // setNewCount(0);
+      // setShowBackBottom(false);
 
       if (onBackBottomClick) {
         onBackBottomClick();
@@ -71,18 +79,19 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
 
     const checkShowBottomRef = useRef(
       throttle((el: HTMLElement) => {
-        if (isNearBottom(el, 2)) {
+        if (isNearBottom(el, 3)) {
           if (newCountRef.current) {
             // 如果有新消息，离底部0.5屏-隐藏提示
             if (isNearBottom(el, 0.5)) {
-              setNewCount(0);
-              setShowBackBottom(false);
+              // setNewCount(0);
+              // setShowBackBottom(false);
+              clearBackBottom();
             }
           } else {
             setShowBackBottom(false);
           }
         } else {
-          // 2屏+显示回到底部
+          // 3屏+显示回到底部
           setShowBackBottom(true);
         }
       }),
@@ -108,17 +117,14 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       const scroller = scrollerRef.current;
       const wrapper = scroller && scroller.wrapperRef.current;
 
-      if (!wrapper || !lastMessage) {
+      if (!wrapper || !lastMessage || lastMessage.position === 'pop') {
         return;
       }
 
-      if (
-        lastMessage.position === 'right' ||
-        document.body.classList.contains(CLASS_NAME_FOCUSING)
-      ) {
-        // 自己发的消息 或 输入框聚焦，则滚动到底部
+      if (lastMessage.position === 'right') {
+        // 自己发的消息，强制滚动到底部
         scrollToEnd({ force: true });
-      } else if (isNearBottom(wrapper, 1)) {
+      } else if (isNearBottom(wrapper, 2)) {
         const animated = !!wrapper.scrollTop;
         scrollToEnd({ animated, force: true });
       } else {

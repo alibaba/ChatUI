@@ -95,7 +95,12 @@ export const ScrollView = React.forwardRef<ScrollViewHandle, ScrollViewProps<any
       <div className="ScrollView-scroller" ref={scrollerRef} onScroll={onScroll}>
         <div className="ScrollView-inner">
           {data.map((item, i) => (
-            <Item item={item} effect={effect} onIntersect={onIntersect} key={getItemKey(item, i)}>
+            <Item
+              item={item}
+              effect={item.effect || effect}
+              onIntersect={onIntersect}
+              key={getItemKey(item, i)}
+            >
               {renderItem(item, i)}
             </Item>
           ))}
