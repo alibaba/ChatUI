@@ -13,8 +13,8 @@ const TIME_GAP = 5 * 60 * 1000;
 let lastTs = 0;
 
 const makeMsg = (msg: MessageWithoutId, id?: MessageId) => {
-  const ts = msg.createdAt || Date.now();
-  const hasTime = msg.hasTime || ts - lastTs > TIME_GAP;
+  const ts = msg.createdAt ?? Date.now();
+  const hasTime = msg.hasTime ?? ts - lastTs > TIME_GAP;
 
   if (hasTime) {
     lastTs = ts;
@@ -22,9 +22,9 @@ const makeMsg = (msg: MessageWithoutId, id?: MessageId) => {
 
   return {
     ...msg,
-    _id: msg._id || id || getRandomString(),
+    _id: msg._id ?? id ?? getRandomString(),
     createdAt: ts,
-    position: msg.position || 'left',
+    position: msg.position ?? 'left',
     hasTime,
   };
 };
