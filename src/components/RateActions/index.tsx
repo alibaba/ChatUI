@@ -6,13 +6,13 @@ import { useLocale } from '../LocaleProvider';
 const UP = 'up';
 const DOWN = 'down';
 
-export type RateActionsProps = {
+export interface RateActionsProps {
   upTitle?: string;
   downTitle?: string;
   onClick: (value: string) => void;
-};
+}
 
-export const RateActions: React.FC<RateActionsProps> = (props) => {
+export const RateActions = (props: RateActionsProps) => {
   const { trans } = useLocale('RateActions', {
     up: '赞同',
     down: '反对',

@@ -5,40 +5,48 @@
   transition: opacity 0.1s;
 }
 
+@frame-time: 0.18s;
+
 .Typing-dot {
   display: inline-block;
-  width: 5px;
-  height: 5px;
-  margin-left: 9px;
+  width: 6px;
+  height: 6px;
+  margin-left: 6px;
   border-radius: 50%;
-  animation: typing-dot 0.8s linear infinite;
+  animation: typing-dot (@frame-time * 7) linear infinite;
   background: var(--gray-3);
 
   &:nth-child(1) {
     margin: 0;
   }
   &:nth-child(2) {
-    animation-delay: -0.2s;
+    animation-delay: @frame-time;
   }
   &:nth-child(3) {
-    animation-delay: -0.4s;
+    animation-delay: @frame-time * 2;
   }
 }
 
 @keyframes typing-dot {
   0% {
-    transform: scale(0.57);
-  }
-  25% {
-    transform: scale(0.78);
-  }
-  50% {
     transform: scale(1);
   }
-  75% {
-    transform: scale(0.78);
+  16.67% {
+    transform: scale(0);
+  }
+  33.33% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(0);
+  }
+  66.67% {
+    transform: scale(1);
+  }
+  83.33% {
+    transform: scale(1);
   }
   100% {
-    transform: scale(0.57);
+    transform: scale(1);
   }
 }

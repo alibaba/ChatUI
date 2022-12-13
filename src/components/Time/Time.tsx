@@ -6,7 +6,7 @@ export interface TimeProps {
   date: IDate;
 }
 
-export const Time: React.FC<TimeProps> = ({ date }) => {
+export const Time = ({ date }: TimeProps) => {
   const { trans } = useLocale('Time');
 
   return (

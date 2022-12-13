@@ -1,6 +1,8 @@
 import React from 'react';
 
-export const HelpText: React.FC = (props) => {
+export interface HelpTextProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const HelpText = (props: HelpTextProps) => {
   const { children, ...others } = props;
   return (
     <div className="HelpText" {...others}>

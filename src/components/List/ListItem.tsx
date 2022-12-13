@@ -8,6 +8,7 @@ interface ListItemPropsBase {
   content?: React.ReactNode;
   rightIcon?: string;
   onClick?: (event: React.MouseEvent) => void;
+  children?: React.ReactNode;
 }
 
 interface ListItemPropsWithLink extends ListItemPropsBase {
@@ -17,7 +18,7 @@ interface ListItemPropsWithLink extends ListItemPropsBase {
 
 export type ListItemProps = ListItemPropsBase | ListItemPropsWithLink;
 
-export const ListItem: React.FC<ListItemProps> = (props) => {
+export const ListItem = (props: ListItemProps) => {
   const { className, as: Element = 'div', content, rightIcon, children, onClick, ...other } = props;
   return (
     <Element className={clsx('ListItem', className)} onClick={onClick} role="listitem" {...other}>

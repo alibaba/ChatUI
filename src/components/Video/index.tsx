@@ -13,7 +13,7 @@ export type VideoProps = React.VideoHTMLAttributes<HTMLVideoElement> & {
   onCoverLoad?: (event: React.SyntheticEvent<HTMLImageElement, Event>) => void;
 };
 
-export const Video: React.FC<VideoProps> = (props) => {
+export const Video = (props: VideoProps) => {
   const {
     className,
     src,

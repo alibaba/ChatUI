@@ -7,7 +7,7 @@ type IToolbarItem = {
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
-export const ToolbarItem: React.FC<IToolbarItem> = (props) => {
+export const ToolbarItem = (props: IToolbarItem) => {
   const { item, onClick } = props;
 
   return (

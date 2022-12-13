@@ -11,7 +11,7 @@ export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 
 export const Image = React.forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
   const { className, src: oSrc, lazy, fluid, children, ...other } = props;
-  const [src, setSrc] = useState('');
+  const [src, setSrc] = useState(lazy ? undefined : oSrc);
   const imgRef = useForwardRef(ref);
   const savedSrc = useRef('');
   const lazyLoaded = useRef(false);
@@ -38,7 +38,9 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>((props, ref)
 
   useEffect(() => {
     savedSrc.current = oSrc;
-    setSrc(lazy && !lazyLoaded.current ? '' : oSrc);
+    if (!lazy || lazyLoaded.current) {
+      setSrc(oSrc);
+    }
   }, [lazy, oSrc]);
 
   return (

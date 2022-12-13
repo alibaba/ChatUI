@@ -1,15 +1,15 @@
 import React from 'react';
 import clsx from 'clsx';
 
-export type FormProps = {
+export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   className?: string;
   /** @deprecated Use `<Input>`'s `variant` instead */
   theme?: string;
-};
+}
 
 export const ThemeContext = React.createContext('');
 
-export const Form: React.FC<FormProps> = (props) => {
+export const Form = (props: FormProps) => {
   const { className, theme = '', children, ...other } = props;
   return (
     <ThemeContext.Provider value={theme}>

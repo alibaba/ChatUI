@@ -1,6 +1,6 @@
 import React from 'react';
-import { Base, ModalProps } from './Base';
+import { Base, ModalProps, BaseModalHandle } from './Base';
 
-export const Popup: React.FC<ModalProps> = (props) => (
-  <Base baseClass="Popup" overflow {...props} />
-);
+export const Popup = React.forwardRef<BaseModalHandle, ModalProps>((props, ref) => (
+  <Base baseClass="Popup" overflow ref={ref} {...props} />
+));

@@ -8,12 +8,13 @@ type ILocales = {
 type ILocaleContext = {
   locale?: string;
   locales?: ILocales;
+  children?: React.ReactNode;
 };
 
 const LocaleContext = React.createContext<ILocaleContext>(undefined!);
 const DEFAULT_LOCALE = 'en-US';
 
-const LocaleProvider: React.FC<ILocaleContext> = ({ locale, locales, children }) => (
+const LocaleProvider = ({ locale, locales, children }: ILocaleContext) => (
   <LocaleContext.Provider value={{ locale, locales }}>{children}</LocaleContext.Provider>
 );
 

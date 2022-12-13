@@ -5,7 +5,7 @@ import { Icon } from '../Icon';
 export interface ToastProps {
   content: React.ReactNode;
   type?: 'success' | 'error' | 'loading';
-  duration: number;
+  duration?: number;
   onUnmount?: () => void;
 }
 
@@ -22,8 +22,8 @@ function renderIcon(type: ToastProps['type']) {
   }
 }
 
-export const Toast: React.FC<ToastProps> = (props) => {
-  const { content, type, duration, onUnmount } = props;
+export const Toast = (props: ToastProps) => {
+  const { content, type, duration = 2000, onUnmount } = props;
   const [show, setShow] = useState(false);
 
   useEffect(() => {

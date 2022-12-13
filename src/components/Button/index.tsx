@@ -12,6 +12,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   icon?: string;
   loading?: boolean;
   disabled?: boolean;
+  children?: React.ReactNode;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
@@ -19,7 +20,7 @@ function composeClass(type?: string) {
   return type && `Btn--${type}`;
 }
 
-export const Button = (props: ButtonProps) => {
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
     className,
     label,
@@ -59,6 +60,7 @@ export const Button = (props: ButtonProps) => {
       type="button"
       disabled={disabled}
       onClick={handleClick}
+      ref={ref}
       {...other}
     >
       {icon && (
@@ -69,4 +71,4 @@ export const Button = (props: ButtonProps) => {
       {label || children}
     </button>
   );
-};
+});

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useImperativeHandle } from 'react';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import useMount from '../../hooks/useMount';
@@ -8,7 +8,7 @@ import { Button, ButtonProps } from '../Button';
 import useNextId from '../../hooks/useNextId';
 import toggleClass from '../../utils/toggleClass';
 
-export type ModalProps = {
+export interface ModalProps {
   active?: boolean;
   baseClass?: string;
   className?: string;
@@ -25,7 +25,12 @@ export type ModalProps = {
   bgColor?: string;
   onClose?: () => void;
   onBackdropClick?: () => void;
-};
+  children?: React.ReactNode;
+}
+
+export interface BaseModalHandle {
+  wrapperRef: React.RefObject<HTMLDivElement>;
+}
 
 function clearModal() {
   if (!document.querySelector('.Modal') && !document.querySelector('.Popup')) {
@@ -33,7 +38,7 @@ function clearModal() {
   }
 }
 
-export const Base: React.FC<ModalProps> = (props) => {
+export const Base = React.forwardRef<BaseModalHandle, ModalProps>((props, ref) => {
   const {
     baseClass,
     active,
@@ -56,13 +61,13 @@ export const Base: React.FC<ModalProps> = (props) => {
   const mid = useNextId('modal-');
   const titleId = props.titleId || mid;
 
-  const wrapper = useRef<HTMLDivElement>(null);
-  const { didMount, isShow } = useMount({ active, ref: wrapper });
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const { didMount, isShow } = useMount({ active, ref: wrapperRef });
 
   useEffect(() => {
     setTimeout(() => {
-      if (autoFocus && wrapper.current) {
-        wrapper.current.focus();
+      if (autoFocus && wrapperRef.current) {
+        wrapperRef.current.focus();
       }
     });
   }, [autoFocus]);
@@ -79,6 +84,10 @@ export const Base: React.FC<ModalProps> = (props) => {
     }
   }, [active, didMount]);
 
+  useImperativeHandle(ref, () => ({
+    wrapperRef,
+  }));
+
   useEffect(
     () => () => {
       clearModal();
@@ -91,7 +100,7 @@ export const Base: React.FC<ModalProps> = (props) => {
   const isPopup = baseClass === 'Popup';
 
   return createPortal(
-    <div className={clsx(baseClass, className, { active: isShow })} ref={wrapper} tabIndex={-1}>
+    <div className={clsx(baseClass, className, { active: isShow })} ref={wrapperRef} tabIndex={-1}>
       {backdrop && (
         <Backdrop
           active={isShow}
@@ -137,4 +146,4 @@ export const Base: React.FC<ModalProps> = (props) => {
     </div>,
     document.body,
   );
-};
+});

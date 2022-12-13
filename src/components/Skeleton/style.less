@@ -1,0 +1,26 @@
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  to {
+    background-position: 468px 0;
+  }
+}
+
+.Skeleton {
+  background: linear-gradient(90deg, #f6f6f6 8%, #f0f0f0 18%, #f6f6f6 33%);
+  background-size: 800px 104px;
+  animation: 1.25s linear infinite forwards shimmer;
+}
+
+.Skeleton--r-sm {
+  border-radius: 2px;
+}
+
+.Skeleton--r-md {
+  border-radius: 6px;
+}
+
+.Skeleton--r-xl {
+  border-radius: 32px;
+}

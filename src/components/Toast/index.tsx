@@ -2,7 +2,7 @@ import React from 'react';
 import { mountComponent } from '../../utils/mountComponent';
 import { Toast, ToastProps } from './Toast';
 
-function show(content: string, type: ToastProps['type'], duration = 2000) {
+function show(content: string, type?: ToastProps['type'], duration?: number) {
   mountComponent(<Toast content={content} type={type} duration={duration} />);
 }
 

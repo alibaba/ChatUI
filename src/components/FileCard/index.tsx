@@ -11,9 +11,10 @@ export interface FileCardProps {
   className?: string;
   file: File;
   extension?: string;
+  children?: React.ReactNode;
 }
 
-export const FileCard: React.FC<FileCardProps> = (props) => {
+export const FileCard = (props: FileCardProps) => {
   const { className, file, extension, children } = props;
   const { name, size } = file;
   const ext = extension || getExtName(name);

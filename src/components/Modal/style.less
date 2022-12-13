@@ -144,13 +144,11 @@
 
 .Popup-header {
   position: relative;
-  margin-top: 4px;
   padding: @popup-header-padding;
 }
 
 .Modal-title,
 .Popup-title {
-  min-height: 25px;
   margin: @popup-title-margin;
   color: @popup-title-color;
   font-size: @popup-title-font-size;
@@ -169,9 +167,12 @@
   top: 12px;
 }
 
+.Popup-title {
+  min-height: 25px;
+}
+
 .Popup-close {
-  top: 50%;
-  transform: translateY(-50%);
+  top: 20px;
 }
 
 .Popup-body {

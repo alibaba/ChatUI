@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 
-export const Label: React.FC = (props) => {
+export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}
+
+export const Label = (props: LabelProps) => {
   const { children, ...other } = props;
 
   return (

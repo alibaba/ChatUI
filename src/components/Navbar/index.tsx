@@ -2,15 +2,15 @@ import React from 'react';
 import clsx from 'clsx';
 import { IconButton, IconButtonProps } from '../IconButton';
 
-export type NavbarProps = {
+export interface NavbarProps {
   title: string;
   className?: string;
   logo?: string;
   leftContent?: IconButtonProps;
   rightContent?: IconButtonProps[];
-};
+}
 
-export const Navbar: React.FC<NavbarProps> = (props) => {
+export const Navbar = (props: NavbarProps) => {
   const { className, title, logo, leftContent, rightContent = [] } = props;
   return (
     <header className={clsx('Navbar', className)}>

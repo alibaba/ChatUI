@@ -19,6 +19,7 @@ export type InputType = 'voice' | 'text';
 export type ComposerProps = {
   wideBreakpoint?: string;
   text?: string;
+  textOnce?: string;
   inputOptions?: InputProps;
   placeholder?: string;
   inputType?: InputType;
@@ -42,9 +43,10 @@ export interface ComposerHandle {
 export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, ref) => {
   const {
     text: initialText = '',
+    textOnce: oTextOnce,
     inputType: initialInputType = 'text',
     wideBreakpoint,
-    placeholder = '请输入...',
+    placeholder: oPlaceholder = '请输入...',
     recorder = {},
     onInputTypeChange,
     onFocus,
@@ -60,6 +62,8 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   } = props;
 
   const [text, setText] = useState(initialText);
+  const [textOnce, setTextOnce] = useState('');
+  const [placeholder, setPlaceholder] = useState(oPlaceholder);
   const [inputType, setInputType] = useState(initialInputType || 'text');
   const [isAccessoryOpen, setAccessoryOpen] = useState(false);
   const [accessoryContent, setAccessoryContent] = useState('');
@@ -104,6 +108,16 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
       onAccessoryToggle(isAccessoryOpen);
     }
   }, [isAccessoryOpen, onAccessoryToggle]);
+
+  useEffect(() => {
+    if (oTextOnce) {
+      setTextOnce(oTextOnce);
+      setPlaceholder(oTextOnce);
+    } else {
+      setTextOnce('');
+      setPlaceholder(oPlaceholder);
+    }
+  }, [oPlaceholder, oTextOnce]);
 
   useEffect(() => {
     isMountRef.current = true;
@@ -157,13 +171,20 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   );
 
   const send = useCallback(() => {
-    onSend('text', text);
-    setText('');
-
+    if (text) {
+      onSend('text', text);
+      setText('');
+    } else if (textOnce) {
+      onSend('text', textOnce);
+    }
+    if (textOnce) {
+      setTextOnce('');
+      setPlaceholder(oPlaceholder);
+    }
     if (focused.current) {
       inputRef.current.focus();
     }
-  }, [onSend, text]);
+  }, [oPlaceholder, onSend, text, textOnce]);
 
   const handleInputKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -289,7 +310,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
             aria-label={isAccessoryOpen ? '关闭工具栏' : '展开工具栏'}
           />
         )}
-        {text && <SendButton onClick={handleSendBtnClick} disabled={false} />}
+        {(text || textOnce) && <SendButton onClick={handleSendBtnClick} disabled={false} />}
       </div>
       {isAccessoryOpen && (
         <AccessoryWrap onClickOutside={handleAccessoryBlur}>

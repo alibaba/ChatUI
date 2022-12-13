@@ -1,14 +1,15 @@
 import React from 'react';
 import clsx from 'clsx';
 
-export type CardTitleProps = {
+export interface CardTitleProps {
   className?: string;
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
   center?: boolean;
-};
+  children?: React.ReactNode;
+}
 
-export const CardTitle: React.FC<CardTitleProps> = (props) => {
+export const CardTitle = (props: CardTitleProps) => {
   const { className, title, subtitle, center, children, ...other } = props;
   return (
     <div className={clsx('CardTitle', { 'CardTitle--center': center }, className)} {...other}>

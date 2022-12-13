@@ -8,7 +8,9 @@ export function mountComponent(Comp: React.ReactElement, root = document.body) {
   const Clone = React.cloneElement(Comp, {
     onUnmount() {
       ReactDOM.unmountComponentAtNode(div);
-      root.removeChild(div);
+      if (root && div) {
+        root.removeChild(div);
+      }
     },
   });
 

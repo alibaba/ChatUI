@@ -1,10 +1,11 @@
 import React from 'react';
-import { Base, ModalProps } from './Base';
+import { Base, ModalProps, BaseModalHandle } from './Base';
 
-export const Modal: React.FC<ModalProps> = (props) => (
+export const Modal = React.forwardRef<BaseModalHandle, ModalProps>((props, ref) => (
   <Base
     baseClass="Modal"
     btnVariant={props.vertical === false ? undefined : 'outline'}
+    ref={ref}
     {...props}
   />
-);
+));

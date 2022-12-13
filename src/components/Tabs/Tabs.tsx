@@ -8,9 +8,10 @@ type TabItemProps = {
   index: number;
   tabIndex: number;
   onClick: (index: number, event: React.MouseEvent) => void;
+  children?: React.ReactNode;
 };
 
-const TabItem: React.FC<TabItemProps> = (props) => {
+const TabItem = (props: TabItemProps) => {
   const { active, index, children, onClick, ...others } = props;
 
   function handleClick(e: React.MouseEvent) {
@@ -33,12 +34,13 @@ const TabItem: React.FC<TabItemProps> = (props) => {
   );
 };
 
-type TabsPaneProps = {
+interface TabsPaneProps {
   active: boolean;
   id?: string;
-};
+  children?: React.ReactNode;
+}
 
-const TabsPane: React.FC<TabsPaneProps> = (props) => {
+const TabsPane = (props: TabsPaneProps) => {
   const { active, children, ...others } = props;
 
   return (
@@ -54,9 +56,10 @@ export type TabsProps = {
   scrollable?: boolean;
   hideNavIfOnlyOne?: boolean;
   onChange?: (index: number, event: React.MouseEvent) => void;
+  children?: React.ReactNode;
 };
 
-export const Tabs: React.FC<TabsProps> = (props) => {
+export const Tabs = (props: TabsProps) => {
   const { className, index: oIndex = 0, scrollable, hideNavIfOnlyOne, children, onChange } = props;
   const [pointerStyles, setPointerStyles] = useState({});
   const [index, setIndex] = useState(oIndex || 0);

@@ -8,7 +8,7 @@ import {
 } from '../MessageContainer';
 import { QuickReplies, QuickReplyItemProps } from '../QuickReplies';
 import { Composer as DComposer, ComposerProps, ComposerHandle } from '../Composer';
-import isSafari from '../../utils/isSafari';
+import { isSafari, getIOSMajorVersion } from '../../utils/ua';
 
 export type ChatProps = Omit<ComposerProps, 'onFocus' | 'onChange' | 'onBlur'> &
   MessageContainerProps & {
@@ -164,6 +164,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     onQuickReplyScroll,
     renderQuickReplies,
     text,
+    textOnce,
     placeholder,
     onInputFocus,
     onInputChange,
@@ -192,8 +193,15 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
   }
 
   useEffect(() => {
+    const rootEl = document.documentElement;
     if (isSafari()) {
-      document.documentElement.dataset.safari = '';
+      rootEl.dataset.safari = '';
+    }
+
+    const v = getIOSMajorVersion();
+    // iOS 9、10 不支持按钮使用 flex
+    if (v && v < 11) {
+      rootEl.dataset.oldIos = '';
     }
   }, []);
 
@@ -228,6 +236,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
             ref={composerRef}
             inputType={inputType}
             text={text}
+            textOnce={textOnce}
             inputOptions={inputOptions}
             placeholder={placeholder}
             onAccessoryToggle={onAccessoryToggle}

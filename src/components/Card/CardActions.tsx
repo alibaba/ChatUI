@@ -1,12 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
 
-export type CardActionsProps = {
+export interface CardActionsProps {
   className?: string;
   direction?: 'column' | 'row';
-};
+  children?: React.ReactNode;
+}
 
-export const CardActions: React.FC<CardActionsProps> = (props) => {
+export const CardActions = (props: CardActionsProps) => {
   const { children, className, direction, ...other } = props;
   return (
     <div

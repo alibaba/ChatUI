@@ -2,14 +2,15 @@ import React from 'react';
 import clsx from 'clsx';
 import { Flex } from '../Flex';
 
-export type CardMediaProps = {
+export interface CardMediaProps {
   className?: string;
   aspectRatio?: 'square' | 'wide';
   color?: string;
   image?: string;
-};
+  children?: React.ReactNode;
+}
 
-export const CardMedia: React.FC<CardMediaProps> = (props) => {
+export const CardMedia = (props: CardMediaProps) => {
   const { className, aspectRatio = 'square', color, image, children, ...other } = props;
 
   const bgStyle = {

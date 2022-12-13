@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import clsx from 'clsx';
 import { Input, InputProps } from '../Input';
 import { SendConfirm } from '../SendConfirm';
@@ -21,7 +21,6 @@ export const ComposerInput = ({
   ...rest
 }: ComposerInputProps) => {
   const [pastedImage, setPastedImage] = useState<File | null>(null);
-  const wrapRef = useRef<HTMLDivElement>(null);
 
   const handlePaste = useCallback((e: React.ClipboardEvent<any>) => {
     parseDataTransfer(e, setPastedImage);
@@ -40,13 +39,14 @@ export const ComposerInput = ({
   }, [onImageSend, pastedImage]);
 
   useEffect(() => {
-    if (canTouch && inputRef.current && wrapRef.current) {
-      riseInput(inputRef.current, wrapRef.current);
+    if (canTouch && inputRef.current) {
+      const $composer = document.querySelector('.Composer');
+      riseInput(inputRef.current, $composer);
     }
   }, [inputRef]);
 
   return (
-    <div className={clsx({ 'S--invisible': invisible })} ref={wrapRef}>
+    <div className={clsx({ 'S--invisible': invisible })}>
       <Input
         className="Composer-input"
         rows={1}

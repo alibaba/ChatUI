@@ -3,15 +3,16 @@ import clsx from 'clsx';
 import { Label } from '../Label';
 import { HelpText } from '../HelpText';
 
-export type FormItemProps = {
+export interface FormItemProps {
   label?: string | React.ReactNode;
   help?: string;
   required?: boolean;
   invalid?: boolean;
   hidden?: boolean;
-};
+  children?: React.ReactNode;
+}
 
-export const FormItem: React.FC<FormItemProps> = (props) => {
+export const FormItem = (props: FormItemProps) => {
   const { label, help, required, invalid, hidden, children } = props;
   return (
     <div className={clsx('FormItem', { required, 'is-invalid': invalid })} hidden={hidden}>

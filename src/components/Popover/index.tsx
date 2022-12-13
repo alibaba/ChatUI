@@ -10,9 +10,10 @@ export type PopoverProps = {
   active: boolean;
   target: HTMLElement;
   onClose: () => void;
+  children?: React.ReactNode;
 };
 
-export const Popover: React.FC<PopoverProps> = (props) => {
+export const Popover = (props: PopoverProps) => {
   const { className, active, target, children, onClose } = props;
   const wrapper = useClickOutside(onClose, 'mousedown');
   const { didMount, isShow } = useMount({ active, ref: wrapper });

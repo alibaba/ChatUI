@@ -1,12 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
 
-export type DividerProps = {
+export interface DividerProps {
   className?: string;
   position?: 'center' | 'left' | 'right';
-};
+  children?: React.ReactNode;
+}
 
-export const Divider: React.FC<DividerProps> = (props) => {
+export const Divider = (props: DividerProps) => {
   const { className, position = 'center', children, ...other } = props;
   return (
     <div
