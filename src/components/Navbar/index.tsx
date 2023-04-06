@@ -24,7 +24,7 @@ export const Navbar = (props: NavbarProps) => {
       </div>
       <div className="Navbar-right">
         {rightContent.map((item) => (
-          <IconButton size="lg" {...item} key={item.icon} />
+          <IconButton size="lg" key={item.icon} {...item} />
         ))}
       </div>
     </header>
