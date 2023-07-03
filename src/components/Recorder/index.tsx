@@ -55,14 +55,14 @@ export interface RecordingProps {
 function DRecording({ text, status, volume }: RecordingProps) {
   const wavesStyle = { transform: `scale(${(volume || 1) / 100 + 1})` };
   return <Flex className="RecorderToast" direction="column" center>
-  <div className="RecorderToast-waves" hidden={status !== 'recording'} style={wavesStyle}>
-    <Icon className="RecorderToast-wave-1" type="hexagon" />
-    <Icon className="RecorderToast-wave-2" type="hexagon" />
-    <Icon className="RecorderToast-wave-3" type="hexagon" />
-  </div>
-  <Icon className="RecorderToast-icon" type={status === 'willCancel' ? 'cancel' : 'mic'} />
-  { text ? <span>{text}</span> : null}
-</Flex>
+    <div className="RecorderToast-waves" hidden={status !== 'recording'} style={wavesStyle}>
+      <Icon className="RecorderToast-wave-1" type="hexagon" />
+      <Icon className="RecorderToast-wave-2" type="hexagon" />
+      <Icon className="RecorderToast-wave-3" type="hexagon" />
+    </div>
+    <Icon className="RecorderToast-icon" type={status === 'willCancel' ? 'cancel' : 'mic'} />
+    { text ? <span>{text}</span> : null}
+  </Flex>
 }
 
 export const Recorder = React.forwardRef<RecorderHandle, RecorderProps>((props, ref) => {
