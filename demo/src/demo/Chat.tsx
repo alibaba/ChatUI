@@ -15,10 +15,32 @@ import Chat, {
   FlexItem,
   ScrollView,
   ToolbarItemProps,
+  Button,
+  Icon,
 } from '../../../src';
 import OrderSelector from './OrdderSelector';
 
 type MessageWithoutId = Omit<MessageProps, '_id'>;
+
+interface SendButtonProps {
+  disabled: boolean;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+interface RecordingProps {
+  /**
+   * 语音文案
+   */
+  text?: string;
+  /**
+   * 状态
+   */
+  status?: 'inited' | 'willCancel' | 'recording';
+  /**
+   * 动画的大小
+   */
+  volume?: number;
+}
 
 const initialMessages: MessageWithoutId[] = [
   {
@@ -305,6 +327,26 @@ export default () => {
     }
   }
 
+  function SendButton({ disabled, onClick }: SendButtonProps) {
+    return <div className="Composer-actions">
+      <Button
+        className="Composer-sendBtn"
+        disabled={disabled}
+        onMouseDown={onClick}
+        color="primary"
+      >
+        发送
+      </Button>
+    </div>
+  }
+
+  function Recording({ text, status, volume }: RecordingProps) {
+    return <Flex className="RecorderToast" direction="column" center>
+    <Icon className="RecorderToast-icon" type={status === 'willCancel' ? 'cancel' : 'mic'} />
+    { text ? <span>{text}</span> : null}
+  </Flex>
+  }
+
   return (
     <DemoPage>
       <div style={{ height: 'calc(100vh - 48px)', marginTop: '-12px' }}>
@@ -331,7 +373,7 @@ export default () => {
           toolbar={toolbar}
           messagesRef={msgRef}
           onToolbarClick={handleToolbarClick}
-          recorder={{ canRecord: true }}
+          recorder={{ canRecord: true, Recording }}
           wideBreakpoint="600px"
           messages={messages}
           renderMessageContent={renderMessageContent}
@@ -339,6 +381,7 @@ export default () => {
           onQuickReplyClick={handleQuickReplyClick}
           onSend={handleSend}
           onImageSend={() => Promise.resolve()}
+          SendButton={SendButton}
         />
       </div>
     </DemoPage>

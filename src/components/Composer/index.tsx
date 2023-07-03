@@ -8,7 +8,7 @@ import { Popover } from '../Popover';
 import { InputProps } from '../Input';
 import { ToolbarItem } from './ToolbarItem';
 import { ComposerInput } from './ComposerInput';
-import { SendButton } from './SendButton';
+import { SendButton as DSendButton } from './SendButton';
 import { Action } from './Action';
 import toggleClass from '../../utils/toggleClass';
 
@@ -34,6 +34,7 @@ export type ComposerProps = {
   onToolbarClick?: (item: ToolbarItemProps, event: React.MouseEvent) => void;
   onAccessoryToggle?: (isAccessoryOpen: boolean) => void;
   rightAction?: IconButtonProps;
+  SendButton?: React.ElementType;
 };
 
 export interface ComposerHandle {
@@ -59,6 +60,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     onToolbarClick,
     rightAction,
     inputOptions,
+    SendButton = DSendButton
   } = props;
 
   const [text, setText] = useState(initialText);

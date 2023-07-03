@@ -140,6 +140,10 @@ export type ChatProps = Omit<ComposerProps, 'onFocus' | 'onChange' | 'onBlur'> &
      * 输入组件
      */
     Composer?: React.ElementType; // FIXME
+    /**
+     * 发送按钮
+     */
+    SendButton?: React.ElementType;
   };
 
 export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => {
@@ -181,6 +185,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     onAccessoryToggle,
     rightAction,
     Composer = DComposer,
+    SendButton,
   } = props;
 
   function handleInputFocus(e: React.FocusEvent<HTMLTextAreaElement>) {
@@ -250,6 +255,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
             onSend={onSend}
             onImageSend={onImageSend}
             rightAction={rightAction}
+            SendButton={SendButton}
           />
         </div>
       </div>
