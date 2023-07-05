@@ -14,8 +14,10 @@
   position: relative;
   display: inline-block;
   overflow: hidden;
-  width: 76px;
-  padding: 6px;
+  // width: 76Px;
+  max-width: 100%;
+  min-width: 0;
+  padding: 6Px;
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -42,11 +44,11 @@
   }
 }
 
-@toolbar-icon-size: 30px;
+@toolbar-icon-size: 30Px;
 
 .Toolbar-btnIcon {
   display: inline-block;
-  padding: 12px;
+  padding: 12Px;
   border-radius: 12px;
   background: var(--white);
   transition: 0.3s;
@@ -65,9 +67,28 @@
 
 .Toolbar-btnText {
   display: block;
-  margin-top: 8px;
-  font-size: 14px;
+  margin-top: 8Px;
+  font-size: 14Px;
   line-height: 1.1;
   white-space: initial;
   word-wrap: break-word;
+}
+
+.ChatApp[data-elder-mode='true'] {
+  .Toolbar-btnIcon {
+    padding: 16Px;
+  }
+}
+@media (min-width: 350px) {
+  .ChatApp[data-elder-mode='true'] {
+    // .Toolbar-btn {
+    //   width: 86Px;
+    // }
+    .Toolbar-btnIcon {
+      padding: 19Px;
+    }
+    .Toolbar-btnIcon .Icon {
+      font-size: 36Px;
+    }
+  }
 }

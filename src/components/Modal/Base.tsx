@@ -7,6 +7,7 @@ import { IconButton } from '../IconButton';
 import { Button, ButtonProps } from '../Button';
 import useNextId from '../../hooks/useNextId';
 import toggleClass from '../../utils/toggleClass';
+import { useConfig } from '../ConfigProvider';
 
 export interface ModalProps {
   active?: boolean;
@@ -60,6 +61,7 @@ export const Base = React.forwardRef<BaseModalHandle, ModalProps>((props, ref) =
 
   const mid = useNextId('modal-');
   const titleId = props.titleId || mid;
+  const configCtx = useConfig();
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const { didMount, isShow } = useMount({ active, ref: wrapperRef });
@@ -100,7 +102,12 @@ export const Base = React.forwardRef<BaseModalHandle, ModalProps>((props, ref) =
   const isPopup = baseClass === 'Popup';
 
   return createPortal(
-    <div className={clsx(baseClass, className, { active: isShow })} ref={wrapperRef} tabIndex={-1}>
+    <div
+      className={clsx(baseClass, className, { active: isShow })}
+      tabIndex={-1}
+      data-elder-mode={configCtx.elderMode}
+      ref={wrapperRef}
+    >
       {backdrop && (
         <Backdrop
           active={isShow}

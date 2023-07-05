@@ -6,10 +6,11 @@ import { Flex } from '../Flex';
 import { Button } from '../Button';
 import canUse from '../../utils/canUse';
 import smoothScroll from '../../utils/smoothScroll';
+import { useLatest } from '../../hooks/useLatest';
 
 const canPassive = canUse('passiveListener');
-const listenerOpts = canPassive ? { passive: true } : false;
-const listenerOptsWithoutPassive = canPassive ? { passive: false } : false;
+const passiveOpts = canPassive ? { passive: true } : false;
+const nonPassiveOpts = canPassive ? { passive: false } : false;
 
 type PullToRefreshStatus = 'pending' | 'pull' | 'active' | 'loading';
 
@@ -59,8 +60,9 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
       },
     } = props;
 
-    const wrapperRef = useRef<HTMLDivElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null!);
     const contentRef = useRef<HTMLDivElement>(null);
+    const onRefreshRef = useLatest(onRefresh);
 
     const [distance, setDistance] = useState(0);
     const [status, setStatus] = useState<PullToRefreshStatus>('pending');
@@ -115,14 +117,14 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
     const handleLoadMore = useCallback(() => {
       const scroller = wrapperRef.current;
 
-      if (!scroller) return;
+      if (!scroller || !onRefreshRef.current) return;
 
       setStatus('loading');
 
       try {
         const sh = scroller.scrollHeight;
 
-        onRefresh!().then((res) => {
+        onRefreshRef.current().then((res) => {
           const handleOffset = () => {
             scrollTo({
               y: scroller.scrollHeight - sh - 50,
@@ -147,27 +149,33 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
         console.error(ex);
         reset();
       }
-    }, [onRefresh, reset]);
+    }, [onRefreshRef, reset]);
 
-    const touchStart = (e: TouchEvent) => {
-      sharedRef.current.startY = e.touches[0].clientY;
-      sharedRef.current.canPull = wrapperRef.current && wrapperRef.current.scrollTop <= 0;
-
-      if (sharedRef.current.canPull) {
-        setStatus('pull');
-        setDropped(false);
-      }
+    const touchStart = () => {
+      sharedRef.current.startY = 0;
     };
 
     const touchMove = useCallback(
       (e: TouchEvent) => {
         const currentY = e.touches[0].clientY;
+        const canPull = wrapperRef.current.scrollTop <= 0;
 
-        const { canPull, startY } = sharedRef.current;
+        if (canPull) {
+          if (!sharedRef.current.startY) {
+            sharedRef.current.startY = currentY;
+            setStatus('pull');
+            setDropped(false);
+          }
+        } else {
+          sharedRef.current.startY = 0;
+        }
+
+        const { startY } = sharedRef.current;
 
         if (!canPull || currentY < startY || statusRef.current === 'loading') return;
 
         let dist = (currentY - startY) / distanceRatio;
+
         if (maxDistance && dist > maxDistance) {
           dist = maxDistance;
         }
@@ -189,7 +197,7 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
     const touchEnd = useCallback(() => {
       setDropped(true);
 
-      if (statusRef.current === 'active') {
+      if (sharedRef.current.startY && statusRef.current === 'active') {
         handleLoadMore();
       } else {
         reset();
@@ -207,8 +215,8 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
         wrapper.removeEventListener('touchend', touchEnd);
         wrapper.removeEventListener('touchcancel', touchEnd);
       } else {
-        wrapper.addEventListener('touchstart', touchStart, listenerOpts);
-        wrapper.addEventListener('touchmove', touchMove, listenerOptsWithoutPassive);
+        wrapper.addEventListener('touchstart', touchStart, passiveOpts);
+        wrapper.addEventListener('touchmove', touchMove, nonPassiveOpts);
         wrapper.addEventListener('touchend', touchEnd);
         wrapper.addEventListener('touchcancel', touchEnd);
       }

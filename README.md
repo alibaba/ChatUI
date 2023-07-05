@@ -101,9 +101,9 @@ const App = () => {
 ### Development
 
 ```bash
-cd storybook
+cd demo
 npm i
-npm run storybook
+npm run dev
 ```
 
 ## Theme

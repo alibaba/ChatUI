@@ -1,6 +1,6 @@
 import React from 'react';
 import formatDate, { IDate } from './parser';
-import { useLocale } from '../LocaleProvider';
+import { useLocale } from '../ConfigProvider';
 
 export interface TimeProps {
   date: IDate;

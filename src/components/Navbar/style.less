@@ -14,21 +14,22 @@
     align-items: center;
     justify-content: center;
     min-height: @navbar-height;
+    padding: 3Px 0;
+    box-sizing: border-box;
   }
   &-left,
   &-right {
-    width: 58px;
+    display: flex;
+    width: 58Px;
   }
   &-right {
-    text-align: right;
-    white-space: nowrap;
+    justify-content: flex-end;
   }
   &-title {
     margin: 0;
     color: @navbar-color;
     font-size: @navbar-font-size;
     font-weight: 500;
-    text-align: center;
   }
   &-logo {
     width: auto;
@@ -36,8 +37,46 @@
   }
   .IconBtn {
     color: var(--gray-1);
+    font-size: 24Px;
   }
   .IconBtn + .IconBtn {
-    margin-left: 9px;
+    margin-left: 9Px;
+  }
+}
+
+.Navbar--left {
+  .Navbar-left {
+    width: 24Px;
+  }
+  .Navbar-main {
+    min-height: 62Px;
+    justify-content: flex-start;
+  }
+  .Navbar-logo {
+    margin-left: 9Px;
+  }
+}
+
+.Navbar-logo + .Navbar-inner {
+  margin-left: 9Px;
+}
+
+.Navbar-desc {
+  color: var(--gray-2);
+  font-size: 12Px;
+}
+
+.ChatApp[data-elder-mode='true'] {
+  .Navbar .IconBtn {
+    font-size: 26Px;
+  }
+  .Navbar-logo {
+    height: 43Px;
+  }
+  .Navbar-title {
+    font-size: 18Px;
+  }
+  .Navbar-desc {
+    font-size: 13Px;
   }
 }

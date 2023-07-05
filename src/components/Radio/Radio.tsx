@@ -8,7 +8,7 @@ export type RadioProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: RadioValue;
 };
 
-export const Radio = (props: RadioProps) => {
+export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref) => {
   const { className, label, checked, disabled, onChange, ...other } = props;
 
   return (
@@ -17,6 +17,7 @@ export const Radio = (props: RadioProps) => {
         'Radio--checked': checked,
         'Radio--disabled': disabled,
       })}
+      ref={ref}
     >
       <input
         type="radio"
@@ -30,4 +31,4 @@ export const Radio = (props: RadioProps) => {
       <span className="Radio-text">{label}</span>
     </label>
   );
-};
+});

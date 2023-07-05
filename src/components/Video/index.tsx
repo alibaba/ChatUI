@@ -1,6 +1,11 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useImperativeHandle } from 'react';
 import clsx from 'clsx';
+import { formatTime } from '../../utils/formatTime';
+
+export interface VideoHandle {
+  wrapperRef: React.RefObject<HTMLDivElement>;
+}
 
 export type VideoProps = React.VideoHTMLAttributes<HTMLVideoElement> & {
   className?: string;
@@ -13,7 +18,7 @@ export type VideoProps = React.VideoHTMLAttributes<HTMLVideoElement> & {
   onCoverLoad?: (event: React.SyntheticEvent<HTMLImageElement, Event>) => void;
 };
 
-export const Video = (props: VideoProps) => {
+export const Video = React.forwardRef<VideoHandle, VideoProps>((props, ref) => {
   const {
     className,
     src,
@@ -27,6 +32,7 @@ export const Video = (props: VideoProps) => {
     ...other
   } = props;
 
+  const wrapperRef = useRef<HTMLDivElement>(null!);
   const localVideoRef = useRef<HTMLVideoElement>(null!);
   const videoRef = outerVideoRef || localVideoRef;
 
@@ -60,13 +66,18 @@ export const Video = (props: VideoProps) => {
   const hasCover = !isPlayed && !!cover;
   const hasDuration = hasCover && !!duration;
 
+  useImperativeHandle(ref, () => ({
+    wrapperRef,
+  }));
+
   return (
     <div
       className={clsx('Video', `Video--${paused ? 'paused' : 'playing'}`, className)}
       style={style}
+      ref={wrapperRef}
     >
       {hasCover && <img className="Video-cover" src={cover} onLoad={onCoverLoad} alt="" />}
-      {hasDuration && <span className="Video-duration">{duration}</span>}
+      {hasDuration && <span className="Video-duration">{formatTime(+duration)}</span>}
       <video
         className="Video-video"
         src={src}
@@ -87,4 +98,4 @@ export const Video = (props: VideoProps) => {
       )}
     </div>
   );
-};
+});

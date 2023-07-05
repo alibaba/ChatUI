@@ -1,19 +1,23 @@
+.ChatApp[data-elder-mode='true'] {
+  --rate-width: 38Px;
+}
+
 .RateActions {
   position: relative;
   z-index: @zindex-rate-actions;
   align-self: flex-end;
-  width: 32px;
-  margin: 0 8px;
+  width: var(--rate-width);
+  margin: 0 8Px;
 }
 
 .RateBtn {
-  padding: 6px;
+  padding: 6Px;
   border-radius: 50%;
   background: @rate-btn-bg;
-  font-size: 20px;
+  font-size: calc(var(--rate-width) - 12Px);
 
   & + .RateBtn {
-    margin-top: 9px;
+    margin-top: 8Px;
   }
   &[data-type='up'] {
     &:hover,

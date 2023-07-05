@@ -36,6 +36,7 @@ export { default as RichText } from './RichText';
 export { default as ScrollView } from './ScrollView';
 export { default as Search } from './Search';
 export { default as Select } from './Select';
+export { default as Skeleton } from './Skeleton';
 export { default as Stepper } from './Stepper';
 export { default as SystemMessage } from './SystemMessage';
 export { default as Tabs } from './Tabs';

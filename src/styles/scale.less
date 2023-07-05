@@ -1,0 +1,19 @@
+& when (@global-style = true) {
+  :root {
+    --scale-ratio: 1;
+    // vw = 16 * 100 / 375
+    font-size: calc(4.2666666667vw * var(--scale-ratio));
+  }
+
+  @media (max-width: 374px) {
+    :root {
+      font-size: calc(16px * var(--scale-ratio));
+    }
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      font-size: 16px;
+    }
+  }
+}

@@ -18,7 +18,7 @@
 @blue: #39f;
 @gray-dark: #333;
 @green: #62d957;
-@orange: #f70;
+@orange: #ff5000;
 @red: #ff3634;
 @yellow: #ffc233;
 @yellow-light: #fff9db;
@@ -122,7 +122,7 @@
 @composer-padding: 9px var(--gutter);
 
 @composer-input-max-height: 132px;
-@composer-input-min-height: 36px;
+@composer-input-min-height: 36Px;
 @composer-input-padding: 8px 12px;
 @composer-input-border: 0;
 @composer-input-bg: var(--white);
@@ -161,14 +161,14 @@
 @list-item-active-bg: var(--gray-6);
 
 // Navbar
-@navbar-height: 44px;
+@navbar-height: 44Px;
 @navbar-padding: 0 var(--gutter);
 @navbar-bg: var(--gray-6);
 @navbar-border-color: var(--gray-5);
 
 @navbar-color: var(--gray-1);
-@navbar-font-size: @font-size-lg;
-@navbar-logo-height: @navbar-height - 8px;
+@navbar-font-size: 17Px;
+@navbar-logo-height: @navbar-height - 6Px;
 
 // Notice
 @notice-padding: @gutter;
@@ -198,8 +198,8 @@
 @bubble-right-color: '';
 @bubble-right-border-radius: 12px;
 
-@bubble-left-gutter: 48px;
-@bubble-right-gutter: 40px;
+@bubble-left-gutter: calc(var(--rate-width) + 16Px);
+@bubble-right-gutter: calc(var(--rate-width) + 8Px);
 
 @bubble-text-padding: 12px;
 
@@ -220,17 +220,18 @@
 // @card-border-color: ;
 @card-bg: var(--white);
 
-@card-text-color: var(--gray-dark);
+@card-text-color: var(--gray-1);
 
-@card-size-xl: 300px;
+@card-size-xl: 300Px;
 @card-size-lg: 160px;
 @card-size-md: 120px;
 @card-size-sm: 104px;
 @card-size-xs: 80px;
 
-@card-fluid-width: calc(100% - 48px);
-@card-max-width: 680px;
-@card-min-width: 260px;
+// 卡片自适应宽度 = 100%宽度 - 赞踩宽度 - 赞踩左右边距
+@card-fluid-width: calc(100% - var(--rate-width) - 16Px);
+@card-max-width: 680Px;
+@card-min-width: 260Px;
 
 @card-btn-padding: 10px;
 @card-btn-line-height: 1.5;
@@ -345,11 +346,11 @@
 @progress-bar-bg-error: var(--red);
 
 // QuickReplies
-@quick-replies-padding: 9px var(--gutter);
+@quick-replies-padding: 9Px var(--gutter);
 @quick-replies-bg: var(--gray-7);
 
 @quick-reply-color: var(--gray-1);
-@quick-reply-font-size: @font-size-sm;
+@quick-reply-font-size: 14Px;
 
 @quick-reply-hover-bg: var(--gray-6);
 
@@ -417,7 +418,7 @@
 // MessageList
 @message-list-padding: var(--gutter);
 
-@message-spacer-y: 12px;
+@message-spacer-y: var(--gutter);
 
 // Toast
 @toast-content-padding: 18px 24px;

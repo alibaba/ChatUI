@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { LocaleProvider } from '../LocaleProvider';
+import { ConfigProvider, ConfigContextType } from '../ConfigProvider';
 import { Navbar, NavbarProps } from '../Navbar';
 import {
   MessageContainer,
@@ -11,19 +11,12 @@ import { Composer as DComposer, ComposerProps, ComposerHandle } from '../Compose
 import { isSafari, getIOSMajorVersion } from '../../utils/ua';
 
 export type ChatProps = Omit<ComposerProps, 'onFocus' | 'onChange' | 'onBlur'> &
+  ConfigContextType &
   MessageContainerProps & {
     /**
      * 宽版模式断点
      */
     // wideBreakpoint?: string;
-    /**
-     * 当前语言
-     */
-    locale?: string;
-    /**
-     * 多语言
-     */
-    locales?: any; // FIXME
     /**
      * 导航栏配置
      */
@@ -147,6 +140,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     wideBreakpoint,
     locale = 'zh-CN',
     locales,
+    elderMode,
     navbar,
     renderNavbar,
     loadMoreText,
@@ -155,6 +149,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     onRefresh,
     onScroll,
     messages = [],
+    isTyping,
     renderMessageContent,
     onBackBottomShow,
     onBackBottomClick,
@@ -206,13 +201,14 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
   }, []);
 
   return (
-    <LocaleProvider locale={locale} locales={locales}>
-      <div className="ChatApp" ref={ref}>
+    <ConfigProvider locale={locale} locales={locales} elderMode={elderMode}>
+      <div className="ChatApp" data-elder-mode={elderMode} ref={ref}>
         {renderNavbar ? renderNavbar() : navbar && <Navbar {...navbar} />}
         <MessageContainer
           ref={messagesRef}
           loadMoreText={loadMoreText}
           messages={messages}
+          isTyping={isTyping}
           renderBeforeMessageList={renderBeforeMessageList}
           renderMessageContent={renderMessageContent}
           onRefresh={onRefresh}
@@ -253,6 +249,6 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
           />
         </div>
       </div>
-    </LocaleProvider>
+    </ConfigProvider>
   );
 });

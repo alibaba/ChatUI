@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DemoPage, DemoSection, LangSwitcher } from '../components';
-import { Time, LocaleProvider } from '../../../src';
+import { Time, ConfigProvider } from '../../../src';
 
 const now = Date.now();
 const MS_A_DAY = 24 * 60 * 60 * 1000;
@@ -13,7 +13,7 @@ export default () => {
     <DemoPage>
       <DemoSection title="基础用法">
         <LangSwitcher value={lang} onChange={setLang} />
-        <LocaleProvider locale={lang}>
+        <ConfigProvider locale={lang}>
           <p>
             <span>现在：</span>
             <Time date={now} />
@@ -34,7 +34,7 @@ export default () => {
             <span>上上周：</span>
             <Time date={now - MS_A_WEEK * 2} />
           </p>
-        </LocaleProvider>
+        </ConfigProvider>
       </DemoSection>
     </DemoPage>
   );

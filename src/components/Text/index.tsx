@@ -10,7 +10,7 @@ export interface TextProps {
   children?: React.ReactNode;
 }
 
-export const Text = (props: TextProps) => {
+export const Text = React.forwardRef<HTMLElement, TextProps>((props, ref) => {
   const { as: Element = 'div', className, align, breakWord, truncate, children, ...other } = props;
   const ellipsis = Number.isInteger(truncate);
 
@@ -27,8 +27,8 @@ export const Text = (props: TextProps) => {
   const style = ellipsis ? { WebkitLineClamp: truncate } : null;
 
   return (
-    <Element className={cls} style={style} {...other}>
+    <Element className={cls} style={style} {...other} ref={ref}>
       {children}
     </Element>
   );
-};
+});

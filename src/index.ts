@@ -9,6 +9,7 @@ export { mountComponent } from './utils/mountComponent';
 
 export { default as useClickOutside } from './hooks/useClickOutside';
 export { default as useForwardRef } from './hooks/useForwardRef';
+export { useLatest } from './hooks/useLatest';
 export { default as useMessages } from './hooks/useMessages';
 export { default as useMount } from './hooks/useMount';
 export { default as useQuickReplies } from './hooks/useQuickReplies';
@@ -67,7 +68,14 @@ export { List, ListItem } from './components/List';
 export type { ListProps, ListItemProps } from './components/List';
 export { Loading } from './components/Loading';
 export type { LoadingProps } from './components/Loading';
-export { LocaleProvider, LocaleContext, useLocale } from './components/LocaleProvider';
+export {
+  ConfigProvider,
+  ConfigProvider as LocaleProvider,
+  ConfigContext,
+  ConfigContext as LocaleContext,
+  useConfig,
+  useLocale,
+} from './components/ConfigProvider';
 export { MediaObject } from './components/MediaObject';
 export type { MediaObjectProps } from './components/MediaObject';
 export { Message, SystemMessage } from './components/Message';

@@ -1,5 +1,4 @@
-/* eslint-disable no-underscore-dangle */
-import { useState, useMemo, useRef, useCallback } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { getRandomString } from '../utils';
 import { MessageProps, MessageId } from '../components/Message';
 
@@ -29,12 +28,9 @@ const makeMsg = (msg: MessageWithoutId, id?: MessageId) => {
   };
 };
 
-const TYPING_ID = '_TYPING_';
-
 export default function useMessages(initialState: MessageWithoutId[] = []) {
   const initialMsgs: Messages = useMemo(() => initialState.map((t) => makeMsg(t)), [initialState]);
   const [messages, setMessages] = useState(initialMsgs);
-  const isTypingRef = useRef(false);
 
   const prependMsgs = useCallback((msgs: Messages) => {
     setMessages((prev: Messages) => [...msgs, ...prev]);
@@ -44,18 +40,10 @@ export default function useMessages(initialState: MessageWithoutId[] = []) {
     setMessages((prev) => prev.map((t) => (t._id === id ? makeMsg(msg, id) : t)));
   }, []);
 
-  const appendMsg = useCallback(
-    (msg: MessageWithoutId) => {
-      const newMsg = makeMsg(msg);
-      if (isTypingRef.current) {
-        isTypingRef.current = false;
-        updateMsg(TYPING_ID, newMsg);
-      } else {
-        setMessages((prev) => [...prev, newMsg]);
-      }
-    },
-    [updateMsg],
-  );
+  const appendMsg = useCallback((msg: MessageWithoutId) => {
+    const newMsg = makeMsg(msg);
+    setMessages((prev) => [...prev, newMsg]);
+  }, []);
 
   const deleteMsg = useCallback((id: MessageId) => {
     setMessages((prev) => prev.filter((t) => t._id !== id));
@@ -65,23 +53,6 @@ export default function useMessages(initialState: MessageWithoutId[] = []) {
     setMessages(list);
   }, []);
 
-  const setTyping = useCallback(
-    (typing: boolean) => {
-      if (typing === isTypingRef.current) return;
-
-      if (typing) {
-        appendMsg({
-          _id: TYPING_ID,
-          type: 'typing',
-        });
-      } else {
-        deleteMsg(TYPING_ID);
-      }
-      isTypingRef.current = typing;
-    },
-    [appendMsg, deleteMsg],
-  );
-
   return {
     messages,
     prependMsgs,
@@ -89,6 +60,5 @@ export default function useMessages(initialState: MessageWithoutId[] = []) {
     updateMsg,
     deleteMsg,
     resetList,
-    setTyping,
   };
 }

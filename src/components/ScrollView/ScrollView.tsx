@@ -36,6 +36,7 @@ export const ScrollView = React.forwardRef<ScrollViewHandle, ScrollViewProps<any
     ...other
   } = props;
 
+  const wrapperRef = useRef<HTMLDivElement>(null!);
   const scrollerRef = useRef<HTMLDivElement>(null!);
 
   function handlePrev() {
@@ -68,6 +69,7 @@ export const ScrollView = React.forwardRef<ScrollViewHandle, ScrollViewProps<any
         scrollerRef.current.scrollTop = y;
       }
     },
+    wrapperRef,
   }));
 
   return (
@@ -81,7 +83,7 @@ export const ScrollView = React.forwardRef<ScrollViewHandle, ScrollViewProps<any
         },
         className,
       )}
-      ref={ref as React.RefObject<HTMLDivElement>}
+      ref={wrapperRef}
       {...other}
     >
       {hasControls && (

@@ -67,8 +67,7 @@
 
 // SystemMessage
 .SystemMessage {
-  padding: 0 15px;
-  font-size: @font-size-xs;
+  padding: 0 15Px;
   color: var(--gray-2);
   text-align: center;
 
@@ -79,8 +78,16 @@
 
 .SystemMessage-inner {
   display: inline-block;
-  padding: 6px 9px;
+  padding: 6Px 9Px;
   border-radius: 6px;
   background: var(--gray-8);
+  font-size: 12Px;
   text-align: left;
+}
+
+.ChatApp[data-elder-mode="true"] {
+  .SystemMessage-inner {
+    padding: 7Px 14Px;
+    font-size: 14Px;
+  }
 }

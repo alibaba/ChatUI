@@ -1,5 +1,5 @@
 import React from 'react';
-import locales from '../../../src/components/LocaleProvider/locales';
+import locales from '../../../src/components/ConfigProvider/locales';
 
 interface LangSwitcherProps {
   value: string;

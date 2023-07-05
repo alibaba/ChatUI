@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../Button';
-import { useLocale } from '../LocaleProvider';
+import { useLocale } from '../ConfigProvider';
 
 interface SendButtonProps {
   disabled: boolean;

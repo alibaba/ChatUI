@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { LocaleProvider, LocaleContext, useLocale } from '..';
+import { ConfigProvider, LocaleContext, useLocale } from '..';
 
 afterEach(cleanup);
 
-describe('<LocaleProvider />', () => {
+describe('<ConfigProvider />', () => {
   it(`should provide the locale`, () => {
     function Test() {
       const { locale } = React.useContext(LocaleContext);
@@ -12,9 +12,9 @@ describe('<LocaleProvider />', () => {
     }
 
     const { getByTestId } = render(
-      <LocaleProvider locale="en-US">
+      <ConfigProvider locale="en-US">
         <Test />
-      </LocaleProvider>,
+      </ConfigProvider>,
     );
 
     expect(getByTestId('span')).toHaveTextContent('en-US');
@@ -27,9 +27,9 @@ describe('<LocaleProvider />', () => {
     }
 
     const { getByTestId } = render(
-      <LocaleProvider locale="en-US">
+      <ConfigProvider locale="en-US">
         <Test />
-      </LocaleProvider>,
+      </ConfigProvider>,
     );
 
     expect(getByTestId('span')).toHaveTextContent('Send');
@@ -47,9 +47,9 @@ describe('<LocaleProvider />', () => {
     }
 
     const { getByTestId } = render(
-      <LocaleProvider locale="en-US">
+      <ConfigProvider locale="en-US">
         <Test />
-      </LocaleProvider>,
+      </ConfigProvider>,
     );
 
     expect(getByTestId('span1')).toHaveTextContent('Send photo');
@@ -63,9 +63,9 @@ describe('<LocaleProvider />', () => {
     }
 
     const { getByTestId } = render(
-      <LocaleProvider locales={{ Test: 'test' }}>
+      <ConfigProvider locales={{ Test: 'test' }}>
         <Test />
-      </LocaleProvider>,
+      </ConfigProvider>,
     );
 
     expect(getByTestId('span')).toHaveTextContent('test');
@@ -78,9 +78,9 @@ describe('<LocaleProvider />', () => {
     }
 
     const { getByTestId } = render(
-      <LocaleProvider locale="test">
+      <ConfigProvider locale="test">
         <Test />
-      </LocaleProvider>,
+      </ConfigProvider>,
     );
 
     expect(getByTestId('span')).toHaveTextContent('Send');
@@ -93,9 +93,9 @@ describe('<LocaleProvider />', () => {
     }
 
     const { getByTestId } = render(
-      <LocaleProvider locale="en-US">
+      <ConfigProvider locale="en-US">
         <Test />
-      </LocaleProvider>,
+      </ConfigProvider>,
     );
 
     expect(getByTestId('span')).toHaveTextContent('en-US');

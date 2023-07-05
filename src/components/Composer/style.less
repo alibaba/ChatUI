@@ -14,7 +14,7 @@
   height: @composer-input-min-height;
 
   .IconBtn {
-    font-size: 30px;
+    font-size: 30Px;
     color: var(--gray-1);
   }
 }
@@ -33,20 +33,39 @@
 }
 
 .Composer-input {
-  overflow: hidden;
+  overflow-x: hidden;
   max-height: @composer-input-max-height;
   padding: @composer-input-padding;
   border: @composer-input-border;
-  border-radius: @composer-input-border-radius;
-  background: @composer-input-bg;
-  line-height: 20px;
-  font-size: 15px;
+  // border-radius: @composer-input-border-radius;
+  // background: @composer-input-bg;
+  line-height: 20Px;
+  font-size: 15Px;
   caret-color: @composer-input-caret-color;
   transition: @composer-input-transition;
 }
 
 .Composer-sendBtn {
   min-width: 0;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 16Px;
+  padding-right: 16Px;
+}
+
+.ChatApp[data-elder-mode="true"] {
+  .Composer-actions {
+    height: 50Px;
+
+    .IconBtn {
+      font-size: 34Px;
+    }
+  }
+  .Composer-input {
+    padding: 9Px 12Px;
+    font-size: 21Px;
+    line-height: 32Px;
+  }
+  .Composer-sendBtn {
+    padding: 4Px 13Px;
+    font-size: 17Px;
+  }
 }

@@ -11,7 +11,7 @@ export default () => (
             content="文字提示"
             as="button"
             onClick={() => {
-              toast.show('提示内容', '');
+              toast.show('提示内容');
             }}
             rightIcon="chevron-right"
           />

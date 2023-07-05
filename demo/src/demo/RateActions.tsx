@@ -1,6 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
-import { RateActions, LocaleProvider } from '../../../src';
+import { RateActions, ConfigProvider } from '../../../src';
 
 export default () => (
   <DemoPage>
@@ -12,16 +12,16 @@ export default () => (
       />
     </DemoSection>
     <DemoSection title="多语言（英文）" bg="gray">
-      <LocaleProvider locale="en-US">
+      <ConfigProvider locale="en-US">
         <RateActions
           onClick={(val: string) => {
             console.log(val);
           }}
         />
-      </LocaleProvider>
+      </ConfigProvider>
     </DemoSection>
     <DemoSection title="修改 title" bg="gray">
-      <LocaleProvider locale="en-US">
+      <ConfigProvider locale="en-US">
         <RateActions
           upTitle="Like"
           downTitle="Unlike"
@@ -29,7 +29,7 @@ export default () => (
             console.log(val);
           }}
         />
-      </LocaleProvider>
+      </ConfigProvider>
     </DemoSection>
   </DemoPage>
 );

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Button } from '../Button';
 import { Icon } from '../Icon';
-import { useLocale } from '../LocaleProvider';
+import { useLocale } from '../ConfigProvider';
 
 interface BackBottomProps {
   count: number;

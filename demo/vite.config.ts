@@ -1,20 +1,18 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig } from 'vite';
-import reactRefresh from '@vitejs/plugin-react-refresh';
+import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [reactRefresh()],
+  base: './',
+  plugins: [react()],
   build: {
-    outDir: 'build',
-    assetsDir: 'assets',
-    manifest: false,
-    minify: false,
+    outDir: '../dist/demo',
     rollupOptions: {
       output: {
-        entryFileNames: `assets/[name].js`,
-        chunkFileNames: `assets/[name].js`,
-        assetFileNames: `assets/[name].[ext]`,
+        entryFileNames: `[name].js`,
+        chunkFileNames: `[name].js`,
+        assetFileNames: `[name].[ext]`,
       },
     },
   },

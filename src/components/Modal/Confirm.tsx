@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Base, ModalProps, BaseModalHandle } from './Base';
-import { useLocale } from '../LocaleProvider';
+import { useLocale } from '../ConfigProvider';
 import { ButtonProps } from '../Button';
 
 const isPrimary = (btn: ButtonProps) => btn.color === 'primary';

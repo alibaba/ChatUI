@@ -7,11 +7,11 @@ export interface ListProps {
   children?: React.ReactNode;
 }
 
-export const List = (props: ListProps) => {
+export const List = React.forwardRef<HTMLDivElement, ListProps>((props, ref) => {
   const { bordered = false, className, children } = props;
   return (
-    <div className={clsx('List', { 'List--bordered': bordered }, className)} role="list">
+    <div className={clsx('List', { 'List--bordered': bordered }, className)} role="list" ref={ref}>
       {children}
     </div>
   );
-};
+});

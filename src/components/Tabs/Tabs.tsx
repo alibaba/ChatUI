@@ -59,7 +59,7 @@ export type TabsProps = {
   children?: React.ReactNode;
 };
 
-export const Tabs = (props: TabsProps) => {
+export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
   const { className, index: oIndex = 0, scrollable, hideNavIfOnlyOne, children, onChange } = props;
   const [pointerStyles, setPointerStyles] = useState({});
   const [index, setIndex] = useState(oIndex || 0);
@@ -162,7 +162,7 @@ export const Tabs = (props: TabsProps) => {
   const needNav = headers.length > (hideNavIfOnlyOne ? 1 : 0);
 
   return (
-    <div className={clsx('Tabs', { 'Tabs--scrollable': scrollable }, className)}>
+    <div className={clsx('Tabs', { 'Tabs--scrollable': scrollable }, className)} ref={ref}>
       {needNav && (
         <div className="Tabs-nav" role="tablist" ref={navRef}>
           {headers}
@@ -172,4 +172,4 @@ export const Tabs = (props: TabsProps) => {
       <div className="Tabs-content">{contents}</div>
     </div>
   );
-};
+});

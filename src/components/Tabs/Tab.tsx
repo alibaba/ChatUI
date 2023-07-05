@@ -5,4 +5,6 @@ export interface TabProps {
   children?: React.ReactNode;
 }
 
-export const Tab = ({ children }: TabProps) => <div>{children}</div>;
+export const Tab = React.forwardRef<HTMLDivElement, TabProps>(({ children }, ref) => (
+  <div ref={ref}>{children}</div>
+));

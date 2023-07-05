@@ -1,5 +1,5 @@
 import React from 'react';
-import { DemoPage, DemoSection } from '../components';
+import { useNavigate } from 'react-router-dom';
 import Chat, {
   Bubble,
   MessageProps,
@@ -7,14 +7,18 @@ import Chat, {
   QuickReplyItemProps,
   useQuickReplies,
   Card,
+  CardMedia,
   CardTitle,
   CardText,
+  CardActions,
+  Button,
   List,
   ListItem,
   Flex,
   FlexItem,
   ScrollView,
   ToolbarItemProps,
+  RateActions,
 } from '../../../src';
 import OrderSelector from './OrdderSelector';
 
@@ -28,9 +32,23 @@ const initialMessages: MessageWithoutId[] = [
   {
     type: 'text',
     content: { text: 'Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-    user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg', name: '小小蜜' },
+    user: {
+      avatar: '//gw.alicdn.com/imgextra/i3/O1CN015amSBN287NjjndS06_!!6000000007885-2-tps-99-98.png',
+      name: '小小蜜',
+    },
     createdAt: Date.now(),
     hasTime: true,
+  },
+  {
+    type: 'text',
+    content: { text: '你好～' },
+    user: {
+      avatar: '//gw.alicdn.com/tfs/TB1g6n4xQP2gK0jSZPxXXacQpXa-234-216.png',
+      name: '小淘',
+    },
+    createdAt: Date.now(),
+    hasTime: true,
+    position: 'right',
   },
   {
     type: 'guess-you',
@@ -42,7 +60,7 @@ const initialMessages: MessageWithoutId[] = [
     type: 'text',
     content: { text: '小蜜我要查看我的物流信息' },
     position: 'right',
-    user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+    user: { avatar: '//gw.alicdn.com/tfs/TB1g6n4xQP2gK0jSZPxXXacQpXa-234-216.png' },
   },
   {
     type: 'image',
@@ -55,6 +73,10 @@ const initialMessages: MessageWithoutId[] = [
     content: {
       text: '由于您长时间未说话或退出小蜜（离开页面、锁屏等）已自动结束本次服务',
     },
+  },
+  {
+    type: 'image-text-button',
+    content: {},
   },
 ];
 
@@ -105,7 +127,8 @@ const skillList = [
   { title: '修改地址', desc: '修改地址' },
 ];
 
-const toolbar = [
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+const toolbar: ToolbarItemProps[] = [
   {
     type: 'smile',
     icon: 'smile',
@@ -129,7 +152,7 @@ const toolbar = [
   {
     type: 'photo',
     title: 'Photo',
-    img: 'https://gw.alicdn.com/tfs/TB1eDjNj.T1gK0jSZFrXXcNCXXa-80-80.png',
+    img: '//gw.alicdn.com/tfs/TB1eDjNj.T1gK0jSZFrXXcNCXXa-80-80.png',
   },
 ];
 
@@ -138,6 +161,8 @@ export default () => {
   const { messages, appendMsg, setTyping, prependMsgs } = useMessages(initialMessages);
   const { quickReplies, replace } = useQuickReplies(defaultQuickReplies);
   const msgRef = React.useRef(null);
+
+  const navigate = useNavigate();
 
   window.appendMsg = appendMsg;
   window.msgRef = msgRef;
@@ -154,7 +179,7 @@ export default () => {
 
       setTimeout(() => {
         setTyping(true);
-      }, 10);
+      }, 1000);
 
       // 模拟回复消息
       setTimeout(() => {
@@ -162,7 +187,7 @@ export default () => {
           type: 'text',
           content: { text: '亲，您遇到什么问题啦？请简要描述您的问题~' },
         });
-      }, 1000);
+      }, 1500);
     }
   }
 
@@ -186,6 +211,7 @@ export default () => {
       appendMsg({
         type: 'order-selector',
         content: {},
+        position: 'pop',
       });
     }
   }
@@ -300,47 +326,67 @@ export default () => {
             <img src={content.picUrl} alt="" />
           </Bubble>
         );
+      case 'image-text-button':
+        return (
+          <Flex>
+            <Card fluid>
+              <CardMedia image="//gw.alicdn.com/tfs/TB1Xv5_vlr0gK0jSZFnXXbRRXXa-427-240.png" />
+              <CardTitle>Card title</CardTitle>
+              <CardText>
+                如您希望卖家尽快给您发货，可以进入【我的订单】找到该笔交易，点击【提醒发货】或点击【联系卖家】与卖家进行旺旺沟通尽快发货给您哦，若卖家明确表示无法发货，建议您申请退款重新选购更高品质的商品哦商品。申请退款重新选购更高品质的商品哦商品。
+              </CardText>
+              <CardActions>
+                <Button>次要按钮</Button>
+                <Button color="primary">主要按钮</Button>
+              </CardActions>
+            </Card>
+            <RateActions onClick={console.log} />
+          </Flex>
+        );
       default:
         return null;
     }
   }
 
   return (
-    <DemoPage>
-      <div style={{ height: 'calc(100vh - 48px)', marginTop: '-12px' }}>
-        <Chat
-          onRefresh={handleRefresh}
-          navbar={{
-            leftContent: {
-              icon: 'chevron-left',
-              title: 'Back',
-            },
-            rightContent: [
-              {
-                icon: 'apps',
-                title: 'Applications',
-              },
-              {
-                icon: 'ellipsis-h',
-                title: 'More',
-              },
-            ],
-            title: '智能助理',
-          }}
-          rightAction={{ icon: 'compass' }}
-          toolbar={toolbar}
-          messagesRef={msgRef}
-          onToolbarClick={handleToolbarClick}
-          recorder={{ canRecord: true }}
-          wideBreakpoint="600px"
-          messages={messages}
-          renderMessageContent={renderMessageContent}
-          quickReplies={quickReplies}
-          onQuickReplyClick={handleQuickReplyClick}
-          onSend={handleSend}
-          onImageSend={() => Promise.resolve()}
-        />
-      </div>
-    </DemoPage>
+    <Chat
+      elderMode
+      onRefresh={handleRefresh}
+      navbar={{
+        leftContent: {
+          icon: 'chevron-left',
+          title: 'Back',
+          onClick() {
+            navigate('/');
+          },
+        },
+        rightContent: [
+          {
+            icon: 'apps',
+            title: 'Applications',
+          },
+          {
+            icon: 'ellipsis-h',
+            title: 'More',
+          },
+        ],
+        title: '智能助理',
+        // desc: '客服热线9510211(7:00-次日1:00)',
+        // logo: 'https://gw.alicdn.com/imgextra/i4/O1CN016i66TT24lRwUecIk5_!!6000000007431-2-tps-164-164.png_80x80.jpg',
+        // align: 'left',
+      }}
+      rightAction={{ icon: 'compass' }}
+      toolbar={toolbar}
+      messagesRef={msgRef}
+      onToolbarClick={handleToolbarClick}
+      recorder={{ canRecord: true }}
+      wideBreakpoint="600px"
+      messages={messages}
+      renderMessageContent={renderMessageContent}
+      quickReplies={quickReplies}
+      onQuickReplyClick={handleQuickReplyClick}
+      onSend={handleSend}
+      onImageSend={() => Promise.resolve()}
+    />
   );
 };

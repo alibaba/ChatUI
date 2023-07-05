@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import { IconButton } from '../IconButton';
-import { useLocale } from '../LocaleProvider';
+import { useLocale } from '../ConfigProvider';
 
 const UP = 'up';
 const DOWN = 'down';

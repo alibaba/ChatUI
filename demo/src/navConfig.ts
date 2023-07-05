@@ -63,6 +63,7 @@ export const navConfig = [
       { name: '模态框', code: 'modal' },
       { name: '上拉弹窗', code: 'popup' },
       { name: '下拉刷新', code: 'pull-to-refresh' },
+      { name: '骨架屏', code: 'skeleton' },
       { name: '轻提示', code: 'toast' },
     ],
   },

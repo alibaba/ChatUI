@@ -90,6 +90,11 @@ export default () => (
           <CardText>fluid</CardText>
         </Card>
       </div>
+      <div className="demo-row">
+        <Card fluid="order">
+          <CardText>fluid=order</CardText>
+        </Card>
+      </div>
     </DemoSection>
     <DemoSection title="按钮竖排">
       <Card size="xl">

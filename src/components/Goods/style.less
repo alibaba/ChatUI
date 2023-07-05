@@ -2,6 +2,18 @@
   padding: @goods-padding;
   font-size: 14px;
 
+  &[data-elder-mode="true"] {
+    .Goods-img {
+      width: 56px;
+      height: 56px;
+    }
+    .Price {
+      color: var(--brand-1);
+    }
+    .Btn {
+      min-width: 0;
+    }
+  }
   & + & {
     border-top: @goods-border-width solid @goods-border-color;
   }
@@ -23,7 +35,7 @@
     }
   }
   &-desc {
-    margin-bottom: 3px;
+    margin-bottom: 3Px;
     color: @goods-desc-color;
     word-break: break-all;
   }

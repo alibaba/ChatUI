@@ -11,7 +11,7 @@ export type TreeNodeProps = {
   children: any[]; // FIXME
 };
 
-export const TreeNode: React.FC<TreeNodeProps> = (props) => {
+export const TreeNode = React.forwardRef<HTMLDivElement, TreeNodeProps>((props, ref) => {
   const { title, content, link, children = [], onClick, onExpand } = props;
   const [expand, setExpand] = useState(false);
   const hasChildren = children.length > 0;
@@ -29,7 +29,7 @@ export const TreeNode: React.FC<TreeNodeProps> = (props) => {
     }
   }
   return (
-    <div className="TreeNode" role="treeitem" aria-expanded={expand}>
+    <div className="TreeNode" role="treeitem" aria-expanded={expand} ref={ref}>
       {
         <div
           className="TreeNode-title"
@@ -71,4 +71,4 @@ export const TreeNode: React.FC<TreeNodeProps> = (props) => {
         : null}
     </div>
   );
-};
+});

@@ -4,7 +4,7 @@ import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
 import { Button } from '../Button';
 import { Input, InputProps } from '../Input';
-import { useLocale } from '../LocaleProvider';
+import { useLocale } from '../ConfigProvider';
 
 export interface SearchProps extends Omit<InputProps, 'value'> {
   className?: string;
@@ -21,16 +21,18 @@ export interface SearchProps extends Omit<InputProps, 'value'> {
   onClear?: () => void;
 }
 
-export const Search = ({
-  className,
-  onSearch,
-  onChange,
-  onClear,
-  value,
-  clearable = true,
-  showSearch = true,
-  ...other
-}: SearchProps) => {
+export const Search = React.forwardRef<HTMLDivElement, SearchProps>((props, ref) => {
+  const {
+    className,
+    onSearch,
+    onChange,
+    onClear,
+    value,
+    clearable = true,
+    showSearch = true,
+    ...other
+  } = props;
+
   const [query, setQuery] = useState(value || '');
   const { trans } = useLocale('Search');
 
@@ -66,7 +68,7 @@ export const Search = ({
   };
 
   return (
-    <div className={clsx('Search', className)}>
+    <div className={clsx('Search', className)} ref={ref}>
       <Icon className="Search-icon" type="search" />
       <Input
         className="Search-input"
@@ -87,4 +89,4 @@ export const Search = ({
       )}
     </div>
   );
-};
+});

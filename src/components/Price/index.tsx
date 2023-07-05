@@ -2,7 +2,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
-export interface PriceProps {
+export interface PriceProps extends React.HTMLAttributes<HTMLDivElement> {
   price: number;
   className?: string;
   locale?: string;

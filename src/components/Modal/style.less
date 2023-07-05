@@ -27,18 +27,13 @@
   z-index: @zindex-modal;
   overflow: hidden;
   width: @modal-width;
+  max-width: 90vw;
   border-radius: @modal-border-radius;
   background: @modal-bg;
   opacity: @modal-opacity;
   transition: @modal-transition;
   transform: @modal-fade-transform;
   font-size: 15px;
-}
-
-@media (max-width: 320px) {
-  .Modal-dialog {
-    width: 300px;
-  }
 }
 
 .Modal-header {
@@ -156,6 +151,16 @@
   text-align: center;
 }
 
+.Popup[data-elder-mode='true'] {
+  .Modal-title,
+  .Popup-title {
+    font-size: 23Px;
+  }
+  .Popup-close {
+    font-size: 32Px;
+  }
+}
+
 .Modal-close,
 .Popup-close {
   position: absolute;
@@ -168,11 +173,11 @@
 }
 
 .Popup-title {
-  min-height: 25px;
+  min-height: 25Px;
 }
 
 .Popup-close {
-  top: 20px;
+  top: 18px;
 }
 
 .Popup-body {

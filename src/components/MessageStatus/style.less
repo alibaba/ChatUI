@@ -17,6 +17,7 @@
     display: block;
   }
   .Message.right .Bubble + & {
-    margin-right: (@gutter - @bubble-right-gutter);
+    // calc(12px - var(--rate-width) + 8Px)
+    margin-right: calc(4Px - var(--rate-width));
   }
 }

@@ -6,6 +6,7 @@ import { Price } from '../Price';
 import { Tag } from '../Tag';
 import { IconButton, IconButtonProps } from '../IconButton';
 import { Button, ButtonProps } from '../Button';
+import { useConfig } from '../ConfigProvider';
 
 type TagProps = {
   name: string;
@@ -29,10 +30,13 @@ export interface GoodsProps extends React.HTMLAttributes<GoodsRef> {
   unit?: string;
   status?: string;
   action?: ButtonProps | IconButtonProps;
+  elderMode?: boolean;
   children?: React.ReactNode;
 }
 
 export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
+  const configCtx = useConfig();
+
   const {
     // 通用
     className,
@@ -47,6 +51,7 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
     count,
     unit,
     action,
+    elderMode: oElderMode,
     children,
 
     // 商品
@@ -58,23 +63,9 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
     ...other
   } = props;
 
-  const isOrder = type === 'order';
-
-  const infos = (
-    <>
-      <Text as="h4" truncate={isOrder ? 2 : true} className="Goods-name">
-        {name}
-      </Text>
-      <Text className="Goods-desc">{desc}</Text>
-      <div className="Goods-tags">
-        {tags.map((t) => (
-          <Tag color="primary" key={t.name}>
-            {t.name}
-          </Tag>
-        ))}
-      </div>
-    </>
-  );
+  const elderMode = oElderMode || configCtx.elderMode;
+  const isOrder = type === 'order' && !elderMode;
+  const isGoods = type !== 'order' && !elderMode;
 
   const priceProps = { currency, locale };
   const priceCont = price != null && <Price price={price} {...priceProps} />;
@@ -91,28 +82,47 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
     </div>
   );
 
-  const mainCont = isOrder ? (
-    infos
-  ) : (
-    <>
-      {action && <IconButton className="Goods-buyBtn" icon="cart" {...action} />}
-      {infos}
-      <Flex alignItems="flex-end">
-        <FlexItem>
-          {priceCont}
-          {originalPrice && <Price price={originalPrice} original {...priceProps} />}
-          {meta && <span className="Goods-meta">{meta}</span>}
-        </FlexItem>
-        {countUnit}
-      </Flex>
-    </>
-  );
-
   return (
-    <Flex className={clsx('Goods', className)} data-type={type} ref={ref} {...other}>
+    <Flex
+      className={clsx('Goods', className)}
+      data-type={type}
+      data-elder-mode={elderMode}
+      ref={ref}
+      {...other}
+    >
       {img && <img className="Goods-img" src={img} alt={name} />}
       <FlexItem className="Goods-main">
-        {mainCont}
+        {isGoods && action && <IconButton className="Goods-buyBtn" icon="cart" {...action} />}
+        <Text as="h4" truncate={isOrder ? 2 : true} className="Goods-name">
+          {name}
+        </Text>
+        <Text className="Goods-desc" truncate={elderMode}>
+          {desc}
+        </Text>
+        {elderMode ? (
+          <Flex alignItems="center" justifyContent="space-between">
+            {priceCont}
+            {action && <Button size="sm" {...action} />}
+          </Flex>
+        ) : (
+          <div className="Goods-tags">
+            {tags.map((t) => (
+              <Tag color="primary" key={t.name}>
+                {t.name}
+              </Tag>
+            ))}
+          </div>
+        )}
+        {isGoods && (
+          <Flex alignItems="flex-end">
+            <FlexItem>
+              {priceCont}
+              {originalPrice && <Price price={originalPrice} original {...priceProps} />}
+              {meta && <span className="Goods-meta">{meta}</span>}
+            </FlexItem>
+            {countUnit}
+          </Flex>
+        )}
         {children}
       </FlexItem>
       {isOrder && (

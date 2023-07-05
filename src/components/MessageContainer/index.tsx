@@ -12,6 +12,7 @@ const listenerOpts = canUse('passiveListener') ? { passive: true } : false;
 export interface MessageContainerProps {
   messages: MessageProps[];
   renderMessageContent: (message: MessageProps) => React.ReactNode;
+  isTyping?: boolean;
   loadMoreText?: string;
   onRefresh?: () => Promise<any>;
   onScroll?: (event: React.UIEvent<HTMLDivElement, UIEvent>) => void;
@@ -34,6 +35,7 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
   (props, ref) => {
     const {
       messages,
+      isTyping,
       loadMoreText,
       onRefresh,
       onScroll,
@@ -134,6 +136,10 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
     }, [lastMessage, scrollToEnd]);
 
     useEffect(() => {
+      scrollToEnd();
+    }, [isTyping, scrollToEnd]);
+
+    useEffect(() => {
       const wrapper = messagesRef.current!;
 
       let needBlur = false;
@@ -187,6 +193,7 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
             {messages.map((msg) => (
               <Message {...msg} renderMessageContent={renderMessageContent} key={msg._id} />
             ))}
+            {isTyping && <Message type="typing" _id="typing" />}
           </div>
         </PullToRefresh>
         {showBackBottom && (

@@ -359,6 +359,7 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
       goTo,
       prev,
       next,
+      wrapperRef,
     }),
     [goTo, prev, next],
   );

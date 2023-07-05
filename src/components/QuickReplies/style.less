@@ -1,12 +1,5 @@
 .QuickReplies {
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: @zindex-quick-replies;
-  bottom: 100%;
-  overflow: hidden;
   padding: @quick-replies-padding;
-  background: @quick-replies-bg;
   transition: opacity 0.3s;
 
   &[data-visible='false'] {
@@ -29,11 +22,12 @@
 
 .QuickReply {
   position: relative;
+  display: block;
   margin: 0;
-  padding: 4px 12px;
+  padding: 4Px 12Px;
   border: 1px solid transparent;
-  border-radius: 15px;
-  line-height: 20px;
+  border-radius: 99PX;
+  line-height: 20Px;
   background: var(--white);
   cursor: pointer;
   color: var(--gray-1);
@@ -62,14 +56,28 @@
     align-items: center;
   }
   &-img {
-    max-height: 13px;
+    max-height: 13Px;
   }
   &-inner > .Icon,
   &-img {
-    margin-right: 3px;
+    margin-right: 3Px;
   }
   .Icon {
     color: var(--brand-1);
-    font-size: 15px;
+    font-size: 15Px;
+  }
+}
+
+.ChatApp[data-elder-mode="true"] {
+  .QuickReply {
+    font-size: 17Px;
+    line-height: 26Px;
+
+    .Icon {
+      font-size: 17Px;
+    }
+  }
+  .QuickReply-img {
+    max-height: 17Px;
   }
 }

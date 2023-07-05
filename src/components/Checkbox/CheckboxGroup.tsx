@@ -12,7 +12,7 @@ export type CheckboxGroupProps = {
   onChange: (value: CheckboxValue[], event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const CheckboxGroup = (props: CheckboxGroupProps) => {
+export const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>((props, ref) => {
   const { className, options, value, name, disabled, block, onChange } = props;
 
   function handleChange(val: CheckboxValue, e: React.ChangeEvent<HTMLInputElement>) {
@@ -21,7 +21,7 @@ export const CheckboxGroup = (props: CheckboxGroupProps) => {
   }
 
   return (
-    <div className={clsx('CheckboxGroup', { 'CheckboxGroup--block': block }, className)}>
+    <div className={clsx('CheckboxGroup', { 'CheckboxGroup--block': block }, className)} ref={ref}>
       {options.map((item) => (
         <Checkbox
           label={item.label || item.value}
@@ -37,4 +37,4 @@ export const CheckboxGroup = (props: CheckboxGroupProps) => {
       ))}
     </div>
   );
-};
+});
