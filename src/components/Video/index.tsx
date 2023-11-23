@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useState, useRef, useImperativeHandle } from 'react';
 import clsx from 'clsx';
+import { Icon } from '../Icon';
 import { formatTime } from '../../utils/formatTime';
 
 export interface VideoHandle {
@@ -93,7 +94,7 @@ export const Video = React.forwardRef<VideoHandle, VideoProps>((props, ref) => {
       </video>
       {hasCover && (
         <button className={clsx('Video-playBtn', { paused })} type="button" onClick={handleClick}>
-          <span className="Video-playIcon" />
+          <Icon className="Video-playIcon" type="play-fill" />
         </button>
       )}
     </div>

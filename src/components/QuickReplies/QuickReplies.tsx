@@ -19,7 +19,7 @@ const QuickReplies = (props: QuickRepliesProps) => {
 
     if (scroller.current) {
       setScrollEvent(false);
-      scroller.current.scrollTo({ x: 0, y: 0 });
+      scroller.current.scrollTo({ x: 0 });
       timer = setTimeout(() => {
         setScrollEvent(true);
       }, 500);

@@ -18,7 +18,12 @@ export const Price = React.forwardRef<HTMLDivElement, PriceProps>((props, ref) =
   let parts: any[] | void = [];
 
   if (locale && currency && canFormat) {
-    parts = new Intl.NumberFormat(locale, { style: 'currency', currency }).formatToParts(price);
+    parts = new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency,
+      useGrouping: false,
+      minimumFractionDigits: 0,
+    }).formatToParts(price);
   } else {
     parts = undefined;
   }

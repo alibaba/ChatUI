@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface BubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   type?: string;
-  content?: React.ReactNode;
+  content?: string;
 }
 
 export const Bubble = React.forwardRef<HTMLDivElement, BubbleProps>((props, ref) => {

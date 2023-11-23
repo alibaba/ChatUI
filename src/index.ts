@@ -28,11 +28,20 @@ export { Bubble } from './components/Bubble';
 export type { BubbleProps } from './components/Bubble';
 export { Button } from './components/Button';
 export type { ButtonProps } from './components/Button';
-export { Card, CardMedia, CardTitle, CardContent, CardText, CardActions } from './components/Card';
+export {
+  Card,
+  CardMedia,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardText,
+  CardActions,
+} from './components/Card';
 export type {
   CardProps,
   CardSize,
   CardMediaProps,
+  CardHeaderProps,
   CardTitleProps,
   CardContentProps,
   CardTextProps,

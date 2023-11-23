@@ -4,6 +4,7 @@ import { Flex, FlexItem } from '../Flex';
 import { Text } from '../Text';
 import { Price } from '../Price';
 import { Tag } from '../Tag';
+import { Icon } from '../Icon';
 import { IconButton, IconButtonProps } from '../IconButton';
 import { Button, ButtonProps } from '../Button';
 import { useConfig } from '../ConfigProvider';
@@ -11,6 +12,8 @@ import { useConfig } from '../ConfigProvider';
 type TagProps = {
   name: string;
 };
+
+type GoodsVariant = 'normal' | 'inList' | 'compact';
 
 export type GoodsRef = HTMLDivElement;
 
@@ -29,8 +32,10 @@ export interface GoodsProps extends React.HTMLAttributes<GoodsRef> {
   count?: number;
   unit?: string;
   status?: string;
+  variant?: GoodsVariant;
   action?: ButtonProps | IconButtonProps;
   elderMode?: boolean;
+  asideContent?: React.ReactNode;
   children?: React.ReactNode;
 }
 
@@ -52,6 +57,7 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
     unit,
     action,
     elderMode: oElderMode,
+    variant,
     children,
 
     // 商品
@@ -60,12 +66,14 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
 
     // 订单
     status,
+    asideContent,
     ...other
   } = props;
 
   const elderMode = oElderMode || configCtx.elderMode;
   const isOrder = type === 'order' && !elderMode;
   const isGoods = type !== 'order' && !elderMode;
+  const isInList = variant === 'inList';
 
   const priceProps = { currency, locale };
   const priceCont = price != null && <Price price={price} {...priceProps} />;
@@ -82,57 +90,87 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
     </div>
   );
 
+  const statusCont = status ? (
+    <span className="Goods-status">
+      {status}
+      {other.onClick && !isInList && <Icon type="chevron-right" />}
+    </span>
+  ) : null;
+
+  const actionCont = action ? <Button size="sm" {...action} /> : null;
+
   return (
     <Flex
       className={clsx('Goods', className)}
       data-type={type}
       data-elder-mode={elderMode}
+      data-variant={variant}
       ref={ref}
       {...other}
     >
       {img && <img className="Goods-img" src={img} alt={name} />}
-      <FlexItem className="Goods-main">
-        {isGoods && action && <IconButton className="Goods-buyBtn" icon="cart" {...action} />}
-        <Text as="h4" truncate={isOrder ? 2 : true} className="Goods-name">
-          {name}
-        </Text>
-        <Text className="Goods-desc" truncate={elderMode}>
-          {desc}
-        </Text>
-        {elderMode ? (
-          <Flex alignItems="center" justifyContent="space-between">
-            {priceCont}
-            {action && <Button size="sm" {...action} />}
-          </Flex>
-        ) : (
-          <div className="Goods-tags">
-            {tags.map((t) => (
-              <Tag color="primary" key={t.name}>
-                {t.name}
-              </Tag>
-            ))}
-          </div>
-        )}
-        {isGoods && (
-          <Flex alignItems="flex-end">
-            <FlexItem>
+      <FlexItem>
+        <Flex>
+          <FlexItem className="Goods-main">
+            {isGoods && action && <IconButton className="Goods-buyBtn" icon="cart" {...action} />}
+            <Text
+              as="h4"
+              /**
+               * 名称行数规则：
+               * 1. 有 desc，单行
+               * 2. 无 desc，2行
+               * 3. 订单列表中，2行
+               */
+              truncate={isOrder && (!desc || isInList) ? 2 : true}
+              className="Goods-name"
+            >
+              {name}
+            </Text>
+            {desc && (
+              <Text className="Goods-desc" truncate>
+                {desc}
+              </Text>
+            )}
+            {elderMode ? (
+              <Flex alignItems="center" justifyContent="space-between">
+                {priceCont}
+                {actionCont}
+              </Flex>
+            ) : (
+              tags.length > 0 && (
+                <div className="Goods-tags">
+                  {tags.map((t) => (
+                    <Tag color="primary" key={t.name}>
+                      {t.name}
+                    </Tag>
+                  ))}
+                </div>
+              )
+            )}
+            {isGoods && (
+              <Flex alignItems="flex-end">
+                <FlexItem>
+                  {priceCont}
+                  {originalPrice && <Price price={originalPrice} original {...priceProps} />}
+                  {meta && <span className="Goods-meta">{meta}</span>}
+                </FlexItem>
+                {countUnit}
+              </Flex>
+            )}
+          </FlexItem>
+          {isOrder && (
+            <div className="Goods-aside">
               {priceCont}
-              {originalPrice && <Price price={originalPrice} original {...priceProps} />}
-              {meta && <span className="Goods-meta">{meta}</span>}
-            </FlexItem>
-            {countUnit}
-          </Flex>
-        )}
-        {children}
+              {countUnit}
+              {isInList && statusCont}
+              {asideContent && <div className="Goods-slot">{asideContent}</div>}
+              {actionCont}
+            </div>
+          )}
+        </Flex>
+        {children && <div className="Goods-slot">{children}</div>}
+        {!isInList && statusCont}
       </FlexItem>
-      {isOrder && (
-        <div className="Goods-aside">
-          {priceCont}
-          {countUnit}
-          <span className="Goods-status">{status}</span>
-          {action && <Button className="Goods-detailBtn" {...action} />}
-        </div>
-      )}
     </Flex>
   );
 });

@@ -8,9 +8,10 @@ export interface TimeProps {
 
 export const Time = ({ date }: TimeProps) => {
   const { trans } = useLocale('Time');
+  const dateTime = new Date(date).toLocaleString('zh').replace(/\//g, '-');
 
   return (
-    <time className="Time" dateTime={new Date(date).toJSON()}>
+    <time className="Time" dateTime={dateTime}>
       {formatDate(date, trans())}
     </time>
   );

@@ -10,30 +10,23 @@ export interface MessageStatusProps {
   status: IMessageStatus;
   delay?: number;
   maxDelay?: number;
-  onRetry?: () => void;
+  retryInterval?: number;
+  onRetry?: (isAutoRetry?: boolean) => void;
   onChange?: (type: StatusType) => void;
 }
 
 export const MessageStatus = ({
   status,
-  delay = 1500,
-  maxDelay = 5000,
+  delay = 800,
+  maxDelay = 12000,
+  retryInterval = 5000,
   onRetry,
   onChange,
 }: MessageStatusProps) => {
   const [type, setType] = useState<StatusType>('');
   const loadingTimerRef = useRef<ReturnType<typeof setTimeout>>();
   const failTimerRef = useRef<ReturnType<typeof setTimeout>>();
-
-  const doTimeout = useCallback(() => {
-    loadingTimerRef.current = setTimeout(() => {
-      setType('loading');
-    }, delay);
-
-    failTimerRef.current = setTimeout(() => {
-      setType('fail');
-    }, maxDelay);
-  }, [delay, maxDelay]);
+  const autoTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
   function clear() {
     if (loadingTimerRef.current) {
@@ -42,7 +35,29 @@ export const MessageStatus = ({
     if (failTimerRef.current) {
       clearTimeout(failTimerRef.current);
     }
+    if (autoTimerRef.current) {
+      clearInterval(autoTimerRef.current);
+    }
   }
+
+  const doTimeout = useCallback(() => {
+    clear();
+
+    loadingTimerRef.current = setTimeout(() => {
+      setType('loading');
+    }, delay);
+
+    failTimerRef.current = setTimeout(() => {
+      setType('fail');
+      clear();
+    }, maxDelay);
+
+    autoTimerRef.current = setInterval(() => {
+      if (onRetry) {
+        onRetry(true);
+      }
+    }, retryInterval);
+  }, [delay, maxDelay, onRetry, retryInterval]);
 
   useEffect(() => {
     clear();
@@ -77,7 +92,7 @@ export const MessageStatus = ({
         {type === 'fail' ? (
           <IconButton icon="warning-circle-fill" onClick={handleRetry} />
         ) : (
-          <Icon type="spinner" spin onClick={handleRetry} />
+          <Icon type="spinner" spin />
         )}
       </div>
     );

@@ -256,7 +256,7 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
       return;
     }
 
-    e.preventDefault();
+    // e.preventDefault();
     e.stopPropagation();
 
     const ev = 'touches' in e ? e.touches[0] : e;
@@ -285,7 +285,9 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
         }
       }
 
-      e.preventDefault();
+      if (e.cancelable) {
+        e.preventDefault();
+      }
       disableTransition();
 
       state.endX = ev.pageX;
@@ -350,7 +352,6 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
       const idx = parseInt(i, 10);
       goTo(idx);
     }
-    e.preventDefault();
   };
 
   useImperativeHandle(
@@ -406,7 +407,7 @@ export const Carousel = React.forwardRef<CarouselHandle, CarouselProps>((props, 
 
   let events;
 
-  if (draggable) {
+  if (draggable && count > 1) {
     events = canTouch
       ? {
           onTouchStart: dragStart,
