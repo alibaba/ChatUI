@@ -37,17 +37,28 @@ export interface GetComponentCallback {
 }
 
 export interface ComponentsContextInterface {
-  addComponent: (code: string, value: ComponentInterface) => void;
-  hasComponent: (code: string) => boolean;
+  addComponent: (code: ComponentKey, value: ComponentInterface) => void;
+  hasComponent: (code: ComponentKey) => boolean;
   getComponent: (
-    code: string,
+    code: ComponentKey,
     callback?: GetComponentCallback,
   ) => React.ComponentType<any> | LazyComponentResult | null;
 }
 
-export interface ComponentsMap {
-  [k: string]: ComponentInterface;
+export enum ComponentKey {
+  slot = 'slot',
+  errorUrl = 'error-url',
+  localComponent = 'local-component',
+  myDecorator = 'my-decorator',
+  testDecorator = 'test-decorator',
+  testAsyncDecorator = 'test-async-decorator',
+  recommend = 'recommend',
+  noCode = 'no-code'
 }
+
+export type ComponentsMap = {
+  [K in ComponentKey]?: ComponentInterface;
+};
 
 export interface ComponentsProviderProps {
   components: ComponentsMap;

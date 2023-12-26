@@ -2,6 +2,7 @@ import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import * as ChatUI from '../../../src';
 import { ComponentsMap, LazyComponentOnLoadParams } from '../../../src';
+import { ComponentKey } from '../../../src/components/ComponentsProvider/interface';
 
 const { ComponentsProvider, LazyComponent, useComponents } = ChatUI;
 
@@ -19,18 +20,18 @@ const ctx = {
 
 // components
 const components: ComponentsMap = {
-  slot: {
+  [ComponentKey.slot]: {
     name: 'AlimeComponentSlot',
     url: '//g.alicdn.com/alime-components/slot/0.1.3/index.js',
   },
-  'error-url': {
+  [ComponentKey.errorUrl]: {
     name: 'AlimeComponentPromptAccess',
     url: '//g.alicdn.com/alime-components/slot/0.1.3/no-index.js',
   },
-  'local-component': {
+  [ComponentKey.localComponent]: {
     component: ({ data }: { data: string }) => <p>local component: {data}</p>,
   },
-  'my-decorator': {
+  [ComponentKey.myDecorator]: {
     component: (props) => (
       <div>
         <h2>`my-decorator`</h2>
@@ -39,7 +40,7 @@ const components: ComponentsMap = {
       </div>
     ),
   },
-  'test-decorator': {
+  [ComponentKey.testDecorator]: {
     decorator: 'my-decorator',
     data: {
       jsonUrl: 'this is a url',
@@ -47,7 +48,7 @@ const components: ComponentsMap = {
       d2: 'd2',
     },
   },
-  'test-async-decorator': {
+  [ComponentKey.testAsyncDecorator]: {
     decorator: 'slot',
     data: {
       jsonUrl: 'this is a url',
@@ -62,7 +63,7 @@ function TestLocalComponent() {
     <div>
       <h1>Example:</h1>
       <LazyComponent
-        code="local-component"
+        code={ComponentKey.localComponent}
         data="11"
         onLoad={(a: any) => console.log('onLoad:', a)}
       />
@@ -74,7 +75,7 @@ function LazySlot() {
   const data = { list: [{ title: 'item-1' }, { title: 'item-2' }] };
   return (
     <LazyComponent
-      code="slot"
+      code={ComponentKey.slot}
       data={data}
       meta={{}}
       ctx={ctx}
@@ -102,7 +103,7 @@ function LazyRecommend() {
   };
   return (
     <LazyComponent
-      code="recommend"
+      code={ComponentKey.recommend}
       data={data}
       meta={{}}
       ctx={ctx}
@@ -118,7 +119,7 @@ function TestNotFoundCode() {
     <div>
       <h1>Example:</h1>
       <LazyComponent
-        code="no-code"
+        code={ComponentKey.noCode}
         onError={(err) => {
           setErrMsg(err.message);
         }}
@@ -134,7 +135,7 @@ function TestComponentHasError() {
     <div>
       <h1>Example:</h1>
       <LazyComponent
-        code="slot"
+        code={ComponentKey.slot}
         onError={(err, errInfo) => {
           setErrMsg(err.message);
           console.log(222, err, errInfo);
@@ -151,7 +152,7 @@ function TestErrorUrl() {
     <div>
       <h1>Example:</h1>
       <LazyComponent
-        code="error-url"
+        code={ComponentKey.errorUrl}
         onError={(err) => {
           setErrMsg(err.message);
           console.log(222, err.message);
@@ -167,7 +168,7 @@ function TestDecorator() {
     <div>
       <h1>Example:</h1>
       <LazyComponent
-        code="test-decorator"
+        code={ComponentKey.testDecorator}
         data1="foo"
         data2="bar"
         onLoad={(r) => {
@@ -183,7 +184,7 @@ function TestAsyncDecorator() {
     <div>
       <h1>Example:</h1>
       <LazyComponent
-        code="test-async-decorator"
+        code={ComponentKey.testAsyncDecorator}
         data={{ list: [{ title: 'item-1' }, { title: 'item-2' }] }}
         meta={{}}
         ctx={ctx}
@@ -208,8 +209,8 @@ function TestAddComponent() {
   const forceUpdate = useForceUpdate();
 
   function addRecommend() {
-    if (!hasComponent('recommend')) {
-      addComponent('recommend', {
+    if (!hasComponent(ComponentKey.recommend)) {
+      addComponent(ComponentKey.recommend, {
         name: 'AlimeComponentRecommend',
         url: '//g.alicdn.com/alime-components/recommend/0.1.0/index.js',
       });

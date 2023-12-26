@@ -1,3 +1,5 @@
+import { ComponentKey } from '../ComponentsProvider/interface';
+
 interface LazyComponentBaseProps {
   fallback?: NonNullable<React.ReactNode> | null;
   onError?: (error: Error, info?: React.ErrorInfo) => void;
@@ -14,7 +16,7 @@ export interface LazyComponentOnLoadParams {
 }
 
 export interface LazyComponentPropsWithCode extends LazyComponentBaseProps {
-  code: string;
+  code: ComponentKey;
   onLoad?: (e: LazyComponentOnLoadParams) => void;
 }
 

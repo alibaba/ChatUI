@@ -6,7 +6,7 @@ import {
   ComponentInterface,
   GetComponentCallback,
   ComponentsProviderProps,
-  ComponentsMap,
+  ComponentsMap, ComponentKey,
 } from './interface';
 
 export { useComponents } from './useComponents';
@@ -23,7 +23,7 @@ export const ComponentsProvider = (props: ComponentsProviderProps) => {
     };
   }, [components]);
 
-  function addComponent(code: string, val: ComponentInterface) {
+  function addComponent(code: ComponentKey, val: ComponentInterface) {
     componentsRef.current[code] = val;
   }
 
@@ -31,7 +31,7 @@ export const ComponentsProvider = (props: ComponentsProviderProps) => {
     return componentsRef.current.hasOwnProperty(code);
   }
 
-  function getComponent(code: string, callback: GetComponentCallback = () => {}) {
+  function getComponent(code: ComponentKey, callback: GetComponentCallback = () => {}) {
     const comp = componentsRef.current[code];
 
     // no component
