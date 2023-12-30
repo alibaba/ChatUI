@@ -57,7 +57,7 @@ export enum ComponentKey {
 }
 
 export type ComponentsMap = {
-  [K in ComponentKey]?: ComponentInterface;
+  [k in ComponentKey]?: ComponentInterface;
 };
 
 export interface ComponentsProviderProps {

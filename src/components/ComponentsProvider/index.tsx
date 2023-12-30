@@ -27,7 +27,7 @@ export const ComponentsProvider = (props: ComponentsProviderProps) => {
     componentsRef.current[code] = val;
   }
 
-  function hasComponent(code: string) {
+  function hasComponent(code: ComponentKey) {
     return componentsRef.current.hasOwnProperty(code);
   }
 
