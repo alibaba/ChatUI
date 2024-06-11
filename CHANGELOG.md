@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-beta.1](https://github.com/alibaba/ChatUI/compare/v2.4.8-beta.0...v3.0.0-beta.1) (2024-06-11)
+
+
+### Features
+
+* sync 2.6.1 ([d25234b](https://github.com/alibaba/ChatUI/commit/d25234bc42db5541f970bd42f4700ccbd3876eab))
+* sync 3.0.11 ([2ce6fdc](https://github.com/alibaba/ChatUI/commit/2ce6fdc5acff74043613e213fb4e4a4663c3a28b))
+* sync 3.0.5 ([af5524f](https://github.com/alibaba/ChatUI/commit/af5524fc60f73a153d68eeab12ff89bbd19a84d5))
+
+
+### Bug Fixes
+
+* miss key when use img in rightContent ([#108](https://github.com/alibaba/ChatUI/issues/108)) ([1a58b0b](https://github.com/alibaba/ChatUI/commit/1a58b0bbb3c0a1ccf684aa48612982016817ac65))
+
 ### [2.4.8-beta.0](https://github.com/alibaba/ChatUI/compare/v2.4.2...v2.4.8-beta.0) (2022-12-13)
 
 
