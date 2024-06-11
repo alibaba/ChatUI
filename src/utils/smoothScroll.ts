@@ -1,4 +1,4 @@
-const rAF = requestAnimationFrame;
+import getFps from './getFps';
 
 interface Props {
   el: HTMLElement;
@@ -7,17 +7,25 @@ interface Props {
   x?: boolean;
 }
 
+let rAF = requestAnimationFrame;
+const mockRAF = (cb: Function) => window.setTimeout(cb, 16);
+
+getFps((fps) => {
+  rAF = fps < 55 ? mockRAF : requestAnimationFrame;
+}, 3);
+
 export default function smoothScroll({ el, to, duration = 300, x }: Props) {
-  let count = 0;
   const attr = x ? 'scrollLeft' : 'scrollTop';
-  const from = el[attr];
-  const frames = Math.round(duration / 16);
-  const step = (to - from) / frames;
 
   if (!rAF) {
     el[attr] = to;
     return;
   }
+
+  const from = el[attr];
+  const frames = Math.round(duration / 16);
+  const step = (to - from) / frames;
+  let count = 0;
 
   function animate() {
     // eslint-disable-next-line no-param-reassign

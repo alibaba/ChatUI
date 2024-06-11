@@ -29,6 +29,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>((props, ref) =>
         </div>
       </div>
       <div className="Navbar-right">
+        <div className="Navbar-rightSlot" />
         {rightContent.map((item) => (
           <IconButton size="lg" key={item.icon} {...item} />
         ))}

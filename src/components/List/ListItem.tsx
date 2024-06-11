@@ -1,11 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Icon } from '../Icon';
+import { Text } from '../Text';
 
 interface ListItemPropsBase {
   className?: string;
   as?: React.ElementType;
   content?: React.ReactNode;
+  ellipsis?: boolean;
   rightIcon?: string;
   onClick?: (event: React.MouseEvent) => void;
   children?: React.ReactNode;
@@ -19,7 +21,16 @@ interface ListItemPropsWithLink extends ListItemPropsBase {
 export type ListItemProps = ListItemPropsBase | ListItemPropsWithLink;
 
 export const ListItem = React.forwardRef<HTMLElement, ListItemProps>((props, ref) => {
-  const { className, as: Element = 'div', content, rightIcon, children, onClick, ...other } = props;
+  const {
+    className,
+    as: Element = 'div',
+    content,
+    ellipsis,
+    rightIcon,
+    children,
+    onClick,
+    ...other
+  } = props;
   return (
     <Element
       className={clsx('ListItem', className)}
@@ -28,7 +39,9 @@ export const ListItem = React.forwardRef<HTMLElement, ListItemProps>((props, ref
       {...other}
       ref={ref}
     >
-      <div className="ListItem-content">{content || children}</div>
+      <Text className="ListItem-content" truncate={ellipsis}>
+        {content || children}
+      </Text>
       {rightIcon && <Icon type={rightIcon} />}
     </Element>
   );
