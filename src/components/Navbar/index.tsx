@@ -8,12 +8,13 @@ export interface NavbarProps {
   logo?: string;
   leftContent?: IconButtonProps;
   rightContent?: IconButtonProps[];
+  rightSlot?: React.ReactNode;
   desc?: React.ReactNode;
   align?: 'left' | 'center';
 }
 
 export const Navbar = React.forwardRef<HTMLElement, NavbarProps>((props, ref) => {
-  const { className, title, logo, desc, leftContent, rightContent = [], align } = props;
+  const { className, title, logo, desc, leftContent, rightContent = [], rightSlot, align } = props;
 
   const isLeft = align === 'left';
   const showTitle = isLeft ? true : !logo;
@@ -29,7 +30,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>((props, ref) =>
         </div>
       </div>
       <div className="Navbar-right">
-        <div className="Navbar-rightSlot" />
+        <div className="Navbar-rightSlot">{rightSlot}</div>
         {rightContent.map((item) => (
           <IconButton size="lg" key={item.icon} {...item} />
         ))}

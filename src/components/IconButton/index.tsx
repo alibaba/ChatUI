@@ -10,7 +10,7 @@ export interface IconButtonProps extends ButtonProps {
 export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
   const { className, icon, img, ...other } = props;
   return (
-    <Button className={clsx('IconBtn', className)} ref={ref} {...other}>
+    <Button className={clsx('IconBtn', className)} data-icon={icon} ref={ref} {...other}>
       {icon && <Icon type={icon} />}
       {!icon && img && <img src={img} alt="" />}
     </Button>

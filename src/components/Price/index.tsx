@@ -79,6 +79,7 @@ export const Price = React.forwardRef<HTMLDivElement, PriceProps>((props, ref) =
       className={clsx('Price', { 'Price--original': original }, className)}
       data-size={autoFit ? getSize(parts) : undefined}
       ref={ref}
+      aria-label={`价格：${price}`}
       {...other}
     >
       {parts.map((t, i) =>

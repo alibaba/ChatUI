@@ -34,6 +34,7 @@ export type ComposerProps = {
   onToolbarClick?: (item: ToolbarItemProps, event: React.MouseEvent) => void;
   onAccessoryToggle?: (isAccessoryOpen: boolean) => void;
   rightAction?: IconButtonProps;
+  isX?: boolean;
 };
 
 export interface ComposerHandle {
@@ -59,6 +60,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     onToolbarClick,
     rightAction,
     inputOptions,
+    isX,
   } = props;
 
   const [text, setText] = useState(initialText);
@@ -244,7 +246,13 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   }, []);
 
   const isInputText = inputType === 'text';
-  const inputTypeIcon = isInputText ? 'volume-circle' : 'keyboard-circle';
+  const inputTypeIcon = isX
+    ? isInputText
+      ? 'mic'
+      : 'keyboard'
+    : isInputText
+    ? 'volume-circle'
+    : 'keyboard-circle';
   const hasToolbar = toolbar.length > 0;
 
   const inputProps = {
@@ -258,6 +266,8 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     onChange: handleTextChange,
     onImageSend,
   };
+
+  const hasValue = !!(text || textOnce);
 
   if (isWide) {
     return (
@@ -278,14 +288,14 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
         <div className="Composer-inputWrap">
           <ComposerInput invisible={false} {...inputProps} />
         </div>
-        <SendButton onClick={handleSendBtnClick} disabled={!text} />
+        <SendButton onClick={handleSendBtnClick} disabled={!hasValue} />
       </div>
     );
   }
 
   return (
     <>
-      <div className="Composer">
+      <div className="Composer" data-has-value={hasValue}>
         {recorder.canRecord && (
           <Action
             className="Composer-inputTypeBtn"
@@ -305,12 +315,12 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
             className={clsx('Composer-toggleBtn', {
               active: isAccessoryOpen,
             })}
-            icon="plus-circle"
+            icon={isX ? 'plus' : 'plus-circle'}
             onClick={handleAccessoryToggle}
             aria-label={isAccessoryOpen ? '关闭工具栏' : '展开工具栏'}
           />
         )}
-        {(text || textOnce) && <SendButton onClick={handleSendBtnClick} disabled={false} />}
+        {(hasValue || isX) && <SendButton onClick={handleSendBtnClick} disabled={!hasValue} />}
       </div>
       {isAccessoryOpen && (
         <AccessoryWrap onClickOutside={handleAccessoryBlur}>

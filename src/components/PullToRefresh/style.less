@@ -1,8 +1,10 @@
 .PullToRefresh {
   height: 100%;
   overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
 
+  .no-scrolling & {
+    -webkit-overflow-scrolling: touch;
+  }
   &-fallback {
     padding-top: var(--gutter);
     text-align: center;

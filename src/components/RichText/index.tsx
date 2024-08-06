@@ -20,6 +20,7 @@ export const RichText = React.forwardRef<HTMLDivElement, RichTextProps>((props, 
       className={clsx('RichText', className)}
       // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={html}
+      role="article"
       ref={ref}
       {...other}
     />

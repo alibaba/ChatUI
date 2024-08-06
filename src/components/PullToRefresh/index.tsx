@@ -44,9 +44,9 @@ export interface PullToRefreshHandle {
 export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefreshProps>(
   (props, ref) => {
     const {
-      distance: oDistance = 30,
+      distance: oDistance = 20,
       loadingDistance = 30,
-      maxDistance,
+      maxDistance = 60,
       distanceRatio = 2,
       loadMoreText = '点击加载更多',
       children,

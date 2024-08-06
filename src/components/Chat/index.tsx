@@ -176,6 +176,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     onAccessoryToggle,
     rightAction,
     Composer = DComposer,
+    isX,
   } = props;
 
   function handleInputFocus(e: React.FocusEvent<HTMLTextAreaElement>) {
@@ -194,15 +195,20 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     }
 
     const v = getIOSMajorVersion();
-    // iOS 9、10 不支持按钮使用 flex
-    if (v && v < 11) {
-      rootEl.dataset.oldIos = '';
+    if (v) {
+      if (v < 11) {
+        // iOS 9、10 不支持按钮使用 flex
+        rootEl.classList.add('no-btn-flex');
+      }
+      if (v < 13) {
+        rootEl.classList.add('no-scrolling');
+      }
     }
   }, []);
 
   return (
     <ConfigProvider locale={locale} locales={locales} elderMode={elderMode}>
-      <div className="ChatApp" data-elder-mode={elderMode} ref={ref}>
+      <div className="ChatApp" data-elder-mode={elderMode} data-x={isX} ref={ref}>
         {renderNavbar ? renderNavbar() : navbar && <Navbar {...navbar} />}
         <MessageContainer
           ref={messagesRef}
@@ -246,6 +252,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
             onSend={onSend}
             onImageSend={onImageSend}
             rightAction={rightAction}
+            isX={isX}
           />
         </div>
       </div>
