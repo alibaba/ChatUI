@@ -13,9 +13,6 @@ export const Backdrop = (props: BackdropProps) => {
     <div
       className={clsx('Backdrop', className, { active })}
       onClick={onClick}
-      role="button"
-      tabIndex={-1}
-      aria-hidden
       {...rest}
     />
   );

@@ -182,7 +182,9 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
 
     return (
       <div className="MessageContainer" ref={messagesRef} tabIndex={-1}>
-        {renderBeforeMessageList && renderBeforeMessageList()}
+        <div className="MessageContainer-before">
+          {renderBeforeMessageList && renderBeforeMessageList()}
+        </div>
         <PullToRefresh
           onRefresh={onRefresh}
           onScroll={handleScroll}

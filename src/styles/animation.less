@@ -19,7 +19,6 @@ each(range(2, 11), {
   }
 });
 
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -29,6 +28,21 @@ each(range(2, 11), {
   }
 }
 
-.A-fadeIn {
+@keyframes up {
+  from {
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.A-fadeIn,
+[data-animation='fadeIn'] {
   animation: 0.6s fadeIn;
+}
+
+[data-animation='fadeInUp'] {
+  animation: fadeIn 0.6s cubic-bezier(0.17, 0.17, 0.67, 1),
+    up 0.6s cubic-bezier(0.02, 0.25, 0.04, 0.98);
 }

@@ -10,7 +10,7 @@ export interface QuickRepliesProps {
 }
 
 const QuickReplies = (props: QuickRepliesProps) => {
-  const { items, visible, onClick, onScroll } = props;
+  const { items = [], visible = true, onClick, onScroll } = props;
   const scroller = useRef<ScrollViewHandle>(null);
   const [scrollEvent, setScrollEvent] = useState(!!onScroll);
 
@@ -45,11 +45,6 @@ const QuickReplies = (props: QuickRepliesProps) => {
       )}
     />
   );
-};
-
-QuickReplies.defaultProps = {
-  items: [],
-  visible: true,
 };
 
 export default React.memo(QuickReplies);

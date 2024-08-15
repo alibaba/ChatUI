@@ -2,53 +2,43 @@
   display: flex;
   align-items: center;
   height: 22.5px;
-  transition: opacity 0.1s;
 }
 
-@frame-time: 0.18s;
+.Typing-text {
+  margin-right: 9px;
+  font-size: 15px;
+}
+
+@frame-time: 0.4s;
 
 .Typing-dot {
   display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin-left: 6px;
-  border-radius: 50%;
-  animation: typing-dot (@frame-time * 7) linear infinite;
-  animation-direction: reverse; // to fix iOS16+ quirky animation
-  transform: scale(0);
-  background: var(--gray-3);
+  width: 4px;
+  height: 4px;
+  margin-left: 4px;
+  border-radius: 4px;
+  animation: typing-dot (@frame-time * 3) ease-in-out infinite;
+  background: var(--gray-5);
+  transform: rotate(-15deg);
 
-  &:nth-child(1) {
+  &:nth-child(2) {
     margin: 0;
   }
-  &:nth-child(2) {
-    animation-delay: @frame-time;
-  }
   &:nth-child(3) {
-    animation-delay: @frame-time * 2;
+    animation-delay: 0.1s;
+  }
+  &:nth-child(4) {
+    animation-delay: 0.2s;
   }
 }
 
 @keyframes typing-dot {
-  0% {
-    transform: scale(1);
+  0%, 40%, 100% {
+    height: 4px;
+    background: var(--gray-5);
   }
-  16.67% {
-    transform: scale(0);
-  }
-  // 33.33% {
-  //   transform: scale(0);
-  // }
-  50% {
-    transform: scale(0);
-  }
-  66.67% {
-    transform: scale(1);
-  }
-  // 83.33% {
-  //   transform: scale(1);
-  // }
-  100% {
-    transform: scale(1);
+  20% {
+    height: 12px;
+    background-image: linear-gradient(162deg, var(--brand-2) 0%, var(--brand-1) 100%);
   }
 }

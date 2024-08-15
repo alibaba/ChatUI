@@ -3,6 +3,7 @@ import 'intersection-observer';
 export { default as clsx } from 'clsx';
 export { default as DOMPurify } from 'dompurify';
 
+export { default as canUse } from './utils/canUse';
 export { importScript } from './utils/importScript';
 export { lazyComponent } from './utils/lazyComponent';
 export { mountComponent } from './utils/mountComponent';
