@@ -112,6 +112,8 @@ export type {
   QuickReplyProps,
   QuickReplyItemProps,
 } from './components/QuickReplies';
+export { Quote } from './components/Quote';
+export type { QuoteProps } from './components/Quote';
 export { Radio, RadioGroup } from './components/Radio';
 export type { RadioProps, RadioGroupProps, RadioValue } from './components/Radio';
 export { RateActions } from './components/RateActions';

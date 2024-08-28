@@ -1,0 +1,32 @@
+.Quote {
+  padding-left: 9px;
+  border-left: 3px solid rgba(0, 0, 0, 0.08);
+  color: var(--gray-2);
+  font-size: 12px;
+
+  .Image,
+  .Video-cover,
+  .Video-video:not([hidden]) {
+    max-width: 72px;
+    max-height: 72px;
+    border-radius: 6px;
+  }
+  .Image,
+  .Video {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .Video-video {
+    width: auto;
+  }
+  .Video-playBtn {
+    pointer-events: none;
+  }
+  .Video-playIcon {
+    font-size: 24px;
+  }
+}
+
+.Quote-author {
+  color: var(--gray-3);
+}
