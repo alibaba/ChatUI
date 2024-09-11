@@ -177,6 +177,15 @@
   text-align: center;
 }
 
+.Popup-subtitle {
+  margin: @popup-subtitle-margin;
+  color: @popup-subtitle-color;
+  font-size: @popup-subtitle-font-size;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 3px;
+}
+
 .Popup[data-elder-mode='true'] {
   .Modal-title,
   .Popup-title {
@@ -226,7 +235,16 @@
   background: var(--white);
 
   .Btn + .Btn {
-    margin-top: @popup-btn-x-spacing;
+    margin-top: @popup-btn-y-spacing;
+  }
+}
+
+.Popup-footer--h {
+  flex-direction: row;
+
+  .Btn + .Btn {
+    margin-top: 0;
+    margin-left: @popup-btn-x-spacing;
   }
 }
 

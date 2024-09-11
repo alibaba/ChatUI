@@ -125,6 +125,30 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     isMountRef.current = true;
   }, []);
 
+  useEffect(() => {
+    const { visualViewport } = window;
+    if (!visualViewport) return;
+
+    const winHeight = window.innerHeight;
+
+    function toggleFocusing() {
+      // 视窗变高做失焦处理
+      // 场景：安卓、鸿蒙、iOS+第三方键盘收起键盘时并没有失去焦点
+      if (focused.current && visualViewport!.height >= winHeight) {
+        inputRef.current?.blur();
+      }
+    }
+
+    function resizeHandler() {
+      toggleFocusing();
+    }
+
+    visualViewport.addEventListener('resize', resizeHandler);
+    return () => {
+      visualViewport.removeEventListener('resize', resizeHandler);
+    };
+  }, []);
+
   useImperativeHandle(ref, () => ({
     setText,
   }));

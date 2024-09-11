@@ -14,6 +14,7 @@ export interface ModalProps {
   baseClass?: string;
   className?: string;
   title?: string;
+  subTitle?: string;
   titleId?: string;
   showClose?: boolean;
   autoFocus?: boolean;
@@ -46,6 +47,7 @@ export const Base = React.forwardRef<BaseModalHandle, ModalProps>((props, ref) =
     active,
     className,
     title,
+    subTitle,
     showClose = true,
     autoFocus = true,
     backdrop = true,
@@ -134,6 +136,7 @@ export const Base = React.forwardRef<BaseModalHandle, ModalProps>((props, ref) =
             <h5 className={`${baseClass}-title`} id={titleId}>
               {title}
             </h5>
+            {isPopup && subTitle && <h6 className={`${baseClass}-subtitle`}>{subTitle}</h6>}
             {showClose && onClose && (
               <IconButton
                 className={`${baseClass}-close`}

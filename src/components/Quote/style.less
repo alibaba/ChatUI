@@ -4,6 +4,9 @@
   color: var(--gray-2);
   font-size: 12px;
 
+  & + .Divider {
+    margin-top: 9px;
+  }
   .Image,
   .Video-cover,
   .Video-video:not([hidden]) {
@@ -24,6 +27,17 @@
   }
   .Video-playIcon {
     font-size: 24px;
+  }
+}
+
+.Bubble {
+  .Quote:hover {
+    cursor: pointer;
+  }
+  .Quote-content {
+    a {
+      pointer-events: none;
+    }
   }
 }
 
