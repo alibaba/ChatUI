@@ -23,7 +23,11 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>((props, ref) =>
     <header className={clsx('Navbar', { 'Navbar--left': isLeft }, className)} ref={ref}>
       <div className="Navbar-left">{leftContent && <IconButton size="lg" {...leftContent} />}</div>
       <div className="Navbar-main">
-        {logo && <img className="Navbar-logo" src={logo} alt={title} />}
+        {logo && (
+          <div className="Navbar-brand">
+            <img className="Navbar-logo" src={logo} alt={title} />
+          </div>
+        )}
         <div className="Navbar-inner">
           {showTitle && <h2 className="Navbar-title">{title}</h2>}
           <div className="Navbar-desc">{desc}</div>
