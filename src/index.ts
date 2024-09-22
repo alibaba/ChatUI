@@ -121,6 +121,8 @@ export type { RateActionsProps } from './components/RateActions';
 export type { RecorderHandle } from './components/Recorder';
 export { RichText } from './components/RichText';
 export type { RichTextProps } from './components/RichText';
+export { ScrollGrid } from './components/ScrollGrid';
+export type { ScrollGridProps } from './components/ScrollGrid';
 export { ScrollView } from './components/ScrollView';
 export type { ScrollViewProps } from './components/ScrollView';
 export { Search } from './components/Search';
