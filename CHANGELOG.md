@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-beta.7](https://github.com/alibaba/ChatUI/compare/v3.0.0-beta.6...v3.0.0-beta.7) (2024-09-22)
+
+
+### Features
+
+* 新增 ScrollGrid ([2e75c7a](https://github.com/alibaba/ChatUI/commit/2e75c7a0edf7a6b95f8651adaf771f578f10a68e))
+
 ## [3.0.0-beta.6](https://github.com/alibaba/ChatUI/compare/v3.0.0-beta.5...v3.0.0-beta.6) (2024-09-19)
 
 
