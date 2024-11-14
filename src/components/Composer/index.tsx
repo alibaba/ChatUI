@@ -64,14 +64,16 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   } = props;
 
   const [text, setText] = useState(initialText);
-  const [textOnce, setTextOnce] = useState('');
-  const [placeholder, setPlaceholder] = useState(oPlaceholder);
+  const [textOnce, setTextOnce] = useState(oTextOnce);
+  const [hasValue, setHasValue] = useState(!!text);
+  const [placeholder, setPlaceholder] = useState(oTextOnce || oPlaceholder);
   const [inputType, setInputType] = useState(initialInputType || 'text');
   const [isAccessoryOpen, setAccessoryOpen] = useState(false);
   const [accessoryContent, setAccessoryContent] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null!);
   const focused = useRef(false);
   const blurTimer = useRef<any>();
+  const valueTimer = useRef<NodeJS.Timeout>();
   const popoverTarget = useRef<any>();
   const isMountRef = useRef(false);
   const [isWide, setWide] = useState(false);
@@ -112,16 +114,6 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   }, [isAccessoryOpen, onAccessoryToggle]);
 
   useEffect(() => {
-    if (oTextOnce) {
-      setTextOnce(oTextOnce);
-      setPlaceholder(oTextOnce);
-    } else {
-      setTextOnce('');
-      setPlaceholder(oPlaceholder);
-    }
-  }, [oPlaceholder, oTextOnce]);
-
-  useEffect(() => {
     isMountRef.current = true;
   }, []);
 
@@ -148,6 +140,18 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
       visualViewport.removeEventListener('resize', resizeHandler);
     };
   }, []);
+
+  useEffect(() => {
+    if (text) {
+      clearTimeout(valueTimer.current);
+      setHasValue(true);
+    } else {
+      // 中文上屏时有一瞬间会无值，所以做延迟处理
+      valueTimer.current = setTimeout(() => {
+        setHasValue(false);
+      });
+    }
+  }, [text]);
 
   useImperativeHandle(ref, () => ({
     setText,
@@ -291,8 +295,6 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     onImageSend,
   };
 
-  const hasValue = !!(text || textOnce);
-
   if (isWide) {
     return (
       <div className="Composer Composer--lg">
@@ -319,7 +321,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
 
   return (
     <>
-      <div className="Composer" data-has-value={hasValue}>
+      <div className="Composer" data-has-value={hasValue} data-has-text-once={!!textOnce}>
         {recorder.canRecord && (
           <Action
             className="Composer-inputTypeBtn"

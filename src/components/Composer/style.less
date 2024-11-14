@@ -2,6 +2,7 @@
   display: flex;
   align-items: flex-end;
   padding: @composer-padding;
+  --action-size: @composer-input-min-height;
 
   > div + div {
     margin-left: 9px;
@@ -11,7 +12,7 @@
 .Composer-actions {
   display: flex;
   align-items: center;
-  height: @composer-input-min-height;
+  height: var(--action-size);
 
   .IconBtn {
     font-size: 30Px;
@@ -20,8 +21,9 @@
 }
 
 .Composer-toggleBtn {
-  transition: transform 0.2s;
-
+  .Icon {
+    transition: transform 0.3s;
+  }
   &.active .Icon {
     transform: rotate(45deg);
   }
@@ -46,9 +48,19 @@
 }
 
 .Composer-sendBtn {
+  flex: 0 0 auto;
   min-width: 0;
   padding-left: 16Px;
   padding-right: 16Px;
+}
+
+@keyframes sendIn {
+  0% {
+    transform: scale(0.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .ChatApp[data-elder-mode="true"] {
@@ -67,5 +79,37 @@
   .Composer-sendBtn {
     padding: 4Px 13Px;
     font-size: 17Px;
+  }
+}
+
+.ChatApp[data-x='true'] {
+  .Composer {
+    &[data-has-value="false"] .Composer-actions[data-action="send"],
+    &[data-has-value="true"] .Composer-actions[data-action-icon] {
+      width: 0;
+      margin: 0;
+      opacity: 0;
+    }
+    // .Composer-sendBtn {
+    //   transform: scale(0.2);
+    // }
+    &[data-has-value="true"] {
+      .Composer-inputWrap {
+        margin-left: 0;
+      }
+      .Composer-sendBtn {
+        animation: 0.3s sendIn;
+        // animation-delay: 0.1s;
+        // animation-fill-mode: forwards;
+      }
+    }
+  }
+  .Composer-actions {
+    overflow: hidden;
+    width: var(--action-size);
+    transition: width 0.1s;
+  }
+  .Composer-actions[data-action='send'] {
+    width: var(--send-width, 63px);
   }
 }

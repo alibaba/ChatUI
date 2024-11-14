@@ -61,24 +61,6 @@
   --rate-width: 33px; // 点赞踩宽度（和消息头像一致）
   --msg-gutter: calc(var(--msg-gap) + var(--rate-width)); // 消息边距
 
-  // 聚焦 或 有输入内容 时，隐藏图标按钮
-  .S--focusing &,
-  .Composer[data-has-value='true'] {
-    .Composer-actions[data-action-icon] {
-      display: none;
-    }
-    .Composer-inputWrap {
-      margin-left: 0;
-    }
-  }
-  .Composer[data-has-value='false'] .Composer-actions[data-action='send'] {
-    display: none;
-  }
-  .S--focusing & {
-    .Composer[data-has-value='false'] .Composer-actions[data-action='send'] {
-      display: flex;
-    }
-  }
   .Composer-actions .IconBtn {
     padding: 8px;
     border-radius: 12px;
