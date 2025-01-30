@@ -61,8 +61,8 @@ const Message = (props: MessageProps) => {
 
   if (type === 'system') {
     return <SystemMessage content={content.text} action={content.action} />;
-  }else if(type==="typing"){
-    return   <Typing />
+  } else if(type==="typing"){
+    return <Typing />
   }
 
   const isRL = position === 'right' || position === 'left';
