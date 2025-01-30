@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { SystemMessage } from './SystemMessage';
+import { Typing } from './Typing';
 import { IMessageStatus } from '../MessageStatus';
 import { Avatar } from '../Avatar';
 import { Time } from '../Time';
@@ -60,6 +61,8 @@ const Message = (props: MessageProps) => {
 
   if (type === 'system') {
     return <SystemMessage content={content.text} action={content.action} />;
+  }else if(type==="typing"){
+    return   <Typing />
   }
 
   const isRL = position === 'right' || position === 'left';
