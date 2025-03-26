@@ -2,15 +2,14 @@ import React from 'react';
 import clsx from 'clsx';
 import { Flex } from '../Flex';
 
-export interface CardMediaProps extends React.HTMLAttributes<HTMLDivElement> {
+export type CardMediaProps = {
   className?: string;
   aspectRatio?: 'square' | 'wide';
   color?: string;
   image?: string;
-  children?: React.ReactNode;
-}
+};
 
-export const CardMedia = React.forwardRef<HTMLDivElement, CardMediaProps>((props, ref) => {
+export const CardMedia: React.FC<CardMediaProps> = (props) => {
   const { className, aspectRatio = 'square', color, image, children, ...other } = props;
 
   const bgStyle = {
@@ -30,7 +29,6 @@ export const CardMedia = React.forwardRef<HTMLDivElement, CardMediaProps>((props
       )}
       style={bgStyle}
       {...other}
-      ref={ref}
     >
       {children && (
         <Flex className="CardMedia-content" direction="column" center>
@@ -39,4 +37,4 @@ export const CardMedia = React.forwardRef<HTMLDivElement, CardMediaProps>((props
       )}
     </div>
   );
-});
+};

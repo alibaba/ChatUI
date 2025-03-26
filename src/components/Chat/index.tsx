@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ConfigProvider, ConfigContextType } from '../ConfigProvider';
 import { Navbar, NavbarProps } from '../Navbar';
 import {
@@ -140,6 +140,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     wideBreakpoint,
     locale = 'zh-CN',
     locales,
+    colorScheme,
     elderMode,
     navbar,
     renderNavbar,
@@ -155,7 +156,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     onBackBottomClick,
     quickReplies = [],
     quickRepliesVisible,
-    onQuickReplyClick = () => {},
+    onQuickReplyClick = () => { },
     onQuickReplyScroll,
     renderQuickReplies,
     text,
@@ -178,6 +179,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     Composer = DComposer,
     isX,
   } = props;
+  const [currentColorScheme, setCurrentColorScheme] = useState<'light' | 'dark'>('light');
 
   function handleInputFocus(e: React.FocusEvent<HTMLTextAreaElement>) {
     if (messagesRef && messagesRef.current) {
@@ -190,7 +192,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
 
   useEffect(() => {
     const rootEl = document.documentElement;
-    if (isSafari()) {
+    if (isSafari) {
       rootEl.dataset.safari = '';
     }
 
@@ -206,9 +208,38 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     }
   }, []);
 
+  useEffect(() => {
+    const updateColorScheme = (scheme: 'light' | 'dark') => {
+      setCurrentColorScheme(scheme);
+      document.documentElement.dataset.colorScheme = scheme;
+    };
+
+    if (colorScheme === 'auto') {
+      const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleColorSchemeChange = (e: MediaQueryListEvent | MediaQueryList) => {
+        updateColorScheme(e.matches ? 'dark' : 'light');
+      }
+
+      colorSchemeQuery.addEventListener('change', handleColorSchemeChange);
+      handleColorSchemeChange(colorSchemeQuery);
+
+      return () => {
+        colorSchemeQuery.removeEventListener('change', handleColorSchemeChange);
+      }
+    } else if (colorScheme === 'dark') {
+      updateColorScheme(colorScheme);
+    }
+    return;
+  }, [colorScheme]);
+
   return (
-    <ConfigProvider locale={locale} locales={locales} elderMode={elderMode}>
-      <div className="ChatApp" data-elder-mode={elderMode} data-x={isX} ref={ref}>
+    <ConfigProvider locale={locale} locales={locales} colorScheme={currentColorScheme} elderMode={elderMode}>
+      <div
+        className="ChatApp"
+        data-elder-mode={elderMode}
+        data-x={isX}
+        ref={ref}
+      >
         {renderNavbar ? renderNavbar() : navbar && <Navbar {...navbar} />}
         <MessageContainer
           ref={messagesRef}
@@ -252,7 +283,6 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
             onSend={onSend}
             onImageSend={onImageSend}
             rightAction={rightAction}
-            isX={isX}
           />
         </div>
       </div>

@@ -12,7 +12,6 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   icon?: string;
   loading?: boolean;
   disabled?: boolean;
-  children?: React.ReactNode;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
@@ -59,6 +58,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, r
       )}
       type="button"
       disabled={disabled}
+      data-loading={loading}
       onClick={handleClick}
       ref={ref}
       {...other}

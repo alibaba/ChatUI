@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { IconButton, IconButtonProps } from '../IconButton';
 
-export interface NavbarProps {
+export type NavbarProps = {
   title: string;
   className?: string;
   logo?: string;
@@ -11,16 +11,16 @@ export interface NavbarProps {
   rightSlot?: React.ReactNode;
   desc?: React.ReactNode;
   align?: 'left' | 'center';
-}
+};
 
-export const Navbar = React.forwardRef<HTMLElement, NavbarProps>((props, ref) => {
+export const Navbar = (props: NavbarProps) => {
   const { className, title, logo, desc, leftContent, rightContent = [], rightSlot, align } = props;
 
   const isLeft = align === 'left';
   const showTitle = isLeft ? true : !logo;
 
   return (
-    <header className={clsx('Navbar', { 'Navbar--left': isLeft }, className)} ref={ref}>
+    <header className={clsx('Navbar', { 'Navbar--left': isLeft }, className)}>
       <div className="Navbar-left">{leftContent && <IconButton size="lg" {...leftContent} />}</div>
       <div className="Navbar-main">
         {logo && (
@@ -41,4 +41,4 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>((props, ref) =>
       </div>
     </header>
   );
-});
+};

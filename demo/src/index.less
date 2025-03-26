@@ -2,25 +2,27 @@
 //   font-size: (16 * 100vw / 375);
 // }
 
-body {
-  margin: 0;
-}
-
 #root {
   overflow-y: auto;
+}
+
+body {
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+  line-height: 1.5;
+  color: var(--color-text-1);
 }
 
 .demo-index {
   padding: 20px 16px;
   box-sizing: border-box;
   min-height: 100vh;
-  background: #fff;
+  background: var(--color-fill-1);
 }
 
 .demo-nav {
   &-title {
     margin: 24px 0 8px 12px;
-    color: rgba(0, 0, 0, 0.65);
+    color: var(--color-text-2);
     font-size: 14px;
     font-weight: 400;
   }
@@ -34,25 +36,20 @@ body {
     display: flex;
     margin-bottom: 12px;
     padding: 10px 20px;
-    background: var(--gray-7);
+    background: var(--color-fill-2);
     border-radius: 99px;
     transition: 0.3s;
-    color: var(--gray-1);
+    color: var(--color-text-1);
     font-size: 14px;
     font-weight: 500;
     line-height: 1.5;
     text-decoration: none;
-
-    &:hover {
-      background: var(--gray-6);
-    }
   }
 }
 
-//
 .demo-page {
   min-height: 100vh;
-  background: var(--gray-6);
+  background: var(--app-bg);
 
   &[data-page='avatar'] {
     .Avatar + .Avatar {
@@ -66,7 +63,7 @@ body {
   }
   &[data-page='card'] {
     .demo-section {
-      background: var(--gray-6);
+      background: var(--app-bg);
     }
     .Card + .Card {
       margin-top: 16px;
@@ -77,19 +74,19 @@ body {
       margin: 6px;
       padding: 6px;
       border-radius: 4px;
-      background: #f4f3ef;
+      background: var(--color-fill-2);
       text-align: center;
       font-size: 14px;
     }
   }
   &[data-page='goods'] {
     .demo-section {
-      background: var(--gray-6);
+      background: var(--app-bg);
     }
   }
   &[data-page='search'] {
     .demo-section {
-      background: var(--gray-6);
+      background: var(--app-bg);
     }
   }
 }
@@ -101,18 +98,18 @@ body {
   justify-content: center;
   height: 48px;
   margin-bottom: 12px;
-  background: #fff;
+  background: var(--color-fill-1);
 
   &-back {
     position: absolute;
-    top: ((56px - 24px) / 2);
+    top: ((48px - 24px) / 2);
     left: 16px;
 
     svg {
       display: block;
       width: 24px;
       height: 24px;
-      fill: #333;
+      fill: var(--color-text-1);
     }
   }
   &-title {
@@ -123,17 +120,19 @@ body {
 
 .demo-section {
   padding: 16px;
-  margin-bottom: 8px;
-
+  
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
   &.bg-white {
-    background: var(--white);
+    background: var(--color-fill-1);
   }
   &.bg-gray {
-    background: #fafafa;
+    background: var(--app-bg);
   }
   &-title {
     margin: 10px 0;
-    color: rgba(0, 0, 0, 0.65);
+    color: var(--color-text-2);
     font-weight: normal;
     font-size: 14px;
     line-height: 16px;
@@ -162,7 +161,7 @@ body {
   width: 72px;
   padding: 12px 14px;
   box-sizing: border-box;
-  background: #FAFAFA;
+  background: var(--color-fill-1);
 
   h1 {
     margin: 8px 0;
@@ -196,7 +195,7 @@ body {
   }
 }
 
-// OrdderSelector
+// OrderSelector
 .OrdderSelector {
   .Popup-dialog {
     background: var(--gray-7);

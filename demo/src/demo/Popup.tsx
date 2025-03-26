@@ -69,6 +69,7 @@ export default () => {
       <Popup
         active={open1}
         title="标题"
+        subTitle="副标题"
         onClose={() => {
           setOpen1(false);
         }}
@@ -121,6 +122,7 @@ export default () => {
         }}
         height={80}
         actions={[{ label: '主要按钮', color: 'primary' }, { label: '次要按钮' }]}
+        vertical={false}
       >
         <div style={{ padding: '15px' }}>
           <p>内容详情内容详情内容详情内容详情内容详情内容详情</p>

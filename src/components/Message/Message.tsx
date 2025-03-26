@@ -12,7 +12,7 @@ export interface User {
   [k: string]: any;
 }
 
-export type MessageId = string | number;
+export type MessageId = string;
 
 export interface MessageProps {
   /**
@@ -72,7 +72,7 @@ const Message = (props: MessageProps) => {
         </div>
       )}
       <div className="Message-main">
-        {isRL && avatar && <Avatar src={avatar} alt={name} url={user.url} />}
+        {isRL && avatar && <Avatar src={avatar} shape="square" alt={name} url={user.url} />}
         <div className="Message-inner">
           {isRL && name && <div className="Message-author">{name}</div>}
           <div className="Message-content" role="alert" aria-live="assertive" aria-atomic="false">

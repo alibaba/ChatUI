@@ -2,10 +2,9 @@ import React from 'react';
 
 interface CarouselItemProps {
   width: string;
-  children?: React.ReactNode;
 }
 
-export const CarouselItem = (props: CarouselItemProps) => {
+export const CarouselItem: React.FC<CarouselItemProps> = (props) => {
   const { width, children } = props;
 
   return (

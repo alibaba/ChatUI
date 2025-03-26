@@ -1,13 +1,17 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Base, ModalProps, BaseModalHandle } from './Base';
+import { Base, ModalProps } from './Base';
 import { useLocale } from '../ConfigProvider';
 import { ButtonProps } from '../Button';
 
 const isPrimary = (btn: ButtonProps) => btn.color === 'primary';
 
-export const Confirm = React.forwardRef<BaseModalHandle, ModalProps>((props, ref) => {
-  const { className, vertical: oVertical, actions, ...other } = props;
+export const Confirm: React.FC<ModalProps> = ({
+  className,
+  vertical: oVertical,
+  actions,
+  ...other
+}) => {
   const { locale = '' } = useLocale();
   const isZh = locale.includes('zh');
   // 中文默认横排
@@ -34,8 +38,7 @@ export const Confirm = React.forwardRef<BaseModalHandle, ModalProps>((props, ref
       btnVariant="outline"
       vertical={vertical}
       actions={actions}
-      ref={ref}
       {...other}
     />
   );
-});
+};

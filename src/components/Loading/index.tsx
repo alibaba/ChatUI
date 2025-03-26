@@ -2,12 +2,11 @@ import React from 'react';
 import { Flex } from '../Flex';
 import { Icon } from '../Icon';
 
-export interface LoadingProps {
+export type LoadingProps = {
   tip?: string;
-  children?: React.ReactNode;
-}
+};
 
-export const Loading = (props: LoadingProps) => {
+export const Loading: React.FC<LoadingProps> = (props) => {
   const { tip, children } = props;
   return (
     <Flex className="Loading" center>

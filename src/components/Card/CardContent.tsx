@@ -1,16 +1,15 @@
 import React from 'react';
 import clsx from 'clsx';
 
-export interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
+export type CardContentProps = {
   className?: string;
-  children?: React.ReactNode;
-}
+};
 
-export const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>((props, ref) => {
+export const CardContent: React.FC<CardContentProps> = (props) => {
   const { className, children, ...other } = props;
   return (
-    <div className={clsx('CardContent', className)} {...other} ref={ref}>
+    <div className={clsx('CardContent', className)} {...other}>
       {children}
     </div>
   );
-});
+};

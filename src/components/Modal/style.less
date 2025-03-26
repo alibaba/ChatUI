@@ -28,7 +28,7 @@
   overflow: hidden;
   width: @modal-width;
   max-width: 90vw;
-  border-radius: @modal-border-radius;
+  border-radius: var(--radius-md);
   background: @modal-bg;
   opacity: @modal-opacity;
   transition: @modal-transition;
@@ -40,7 +40,7 @@
     overflow: visible;
     background-image:
       linear-gradient(to bottom, rgba(255, 255, 255, 75%) 0%, rgba(255, 255, 255, 75%) 120px),
-      linear-gradient(to bottom, var(--brand-1) 0%, var(--white) 120px);
+      linear-gradient(to bottom, var(--brand-1) 0%, var(--color-fill-1) 120px);
   }
 }
 
@@ -50,9 +50,9 @@
     linear-gradient(-51deg, var(--brand-1) 0%, var(--brand-1) 100%);
   background-repeat: no-repeat;
   background-size: cover;
-  box-shadow: 0 0 2px 0px var(--white), 0 0 2px 0px var(--brand-1);
+  box-shadow: 0 0 2px 0px var(--color-fill-1), 0 0 2px 0px var(--brand-1);
   box-sizing: border-box;
-  border: 2px solid var(--white);
+  border: 2px solid var(--color-fill-1);
   border-radius: 50%;
   width: 58px;
   height: 58px;
@@ -82,11 +82,11 @@
     padding-top: 10px;
     padding-bottom: 10px;
     border-width: 1px 0 0;
-    border-color: var(--gray-6);
+    border-color: var(--color-line-1);
     border-radius: 0;
 
     &:not(.Btn--primary) {
-      color: var(--gray-2);
+      color: var(--color-text-2);
     }
   }
 }
@@ -143,14 +143,14 @@
   z-index: @zindex-popup;
   overflow: hidden;
   width: 100%;
-  border-radius: @popup-border-radius;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
   background: @popup-bg;
   opacity: 0;
   transform: translate3d(0, 100%, 0);
   transition: 0.3s;
 
   &[data-bg-color="gray"] {
-    background: var(--gray-7);
+    background: var(--color-fill-2);
   }
   &[data-height="80"] {
     height: 80vh;
@@ -232,7 +232,7 @@
   flex-direction: column;
   padding: @popup-footer-padding;
   padding-bottom: calc(9px + var(--safe-bottom));
-  background: var(--white);
+  background: var(--color-fill-1);
 
   .Btn + .Btn {
     margin-top: @popup-btn-y-spacing;

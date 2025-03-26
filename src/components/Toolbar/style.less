@@ -21,7 +21,8 @@
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: var(--gray-2);
+  color: var(--color-text-3);
+  font-weight: 400;
   vertical-align: top;
 
   &:hover {
@@ -49,8 +50,9 @@
 .Toolbar-btnIcon {
   display: inline-block;
   padding: 12Px;
-  border-radius: 12px;
-  background: var(--white);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-1);
   transition: 0.3s;
 
   .Icon {
@@ -79,6 +81,7 @@
     padding: 16Px;
   }
 }
+
 @media (min-width: 350px) {
   .ChatApp[data-elder-mode='true'] {
     // .Toolbar-btn {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import { Button } from '../Button';
 
-export interface SystemMessageProps {
+export type SystemMessageProps = {
   className?: string;
   content: string;
   action?: {
@@ -11,7 +11,7 @@ export interface SystemMessageProps {
     once?: boolean;
     disabled?: boolean;
   };
-}
+};
 
 export const SystemMessage = (props: SystemMessageProps) => {
   const { className, content, action } = props;

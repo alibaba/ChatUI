@@ -128,10 +128,10 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
             {desc && (
               /**
                * 行数规则：
-               * 1. 订单，无状态，非紧凑，2行
+               * 1. 订单，无状态，订单列表中，2行
                * 2. 其它，单行
                */
-              <Text className="Goods-desc" truncate={(isOrder && !status && variant !== 'compact') ? 2 : true}>
+              <Text className="Goods-desc" truncate={(isOrder && !status && isInList) ? 2 : true}>
                 {desc}
               </Text>
             )}
@@ -171,8 +171,9 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
             </div>
           )}
         </Flex>
-        {statusCont}
+        {isInList && statusCont}
         {children && <div className="Goods-slot">{children}</div>}
+        {!isInList && statusCont}
       </FlexItem>
     </Flex>
   );

@@ -6,7 +6,7 @@ export interface ToolbarProps {
   onClick: (item: ToolbarItemProps, event: React.MouseEvent) => void;
 }
 
-export const Toolbar = (props: ToolbarProps) => {
+export const Toolbar: React.FC<ToolbarProps> = (props) => {
   const { items, onClick } = props;
   return (
     <div className="Toolbar">

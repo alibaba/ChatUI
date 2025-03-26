@@ -11,16 +11,15 @@ export interface FileCardProps {
   className?: string;
   file: File;
   extension?: string;
-  children?: React.ReactNode;
 }
 
-export const FileCard = React.forwardRef<HTMLDivElement, FileCardProps>((props, ref) => {
+export const FileCard: React.FC<FileCardProps> = (props) => {
   const { className, file, extension, children } = props;
   const { name, size } = file;
   const ext = extension || getExtName(name);
 
   return (
-    <Card className={clsx('FileCard', className)} size="xl" ref={ref}>
+    <Card className={clsx('FileCard', className)} size="xl">
       <Flex>
         <div className="FileCard-icon" data-type={ext}>
           <Icon type="file" />
@@ -40,4 +39,4 @@ export const FileCard = React.forwardRef<HTMLDivElement, FileCardProps>((props, 
       </Flex>
     </Card>
   );
-});
+};

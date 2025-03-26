@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useImperativeHandle } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import useMount from '../../hooks/useMount';
@@ -9,7 +9,7 @@ import useNextId from '../../hooks/useNextId';
 import toggleClass from '../../utils/toggleClass';
 import { useConfig } from '../ConfigProvider';
 
-export interface ModalProps {
+export type ModalProps = {
   active?: boolean;
   baseClass?: string;
   className?: string;
@@ -28,12 +28,7 @@ export interface ModalProps {
   avatar?: string;
   onClose?: () => void;
   onBackdropClick?: () => void;
-  children?: React.ReactNode;
-}
-
-export interface BaseModalHandle {
-  wrapperRef: React.RefObject<HTMLDivElement>;
-}
+};
 
 function clearModal() {
   if (!document.querySelector('.Modal') && !document.querySelector('.Popup')) {
@@ -41,7 +36,7 @@ function clearModal() {
   }
 }
 
-export const Base = React.forwardRef<BaseModalHandle, ModalProps>((props, ref) => {
+export const Base: React.FC<ModalProps> = (props) => {
   const {
     baseClass,
     active,
@@ -67,13 +62,13 @@ export const Base = React.forwardRef<BaseModalHandle, ModalProps>((props, ref) =
   const titleId = props.titleId || mid;
   const configCtx = useConfig();
 
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const { didMount, isShow } = useMount({ active, ref: wrapperRef });
+  const wrapper = useRef<HTMLDivElement>(null);
+  const { didMount, isShow } = useMount({ active, ref: wrapper });
 
   useEffect(() => {
     setTimeout(() => {
-      if (autoFocus && wrapperRef.current) {
-        wrapperRef.current.focus();
+      if (autoFocus && wrapper.current) {
+        wrapper.current.focus();
       }
     });
   }, [autoFocus]);
@@ -89,10 +84,6 @@ export const Base = React.forwardRef<BaseModalHandle, ModalProps>((props, ref) =
       clearModal();
     }
   }, [active, didMount]);
-
-  useImperativeHandle(ref, () => ({
-    wrapperRef,
-  }));
 
   useEffect(
     () => () => {
@@ -111,7 +102,7 @@ export const Base = React.forwardRef<BaseModalHandle, ModalProps>((props, ref) =
       className={clsx(baseClass, className, { active: isShow })}
       tabIndex={-1}
       data-elder-mode={configCtx.elderMode}
-      ref={wrapperRef}
+      ref={wrapper}
     >
       {backdrop && (
         <Backdrop
@@ -163,4 +154,4 @@ export const Base = React.forwardRef<BaseModalHandle, ModalProps>((props, ref) =
     </div>,
     document.body,
   );
-});
+};

@@ -18,7 +18,7 @@
   margin: @input-margin;
   padding: @input-padding;
   border: @input-border;
-  border-radius: @input-border-radius;
+  border-radius: var(--radius-md);
   font-family: @input-font-family;
   font-size: @input-font-size;
   line-height: @input-line-height;
@@ -41,12 +41,15 @@
       }
     }
   }
+  &:disabled {
+    opacity: 0.5;
+  }
   &::placeholder {
-    color: var(--gray-4);
+    color: var(--color-text-3);
   }
   &--filled {
     border-color: transparent;
-    background-color: var(--gray-6);
+    background-color: var(--color-fill-2);
   }
   &--flushed {
     padding: 2px var(--gutter);
@@ -66,6 +69,6 @@
   z-index: 1;
   float: right;
   margin-right: var(--gutter);
-  color: var(--gray-3);
+  color: var(--color-text-3);
   font-size: @font-size-xs;
 }

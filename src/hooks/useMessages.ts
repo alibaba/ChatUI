@@ -43,6 +43,7 @@ export default function useMessages(initialState: MessageWithoutId[] = []) {
   const appendMsg = useCallback((msg: MessageWithoutId) => {
     const newMsg = makeMsg(msg);
     setMessages((prev) => [...prev, newMsg]);
+    return newMsg._id;
   }, []);
 
   const deleteMsg = useCallback((id: MessageId) => {

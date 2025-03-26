@@ -9,7 +9,7 @@ export type SendConfirmProps = {
   onSend: () => void;
 };
 
-export const SendConfirm = (props: SendConfirmProps) => {
+export const SendConfirm: React.FC<SendConfirmProps> = (props) => {
   const { file, onCancel, onSend } = props;
   const [img, setImg] = useState('');
   const { trans } = useLocale('SendConfirm');

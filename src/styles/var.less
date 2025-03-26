@@ -1,26 +1,26 @@
 @global-style: true;
 
 // Color Palette
-@brand-1: #ff5000;
-@brand-2: #ff9000;
-@brand-3: #fff9eb;
+@brand-1: #ff6200;
+@brand-2: #ffb300;
+@brand-3: #ffe0cc;
 @black: #000;
 @white: #fff;
-@gray-1: #111;
-@gray-2: #666;
-@gray-3: #999;
-@gray-4: #ccc;
-@gray-5: #ddd;
-@gray-6: #eee;
+@gray-1: #11192d;
+@gray-2: #50607a;
+@gray-3: #7c889c;
+@gray-4: #cacfd7;
+@gray-5: #50607a;
+@gray-6: #e5e5e5;
 @gray-7: #f5f5f5;
-@gray-8: #f8f8f8;
+@gray-8: #f3f6f8;
 
-@blue: #39f;
-@gray-dark: #333;
-@green: #62d957;
-@orange: #ff5000;
-@red: #ff3634;
-@yellow: #ffc233;
+@blue: #0080ff;
+@gray-dark: #11192d;
+@green: #1dbf1d;
+@orange: #ff6200;
+@red: #ff0300;
+@yellow: #ffb300;
 @yellow-light: #fff9db;
 
 // Box Shadow
@@ -33,7 +33,7 @@
 
 // Body
 @body-bg: @white;
-@body-color: var(--gray-1);
+@body-color: var(--color-text-1);
 
 // Links
 @link-color: var(--blue);
@@ -71,24 +71,14 @@
 // Border
 @border-width: 1px;
 // @border-color: @gray-4;
-@border-radius-sm: 0.25rem; // 4px
-@border-radius-md: 0.75rem; // 12px
-@border-radius-lg: 1.25rem; // 20px
-
-// Avatar
-@avatar-size: 36px;
-@avatar-size-sm: 24px;
-@avatar-size-lg: 40px;
-
-@avatar-square-border-radius: 4px;
-
-// Backdrop
-@backdrop-bg: rgba(0, 0, 0, 0.7);
+// @border-radius-sm: 0.25rem; // 4px
+// @border-radius-md: 0.75rem; // 12px
+// @border-radius-lg: 1.25rem; // 20px
 
 // Button
 @btn-padding: 5px 12px;
 @btn-border-radius: 999px;
-@btn-bg: var(--white);
+@btn-bg: var(--color-fill-1);
 @btn-font-family: inherit;
 @btn-font-size: @font-size-sm;
 @btn-font-weight: @font-weight-normal;
@@ -108,15 +98,8 @@
 @btn-block-spacing-y: 9px;
 
 @btn-border-width: @border-width;
-@btn-border-color: var(--gray-5);
 
 @btn-transition: 0.15s ease-in-out;
-
-@btn-primary-border-color: transparent;
-@btn-primary-color: var(--white);
-@btn-primary-bg: linear-gradient(90deg, var(--brand-2) 0%, var(--brand-1) 98%);
-@btn-primary-hover-bg: @btn-primary-bg right/200%;
-@btn-primary-active-bg: @btn-primary-bg right/400%;
 
 // Composer
 @composer-padding: 9px var(--gutter);
@@ -124,9 +107,7 @@
 @composer-input-max-height: 132px;
 @composer-input-min-height: 36Px;
 @composer-input-padding: 8px 12px;
-@composer-input-border: 0;
-@composer-input-bg: var(--white);
-@composer-input-border-radius: 12px;
+@composer-input-bg: var(--color-fill-1);
 @composer-input-caret-color: var(--brand-2);
 @composer-input-transition: border-color 0.15s ease-in-out;
 
@@ -135,78 +116,55 @@
 @input-min-height: 24px;
 @input-margin: 0;
 @input-padding: 5px @gutter;
-@input-border: 1px solid var(--gray-6);
+@input-border: 1px solid var(--color-line-1);
 @input-border-radius: 12px;
-@input-bg: var(--white);
+@input-bg: var(--color-fill-1);
 @input-font-family: inherit;
 @input-font-size: @font-size-sm;
 @input-line-height: 1.5;
-@input-color: var(--gray-1);
+@input-color: var(--color-text-1);
 @input-resize: none;
 
 // List
-@list-bg: var(--white);
+@list-bg: var(--color-fill-1);
 @list-border-width: @border-width;
-@list-border-color: var(--gray-7);
+@list-border-color: var(--color-line-1);
 @list-border-radius: 2px;
 
 @list-item-padding: 10px var(--gutter);
-@list-item-color: var(--gray-1);
+@list-item-color: var(--color-text-1);
 @list-item-font-size: 15px;
 @list-item-line-height: 1.6;
-@list-item-icon-color: var(--gray-3);
+@list-item-icon-color: var(--color-text-3);
 
 @list-item-hover-bg: @btn-hover-bg;
 
-@list-item-active-bg: var(--gray-6);
+@list-item-active-bg: var(--color-fill-2);
 
 // Navbar
 @navbar-height: 44Px;
 @navbar-padding: 0 var(--gutter);
-@navbar-bg: var(--gray-6);
-@navbar-border-color: var(--gray-5);
 
-@navbar-color: var(--gray-1);
+@navbar-color: var(--color-text-1);
 @navbar-font-size: 17Px;
 @navbar-logo-height: @navbar-height - 6Px;
 
 // Notice
 @notice-padding: @gutter;
 @notice-border-radius: 12px;
-@notice-bg: var(--white);
+@notice-bg: var(--color-fill-1);
 @notice-icon-color: var(--brand-1);
 
-@notice-content-color: var(--gray-1);
+@notice-content-color: var(--color-text-1);
 @notice-content-font-size: 13px;
 
 // Popover
 @popover-border-radius: 6px;
-@popover-bg: var(--white);
+@popover-bg: var(--color-fill-1);
 @popover-box-shadow: @modal-box-shadow;
 
 // RateActions
-@rate-btn-bg: var(--white);
-
-// Bubble
-@bubble-max-width: 680px;
-
-@bubble-left-bg: var(--white);
-@bubble-left-color: '';
-@bubble-left-border-radius: 12px;
-
-@bubble-right-bg: var(--brand-3);
-@bubble-right-color: '';
-@bubble-right-border-radius: 12px;
-
-@bubble-left-gutter: calc(var(--rate-width) + 16Px);
-@bubble-right-gutter: calc(var(--rate-width) + 8Px);
-
-@bubble-text-padding: 12px;
-
-@bubble-img-max-width: 200px;
-@bubble-img-max-height: 200px;
-
-@bubble-typing-padding: 8px 16px;
+@rate-btn-bg: var(--color-fill-1);
 
 // Card
 @card-padding: 12px;
@@ -214,13 +172,13 @@
 @card-title-font-size: @font-size-md;
 @card-title-font-weight: @font-weight-bold;
 @card-subtitle-font-size: @font-size-xxs;
-@card-subtitle-color: var(--gray-3);
+@card-subtitle-color: var(--color-text-3);
 @card-border-width: @border-width;
 @card-border-radius: 12px;
 // @card-border-color: ;
-@card-bg: var(--white);
+@card-bg: var(--color-fill-1);
 
-@card-text-color: var(--gray-1);
+@card-text-color: var(--color-text-1);
 
 @card-size-xl: 300Px;
 @card-size-lg: 160px;
@@ -231,23 +189,21 @@
 // 卡片自适应宽度 = 100%宽度 - 赞踩宽度 - 赞踩左右边距
 @card-fluid-width: calc(100% - var(--rate-width) - 16Px);
 @card-max-width: 432Px;
-@card-min-width: 260Px;
+@card-min-width: 256Px;
 
 @card-btn-padding: 10px;
 @card-btn-line-height: 1.5;
 @card-btn-spacing-x: @gutter;
 @card-btn-spacing-y: 0;
-@card-btn-border-color: var(--gray-6);
+@card-btn-border-color: var(--color-line-1);
 
-@card-column-btn-bg: var(--white);
-@card-column-btn-color: var(--gray-3);
+@card-column-btn-bg: var(--color-fill-1);
+@card-column-btn-color: var(--color-text-2);
 
 @card-column-btn-primary-color: var(--brand-1);
 
-@card-column-btn-hover-bg: var(--gray-7);
-@card-column-btn-active-bg: var(--gray-7);
-
-@card-column-btn-disabled-color: var(--gray-4);
+@card-column-btn-hover-bg: var(--color-fill-2);
+@card-column-btn-active-bg: var(--color-fill-2);
 
 // Carousel
 @carousel-dots-bottom: 8px;
@@ -258,7 +214,6 @@
 @carousel-dot-padding: 0;
 @carousel-dot-border: 0;
 @carousel-dot-border-radius: 50%;
-@carousel-dot-bg: var(--gray-4);
 @carousel-dot-transition: 0.3s;
 
 // Icon
@@ -268,7 +223,7 @@
 @icon-button-border: 0;
 @icon-button-border-radius: 3px;
 @icon-button-bg: transparent;
-@icon-button-color: var(--gray-2);
+@icon-button-color: var(--color-text-2);
 @icon-button-size: 18px;
 
 @icon-button-primary-color: var(--brand-2);
@@ -276,34 +231,30 @@
 @icon-button-lg-border-radius: 6px;
 @icon-button-lg-size: 24px;
 
-@icon-button-disabled-border-color: var(--gray-6);
-@icon-button-disabled-color: var(--gray-6);
-
 // Modals
 @modal-width: 320px;
 @modal-border-radius: 12px;
 
-@modal-bg: var(--white);
+@modal-bg: var(--color-fill-1);
 @modal-box-shadow: var(--shadow-3);
 
 @modal-header-padding: @gutter;
 
 @modal-title-margin: 0;
-@modal-title-color: var(--gray-1);
+@modal-title-color: var(--color-text-1);
 @modal-title-font-size: @font-size-lg;
 @modal-title-font-weight: @font-weight-bold;
 
 @modal-close-padding: 0;
-@modal-close-color: var(--gray-1);
+@modal-close-color: var(--color-text-1);
 
 @modal-footer-x-padding: @gutter;
 @modal-btn-x-spacing: @gutter;
 
 @modal-btn-y-padding: 12px;
 @modal-btn-y-border-width: 1px;
-@modal-btn-y-border-color: var(--gray-6);
-@modal-btn-y-bg: var(--white);
-@modal-btn-y-color: var(--gray-2);
+@modal-btn-y-bg: var(--color-fill-1);
+@modal-btn-y-color: var(--color-text-2);
 @modal-btn-y-primary-color: var(--brand-1);
 
 @modal-fade-transform: translate(0, -50px);
@@ -313,8 +264,7 @@
 @modal-transition: transform 0.3s ease-out, opacity 0.15s linear;
 
 // Popup
-@popup-border-radius: 27px 27px 0 0;
-@popup-bg: var(--white);
+@popup-bg: var(--color-fill-1);
 
 @popup-max-height: 70vh;
 @popup-wide-width: 480px;
@@ -326,7 +276,7 @@
 @popup-title-font-size: @modal-title-font-size;
 
 @popup-subtitle-margin: 0;
-@popup-subtitle-color: var(--gray-3);
+@popup-subtitle-color: var(--color-text-3);
 @popup-subtitle-font-size: @font-size-xs;
 
 @popup-close-color: @modal-close-color;
@@ -342,7 +292,7 @@
 
 // Progress bars
 @progress-height: 2px;
-@progress-bg: var(--gray-5);
+@progress-bg: var(--color-line-1);
 @progress-border-radius: 100px;
 @progress-bar-bg: var(--blue);
 @progress-bar-transition: width 0.6s ease;
@@ -352,12 +302,9 @@
 
 // QuickReplies
 @quick-replies-padding: 9Px var(--gutter);
-@quick-replies-bg: var(--gray-7);
 
-@quick-reply-color: var(--gray-1);
+@quick-reply-color: var(--color-text-1);
 @quick-reply-font-size: 14Px;
-
-@quick-reply-hover-bg: var(--gray-6);
 
 @quick-reply-dot-top: 0;
 @quick-reply-dot-right: 0;
@@ -372,11 +319,11 @@
 @tabs-nav-link-border: 0;
 @tabs-nav-link-border-radius: 20px;
 @tabs-nav-link-bg: transparent;
-@tabs-nav-link-color: var(--gray-2);
+@tabs-nav-link-color: var(--color-text-2);
 @tabs-nav-link-font-size: @font-size-sm;
 @tabs-nav-link-transition: 0.3s;
 
-@tabs-nav-link-hover-color: var(--gray-1);
+@tabs-nav-link-hover-color: var(--color-text-1);
 
 @tabs-nav-link-active-color: @tabs-nav-link-hover-color;
 
@@ -402,22 +349,17 @@
 
 @goods-padding: @gutter;
 @goods-gap: 9Px;
-@goods-desc-color: var(--gray-3);
-@goods-meta-color: var(--gray-3);
+@goods-desc-color: var(--color-text-3);
+@goods-meta-color: var(--color-text-3);
 @goods-meta-font-size: @font-size-xxs;
 @goods-border-width: 1px;
-@goods-border-color: var(--gray-7);
-@goods-count-color: var(--gray-3);
+@goods-border-color: var(--color-line-1);
+@goods-count-color: var(--color-text-3);
 @goods-count-font-size: @font-size-sm;
 @goods-unit-font-size: @font-size-xs;
 @goods-buy-btn-bg: var(--brand-1);
 @goods-buy-btn-color: #fff;
 @goods-buy-btn-padding: 2px;
-
-// MessageList
-@message-list-padding: var(--gutter);
-
-@message-spacer-y: var(--gutter);
 
 // Toast
 @toast-content-padding: 18px 24px;
@@ -425,7 +367,7 @@
 @toast-content-bg: rgba(0, 0, 0, 0.7);
 
 @toast-message-margin: 0;
-@toast-message-color: var(--white);
+@toast-message-color: var(--color-fill-1);
 @toast-message-font-size: 16px;
 
 // Z-index

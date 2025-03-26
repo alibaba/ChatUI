@@ -8,7 +8,7 @@ export type CheckboxProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: CheckboxValue;
 };
 
-export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props, ref) => {
+export const Checkbox: React.FC<CheckboxProps> = (props) => {
   const { className, label, checked, disabled, onChange, ...other } = props;
   return (
     <label
@@ -16,7 +16,6 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
         'Checkbox--checked': checked,
         'Checkbox--disabled': disabled,
       })}
-      ref={ref}
     >
       <input
         type="checkbox"
@@ -30,4 +29,4 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
       <span className="Checkbox-text">{label}</span>
     </label>
   );
-});
+};

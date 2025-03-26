@@ -1,4 +1,6 @@
-@step-icon-width: 24px;
+@step-title-height: 24px;
+@step-icon-size: 16px;
+// @step-dot-size: 10px;
 
 .Stepper {
   margin: 0;
@@ -8,34 +10,35 @@
 
 .Step {
   position: relative;
-  padding-left: (@step-icon-width + 5px);
-  padding-bottom: 18px;
+  padding-left: (@step-icon-size + 3px);
+  padding-bottom: 9px;
 
   &:last-child {
     padding-bottom: 0;
 
     .Step-line {
-      display: none;
+      bottom: 0;
     }
   }
 }
 
 .Step--active {
   .Step-dot {
+    border-color: var(--brand-1);
     background: var(--brand-1);
   }
   .Step-title {
     span {
       color: var(--brand-1);
-      font-weight: 500;
+      font-weight: 600;
     }
   }
   .Step-desc {
-    color: var(--gray-1);
+    color: var(--color-text-1);
   }
   &[data-status] {
     .Step-line {
-      top: (@step-icon-width + 2px);
+      top: (@step-title-height / 2 + @step-icon-size / 2 + 2px);
     }
     .Step-icon {
       color: var(--red);
@@ -52,47 +55,51 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: @step-icon-width;
-  height: @step-icon-width;
-  font-size: @step-icon-width;
+  width: @step-icon-size;
+  height: @step-title-height;
+  font-size: @step-icon-size;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .Step-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--white);
-  border: 1px solid var(--brand-1);
+  width: 10px;
+  height: 10px;
+  background: var(--color-fill-1);
+  border: 1px solid var(--color-line-2);
   border-radius: 50%;
+  box-sizing: border-box;
 }
 
 .Step-line {
   position: absolute;
-  top: (@step-icon-width / 2 + 5px + 3px);
-  left: (@step-icon-width / 2);
+  top: (@step-title-height / 2 + @step-icon-size / 2);
+  left: (@step-icon-size / 2);
   bottom: -4px;
   width: 1px;
-  background: var(--brand-1);
-  opacity: 0.5;
+  background: var(--color-line-2);
+  transform: translateX(-50%) scaleX(0.5);
 }
 
 .Step-title {
   display: flex;
   align-items: center;
-  color: var(--gray-1);
+  color: var(--color-text-3);
   font-size: var(--font-size-md);
 
+  .Card & {
+    font-size: 15px;
+  }
   small {
     margin-left: 12px;
-    color: var(--gray-3);
+    color: var(--color-text-3);
     font-size: var(--font-size-xs);
   }
 }
 
 .Step-desc {
-  margin-top: 3px;
-  color: var(--gray-3);
+  margin-top: 6px;
+  color: var(--color-text-3);
   font-size: var(--font-size-sm);
 }

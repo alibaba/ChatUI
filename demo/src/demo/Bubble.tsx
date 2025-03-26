@@ -4,7 +4,7 @@ import { Bubble } from '../../../src';
 
 export default () => (
   <DemoPage>
-    <DemoSection title="文本气泡">
+    <DemoSection title="文本气泡" bg='gray'>
       <div className="Message left">
         <div className="Message-content">
           <Bubble type="text">
@@ -18,7 +18,7 @@ export default () => (
         </div>
       </div>
     </DemoSection>
-    <DemoSection title="图片气泡">
+    <DemoSection title="图片气泡" bg='gray'>
       <div className="Message left">
         <div className="Message-content">
           <Bubble type="image">

@@ -9,19 +9,20 @@ const cssnanoConfig = {
 };
 
 const pxtoremConfig = {
-  propList: [
-    '*',
-    '!border*',
-    '!box-shadow',
-  ],
+  propList: ['*', '!border*', '!box-shadow'],
   selectorBlackList: [':root'],
 };
 
-module.exports = (ctx) => ({
-  map: ctx.env === 'development' && ctx.options ? ctx.options.map : false,
-  plugins: {
-    autoprefixer: {},
-    'postcss-pxtorem': pxtoremConfig,
-    cssnano: ctx.env === 'production' ? cssnanoConfig : false,
-  },
-});
+/** @type {import('postcss-load-config').Config} */
+const config = {
+  plugins:
+    process.env.NODE_ENV === 'production'
+      ? [
+          require('autoprefixer'),
+          require('postcss-pxtorem')(pxtoremConfig),
+          require('cssnano')(cssnanoConfig),
+        ]
+      : [],
+};
+
+module.exports = config;

@@ -21,18 +21,17 @@ export interface SearchProps extends Omit<InputProps, 'value'> {
   onClear?: () => void;
 }
 
-export const Search = React.forwardRef<HTMLDivElement, SearchProps>((props, ref) => {
-  const {
-    className,
-    onSearch,
-    onChange,
-    onClear,
-    value,
-    clearable = true,
-    showSearch = true,
-    ...other
-  } = props;
-
+export const Search = ({
+  className,
+  onSearch,
+  onChange,
+  onClear,
+  value,
+  disabled,
+  clearable = true,
+  showSearch = true,
+  ...other
+}: SearchProps) => {
   const [query, setQuery] = useState(value || '');
   const { trans } = useLocale('Search');
 
@@ -68,12 +67,13 @@ export const Search = React.forwardRef<HTMLDivElement, SearchProps>((props, ref)
   };
 
   return (
-    <div className={clsx('Search', className)} ref={ref}>
+    <div className={clsx('Search', className)} data-disabled={disabled}>
       <Icon className="Search-icon" type="search" />
       <Input
         className="Search-input"
         type="search"
         value={query}
+        disabled={disabled}
         enterKeyHint="search"
         onChange={handleChange}
         onKeyDown={handleKeyDown}
@@ -89,4 +89,4 @@ export const Search = React.forwardRef<HTMLDivElement, SearchProps>((props, ref)
       )}
     </div>
   );
-});
+};

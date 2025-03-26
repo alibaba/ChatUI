@@ -5,8 +5,7 @@
   align-items: center;
   padding: @navbar-padding;
   padding-top: var(--safe-top);
-  border-bottom: 1px solid @navbar-border-color;
-  background: @navbar-bg;
+  background: var(--navbar-bg);
 
   &-main {
     flex: 1;
@@ -37,7 +36,7 @@
     height: @navbar-logo-height;
   }
   .IconBtn {
-    color: var(--gray-1);
+    color: var(--color-text-1);
     font-size: 24Px;
   }
   .IconBtn + .IconBtn,
@@ -65,7 +64,7 @@
 }
 
 .Navbar-desc {
-  color: var(--gray-2);
+  color: var(--color-text-2);
   font-size: 12Px;
 }
 

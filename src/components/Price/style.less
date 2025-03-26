@@ -1,10 +1,24 @@
+@font-face {
+  font-family: "AlibabaSans";
+  src: url(https://gw.alipayobjects.com/as/g/antui/antui-static/1.0.5/fonts/AlibabaSans102Ver2-Rg.woff) format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AlibabaSans";
+  src: url(https://gw.alipayobjects.com/as/g/antui/antui-static/1.0.5/fonts/AlibabaSans102Ver2-Md.woff) format("woff");
+  font-weight: 500;
+  font-display: swap;
+}
+
 .Price {
   display: inline;
   font-size: @price-font-size;
   font-weight: 500;
+  font-family: 'AlibabaSans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
 
   &--original {
-    color: var(--gray-3);
+    color: var(--color-text-3);
     text-decoration: line-through;
   }
   &[data-size] {

@@ -14,9 +14,9 @@ export default () => (
     <DemoSection title="基础用法">
       <Carousel autoPlay>
         {imgs.map((img, i) => (
-          <div>
+          <div key={img}>
             <p>{i}</p>
-            <Image key={img} src={img} fluid />
+            <Image style={{ display: 'block' }} src={img} fluid />
           </div>
         ))}
       </Carousel>

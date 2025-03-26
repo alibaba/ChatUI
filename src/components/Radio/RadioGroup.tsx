@@ -12,10 +12,10 @@ export type RadioGroupProps = {
   onChange: (value: RadioValue, event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>((props, ref) => {
+export const RadioGroup: React.FC<RadioGroupProps> = (props) => {
   const { className, options, value, name, disabled, block, onChange } = props;
   return (
-    <div className={clsx('RadioGroup', { 'RadioGroup--block': block }, className)} ref={ref}>
+    <div className={clsx('RadioGroup', { 'RadioGroup--block': block }, className)}>
       {options.map((item) => (
         <Radio
           label={item.label || item.value}
@@ -31,4 +31,4 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>((pro
       ))}
     </div>
   );
-});
+};

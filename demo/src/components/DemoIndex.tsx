@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { navConfig } from '../navConfig';
 import { toPascalCase } from '../utils';
 
 export default function DemoIndex() {
+  useEffect(() => {
+    const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleColorSchemeChange = (e: MediaQueryListEvent | MediaQueryList) => {
+      document.documentElement.dataset.colorScheme = e.matches ? 'dark' : 'light';
+    };
+
+    colorSchemeQuery.addEventListener('change', handleColorSchemeChange);
+    handleColorSchemeChange(colorSchemeQuery);
+  }, []);
+
   return (
     <div className="demo-index">
       {navConfig.map((t) => (

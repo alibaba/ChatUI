@@ -2,15 +2,15 @@
   display: flex;
   align-items: center;
   padding: 3px 5px 3px 15px;
-  background: var(--white);
-  border-radius: 50px;
+  background: var(--color-fill-1);
+  border-radius: var(--radius-md);
 
   &-icon,
   &-clear {
     font-size: var(--font-size-lg);
   }
   &-icon {
-    color: var(--gray-3);
+    color: var(--color-text-3);
   }
   &-input {
     flex: 1;
@@ -26,13 +26,16 @@
     opacity: 1;
   }
   &-clear {
-    color: var(--gray-5);
+    color: var(--color-text-3);
     opacity: 0;
 
     &:hover {
       background: initial;
-      color: var(--gray-3);
+      color: var(--color-text-3);
     }
+  }
+  &[data-disabled="true"] {
+    opacity: 0.5;
   }
   .Btn--primary {
     min-width: 56px;

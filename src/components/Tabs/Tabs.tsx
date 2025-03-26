@@ -8,10 +8,9 @@ type TabItemProps = {
   index: number;
   tabIndex: number;
   onClick: (index: number, event: React.MouseEvent) => void;
-  children?: React.ReactNode;
 };
 
-const TabItem = (props: TabItemProps) => {
+const TabItem: React.FC<TabItemProps> = (props) => {
   const { active, index, children, onClick, ...others } = props;
 
   function handleClick(e: React.MouseEvent) {
@@ -34,13 +33,12 @@ const TabItem = (props: TabItemProps) => {
   );
 };
 
-interface TabsPaneProps {
+type TabsPaneProps = {
   active: boolean;
   id?: string;
-  children?: React.ReactNode;
-}
+};
 
-const TabsPane = (props: TabsPaneProps) => {
+const TabsPane: React.FC<TabsPaneProps> = (props) => {
   const { active, children, ...others } = props;
 
   return (
@@ -56,10 +54,9 @@ export type TabsProps = {
   scrollable?: boolean;
   hideNavIfOnlyOne?: boolean;
   onChange?: (index: number, event: React.MouseEvent) => void;
-  children?: React.ReactNode;
 };
 
-export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
+export const Tabs: React.FC<TabsProps> = (props) => {
   const { className, index: oIndex = 0, scrollable, hideNavIfOnlyOne, children, onChange } = props;
   const [pointerStyles, setPointerStyles] = useState({});
   const [index, setIndex] = useState(oIndex || 0);
@@ -162,7 +159,7 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>((props, ref) => 
   const needNav = headers.length > (hideNavIfOnlyOne ? 1 : 0);
 
   return (
-    <div className={clsx('Tabs', { 'Tabs--scrollable': scrollable }, className)} ref={ref}>
+    <div className={clsx('Tabs', { 'Tabs--scrollable': scrollable }, className)}>
       {needNav && (
         <div className="Tabs-nav" role="tablist" ref={navRef}>
           {headers}
@@ -172,4 +169,4 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>((props, ref) => 
       <div className="Tabs-content">{contents}</div>
     </div>
   );
-});
+};

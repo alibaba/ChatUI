@@ -3,14 +3,13 @@ import clsx from 'clsx';
 
 export type TreeProps = {
   className?: string;
-  children?: React.ReactNode;
 };
 
-export const Tree = React.forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
+export const Tree: React.FC<TreeProps> = (props) => {
   const { className, children } = props;
   return (
-    <div className={clsx('Tree', className)} role="tree" ref={ref}>
+    <div className={clsx('Tree', className)} role="tree">
       {children}
     </div>
   );
-});
+};

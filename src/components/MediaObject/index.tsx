@@ -10,7 +10,7 @@ export type MediaObjectProps = {
   meta?: React.ReactNode;
 };
 
-export const MediaObject = (props: MediaObjectProps) => {
+export const MediaObject: React.FC<MediaObjectProps> = (props) => {
   const { className, picUrl, picSize, title, picAlt, meta } = props;
   return (
     <div className={clsx('MediaObject', className)}>

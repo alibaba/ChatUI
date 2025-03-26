@@ -29,7 +29,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--gray-6);
+  background: var(--app-bg);
   color: @body-color;
   font-family: @font-family-base;
   line-height: @line-height-base;
@@ -53,67 +53,13 @@
   position: relative;
   z-index: @zindex-footer;
   padding-bottom: var(--safe-bottom);
-  background: var(--gray-7);
-}
-
-.ChatApp[data-x='true'] {
-  --msg-gap: 6px; // 头像和消息内容的间隙
-  --rate-width: 33px; // 点赞踩宽度（和消息头像一致）
-  --msg-gutter: calc(var(--msg-gap) + var(--rate-width)); // 消息边距
-
-  .Composer-actions .IconBtn {
-    padding: 8px;
-    border-radius: 12px;
-    background: #fff;
-    color: #000;
-    font-size: 20px;
-  }
-  .Card--fluid {
-    width: calc(100% - var(--msg-gutter));
-  }
-  .Message-main > .Avatar {
-    border-radius: 9px;
-
-    img {
-      width: var(--rate-width);
-      height: var(--rate-width);
-    }
-  }
-  .Message.left .Bubble {
-    margin-right: var(--msg-gutter);
-  }
-  .Message.right .Bubble {
-    margin-left: var(--msg-gutter);
-  }
-  .Message.left .Message-main > .Avatar {
-    margin-right: var(--msg-gap);
-  }
-  .Message.right .Message-main > .Avatar {
-    margin-left: var(--msg-gap);
-  }
-  .RateActions {
-    margin: 0 0 0 var(--msg-gap);
-  }
-  .RateBtn {
-    border-radius: 12px;
-  }
-  .Avatar--square {
-    border-radius: 9px;
-  }
-  .Toolbar-btn {
-    font-weight: 300;
-  }
-  .Toolbar-btnIcon {
-    background: rgba(255, 255, 255, 0.35);
-    border-radius: 15px;
-    color: var(--gray-1);
-  }
+  background: var(--footer-bg);
 }
 
 @media (max-width: 374px) {
-  .ChatApp[data-x='true'] {
-    --msg-gap: 3px;
-    --rate-width: 24px;
+  :root {
+    --msg-avatar-gap: 3Px;
+    --rate-width: 24Px;
   }
   .MessageList {
     padding-left: 6px;

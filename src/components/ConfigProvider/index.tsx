@@ -15,6 +15,10 @@ export type ConfigContextType = {
    */
   locales?: ILocales;
   /**
+   * 主题色
+   */
+  colorScheme?: 'light' | 'dark' | 'auto';
+  /**
    * 适老化模式
    */
   elderMode?: boolean;
@@ -31,10 +35,13 @@ export const ConfigContext = React.createContext<ConfigContextType>({});
 export const ConfigProvider = ({
   locale = DEFAULT_LOCALE,
   locales,
+  colorScheme,
   elderMode,
   children,
 }: ConfigProviderProps) => (
-  <ConfigContext.Provider value={{ locale, locales, elderMode }}>{children}</ConfigContext.Provider>
+  <ConfigContext.Provider value={{ locale, locales, colorScheme, elderMode }}>
+    {children}
+  </ConfigContext.Provider>
 );
 
 export const useConfig = () => useContext(ConfigContext);

@@ -8,7 +8,7 @@ export interface FlexItemProps extends React.HTMLAttributes<HTMLElement> {
   order?: number;
 }
 
-export const FlexItem = React.forwardRef<HTMLDivElement, FlexItemProps>((props, ref) => {
+export const FlexItem: React.FC<FlexItemProps> = (props) => {
   const { className, flex, alignSelf, order, style, children, ...other } = props;
   return (
     <div
@@ -19,10 +19,9 @@ export const FlexItem = React.forwardRef<HTMLDivElement, FlexItemProps>((props, 
         alignSelf,
         order,
       }}
-      ref={ref}
       {...other}
     >
       {children}
     </div>
   );
-});
+};

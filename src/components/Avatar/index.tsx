@@ -12,10 +12,9 @@ export interface AvatarProps {
   url?: string;
   size?: AvatarSize;
   shape?: AvatarShape;
-  children?: React.ReactNode;
 }
 
-export const Avatar = (props: AvatarProps) => {
+export const Avatar: React.FC<AvatarProps> = (props) => {
   const { className, src, alt, url, size = 'md', shape = 'circle', children } = props;
 
   const Element = url ? 'a' : 'span';

@@ -16,6 +16,7 @@ export default () => {
   const [open3, setOpen3] = useState(false);
   const [open4, setOpen4] = useState(false);
   const [open5, setOpen5] = useState(false);
+  const [open6, setOpen6] = useState(false);
 
   return (
     <DemoPage>
@@ -51,6 +52,14 @@ export default () => {
               as="button"
               onClick={() => {
                 setOpen5(true);
+              }}
+              rightIcon="chevron-right"
+            />
+            <ListItem
+              content="带头像"
+              as="button"
+              onClick={() => {
+                setOpen6(true);
               }}
               rightIcon="chevron-right"
             />
@@ -104,6 +113,19 @@ export default () => {
         }}
         actions={[{ label: '结束排队' }, { label: '保持排队', color: 'primary' }]}
         vertical={false}
+      >
+        <MainContent />
+      </Modal>
+      <Modal
+        active={open6}
+        title="是否继续接入客户经理？"
+        onClose={() => {
+          setOpen6(false);
+        }}
+        actions={[{ label: '暂不需要' }, { label: '接入', color: 'primary' }]}
+        vertical={false}
+        showClose={false}
+        avatar="https://gw.alicdn.com/imgextra/i3/O1CN015amSBN287NjjndS06_!!6000000007885-2-tps-99-98.png"
       >
         <MainContent />
       </Modal>

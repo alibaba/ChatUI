@@ -1,6 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
-import { Card, List, ListItem } from '../../../src';
+import { Card, CardContent, List, ListItem } from '../../../src';
 
 export default () => (
   <DemoPage>
@@ -41,6 +41,17 @@ export default () => (
           <ListItem content="内容2" as="button" rightIcon="chevron-right" />
           <ListItem content="内容3" as="button" rightIcon="chevron-right" />
         </List>
+      </Card>
+    </DemoSection>
+    <DemoSection title="Card + variant=buttons" bg="gray">
+      <Card>
+        <CardContent>
+          <List variant="buttons">
+            <ListItem content="卖家不退款，我要催退款怎么办" as="button" />
+            <ListItem content="怎么申请退款或退货？" as="button" />
+            <ListItem content="我要退货，怎么申请？文案很长很长很长很长" as="button" ellipsis />
+          </List>
+        </CardContent>
       </Card>
     </DemoSection>
   </DemoPage>

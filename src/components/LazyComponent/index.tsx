@@ -9,7 +9,7 @@ import { useComponents } from '../ComponentsProvider/useComponents';
 
 export type { LazyComponentProps, LazyComponentOnLoadParams };
 
-export const LazyComponentWithCode = (props: LazyComponentPropsWithCode) => {
+export const LazyComponentWithCode: React.FC<LazyComponentPropsWithCode> = (props) => {
   const { code, fallback, onLoad, onError, ...rest } = props;
   const { getComponent } = useComponents();
 
@@ -24,7 +24,7 @@ export const LazyComponentWithCode = (props: LazyComponentPropsWithCode) => {
   return <SuspenseWrap component={Comp} onError={onError} fallback={fallback} {...rest} />;
 };
 
-export const LazyComponent = (props: LazyComponentProps) => {
+export const LazyComponent: React.FC<LazyComponentProps> = (props) => {
   const { component, code, onLoad, ...rest } = props;
 
   if (component) {

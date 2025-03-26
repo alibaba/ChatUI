@@ -1,29 +1,59 @@
 .Bubble {
-  max-width: @bubble-max-width;
+  max-width: 512px;
   // min-width: 0;
-  min-width: 1px; // for IE bug
-  background: @bubble-left-bg;
-  border-radius: @bubble-left-border-radius;
+  min-width: 1Px; // for IE bug
+  background: var(--color-fill-1);
+  border-radius: var(--radius-md);
 
   &.text,
-  &.typing {
-    min-width: 40px;
-    padding: @bubble-text-padding;
+  &.typing,
+  &.richtext {
+    padding: 12px;
     box-sizing: border-box;
-    white-space: pre-wrap;
     word-wrap: break-word;
     overflow-wrap: break-word;
+  }
+  &.text {
+    min-width: 40px;
+    white-space: pre-wrap;
   }
   &.image {
     img {
       display: block;
-      max-width: @bubble-img-max-width;
-      max-height: @bubble-img-max-height;
+      max-width: 180px;
+      min-width: 80px;
+      max-height: 180px;
+      min-height: 80px;
+      object-fit: cover;
       height: auto;
       border-radius: inherit;
     }
   }
   p {
     margin: 0;
+  }
+}
+
+[data-effect='typing'] {
+  position: relative;
+  overflow: hidden;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ol:last-child li,
+  ul:last-child li {
+    &:last-child:after {
+      content: '';
+      width: 80px;
+      height: 1.5em;
+      background: linear-gradient(90deg, transparent, var(--color-fill-1));
+      position: absolute;
+      margin-left: -80px;
+    }
   }
 }

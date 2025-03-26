@@ -1,19 +1,17 @@
-@avatar-gap: 4px;
-
 .Message {
   position: relative;
 
   & + & {
-    margin-top: @message-spacer-y;
+    margin-top: var(--gutter);
   }
   &.left {
     .Message-main {
       & > .Avatar {
-        margin-right: @avatar-gap;
+        margin-right: var(--msg-avatar-gap);
       }
     }
     .Bubble {
-      margin-right: @bubble-left-gutter;
+      margin-right: var(--msg-gutter);
     }
   }
   &.right {
@@ -23,16 +21,15 @@
     }
     .Message-main {
       & > .Avatar {
-        margin-left: @avatar-gap;
+        margin-left: var(--msg-avatar-gap);
       }
     }
     .Message-author {
       text-align: right;
     }
     .Bubble {
-      margin-left: @bubble-right-gutter;
-      border-radius: @bubble-right-border-radius;
-      background: @bubble-right-bg;
+      margin-left: var(--msg-gutter);
+      background: var(--brand-3);
     }
   }
   &.pop {
@@ -45,6 +42,10 @@
   justify-content: center;
   margin-bottom: 12px;
   text-align: center;
+}
+
+.Message-main > .Avatar {
+  --avatar-size: var(--rate-width);
 }
 
 .Message-main,
@@ -60,7 +61,7 @@
 
 .Message-author {
   margin-bottom: 6px;
-  color: var(--gray-2);
+  color: var(--color-text-2);
   font-size: var(--font-size-xs);
   line-height: 1.1;
 }
@@ -68,26 +69,59 @@
 // SystemMessage
 .SystemMessage {
   padding: 0 15Px;
-  color: var(--gray-2);
+  color: var(--color-text-2);
   text-align: center;
 
   .Btn {
     margin-left: 6px;
 
     &:disabled {
-      color: var(--gray-3);
+      color: var(--color-text-3);
       opacity: 1;
     }
   }
 }
 
 .SystemMessage-inner {
+  position: relative;
   display: inline-block;
   padding: 6Px 9Px;
-  border-radius: 6px;
-  background: var(--gray-8);
   font-size: 12Px;
   text-align: left;
+  border-radius: var(--radius-md);
+
+  &::before {
+    content: '';
+    position: absolute;
+    background: var(--color-fill-1);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    opacity: 0.7;
+    z-index: 0;
+  }
+
+  .Btn,
+  span {
+    z-index: 1;
+    position: relative;
+    vertical-align: top;
+  }
+}
+
+html[data-color-scheme="dark"] {
+  .SystemMessage-inner {
+    background: var(--color-fill-2);
+
+    &::before {
+      content: none;
+    }
+    span {
+      position: static;
+    }
+  }
 }
 
 .ChatApp[data-elder-mode="true"] {

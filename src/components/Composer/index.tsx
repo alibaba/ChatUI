@@ -11,6 +11,8 @@ import { ComposerInput } from './ComposerInput';
 import { SendButton } from './SendButton';
 import { Action } from './Action';
 import toggleClass from '../../utils/toggleClass';
+import { isIOS, isArkWeb } from '../../utils/ua';
+import { updateViewportTop, setViewportTop } from './viewportTop';
 
 export const CLASS_NAME_FOCUSING = 'S--focusing';
 
@@ -60,7 +62,6 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     onToolbarClick,
     rightAction,
     inputOptions,
-    isX,
   } = props;
 
   const [text, setText] = useState(initialText);
@@ -121,18 +122,25 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     const { visualViewport } = window;
     if (!visualViewport) return;
 
-    const winHeight = window.innerHeight;
+    let winHeight = window.innerHeight;
 
     function toggleFocusing() {
+      if (window.innerHeight > winHeight) {
+        // iOS 下第一次的时候 winHeight 有可能不准
+        winHeight = window.innerHeight;
+      }
       // 视窗变高做失焦处理
-      // 场景：安卓、鸿蒙、iOS+第三方键盘收起键盘时并没有失去焦点
+      // 场景：键盘收起键盘时并没有失去焦点
       if (focused.current && visualViewport!.height >= winHeight) {
         inputRef.current?.blur();
       }
     }
 
     function resizeHandler() {
-      toggleFocusing();
+      // Android 没有下面安全区且可以悬浮键盘，故不做收起失焦处理
+      if (isIOS || isArkWeb) {
+        toggleFocusing();
+      }
     }
 
     visualViewport.addEventListener('resize', resizeHandler);
@@ -179,6 +187,10 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
       toggleClass(CLASS_NAME_FOCUSING, true);
       focused.current = true;
 
+      if (isIOS) {
+        updateViewportTop();
+      }
+
       if (onFocus) {
         onFocus(e);
       }
@@ -192,6 +204,10 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
         toggleClass(CLASS_NAME_FOCUSING, false);
         focused.current = false;
       }, 0);
+
+      if (isIOS) {
+        setViewportTop(0);
+      }
 
       if (onBlur) {
         onBlur(e);
@@ -274,13 +290,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   }, []);
 
   const isInputText = inputType === 'text';
-  const inputTypeIcon = isX
-    ? isInputText
-      ? 'mic'
-      : 'keyboard'
-    : isInputText
-    ? 'volume-circle'
-    : 'keyboard-circle';
+  const inputTypeIcon = isInputText ? 'mic' : 'keyboard';
   const hasToolbar = toolbar.length > 0;
 
   const inputProps = {
@@ -341,12 +351,12 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
             className={clsx('Composer-toggleBtn', {
               active: isAccessoryOpen,
             })}
-            icon={isX ? 'plus' : 'plus-circle'}
+            icon="plus"
             onClick={handleAccessoryToggle}
             aria-label={isAccessoryOpen ? '关闭工具栏' : '展开工具栏'}
           />
         )}
-        {(hasValue || isX) && <SendButton onClick={handleSendBtnClick} disabled={!hasValue} />}
+        {hasValue && <SendButton onClick={handleSendBtnClick} disabled={!hasValue} />}
       </div>
       {isAccessoryOpen && (
         <AccessoryWrap onClickOutside={handleAccessoryBlur}>

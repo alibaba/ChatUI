@@ -15,14 +15,13 @@
   display: inline-block;
   width: 4px;
   height: 4px;
-  margin-left: 4px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   animation: typing-dot (@frame-time * 3) ease-in-out infinite;
   background: var(--gray-5);
   transform: rotate(-15deg);
 
-  &:nth-child(2) {
-    margin: 0;
+  & + & {
+    margin-left: 4px;
   }
   &:nth-child(3) {
     animation-delay: 0.1s;
@@ -35,7 +34,7 @@
 @keyframes typing-dot {
   0%, 40%, 100% {
     height: 4px;
-    background: var(--gray-5);
+    background: var(--color-line-2);
   }
   20% {
     height: 12px;

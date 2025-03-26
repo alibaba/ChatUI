@@ -19,6 +19,7 @@ import Chat, {
   ScrollView,
   ToolbarItemProps,
   RateActions,
+  useTitleTyping,
 } from '../../../src';
 import OrderSelector from './OrdderSelector';
 
@@ -33,8 +34,8 @@ const initialMessages: MessageWithoutId[] = [
     type: 'text',
     content: { text: 'Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
     user: {
-      avatar: '//gw.alicdn.com/imgextra/i3/O1CN015amSBN287NjjndS06_!!6000000007885-2-tps-99-98.png',
-      name: '小小蜜',
+      avatar: 'https://gw.alicdn.com/imgextra/i2/O1CN01fPEB9P1ylYWgaDuVR_!!6000000006619-0-tps-132-132.jpg',
+      // name: '小小蜜',
     },
     createdAt: Date.now(),
     hasTime: true,
@@ -52,6 +53,10 @@ const initialMessages: MessageWithoutId[] = [
   },
   {
     type: 'guess-you',
+    user: {
+      avatar: 'https://gw.alicdn.com/imgextra/i2/O1CN01fPEB9P1ylYWgaDuVR_!!6000000006619-0-tps-132-132.jpg',
+      // name: '小小蜜',
+    },
   },
   {
     type: 'skill-cards',
@@ -67,6 +72,10 @@ const initialMessages: MessageWithoutId[] = [
     content: {
       picUrl: '//img.alicdn.com/tfs/TB1p_nirYr1gK0jSZR0XXbP8XXa-300-300.png',
     },
+    user: {
+      avatar: 'https://gw.alicdn.com/imgextra/i2/O1CN01fPEB9P1ylYWgaDuVR_!!6000000006619-0-tps-132-132.jpg',
+      // name: '小小蜜',
+    },
   },
   {
     type: 'system',
@@ -77,6 +86,10 @@ const initialMessages: MessageWithoutId[] = [
   {
     type: 'image-text-button',
     content: {},
+    user: {
+      avatar: 'https://gw.alicdn.com/imgextra/i2/O1CN01fPEB9P1ylYWgaDuVR_!!6000000006619-0-tps-132-132.jpg',
+      // name: '小小蜜',
+    },
   },
 ];
 
@@ -137,7 +150,7 @@ const toolbar: ToolbarItemProps[] = [
   {
     type: 'orderSelector',
     icon: 'shopping-bag',
-    title: '宝贝',
+    title: '订单',
   },
   {
     type: 'image',
@@ -158,9 +171,11 @@ const toolbar: ToolbarItemProps[] = [
 
 export default () => {
   // 消息列表
-  const { messages, appendMsg, setTyping, prependMsgs } = useMessages(initialMessages);
+  const { messages, appendMsg, prependMsgs } = useMessages(initialMessages);
   const { quickReplies, replace } = useQuickReplies(defaultQuickReplies);
   const msgRef = React.useRef(null);
+
+  const { isTyping, start, stop } = useTitleTyping();
 
   const navigate = useNavigate();
 
@@ -178,16 +193,17 @@ export default () => {
       });
 
       setTimeout(() => {
-        setTyping(true);
-      }, 1000);
+        start();
+      }, 500);
 
       // 模拟回复消息
       setTimeout(() => {
+        stop();
         appendMsg({
           type: 'text',
           content: { text: '亲，您遇到什么问题啦？请简要描述您的问题~' },
         });
-      }, 1500);
+      }, 5000);
     }
   }
 
@@ -282,7 +298,7 @@ export default () => {
   function renderMessageContent(msg: MessageProps) {
     const { type, content } = msg;
 
-    // 根据消息类型来渲染
+    // 根据类型渲染消息气泡
     switch (type) {
       case 'text':
         return <Bubble content={content.text} />;
@@ -350,7 +366,8 @@ export default () => {
 
   return (
     <Chat
-      elderMode
+      colorScheme="auto"
+      elderMode={false}
       onRefresh={handleRefresh}
       navbar={{
         leftContent: {
@@ -370,17 +387,17 @@ export default () => {
             title: 'More',
           },
         ],
-        title: '智能助理',
+        title: isTyping ? '对方正在输入...' : '智能助理',
         // desc: '客服热线9510211(7:00-次日1:00)',
         // logo: 'https://gw.alicdn.com/imgextra/i4/O1CN016i66TT24lRwUecIk5_!!6000000007431-2-tps-164-164.png_80x80.jpg',
         // align: 'left',
       }}
-      rightAction={{ icon: 'compass' }}
+      rightAction={{ icon: 'shopping-bag' }}
       toolbar={toolbar}
       messagesRef={msgRef}
       onToolbarClick={handleToolbarClick}
       recorder={{ canRecord: true }}
-      wideBreakpoint="600px"
+      wideBreakpoint="800px"
       messages={messages}
       renderMessageContent={renderMessageContent}
       quickReplies={quickReplies}

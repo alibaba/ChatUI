@@ -12,7 +12,7 @@ import {
 export { useComponents } from './useComponents';
 export type { ComponentsProviderProps, ComponentsMap };
 
-export const ComponentsProvider = (props: ComponentsProviderProps) => {
+export const ComponentsProvider: React.FC<ComponentsProviderProps> = (props) => {
   const { components, children } = props;
   const componentsRef = React.useRef<ComponentsMap>({ ...components });
 

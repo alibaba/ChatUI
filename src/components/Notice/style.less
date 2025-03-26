@@ -2,18 +2,22 @@
   display: flex;
   align-items: center;
   padding: @notice-padding;
-  border-radius: @notice-border-radius;
+  border-radius: var(--radius-md);
   background: @notice-bg;
 
   &-icon {
     margin-right: 6px;
   }
-  &-close {
-    margin-left: 6px;
-  }
   .Icon {
     color: @notice-icon-color;
     font-size: 16px;
+  }
+  &-close {
+    margin-left: 6px;
+
+    .Icon {
+      color: var(--color-text-3);
+    }
   }
 }
 

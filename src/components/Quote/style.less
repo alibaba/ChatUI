@@ -1,7 +1,7 @@
 .Quote {
   padding-left: 9px;
-  border-left: 3px solid rgba(0, 0, 0, 0.08);
-  color: var(--gray-2);
+  border-left: 3px solid var(--color-line-1);
+  color: var(--color-text-2);
   font-size: 12px;
 
   & + .Divider {
@@ -12,7 +12,7 @@
   .Video-video:not([hidden]) {
     max-width: 72px;
     max-height: 72px;
-    border-radius: 6px;
+    border-radius: var(--radius-md);
   }
   .Image,
   .Video {
@@ -42,5 +42,5 @@
 }
 
 .Quote-author {
-  color: var(--gray-3);
+  color: var(--color-text-3);
 }

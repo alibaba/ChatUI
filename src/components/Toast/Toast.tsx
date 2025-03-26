@@ -22,7 +22,7 @@ function renderIcon(type: ToastProps['type']) {
   }
 }
 
-export const Toast = (props: ToastProps) => {
+export const Toast: React.FC<ToastProps> = (props) => {
   const { content, type, duration = 2000, onUnmount } = props;
   const [show, setShow] = useState(false);
 

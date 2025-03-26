@@ -3,20 +3,43 @@
   align-items: flex-end;
   padding: @composer-padding;
   --action-size: @composer-input-min-height;
+  --action-font-size: 20Px;
 
   > div + div {
-    margin-left: 9px;
+    margin-left: 9Px;
+  }
+  &[data-has-value="false"] .Composer-actions[data-action="send"],
+  &[data-has-value="true"] .Composer-actions[data-action-icon] {
+    width: 0;
+    margin: 0;
+    opacity: 0;
+  }
+  &[data-has-value="true"] {
+    .Composer-inputWrap {
+      margin-left: 0;
+    }
+    .Composer-sendBtn {
+      animation: 0.3s sendIn;
+    }
   }
 }
 
 .Composer-actions {
   display: flex;
   align-items: center;
+  overflow: hidden;
+  width: var(--action-size);
   height: var(--action-size);
+  transition: width 0.1s;
 
+  &[data-action='send'] {
+    width: var(--send-width, 63Px);
+  }
   .IconBtn {
-    font-size: 30Px;
-    color: var(--gray-1);
+    padding: 8Px;
+    background: var(--color-fill-1);
+    font-size: var(--action-font-size);
+    color: var(--color-text-1);
   }
 }
 
@@ -38,8 +61,8 @@
   overflow-x: hidden;
   max-height: @composer-input-max-height;
   padding: @composer-input-padding;
-  border: @composer-input-border;
-  // border-radius: @composer-input-border-radius;
+  border: 0;
+  border-radius: var(--radius-md);
   // background: @composer-input-bg;
   line-height: 20Px;
   font-size: 15Px;
@@ -64,12 +87,9 @@
 }
 
 .ChatApp[data-elder-mode="true"] {
-  .Composer-actions {
-    height: 50Px;
-
-    .IconBtn {
-      font-size: 34Px;
-    }
+  .Composer {
+    --action-size: 50Px;
+    --action-font-size: 34Px;
   }
   .Composer-input {
     padding: 9Px 12Px;
@@ -79,37 +99,5 @@
   .Composer-sendBtn {
     padding: 4Px 13Px;
     font-size: 17Px;
-  }
-}
-
-.ChatApp[data-x='true'] {
-  .Composer {
-    &[data-has-value="false"] .Composer-actions[data-action="send"],
-    &[data-has-value="true"] .Composer-actions[data-action-icon] {
-      width: 0;
-      margin: 0;
-      opacity: 0;
-    }
-    // .Composer-sendBtn {
-    //   transform: scale(0.2);
-    // }
-    &[data-has-value="true"] {
-      .Composer-inputWrap {
-        margin-left: 0;
-      }
-      .Composer-sendBtn {
-        animation: 0.3s sendIn;
-        // animation-delay: 0.1s;
-        // animation-fill-mode: forwards;
-      }
-    }
-  }
-  .Composer-actions {
-    overflow: hidden;
-    width: var(--action-size);
-    transition: width 0.1s;
-  }
-  .Composer-actions[data-action='send'] {
-    width: var(--send-width, 63px);
   }
 }

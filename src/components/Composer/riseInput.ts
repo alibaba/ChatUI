@@ -1,10 +1,8 @@
 import { isIOS, isSafariOrIOS11, getIOSMajorVersion } from '../../utils/ua';
 
-const iOS = isIOS();
-
 function testScrollType() {
-  if (iOS) {
-    if (isSafariOrIOS11()) {
+  if (isIOS) {
+    if (isSafariOrIOS11) {
       /**
        * 不处理
        * - Safari
@@ -47,7 +45,7 @@ export default function riseInput(input: Element, wrap?: Element | null) {
 
     // 某些情况下收起键盘后输入框不收回，页面下面空白
     // 比如：闲鱼、大麦、乐动力、微信
-    if (scrollType && iOS) {
+    if (scrollType && isIOS) {
       // 以免点击快捷短语无效
       setTimeout(() => {
         document.body.scrollIntoView();
