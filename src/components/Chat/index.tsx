@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { LocaleProvider } from '../LocaleProvider';
+import React, { useEffect, useState } from 'react';
+import { ConfigProvider, ConfigContextType } from '../ConfigProvider';
 import { Navbar, NavbarProps } from '../Navbar';
 import {
   MessageContainer,
@@ -8,22 +8,15 @@ import {
 } from '../MessageContainer';
 import { QuickReplies, QuickReplyItemProps } from '../QuickReplies';
 import { Composer as DComposer, ComposerProps, ComposerHandle } from '../Composer';
-import isSafari from '../../utils/isSafari';
+import { isSafari, getIOSMajorVersion } from '../../utils/ua';
 
 export type ChatProps = Omit<ComposerProps, 'onFocus' | 'onChange' | 'onBlur'> &
+  ConfigContextType &
   MessageContainerProps & {
     /**
      * 宽版模式断点
      */
     // wideBreakpoint?: string;
-    /**
-     * 当前语言
-     */
-    locale?: string;
-    /**
-     * 多语言
-     */
-    locales?: any; // FIXME
     /**
      * 导航栏配置
      */
@@ -147,6 +140,8 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     wideBreakpoint,
     locale = 'zh-CN',
     locales,
+    colorScheme,
+    elderMode,
     navbar,
     renderNavbar,
     loadMoreText,
@@ -155,13 +150,17 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     onRefresh,
     onScroll,
     messages = [],
+    isTyping,
     renderMessageContent,
+    onBackBottomShow,
+    onBackBottomClick,
     quickReplies = [],
     quickRepliesVisible,
-    onQuickReplyClick = () => {},
+    onQuickReplyClick = () => { },
     onQuickReplyScroll,
     renderQuickReplies,
     text,
+    textOnce,
     placeholder,
     onInputFocus,
     onInputChange,
@@ -178,11 +177,13 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     onAccessoryToggle,
     rightAction,
     Composer = DComposer,
+    isX,
   } = props;
+  const [currentColorScheme, setCurrentColorScheme] = useState<'light' | 'dark'>('light');
 
   function handleInputFocus(e: React.FocusEvent<HTMLTextAreaElement>) {
     if (messagesRef && messagesRef.current) {
-      messagesRef.current.scrollToEnd({ animated: false });
+      messagesRef.current.scrollToEnd({ animated: false, force: true });
     }
     if (onInputFocus) {
       onInputFocus(e);
@@ -190,23 +191,67 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
   }
 
   useEffect(() => {
-    if (isSafari()) {
-      document.documentElement.dataset.safari = '';
+    const rootEl = document.documentElement;
+    if (isSafari) {
+      rootEl.dataset.safari = '';
+    }
+
+    const v = getIOSMajorVersion();
+    if (v) {
+      if (v < 11) {
+        // iOS 9、10 不支持按钮使用 flex
+        rootEl.classList.add('no-btn-flex');
+      }
+      if (v < 13) {
+        rootEl.classList.add('no-scrolling');
+      }
     }
   }, []);
 
+  useEffect(() => {
+    const updateColorScheme = (scheme: 'light' | 'dark') => {
+      setCurrentColorScheme(scheme);
+      document.documentElement.dataset.colorScheme = scheme;
+    };
+
+    if (colorScheme === 'auto') {
+      const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleColorSchemeChange = (e: MediaQueryListEvent | MediaQueryList) => {
+        updateColorScheme(e.matches ? 'dark' : 'light');
+      }
+
+      colorSchemeQuery.addEventListener('change', handleColorSchemeChange);
+      handleColorSchemeChange(colorSchemeQuery);
+
+      return () => {
+        colorSchemeQuery.removeEventListener('change', handleColorSchemeChange);
+      }
+    } else if (colorScheme === 'dark') {
+      updateColorScheme(colorScheme);
+    }
+    return;
+  }, [colorScheme]);
+
   return (
-    <LocaleProvider locale={locale} locales={locales}>
-      <div className="ChatApp" ref={ref}>
+    <ConfigProvider locale={locale} locales={locales} colorScheme={currentColorScheme} elderMode={elderMode}>
+      <div
+        className="ChatApp"
+        data-elder-mode={elderMode}
+        data-x={isX}
+        ref={ref}
+      >
         {renderNavbar ? renderNavbar() : navbar && <Navbar {...navbar} />}
         <MessageContainer
           ref={messagesRef}
           loadMoreText={loadMoreText}
           messages={messages}
+          isTyping={isTyping}
           renderBeforeMessageList={renderBeforeMessageList}
           renderMessageContent={renderMessageContent}
           onRefresh={onRefresh}
           onScroll={onScroll}
+          onBackBottomShow={onBackBottomShow}
+          onBackBottomClick={onBackBottomClick}
         />
         <div className="ChatFooter">
           {renderQuickReplies ? (
@@ -224,6 +269,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
             ref={composerRef}
             inputType={inputType}
             text={text}
+            textOnce={textOnce}
             inputOptions={inputOptions}
             placeholder={placeholder}
             onAccessoryToggle={onAccessoryToggle}
@@ -240,6 +286,6 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
           />
         </div>
       </div>
-    </LocaleProvider>
+    </ConfigProvider>
   );
 });

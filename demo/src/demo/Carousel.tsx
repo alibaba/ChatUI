@@ -1,7 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Carousel, Image } from '../../../src';
-import '../../../src/styles/index.less';
 
 const imgs = [
   '//gw.alicdn.com/tfs/TB1GRW3voY1gK0jSZFMXXaWcVXa-620-320.jpg',
@@ -15,9 +14,9 @@ export default () => (
     <DemoSection title="基础用法">
       <Carousel autoPlay>
         {imgs.map((img, i) => (
-          <div>
+          <div key={img}>
             <p>{i}</p>
-            <Image key={img} src={img} fluid />
+            <Image style={{ display: 'block' }} src={img} fluid />
           </div>
         ))}
       </Carousel>

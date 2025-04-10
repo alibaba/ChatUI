@@ -10,7 +10,7 @@ export interface IconButtonProps extends ButtonProps {
 export const IconButton: React.FC<IconButtonProps> = (props) => {
   const { className, icon, img, ...other } = props;
   return (
-    <Button className={clsx('IconBtn', className)} {...other}>
+    <Button className={clsx('IconBtn', className)} data-icon={icon} {...other}>
       {icon && <Icon type={icon} />}
       {!icon && img && <img src={img} alt="" />}
     </Button>

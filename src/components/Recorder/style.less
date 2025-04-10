@@ -8,8 +8,8 @@
   padding: 10px;
   transform: translate(-50%, -50%);
   border-radius: 12px;
-  background: rgba(51, 51, 51, 0.87);
-  color: var(--white);
+  background: var(--color-toast);
+  color: var(--color-fill-1);
   text-align: center;
 }
 
@@ -18,8 +18,8 @@
     color: var(--red);
   }
   .Recorder-btn {
-    background: var(--gray-7);
-    color: var(--gray-3);
+    background: @btn-hover-bg;
+    color: var(--color-text-3);
   }
 }
 
@@ -69,13 +69,11 @@
 .Recorder-btn {
   height: 36px;
   border-radius: 20px;
-  background: var(--white);
-  color: var(--gray-dark);
+  background: var(--color-fill-1);
+  color: var(--brand-1);
   line-height: 36px;
   text-align: center;
   transition: .3s;
-  user-select: none;
-  -webkit-touch-callout: none;
 }
 
 @keyframes wave {

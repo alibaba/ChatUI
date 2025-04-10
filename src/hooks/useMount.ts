@@ -12,11 +12,15 @@ function useMount({ active = false, ref, delay = 300 }: UseMountOptions) {
   const [didMount, setDidMount] = useState(false);
   const timeout = useRef<ReturnType<typeof setTimeout>>();
 
+  const clear = () => {
+    if (timeout.current) {
+      clearTimeout(timeout.current);
+    }
+  };
+
   useEffect(() => {
     if (active) {
-      if (timeout.current) {
-        clearTimeout(timeout.current);
-      }
+      clear();
       setDidMount(active);
     } else {
       setIsShow(active);
@@ -24,6 +28,8 @@ function useMount({ active = false, ref, delay = 300 }: UseMountOptions) {
         setDidMount(active);
       }, delay);
     }
+
+    return clear;
   }, [active, delay]);
 
   useEffect(() => {

@@ -1,0 +1,40 @@
+:root[data-color-scheme="dark"] {
+  // 不再建议直接用，用下面的文字色、填充色、线条色、功能色
+  --black: var(--gray-1); // 不再使用
+  --white: #1c222e;
+  --gray-1: #f3f6f8;
+  --gray-2: #cacfd7;
+  --gray-4: #444c5a;
+  --gray-5: rgba(204, 223, 255, 0.15);
+  --gray-8: rgba(124, 136, 156, 0.15);
+  --blue: #409fff;
+  --red: #ff6666;
+
+  // Brand 品牌色
+  --brand-3: #343B4D;
+  --brand-4: #332B26;
+
+  --color-mask: rgba(14, 17, 25, 0.7);
+  --color-toast: rgba(243, 246, 248, 0.9);
+
+  --app-bg: #0e1119;
+  --navbar-bg: #0e1119;
+  --footer-bg: #0e1119;
+
+  --btn-primary-color: #fff;
+
+  --skeleton-bg-1: var(--color-fill-2);
+  --skeleton-bg-2: var(--color-line-1);
+
+  .Toolbar-btnIcon {
+    background: #1c222e;
+  }
+
+  .Modal-dialog[data-has-avatar='true'] {
+    background: @modal-bg;
+  }
+
+  .Popup-dialog[data-bg-color="gray"] {
+    background: var(--brand-3);
+  }
+}

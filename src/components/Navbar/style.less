@@ -3,41 +3,82 @@
   z-index: @zindex-navbar;
   display: flex;
   align-items: center;
-  min-height: @navbar-height;
   padding: @navbar-padding;
   padding-top: var(--safe-top);
-  border-bottom: 1px solid @navbar-border-color;
-  background: @navbar-bg;
+  background: var(--navbar-bg);
 
   &-main {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: @navbar-height;
+    padding: 3Px 0;
+    box-sizing: border-box;
   }
   &-left,
   &-right {
-    @padding-width: @navbar-icon-padding * 2;
-    width: 100px;
-    width: ~'calc((@{icon-button-lg-size} + @{padding-width}) * 2)';
-    padding: 2px 0;
+    display: flex;
+    width: 58Px;
   }
   &-right {
-    text-align: right;
+    justify-content: flex-end;
   }
   &-title {
     margin: 0;
     color: @navbar-color;
     font-size: @navbar-font-size;
-    text-align: center;
-    font-weight: 400;
+    font-weight: 500;
   }
   &-logo {
+    display: block;
     width: auto;
     height: @navbar-logo-height;
   }
   .IconBtn {
-    padding: @navbar-icon-padding;
-    color: @navbar-icon-color;
+    color: var(--color-text-1);
+    font-size: 24Px;
+  }
+  .IconBtn + .IconBtn,
+  .Navbar-rightSlot + .IconBtn {
+    margin-left: 12Px;
+  }
+}
+
+.Navbar--left {
+  .Navbar-left {
+    width: 24Px;
+  }
+  .Navbar-right {
+    width: auto;
+  }
+  .Navbar-main {
+    min-height: 62Px;
+    margin-left: 9Px;
+    justify-content: flex-start;
+  }
+}
+
+.Navbar-brand + .Navbar-inner {
+  margin-left: 9Px;
+}
+
+.Navbar-desc {
+  color: var(--color-text-2);
+  font-size: 12Px;
+}
+
+.ChatApp[data-elder-mode='true'] {
+  .Navbar .IconBtn {
+    font-size: 26Px;
+  }
+  .Navbar-logo {
+    height: 43Px;
+  }
+  .Navbar-title {
+    font-size: 18Px;
+  }
+  .Navbar-desc {
+    font-size: 13Px;
   }
 }

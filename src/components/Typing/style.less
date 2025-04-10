@@ -1,47 +1,43 @@
 .Typing {
   display: flex;
   align-items: center;
-  height: 20px;
-  transition: opacity 0.1s;
+  height: 22.5px;
 }
+
+.Typing-text {
+  margin-right: 9px;
+  font-size: 15px;
+}
+
+@frame-time: 0.4s;
 
 .Typing-dot {
   display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-left: 5px;
-  border-radius: 50%;
-  background: var(--brand-2);
-  animation: typing-dot 0.9s linear infinite;
+  width: 4px;
+  height: 4px;
+  border-radius: var(--radius-sm);
+  animation: typing-dot (@frame-time * 3) ease-in-out infinite;
+  background: var(--gray-5);
+  transform: rotate(-15deg);
 
-  &:nth-child(1) {
-    margin: 0;
-    opacity: 0.9;
-  }
-  &:nth-child(2) {
-    opacity: 0.3;
-    animation-delay: 0.225s;
+  & + & {
+    margin-left: 4px;
   }
   &:nth-child(3) {
-    opacity: 0.6;
-    animation-delay: 0.45s;
+    animation-delay: 0.1s;
+  }
+  &:nth-child(4) {
+    animation-delay: 0.2s;
   }
 }
 
 @keyframes typing-dot {
-  0% {
-    transform: translateY(0);
+  0%, 40%, 100% {
+    height: 4px;
+    background: var(--color-line-2);
   }
-  25% {
-    transform: translateY(6px);
-  }
-  50% {
-    transform: translateY(0);
-  }
-  75% {
-    transform: translateY(-6px);
-  }
-  100% {
-    transform: translateY(0);
+  20% {
+    height: 12px;
+    background-image: linear-gradient(162deg, var(--brand-2) 0%, var(--brand-1) 100%);
   }
 }

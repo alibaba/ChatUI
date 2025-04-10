@@ -1,39 +1,72 @@
 :root {
-  --brand-1: @brand-1;
-  --brand-2: @brand-2;
-  --brand-3: @brand-3;
-  --black: @black;
-  --white: @white;
-  --gray-1: @gray-1;
-  --gray-2: @gray-2;
-  --gray-3: @gray-3;
-  --gray-4: @gray-4;
-  --gray-5: @gray-5;
-  --gray-6: @gray-6;
-  --gray-7: @gray-7;
-  --gray-8: @gray-8;
-  --light-1: @light-1;
-  --light-2: @light-2;
-  --blue: @blue;
+  // 已弃用，用下面的文字色、填充色、线条色、功能色替换
+  --black: #000; // 不再使用
+  --white: #fff;
+  --gray-1: #11192d;
+  --gray-2: #50607a;
+  --gray-3: #7c889c;
+  --gray-4: #cacfd7;
+  --gray-5: rgba(80, 96, 122, 0.15);
+  --gray-6: #e5e5e5; // 不再使用
+  --gray-7: #f5f5f5; // 不再使用
+  --gray-8: #f3f6f8;
+  --light-1: @gray-6; // 不再使用
+  --light-2: @gray-7; // 不再使用
+  --link-color: var(--blue);
+  --blue: #0080ff;
   --gray-dark: @gray-dark;
-  --green: @green;
+  --green: #1dbf1d;
   --orange: @orange;
-  --red: @red;
+  --red: #ff0300;
   --yellow: @yellow;
   --yellow-light: @yellow-light;
+}
+
+:root {
+  // Brand 品牌色
+  --brand-1: #ff6200;
+  --brand-2: #ffb300;
+  --brand-3: #ffe0cc;
+  --brand-4: #ffefe5;
+
+  // Text 文字色
+  --color-text-1: var(--gray-1);
+  --color-text-2: var(--gray-2);
+  --color-text-3: var(--gray-3);
+
+  // Fill 填充色
+  --color-fill-1: var(--white);
+  --color-fill-2: var(--gray-8);
+  --color-mask: rgba(14, 17, 25, 0.5);
+  --color-toast: rgba(17, 25, 45, 0.9);
+
+  // Line 线条色
+  --color-line-1: var(--gray-5);
+  --color-line-2: var(--gray-4);
+
+  // Functional 功能色
+  --highlight-1: var(--brand-1);
+  --highlight-2: var(--brand-2);
+  --color-warning: var(--red);
+  --color-success: var(--green);
+  --color-link: var(--link-color);
+
   --font-size-xs: @font-size-xs;
   --font-size-sm: @font-size-sm;
   --font-size-md: @font-size-md;
   --font-size-lg: @font-size-lg;
-  --radius-sm: @border-radius-sm;
-  --radius-md: @border-radius-md;
-  --radius-lg: @border-radius-lg;
+
+  --radius-sm: 4Px;
+  --radius-md: 6Px;
+  // --radius-lg: @border-radius-lg;
+
   --shadow-1: @shadow-1;
   --shadow-2: @shadow-2;
   --shadow-3: @shadow-3;
+
   --safe-top: 0px;
   --safe-bottom: 0px;
-  --gutter: @gutter;
+  --viewport-top: 0px;
 }
 
 @supports (top: constant(safe-area-inset-top)) {
@@ -48,4 +81,39 @@
     --safe-top: env(safe-area-inset-top);
     --safe-bottom: env(safe-area-inset-bottom);
   }
+}
+
+:root {
+  --app-bg: var(--color-fill-2);
+  --navbar-bg: var(--color-fill-2);
+  --footer-bg: var(--color-fill-2);
+
+  --gutter: @gutter;
+  --rate-width: 32Px;
+
+  // 头像和消息内容的间隙
+  --msg-avatar-gap: 6Px;
+  // 消息旁边的空白空间：间隙 + 头像的宽度（点赞踩的宽度一致）
+  --msg-gutter: calc(var(--msg-avatar-gap) + var(--rate-width));
+
+  --btn-padding: 8px 12px;
+  --btn-border-color: var(--color-line-2);
+  --btn-border-radius: var(--radius-md);
+  --btn-bg: var(--color-fill-1);
+  --btn-color: var(--color-text-2);
+  --btn-font-weight: 500;
+  --btn-font-size: @btn-font-size;
+  --btn-line-height: 1.125rem; // 18px
+  --btn-padding-sm: 4px 12px;
+  --btn-font-size-sm: @btn-font-size-sm;
+  --btn-padding-lg: 10px 12px;
+  --btn-font-size-lg: 15px;
+  --btn-primary-border-color: transparent;
+  --btn-primary-bg: var(--brand-1);
+  --btn-primary-color: var(--white);
+
+  --goods-img-size: 72px;
+
+  --skeleton-bg-1: #f6f6f6;
+  --skeleton-bg-2: #f0f0f0;
 }

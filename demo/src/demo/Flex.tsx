@@ -1,7 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Flex, FlexItem } from '../../../src';
-import '../../../src/styles/index.less';
 
 function FluidLayout({ n }: { n: number }) {
   return (
@@ -9,7 +8,7 @@ function FluidLayout({ n }: { n: number }) {
       <h5>{`${n}个`}</h5>
       <Flex
         wrap="wrap"
-        style={{ width: '200px', height: '150px', background: 'black', alignContent: 'flex-start' }}
+        style={{ width: '200px', height: '150px', background: 'var(--black)', alignContent: 'flex-start' }}
       >
         {Array.from(Array(n)).map((t, i) => (
           <FlexItem
@@ -18,7 +17,7 @@ function FluidLayout({ n }: { n: number }) {
               boxSizing: 'border-box',
               height: '50px',
               border: '1px solid red',
-              background: 'white',
+              background: 'var(--color-fill-1)',
             }}
             key={i}
           />

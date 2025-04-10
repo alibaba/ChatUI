@@ -4,13 +4,20 @@ import clsx from 'clsx';
 export type ListProps = {
   className?: string;
   bordered?: boolean;
+  variant?: 'buttons';
+  children?: React.ReactNode;
 };
 
-export const List: React.FC<ListProps> = (props) => {
-  const { bordered = false, className, children } = props;
+export const List = React.forwardRef<HTMLDivElement, ListProps>((props, ref) => {
+  const { bordered = false, className, variant, children } = props;
   return (
-    <div className={clsx('List', { 'List--bordered': bordered }, className)} role="list">
+    <div
+      className={clsx('List', { 'List--bordered': bordered }, className)}
+      data-variant={variant}
+      role="list"
+      ref={ref}
+    >
       {children}
     </div>
   );
-};
+});

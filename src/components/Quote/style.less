@@ -1,0 +1,46 @@
+.Quote {
+  padding-left: 9px;
+  border-left: 3px solid var(--color-line-1);
+  color: var(--color-text-2);
+  font-size: 12px;
+
+  & + .Divider {
+    margin-top: 9px;
+  }
+  .Image,
+  .Video-cover,
+  .Video-video:not([hidden]) {
+    max-width: 72px;
+    max-height: 72px;
+    border-radius: var(--radius-md);
+  }
+  .Image,
+  .Video {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .Video-video {
+    width: auto;
+  }
+  .Video-playBtn {
+    pointer-events: none;
+  }
+  .Video-playIcon {
+    font-size: 24px;
+  }
+}
+
+.Bubble {
+  .Quote:hover {
+    cursor: pointer;
+  }
+  .Quote-content {
+    a {
+      pointer-events: none;
+    }
+  }
+}
+
+.Quote-author {
+  color: var(--color-text-3);
+}

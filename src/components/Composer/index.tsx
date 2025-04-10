@@ -11,14 +11,17 @@ import { ComposerInput } from './ComposerInput';
 import { SendButton } from './SendButton';
 import { Action } from './Action';
 import toggleClass from '../../utils/toggleClass';
+import { isIOS, isArkWeb } from '../../utils/ua';
+import { updateViewportTop, setViewportTop } from './viewportTop';
 
-const FOCUSING_CLASS = 'S--focusing';
+export const CLASS_NAME_FOCUSING = 'S--focusing';
 
 export type InputType = 'voice' | 'text';
 
 export type ComposerProps = {
   wideBreakpoint?: string;
   text?: string;
+  textOnce?: string;
   inputOptions?: InputProps;
   placeholder?: string;
   inputType?: InputType;
@@ -33,6 +36,7 @@ export type ComposerProps = {
   onToolbarClick?: (item: ToolbarItemProps, event: React.MouseEvent) => void;
   onAccessoryToggle?: (isAccessoryOpen: boolean) => void;
   rightAction?: IconButtonProps;
+  isX?: boolean;
 };
 
 export interface ComposerHandle {
@@ -42,9 +46,10 @@ export interface ComposerHandle {
 export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, ref) => {
   const {
     text: initialText = '',
+    textOnce: oTextOnce,
     inputType: initialInputType = 'text',
     wideBreakpoint,
-    placeholder = '请输入...',
+    placeholder: oPlaceholder = '请输入...',
     recorder = {},
     onInputTypeChange,
     onFocus,
@@ -60,12 +65,16 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   } = props;
 
   const [text, setText] = useState(initialText);
+  const [textOnce, setTextOnce] = useState(oTextOnce);
+  const [hasValue, setHasValue] = useState(!!text);
+  const [placeholder, setPlaceholder] = useState(oTextOnce || oPlaceholder);
   const [inputType, setInputType] = useState(initialInputType || 'text');
   const [isAccessoryOpen, setAccessoryOpen] = useState(false);
   const [accessoryContent, setAccessoryContent] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null!);
   const focused = useRef(false);
   const blurTimer = useRef<any>();
+  const valueTimer = useRef<NodeJS.Timeout>();
   const popoverTarget = useRef<any>();
   const isMountRef = useRef(false);
   const [isWide, setWide] = useState(false);
@@ -109,6 +118,49 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     isMountRef.current = true;
   }, []);
 
+  useEffect(() => {
+    const { visualViewport } = window;
+    if (!visualViewport) return;
+
+    let winHeight = window.innerHeight;
+
+    function toggleFocusing() {
+      if (window.innerHeight > winHeight) {
+        // iOS 下第一次的时候 winHeight 有可能不准
+        winHeight = window.innerHeight;
+      }
+      // 视窗变高做失焦处理
+      // 场景：键盘收起键盘时并没有失去焦点
+      if (focused.current && visualViewport!.height >= winHeight) {
+        inputRef.current?.blur();
+      }
+    }
+
+    function resizeHandler() {
+      // Android 没有下面安全区且可以悬浮键盘，故不做收起失焦处理
+      if (isIOS || isArkWeb) {
+        toggleFocusing();
+      }
+    }
+
+    visualViewport.addEventListener('resize', resizeHandler);
+    return () => {
+      visualViewport.removeEventListener('resize', resizeHandler);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (text) {
+      clearTimeout(valueTimer.current);
+      setHasValue(true);
+    } else {
+      // 中文上屏时有一瞬间会无值，所以做延迟处理
+      valueTimer.current = setTimeout(() => {
+        setHasValue(false);
+      });
+    }
+  }, [text]);
+
   useImperativeHandle(ref, () => ({
     setText,
   }));
@@ -132,8 +184,12 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   const handleInputFocus = useCallback(
     (e: React.FocusEvent<HTMLTextAreaElement>) => {
       clearTimeout(blurTimer.current);
-      toggleClass(FOCUSING_CLASS, true);
+      toggleClass(CLASS_NAME_FOCUSING, true);
       focused.current = true;
+
+      if (isIOS) {
+        updateViewportTop();
+      }
 
       if (onFocus) {
         onFocus(e);
@@ -145,9 +201,13 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   const handleInputBlur = useCallback(
     (e: React.FocusEvent<HTMLTextAreaElement>) => {
       blurTimer.current = setTimeout(() => {
-        toggleClass(FOCUSING_CLASS, false);
+        toggleClass(CLASS_NAME_FOCUSING, false);
         focused.current = false;
       }, 0);
+
+      if (isIOS) {
+        setViewportTop(0);
+      }
 
       if (onBlur) {
         onBlur(e);
@@ -157,13 +217,20 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   );
 
   const send = useCallback(() => {
-    onSend('text', text);
-    setText('');
-
+    if (text) {
+      onSend('text', text);
+      setText('');
+    } else if (textOnce) {
+      onSend('text', textOnce);
+    }
+    if (textOnce) {
+      setTextOnce('');
+      setPlaceholder(oPlaceholder);
+    }
     if (focused.current) {
       inputRef.current.focus();
     }
-  }, [onSend, text]);
+  }, [oPlaceholder, onSend, text, textOnce]);
 
   const handleInputKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -223,7 +290,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   }, []);
 
   const isInputText = inputType === 'text';
-  const inputTypeIcon = isInputText ? 'volume-circle' : 'keyboard-circle';
+  const inputTypeIcon = isInputText ? 'mic' : 'keyboard';
   const hasToolbar = toolbar.length > 0;
 
   const inputProps = {
@@ -257,14 +324,14 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
         <div className="Composer-inputWrap">
           <ComposerInput invisible={false} {...inputProps} />
         </div>
-        <SendButton onClick={handleSendBtnClick} disabled={!text} />
+        <SendButton onClick={handleSendBtnClick} disabled={!hasValue} />
       </div>
     );
   }
 
   return (
     <>
-      <div className="Composer">
+      <div className="Composer" data-has-value={hasValue} data-has-text-once={!!textOnce}>
         {recorder.canRecord && (
           <Action
             className="Composer-inputTypeBtn"
@@ -284,12 +351,12 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
             className={clsx('Composer-toggleBtn', {
               active: isAccessoryOpen,
             })}
-            icon="plus-circle"
+            icon="plus"
             onClick={handleAccessoryToggle}
             aria-label={isAccessoryOpen ? '关闭工具栏' : '展开工具栏'}
           />
         )}
-        {text && <SendButton onClick={handleSendBtnClick} disabled={false} />}
+        {hasValue && <SendButton onClick={handleSendBtnClick} disabled={!hasValue} />}
       </div>
       {isAccessoryOpen && (
         <AccessoryWrap onClickOutside={handleAccessoryBlur}>

@@ -6,12 +6,22 @@
       height: calc(100vh - calc(100vh - 100%));
     }
   }
+
   body,
   #root {
     height: 100%;
   }
+
   body {
+    overflow: hidden;
     margin: 0;
+  }
+
+  @media (hover: none) {
+    body {
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
   }
 }
 
@@ -19,7 +29,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--light-1);
+  background: var(--app-bg);
   color: @body-color;
   font-family: @font-family-base;
   line-height: @line-height-base;
@@ -30,7 +40,8 @@
   --safe-bottom: 0px;
 }
 
-@media (hover: none) {
+// only for iOS
+@supports (-webkit-touch-callout: none) {
   .S--focusing {
     .MessageList {
       margin-top: 75vh;
@@ -42,53 +53,16 @@
   position: relative;
   z-index: @zindex-footer;
   padding-bottom: var(--safe-bottom);
-  background: rgba(242, 244, 245, 0.95);
+  background: var(--footer-bg);
 }
 
-.slide-in-right-item {
-  animation: slideInRight 0.5s ease-in-out both;
-}
-
-.slide-in-right-item {
-  &:nth-child(2) {
-    animation-delay: 0.2s;
+@media (max-width: 374px) {
+  :root {
+    --msg-avatar-gap: 3Px;
+    --rate-width: 24Px;
   }
-  &:nth-child(3) {
-    animation-delay: 0.4s;
-  }
-  &:nth-child(4) {
-    animation-delay: 0.6s;
-  }
-  &:nth-child(5) {
-    animation-delay: 0.8s;
-  }
-  &:nth-child(6) {
-    animation-delay: 1s;
-  }
-  &:nth-child(7) {
-    animation-delay: 1.2s;
-  }
-  &:nth-child(8) {
-    animation-delay: 1.4s;
-  }
-  &:nth-child(9) {
-    animation-delay: 1.6s;
-  }
-  &:nth-child(10) {
-    animation-delay: 1.8s;
-  }
-  &:nth-child(11) {
-    animation-delay: 2s;
-  }
-}
-
-@keyframes slideInRight {
-  0% {
-    transform: translateX(100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
+  .MessageList {
+    padding-left: 6px;
+    padding-right: 6px;
   }
 }

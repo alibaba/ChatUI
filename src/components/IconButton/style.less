@@ -1,19 +1,16 @@
 .IconBtn {
-  padding: @icon-button-padding;
+  min-width: 0;
+  padding: 0;
   border: 0;
   border-radius: @icon-button-border-radius;
   background: @icon-button-bg;
   color: @icon-button-color;
+  font-size: @icon-button-size;
 
   &.Btn--primary {
     color: @icon-button-primary-color;
   }
-  &:disabled {
-    border-color: @icon-button-disabled-border-color;
-    color: @icon-button-disabled-color;
-  }
   &.Btn--lg {
-    padding: @icon-button-lg-padding;
     border-radius: @icon-button-lg-border-radius;
     font-size: @icon-button-lg-size;
   }

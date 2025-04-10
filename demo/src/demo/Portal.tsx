@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Portal } from '../../../src';
-import '../../../src/styles/index.less';
 
 export default () => {
   const containerRef = useRef(null);

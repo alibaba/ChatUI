@@ -1,18 +1,43 @@
 .Goods {
   padding: @goods-padding;
+  font-size: 14px;
 
+  &[data-elder-mode="true"] {
+    --goods-img-size: 56px;
+
+    .Price {
+      color: var(--brand-1);
+    }
+  }
+  &[data-variant="inList"] {
+    .Goods-status {
+      display: flex;
+      justify-content: flex-end;
+      color: var(--highlight-2);
+    }
+  }
+  &[data-variant="compact"] {
+    --goods-img-size: 44px;
+    padding: 6px;
+    background: var(--color-fill-2);
+    color: var(--color-text-2);
+
+    .Price {
+      font-weight: 400;
+    }
+  }
   & + & {
     border-top: @goods-border-width solid @goods-border-color;
   }
   &-img {
-    width: @goods-img-width;
-    height: @goods-img-height;
+    width: var(--goods-img-size);
+    height: var(--goods-img-size);
     margin-right: @goods-gap;
     object-fit: cover;
-    border-radius: @goods-img-border-radius;
+    border-radius: var(--radius-md);
   }
   &-name {
-    margin: 0 0 5px;
+    margin: 0;
     font-size: @font-size-sm;
     font-weight: 400;
   }
@@ -22,8 +47,8 @@
     }
   }
   &-desc {
+    margin-top: 2Px;
     color: @goods-desc-color;
-    font-size: @goods-desc-font-size;
     word-break: break-all;
   }
   &-meta {
@@ -31,6 +56,7 @@
     font-size: @goods-meta-font-size;
   }
   &-countUnit {
+    margin-left: 6px;
     color: @goods-count-color;
     font-size: @goods-count-font-size;
   }
@@ -48,21 +74,25 @@
       background: @goods-buy-btn-bg;
     }
   }
-  &-detailBtn {
-    min-width: @goods-detail-btn-min-width;
-    padding: @goods-detail-btn-padding;
-    border-radius: @goods-detail-btn-border-radius;
-    font-size: @goods-detail-btn-font-size;
-    line-height: @goods-detail-btn-line-height;
-  }
   &-aside {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin-left: @goods-gap;
+    margin-left: 6Px;
   }
   &-status {
-    color: @goods-status-color;
-    font-size: @goods-status-font-size;
+    display: inline-flex;
+    align-items: center;
+    color: var(--highlight-1);
   }
+  .Btn {
+    min-width: 0;
+  }
+}
+
+.Goods-tags,
+.Goods-countUnit,
+.Goods-status,
+.Goods-slot {
+  margin-top: 2Px;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { DemoPage, DemoSection } from '../components';
+import { useNavigate } from 'react-router-dom';
 import Chat, {
   Bubble,
   MessageProps,
@@ -7,28 +7,56 @@ import Chat, {
   QuickReplyItemProps,
   useQuickReplies,
   Card,
+  CardMedia,
   CardTitle,
   CardText,
+  CardActions,
+  Button,
   List,
   ListItem,
   Flex,
   FlexItem,
   ScrollView,
   ToolbarItemProps,
+  RateActions,
+  useTitleTyping,
 } from '../../../src';
 import OrderSelector from './OrdderSelector';
-import '../../../src/styles/index.less';
 
 type MessageWithoutId = Omit<MessageProps, '_id'>;
 
 const initialMessages: MessageWithoutId[] = [
   {
+    type: 'system',
+    content: { text: '88VIP专属智能客服小蜜 为您服务' },
+  },
+  {
     type: 'text',
     content: { text: 'Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-    user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg', name: '小小蜜' },
+    user: {
+      avatar: 'https://gw.alicdn.com/imgextra/i2/O1CN01fPEB9P1ylYWgaDuVR_!!6000000006619-0-tps-132-132.jpg',
+      // name: '小小蜜',
+    },
+    createdAt: Date.now(),
+    hasTime: true,
+  },
+  {
+    type: 'text',
+    content: { text: '你好～' },
+    user: {
+      avatar: '//gw.alicdn.com/tfs/TB1g6n4xQP2gK0jSZPxXXacQpXa-234-216.png',
+      name: '小淘',
+    },
+    createdAt: Date.now(),
+    hasTime: true,
+    position: 'right',
   },
   {
     type: 'guess-you',
+    user: {
+      avatar: 'https://gw.alicdn.com/imgextra/i2/O1CN01fPEB9P1ylYWgaDuVR_!!6000000006619-0-tps-132-132.jpg',
+      // name: '小小蜜',
+    },
   },
   {
     type: 'skill-cards',
@@ -37,42 +65,66 @@ const initialMessages: MessageWithoutId[] = [
     type: 'text',
     content: { text: '小蜜我要查看我的物流信息' },
     position: 'right',
-    user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+    user: { avatar: '//gw.alicdn.com/tfs/TB1g6n4xQP2gK0jSZPxXXacQpXa-234-216.png' },
   },
   {
     type: 'image',
     content: {
       picUrl: '//img.alicdn.com/tfs/TB1p_nirYr1gK0jSZR0XXbP8XXa-300-300.png',
     },
+    user: {
+      avatar: 'https://gw.alicdn.com/imgextra/i2/O1CN01fPEB9P1ylYWgaDuVR_!!6000000006619-0-tps-132-132.jpg',
+      // name: '小小蜜',
+    },
+  },
+  {
+    type: 'system',
+    content: {
+      text: '由于您长时间未说话或退出小蜜（离开页面、锁屏等）已自动结束本次服务',
+    },
+  },
+  {
+    type: 'image-text-button',
+    content: {},
+    user: {
+      avatar: 'https://gw.alicdn.com/imgextra/i2/O1CN01fPEB9P1ylYWgaDuVR_!!6000000006619-0-tps-132-132.jpg',
+      // name: '小小蜜',
+    },
   },
 ];
 
 const defaultQuickReplies = [
   {
+    icon: 'shopping-bag',
+    name: '咨询订单问题（高亮）',
+    code: 'orderSelector',
+    isHighlight: true,
+  },
+  {
+    icon: 'shopping-bag',
+    name: '如何申请退款（高亮）',
+    code: 'orderSelector',
+    isHighlight: true,
+  },
+  {
     icon: 'message',
-    name: '1联系人工服务',
+    name: '联系人工服务（高亮+新）',
     code: 'q1',
     isNew: true,
     isHighlight: true,
   },
   {
-    name: '2短语',
-    code: 'q2',
+    name: '质量问题（新）',
+    code: 'q3',
     isNew: true,
   },
   {
-    name: '3强快捷短语',
-    code: 'q3',
-    isHighlight: true,
-  },
-  {
-    name: '4弱快捷短语',
+    name: '卖家文案',
     code: 'q4',
   },
   {
     name: '5强快捷短语',
     code: 'q5',
-    isHighlight: true,
   },
   {
     name: '6弱快捷短语',
@@ -88,11 +140,47 @@ const skillList = [
   { title: '修改地址', desc: '修改地址' },
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+const toolbar: ToolbarItemProps[] = [
+  {
+    type: 'smile',
+    icon: 'smile',
+    title: '表情',
+  },
+  {
+    type: 'orderSelector',
+    icon: 'shopping-bag',
+    title: '订单',
+  },
+  {
+    type: 'image',
+    icon: 'image',
+    title: '图片',
+  },
+  {
+    type: 'camera',
+    icon: 'camera',
+    title: '拍照',
+  },
+  {
+    type: 'photo',
+    title: 'Photo',
+    img: '//gw.alicdn.com/tfs/TB1eDjNj.T1gK0jSZFrXXcNCXXa-80-80.png',
+  },
+];
+
 export default () => {
   // 消息列表
-  const { messages, appendMsg, setTyping, prependMsgs } = useMessages(initialMessages);
+  const { messages, appendMsg, prependMsgs } = useMessages(initialMessages);
   const { quickReplies, replace } = useQuickReplies(defaultQuickReplies);
   const msgRef = React.useRef(null);
+
+  const { isTyping, start, stop } = useTitleTyping();
+
+  const navigate = useNavigate();
+
+  window.appendMsg = appendMsg;
+  window.msgRef = msgRef;
 
   // 发送回调
   function handleSend(type: string, val: string) {
@@ -104,15 +192,18 @@ export default () => {
         position: 'right',
       });
 
-      setTyping(true);
+      setTimeout(() => {
+        start();
+      }, 500);
 
       // 模拟回复消息
       setTimeout(() => {
+        stop();
         appendMsg({
           type: 'text',
           content: { text: '亲，您遇到什么问题啦？请简要描述您的问题~' },
         });
-      }, 1000);
+      }, 5000);
     }
   }
 
@@ -132,55 +223,67 @@ export default () => {
           code: 'qb',
         },
       ]);
+    } else if (item.code === 'orderSelector') {
+      appendMsg({
+        type: 'order-selector',
+        content: {},
+        position: 'pop',
+      });
     }
   }
 
   function handleRefresh() {
-    prependMsgs([
-      {
-        _id: '1111',
-        type: 'text',
-        content: { text: '11111Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-      {
-        _id: '2222',
-        type: 'text',
-        content: { text: '22222 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-      {
-        _id: '3333',
-        type: 'text',
-        content: { text: '333 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-      {
-        _id: '4444',
-        type: 'text',
-        content: { text: '444 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-      {
-        _id: '5555',
-        type: 'text',
-        content: { text: '555 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-      {
-        _id: '6666',
-        type: 'text',
-        content: { text: '666 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-      {
-        _id: '7777',
-        type: 'text',
-        content: { text: '777 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
-        user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-      },
-    ]);
-    return Promise.resolve({});
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const now = Date.now();
+
+        prependMsgs([
+          {
+            _id: now + '1111',
+            type: 'text',
+            content: { text: '11111Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '2222',
+            type: 'text',
+            content: { text: '22222 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '3333',
+            type: 'text',
+            content: { text: '333 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '4444',
+            type: 'text',
+            content: { text: '444 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '5555',
+            type: 'text',
+            content: { text: '555 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '6666',
+            type: 'text',
+            content: { text: '666 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '7777',
+            type: 'text',
+            content: { text: '777 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+        ]);
+        resolve({});
+      }, 800);
+    });
   }
 
   function handleToolbarClick(item: ToolbarItemProps) {
@@ -195,7 +298,7 @@ export default () => {
   function renderMessageContent(msg: MessageProps) {
     const { type, content } = msg;
 
-    // 根据消息类型来渲染
+    // 根据类型渲染消息气泡
     switch (type) {
       case 'text':
         return <Bubble content={content.text} />;
@@ -239,59 +342,68 @@ export default () => {
             <img src={content.picUrl} alt="" />
           </Bubble>
         );
+      case 'image-text-button':
+        return (
+          <Flex>
+            <Card fluid>
+              <CardMedia image="//gw.alicdn.com/tfs/TB1Xv5_vlr0gK0jSZFnXXbRRXXa-427-240.png" />
+              <CardTitle>Card title</CardTitle>
+              <CardText>
+                如您希望卖家尽快给您发货，可以进入【我的订单】找到该笔交易，点击【提醒发货】或点击【联系卖家】与卖家进行旺旺沟通尽快发货给您哦，若卖家明确表示无法发货，建议您申请退款重新选购更高品质的商品哦商品。申请退款重新选购更高品质的商品哦商品。
+              </CardText>
+              <CardActions>
+                <Button>次要按钮</Button>
+                <Button color="primary">主要按钮</Button>
+              </CardActions>
+            </Card>
+            <RateActions onClick={console.log} />
+          </Flex>
+        );
       default:
         return null;
     }
   }
 
   return (
-    <DemoPage>
-      <DemoSection title="基础用法">
-        <div style={{ height: '60vh' }}>
-          <Chat
-            onRefresh={handleRefresh}
-            navbar={{
-              leftContent: {
-                icon: 'chevron-left',
-                title: 'Back',
-              },
-              rightContent: [
-                {
-                  icon: 'apps',
-                  title: 'Applications',
-                },
-                {
-                  icon: 'ellipsis-h',
-                  title: 'More',
-                },
-              ],
-              title: '智能助理',
-            }}
-            toolbar={[
-              {
-                type: 'orderSelector',
-                icon: 'shopping-bag',
-                title: 'OrdderSelector',
-              },
-              {
-                type: 'photo',
-                title: 'Photo',
-                img: 'https://gw.alicdn.com/tfs/TB1eDjNj.T1gK0jSZFrXXcNCXXa-80-80.png',
-              },
-            ]}
-            messagesRef={msgRef}
-            onToolbarClick={handleToolbarClick}
-            recorder={{ canRecord: true }}
-            wideBreakpoint="600px"
-            messages={messages}
-            renderMessageContent={renderMessageContent}
-            quickReplies={quickReplies}
-            onQuickReplyClick={handleQuickReplyClick}
-            onSend={handleSend}
-            onImageSend={() => Promise.resolve()}
-          />
-        </div>
-      </DemoSection>
-    </DemoPage>
+    <Chat
+      colorScheme="auto"
+      elderMode={false}
+      onRefresh={handleRefresh}
+      navbar={{
+        leftContent: {
+          icon: 'chevron-left',
+          title: 'Back',
+          onClick() {
+            navigate('/');
+          },
+        },
+        rightContent: [
+          {
+            icon: 'apps',
+            title: 'Applications',
+          },
+          {
+            icon: 'ellipsis-h',
+            title: 'More',
+          },
+        ],
+        title: isTyping ? '对方正在输入...' : '智能助理',
+        // desc: '客服热线9510211(7:00-次日1:00)',
+        // logo: 'https://gw.alicdn.com/imgextra/i4/O1CN016i66TT24lRwUecIk5_!!6000000007431-2-tps-164-164.png_80x80.jpg',
+        // align: 'left',
+      }}
+      rightAction={{ icon: 'shopping-bag' }}
+      toolbar={toolbar}
+      messagesRef={msgRef}
+      onToolbarClick={handleToolbarClick}
+      recorder={{ canRecord: true }}
+      wideBreakpoint="800px"
+      messages={messages}
+      renderMessageContent={renderMessageContent}
+      quickReplies={quickReplies}
+      onQuickReplyClick={handleQuickReplyClick}
+      onSend={handleSend}
+      onImageSend={() => Promise.resolve()}
+    />
   );
 };

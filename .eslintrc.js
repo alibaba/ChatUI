@@ -13,7 +13,7 @@ module.exports = {
     browser: true,
     jest: true,
   },
-  plugins: ['compat'],
+  plugins: ['compat', 'import', 'jsx-a11y', 'react', 'react-hooks'],
   rules: {
     'compat/compat': 'error',
     'import/prefer-default-export': 'off',

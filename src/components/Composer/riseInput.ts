@@ -1,13 +1,8 @@
-const ua = navigator.userAgent;
-const iOS = /iPad|iPhone|iPod/.test(ua);
-
-function uaIncludes(str: string) {
-  return ua.indexOf(str) !== -1;
-}
+import { isIOS, isSafariOrIOS11, getIOSMajorVersion } from '../../utils/ua';
 
 function testScrollType() {
-  if (iOS) {
-    if (uaIncludes('Safari/') || /OS 11_[0-3]\D/.test(ua)) {
+  if (isIOS) {
+    if (isSafariOrIOS11) {
       /**
        * 不处理
        * - Safari
@@ -15,21 +10,21 @@ function testScrollType() {
        */
       return 0;
     }
-    // 用 `scrollTop` 的方式
-    return 1;
+
+    const major = getIOSMajorVersion();
+    // iOS 12及以下用 `scrollTop` 的方式
+    if (major < 13) {
+      return 1;
+    }
   }
   // 其它的用 `scrollIntoView` 的方式
   return 2;
 }
 
-export default function riseInput(input: HTMLElement, target: HTMLElement) {
+export default function riseInput(input: Element, wrap?: Element | null) {
   const scrollType = testScrollType();
   let scrollTimer: ReturnType<typeof setTimeout>;
-
-  if (!target) {
-    // eslint-disable-next-line no-param-reassign
-    target = input;
-  }
+  const target = wrap || input;
 
   const scrollIntoView = () => {
     if (scrollType === 0) return;
@@ -50,7 +45,7 @@ export default function riseInput(input: HTMLElement, target: HTMLElement) {
 
     // 某些情况下收起键盘后输入框不收回，页面下面空白
     // 比如：闲鱼、大麦、乐动力、微信
-    if (scrollType && iOS) {
+    if (scrollType && isIOS) {
       // 以免点击快捷短语无效
       setTimeout(() => {
         document.body.scrollIntoView();

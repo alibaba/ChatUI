@@ -9,8 +9,8 @@ export type EmptyProps = {
   tip?: string;
 };
 
-const IMAGE_EMPTY = '//gw.alicdn.com/tfs/TB1fnnLRkvoK1RjSZFDXXXY3pXa-300-250.svg';
-const IMAGE_OOPS = '//gw.alicdn.com/tfs/TB1lRjJRbvpK1RjSZPiXXbmwXXa-300-250.svg';
+const IMAGE_EMPTY = 'https://gw.alicdn.com/imgextra/i3/O1CN01c0BqGH1Jx6L1ihheM_!!6000000001094-55-tps-280-280.svg';
+const IMAGE_OOPS = 'https://gw.alicdn.com/imgextra/i3/O1CN011bYju01hGYK2LMydz_!!6000000004250-55-tps-280-280.svg';
 
 export const Empty: React.FC<EmptyProps> = (props) => {
   const { className, type, image, tip, children } = props;

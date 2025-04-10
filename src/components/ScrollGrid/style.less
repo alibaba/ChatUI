@@ -1,0 +1,54 @@
+.ScrollGrid {
+  overflow: hidden;
+
+  &[data-wrap='true'] {
+    .ScrollGrid-inner {
+      flex-wrap: wrap;
+    }
+  }
+  &[data-wrap='false'] {
+    .ScrollGrid-scroller {
+      display: flex;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      margin-bottom: -18px;
+      padding-bottom: 18px;
+    }
+    .ScrollGrid-inner {
+      & > div {
+        flex: 0 0 auto;
+      }
+    }
+  }
+}
+
+.ScrollGrid-scroller {
+  .no-scrolling & {
+    -webkit-overflow-scrolling: touch;
+  }
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.ScrollGrid-inner {
+  display: flex;
+  min-width: 100%;
+}
+
+.ScrollGrid-indicator,
+.ScrollGrid-indicatorBar {
+  height: 3px;
+  border-radius: 100px;
+}
+
+.ScrollGrid-indicator {
+  width: 20px;
+  margin: 3px auto 0;
+  background: var(--color-line-1);
+}
+
+.ScrollGrid-indicatorBar {
+  width: 10px;
+  background: var(--brand-1);
+}

@@ -1,8 +1,8 @@
 .Card {
+  --card-radius: var(--radius-md);
   overflow: hidden;
-  border-radius: @card-border-radius;
+  border-radius: var(--card-radius);
   background: @card-bg;
-  box-shadow: @card-box-shadow;
 
   &--xl {
     width: @card-size-xl;
@@ -20,10 +20,14 @@
     width: @card-size-xs;
   }
   &--fluid {
-    width: @card-fluid-width;
+    width: calc(100% - var(--msg-gutter));
     max-width: @card-max-width;
     min-width: @card-min-width;
   }
+}
+
+.Card[data-fluid="order"] {
+  max-width: 360px;
 }
 
 /* CardMedia */
@@ -58,6 +62,87 @@
   }
 }
 
+/* CardHeader */
+.CardHeader {
+  position: relative;
+  padding: @card-padding @card-padding 9px;
+
+  &[data-has-bg="true"] {
+    padding-bottom: calc(9px + var(--card-radius));
+    // box-shadow: inset 0 1px 0 0 #fff;
+    // 用 box-shadow 会残留一条曲线，所以用 margin 来模拟内阴影
+    margin-top: 1Px;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+
+    & + [class^="Card"] {
+      position: relative;
+      margin-top: calc(-1 * var(--card-radius));
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+      // border-radius: @card-border-radius @card-border-radius 0 0;
+      background-color: inherit;
+    }
+  }
+}
+
+.CardHeader-logo {
+  display: block;
+  height: 24px;
+}
+
+.CardHeader-icon {
+  margin: 2px 6px 2px 0;
+  font-size: 20px;
+  height: 20px;
+}
+
+.CardHeader-title {
+  margin: 0;
+  color: var(--color-text-1);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.CardHeader-desc {
+  margin: 2px 0 0;
+  color: var(--color-text-2);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.CardHeader-badge {
+  width: 90px;
+  margin: -12px;
+  background: center right/contain no-repeat;
+}
+
+.CardHeader-slot,
+.CardHeader-badge {
+  margin-left: 9px;
+}
+
+.CardHeader-slot {
+  display: flex;
+
+  .Btn {
+    min-width: auto;
+    padding: 2px 9px;
+    font-size: 12px;
+  }
+  > a {
+    display: flex;
+    align-items: center;
+    color: var(--color-text-2);
+    text-decoration: none;
+    font-size: 14px;
+
+    .Icon {
+      font-size: 16px;
+    }
+  }
+}
+
 /* CardTitle */
 .CardTitle {
   padding: @card-title-padding;
@@ -72,6 +157,7 @@
     font-weight: @card-title-font-weight;
   }
   &-subtitle {
+    margin: 0;
     color: @card-subtitle-color;
     font-size: @card-subtitle-font-size;
   }
@@ -80,10 +166,6 @@
 /* CardContent */
 .CardContent {
   padding: @card-padding;
-
-  .CardTitle + & {
-    padding-top: 0;
-  }
 }
 
 /* CardText */
@@ -91,9 +173,6 @@
   padding: @card-padding;
   color: @card-text-color;
 
-  .CardTitle + & {
-    padding-top: 0;
-  }
   p {
     margin: 0;
   }
@@ -102,14 +181,10 @@
 /* CardActions */
 .CardActions {
   display: flex;
-  padding: @card-padding;
+  padding: @card-padding @card-padding 18px;
 
-  .CardTitle + &,
-  .CardText + & {
-    padding-top: 0;
-  }
   .Btn {
-    flex: 1 1 auto;
+    flex: 1;
     line-height: @card-btn-line-height;
   }
   .Btn + .Btn {
@@ -127,19 +202,13 @@
     border-top: 1px solid @card-btn-border-color;
     border-radius: 0;
     background: @card-column-btn-bg;
-    color: @card-column-btn-color;
+    color: var(--color-text-2);
 
     &:last-child {
-      border-radius: 0 0 @card-border-radius @card-border-radius;
-    }
-    &:hover {
-      background: @card-column-btn-hover-bg;
+      border-radius: 0 0 var(--card-radius) var(--card-radius);
     }
     &:active {
       background: @card-column-btn-active-bg;
-    }
-    &:disabled {
-      color: @card-column-btn-disabled-color;
     }
   }
   .Btn + .Btn {
@@ -147,5 +216,24 @@
   }
   .Btn--primary {
     color: @card-column-btn-primary-color;
+  }
+}
+
+@media (hover: hover) {
+  .CardActions--column {
+    .Btn {
+      &:hover {
+        background: @card-column-btn-hover-bg;
+      }
+    }
+  }
+}
+
+.CardHeader[data-has-bg="false"],
+.CardTitle,
+.CardText,
+.CardContent {
+  & + [class^="Card"] {
+    padding-top: 0;
   }
 }

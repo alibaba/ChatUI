@@ -7,11 +7,6 @@
 
   & > .PullToRefresh {
     flex: 1;
-
-    & > .PullToRefresh-inner {
-      box-sizing: border-box;
-      padding-bottom: 40px;
-    }
   }
   &:focus {
     outline: 0;
@@ -19,5 +14,6 @@
 }
 
 .MessageList {
-  padding: @message-list-padding;
+  padding: var(--gutter);
+  font-size: 15px;
 }

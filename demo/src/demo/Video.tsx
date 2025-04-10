@@ -2,7 +2,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Video } from '../../../src';
-import '../../../src/styles/index.less';
 
 export default () => (
   <DemoPage>

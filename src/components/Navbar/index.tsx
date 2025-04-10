@@ -8,23 +8,35 @@ export type NavbarProps = {
   logo?: string;
   leftContent?: IconButtonProps;
   rightContent?: IconButtonProps[];
+  rightSlot?: React.ReactNode;
+  desc?: React.ReactNode;
+  align?: 'left' | 'center';
 };
 
-export const Navbar: React.FC<NavbarProps> = (props) => {
-  const { className, title, logo, leftContent, rightContent = [] } = props;
+export const Navbar = (props: NavbarProps) => {
+  const { className, title, logo, desc, leftContent, rightContent = [], rightSlot, align } = props;
+
+  const isLeft = align === 'left';
+  const showTitle = isLeft ? true : !logo;
+
   return (
-    <header className={clsx('Navbar', className)}>
+    <header className={clsx('Navbar', { 'Navbar--left': isLeft }, className)}>
       <div className="Navbar-left">{leftContent && <IconButton size="lg" {...leftContent} />}</div>
       <div className="Navbar-main">
-        {logo ? (
-          <img className="Navbar-logo" src={logo} alt={title} />
-        ) : (
-          <h2 className="Navbar-title">{title}</h2>
+        {logo && (
+          <div className="Navbar-brand">
+            <img className="Navbar-logo" src={logo} alt={title} />
+          </div>
         )}
+        <div className="Navbar-inner">
+          {showTitle && <h2 className="Navbar-title">{title}</h2>}
+          <div className="Navbar-desc">{desc}</div>
+        </div>
       </div>
       <div className="Navbar-right">
+        <div className="Navbar-rightSlot">{rightSlot}</div>
         {rightContent.map((item) => (
-          <IconButton size="lg" {...item} key={item.icon} />
+          <IconButton size="lg" key={item.icon} {...item} />
         ))}
       </div>
     </header>

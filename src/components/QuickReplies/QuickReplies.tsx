@@ -10,7 +10,7 @@ export interface QuickRepliesProps {
 }
 
 const QuickReplies = (props: QuickRepliesProps) => {
-  const { items, visible, onClick, onScroll } = props;
+  const { items = [], visible = true, onClick, onScroll } = props;
   const scroller = useRef<ScrollViewHandle>(null);
   const [scrollEvent, setScrollEvent] = useState(!!onScroll);
 
@@ -19,7 +19,7 @@ const QuickReplies = (props: QuickRepliesProps) => {
 
     if (scroller.current) {
       setScrollEvent(false);
-      scroller.current.scrollTo({ x: 0, y: 0 });
+      scroller.current.scrollTo({ x: 0 });
       timer = setTimeout(() => {
         setScrollEvent(true);
       }, 500);
@@ -45,11 +45,6 @@ const QuickReplies = (props: QuickRepliesProps) => {
       )}
     />
   );
-};
-
-QuickReplies.defaultProps = {
-  items: [],
-  visible: true,
 };
 
 export default React.memo(QuickReplies);

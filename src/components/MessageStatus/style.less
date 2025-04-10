@@ -1,10 +1,11 @@
 .MessageStatus {
   align-self: center;
   margin-right: @gutter;
+  font-size: 15Px;
 
   &[data-status='loading'] {
     .Icon {
-      color: var(--gray-4);
+      color: var(--color-text-2);
     }
   }
   &[data-status='fail'] {
@@ -16,7 +17,16 @@
   .Icon {
     display: block;
   }
-  .Message.right .Bubble + & {
-    margin-right: (@gutter - @bubble-right-gutter);
+  .Message[data-type="text"] & {
+    // = calc(12px - var(--rate-width) - 8Px)
+    margin-right: calc(4Px - var(--rate-width));
+  }
+  .Message[data-type="order"] & {
+    // = -(气泡外边距40 - 间距12)
+    // calc(var(--rate-width) + 8Px) - 间距12
+    margin-right: calc(-4Px - var(--rate-width));
+    // = margin-right - 自宽15
+    // = calc(-4Px - var(--rate-width)) - 15Px
+    margin-left: calc(var(--rate-width) - 11Px);
   }
 }

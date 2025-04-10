@@ -4,8 +4,13 @@ export const navConfig = [
     list: [
       { name: '对话容器', code: 'chat' },
       { name: '气泡', code: 'bubble' },
+      { name: '打字气泡', code: 'typing-bubble' },
       { name: '卡片', code: 'card' },
       { name: '文件卡片', code: 'file-card' },
+      { name: '消息状态', code: 'message-status' },
+      { name: '系统消息', code: 'system-message' },
+      { name: '思考中', code: 'think' },
+      { name: '输入中', code: 'typing' },
     ],
   },
   {
@@ -37,10 +42,14 @@ export const navConfig = [
       { name: '分割线', code: 'divider' },
       { name: '空状态', code: 'empty' },
       { name: '列表', code: 'list' },
+      { name: '导航', code: 'navbar' },
       { name: '公告', code: 'notice' },
       { name: '进度条', code: 'progress' },
+      { name: '引用', code: 'quote' },
       { name: '富文本', code: 'rich-text' },
+      { name: '滚动网格', code: 'scroll-grid' },
       { name: '滚动容器', code: 'scroll-view' },
+      { name: '骨架屏', code: 'skeleton' },
       { name: '步骤条', code: 'stepper' },
       { name: '标签页', code: 'tabs' },
       { name: '标签', code: 'tag' },
@@ -55,6 +64,7 @@ export const navConfig = [
     list: [
       { name: '无限滚动', code: 'infinite-scroll' },
       { name: '加载', code: 'Loading' },
+      { name: '确认框', code: 'confirm' },
       { name: '模态框', code: 'modal' },
       { name: '上拉弹窗', code: 'popup' },
       { name: '下拉刷新', code: 'pull-to-refresh' },
@@ -71,6 +81,7 @@ export const navConfig = [
   {
     title: '其它组件',
     list: [
+      { name: '组件加载器', code: 'component-provider' },
       { name: '错误边界', code: 'error-boundary' },
       { name: '传送门', code: 'portal' },
       { name: '视觉上隐藏', code: 'visually-hidden' },

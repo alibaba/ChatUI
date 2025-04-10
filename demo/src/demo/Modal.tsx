@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Modal, Card, List, ListItem } from '../../../src';
-import '../../../src/styles/index.less';
+
+function MainContent() {
+  return (
+    <div>
+      亲，选择保持排队后，请在 10分钟 内返回对话页面进行咨询，否则系统将会自动结束本次通话哦~
+    </div>
+  );
+}
 
 export default () => {
   const [open1, setOpen1] = useState(false);
@@ -9,6 +16,7 @@ export default () => {
   const [open3, setOpen3] = useState(false);
   const [open4, setOpen4] = useState(false);
   const [open5, setOpen5] = useState(false);
+  const [open6, setOpen6] = useState(false);
 
   return (
     <DemoPage>
@@ -47,6 +55,14 @@ export default () => {
               }}
               rightIcon="chevron-right"
             />
+            <ListItem
+              content="带头像"
+              as="button"
+              onClick={() => {
+                setOpen6(true);
+              }}
+              rightIcon="chevron-right"
+            />
           </List>
         </Card>
       </DemoSection>
@@ -57,9 +73,7 @@ export default () => {
           setOpen1(false);
         }}
       >
-        <div style={{ padding: '0px 15px' }}>
-          <p>内容详情内容详情内容详情内容详情内容详情内容详情</p>
-        </div>
+        <MainContent />
       </Modal>
       <Modal
         active={open2}
@@ -69,9 +83,7 @@ export default () => {
         }}
         backdrop="static"
       >
-        <div style={{ padding: '0px 15px' }}>
-          <p>内容详情内容详情内容详情内容详情内容详情内容详情</p>
-        </div>
+        <MainContent />
       </Modal>
       <Modal
         active={open3}
@@ -81,9 +93,7 @@ export default () => {
         }}
         showClose={false}
       >
-        <div style={{ padding: '0px 15px' }}>
-          <p>内容详情内容详情内容详情内容详情内容详情内容详情</p>
-        </div>
+        <MainContent />
       </Modal>
       <Modal
         active={open4}
@@ -91,24 +101,33 @@ export default () => {
         onClose={() => {
           setOpen4(false);
         }}
-        actions={[{ label: '强按钮', color: 'primary' }, { label: '弱按钮' }]}
+        actions={[{ label: '确认', color: 'primary' }, { label: '取消' }]}
       >
-        <div style={{ padding: '0px 15px' }}>
-          <p>内容详情内容详情内容详情内容详情内容详情内容详情</p>
-        </div>
+        <MainContent />
       </Modal>
       <Modal
         active={open5}
-        title="标题"
+        title="需要保持排队吗?"
         onClose={() => {
           setOpen5(false);
         }}
-        actions={[{ label: '强按钮', color: 'primary' }, { label: '弱按钮' }]}
+        actions={[{ label: '结束排队' }, { label: '保持排队', color: 'primary' }]}
         vertical={false}
       >
-        <div style={{ padding: '0px 15px' }}>
-          <p>内容详情内容详情内容详情内容详情内容详情内容详情</p>
-        </div>
+        <MainContent />
+      </Modal>
+      <Modal
+        active={open6}
+        title="是否继续接入客户经理？"
+        onClose={() => {
+          setOpen6(false);
+        }}
+        actions={[{ label: '暂不需要' }, { label: '接入', color: 'primary' }]}
+        vertical={false}
+        showClose={false}
+        avatar="https://gw.alicdn.com/imgextra/i3/O1CN015amSBN287NjjndS06_!!6000000007885-2-tps-99-98.png"
+      >
+        <MainContent />
       </Modal>
     </DemoPage>
   );

@@ -6,7 +6,7 @@ export type CardSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export interface CardProps {
   className?: string;
   size?: CardSize;
-  fluid?: boolean;
+  fluid?: boolean | 'order';
   children?: React.ReactNode;
 }
 
@@ -16,6 +16,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>((props, ref) => 
   return (
     <div
       className={clsx('Card', size && `Card--${size}`, { 'Card--fluid': fluid }, className)}
+      data-fluid={fluid}
       {...other}
       ref={ref}
     >

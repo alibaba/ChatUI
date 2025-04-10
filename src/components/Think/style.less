@@ -1,0 +1,68 @@
+.Think {
+  &[data-collapsed='true'] {
+    .Think-toggle .Icon {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+.Think-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 7px 14px;
+  margin-bottom: 12px;
+  background: var(--color-fill-2);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  .Icon {
+    transition: transform 0.2s ease-in-out;
+    font-size: var(--font-size-sm);
+  }
+}
+
+.Think-content {
+  margin: 12px 0;
+  padding: 4px 0 4px 8px;
+  border-left: 2px solid var(--color-line-1);
+  color: var(--color-text-3);
+  font-size: var(--font-size-sm);
+
+  p {
+    margin: 0;
+  }
+}
+
+.ReactMarkdown {
+  font-size: 16px;
+  font-weight: 400;
+  min-height: 24px;
+  user-select: text;
+
+  p {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  ol,
+  ul {
+    list-style: revert;
+    margin: revert;
+    padding: revert;
+  }
+  blockquote {
+    border-left: 2px solid #e5e5e5;
+    color: #8b8b8b;
+    font-size: 14px;
+    margin: 1rem 0;
+    padding: 0.25rem 0 0.25rem 0.5rem;
+
+    p {
+      font-size: 14px;
+    }
+  }
+}

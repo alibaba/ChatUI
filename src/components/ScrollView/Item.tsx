@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 
-export type ScrollViewEffect = 'slide';
+export type ScrollViewEffect = 'slide' | 'fade' | '';
 
 export type ScrollViewItemProps = {
   item: any;
@@ -41,6 +41,7 @@ export const Item: React.FC<ScrollViewItemProps> = (props) => {
     <div
       className={clsx('ScrollView-item', {
         'slide-in-right-item': effect === 'slide',
+        'A-fadeIn': effect === 'fade',
       })}
       ref={itemRef}
     >

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useImperativeHandle, useCallback } 
 import clsx from 'clsx';
 import { Flex } from '../Flex';
 import { Icon } from '../Icon';
-import { useLocale } from '../LocaleProvider';
+import { useLocale } from '../ConfigProvider';
 import canUse from '../../utils/canUse';
 
 const canPassive = canUse('passiveListener');

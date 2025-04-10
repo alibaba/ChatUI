@@ -1,23 +1,23 @@
+.ChatApp[data-elder-mode='true'] {
+  --rate-width: 38Px;
+}
+
 .RateActions {
   position: relative;
   z-index: @zindex-rate-actions;
   align-self: flex-end;
-  width: 32px;
-  margin: 0 8px;
+  width: var(--rate-width);
+  margin-left: var(--msg-avatar-gap);
 }
 
 .RateBtn {
-  padding: 4px;
-  border-radius: 50%;
+  padding: 6Px;
+  border-radius: var(--radius-md);
   background: @rate-btn-bg;
-  box-shadow: @rate-btn-box-shadow;
-  font-size: @icon-button-lg-size;
+  font-size: calc(var(--rate-width) - 12Px);
 
   & + .RateBtn {
-    margin-top: 9px;
-  }
-  &.active {
-    box-shadow: none;
+    margin-top: 9Px;
   }
   &[data-type='up'] {
     &:hover,

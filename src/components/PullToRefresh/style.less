@@ -1,14 +1,16 @@
 .PullToRefresh {
   height: 100%;
   overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
 
+  .no-scrolling & {
+    -webkit-overflow-scrolling: touch;
+  }
   &-fallback {
     padding-top: var(--gutter);
     text-align: center;
   }
   &-loadMore {
-    font-size: @font-size-sm;
+    font-size: 14Px;
   }
 }
 
@@ -18,16 +20,16 @@
 }
 
 .PullToRefresh-indicator {
-  height: 25px;
-  margin-top: -25px;
+  height: 30px;
+  margin-top: -30px;
   color: grey;
   text-align: center;
-  line-height: 25px;
+  line-height: 30px;
 }
 
 .PullToRefresh-spinner {
-  color: var(--brand-2);
-  font-size: @icon-size-lg;
+  color: var(--color-text-3);
+  font-size: 27px;
 }
 
 .PullToRefresh-transition {

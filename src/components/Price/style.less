@@ -1,12 +1,58 @@
+@font-face {
+  font-family: "AlibabaSans";
+  src: url(https://gw.alipayobjects.com/as/g/antui/antui-static/1.0.5/fonts/AlibabaSans102Ver2-Rg.woff) format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AlibabaSans";
+  src: url(https://gw.alipayobjects.com/as/g/antui/antui-static/1.0.5/fonts/AlibabaSans102Ver2-Md.woff) format("woff");
+  font-weight: 500;
+  font-display: swap;
+}
+
 .Price {
   display: inline;
   font-size: @price-font-size;
+  font-weight: 500;
+  font-family: 'AlibabaSans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
 
   &--original {
-    color: var(--gray-3);
+    color: var(--color-text-3);
     text-decoration: line-through;
   }
-  &:not(&--original) &-integer {
-    font-size: @price-integer-font-size;
+  &[data-size] {
+    font-weight: 700;
+
+    .Price-currency,
+    .Price-decimal,
+    .Price-fraction {
+      font-size: 0.6em; // 不支持 max 的兜底处理
+    }
+    .Price-currency {
+      margin-right: 2px;
+      vertical-align: 1px;
+      font-size: max(0.6em, 11px);
+    }
+    .Price-decimal,
+    .Price-fraction {
+      font-size: max(0.6em, 14px);
+    }
   }
+  &[data-size="xl"] {
+    font-size: 30px;
+  }
+  &[data-size="lg"] {
+    font-size: 24px;
+  }
+  &[data-size="md"] {
+    font-size: 18px;
+  }
+  &[data-size="sm"] {
+    font-size: 14px;
+  }
+}
+
+.Price-currency {
+  font-size: 0.8em;
 }

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Popup, Card, List, ListItem } from '../../../src';
-import '../../../src/styles/index.less';
 
 export default () => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const [open4, setOpen4] = useState(false);
+  const [open5, setOpen5] = useState(false);
+  const [open6, setOpen6] = useState(false);
 
   return (
     <DemoPage>
@@ -46,12 +47,29 @@ export default () => {
               }}
               rightIcon="chevron-right"
             />
+            <ListItem
+              content="带按钮 80 高"
+              as="button"
+              onClick={() => {
+                setOpen5(true);
+              }}
+              rightIcon="chevron-right"
+            />
+            <ListItem
+              content="灰色背景"
+              as="button"
+              onClick={() => {
+                setOpen6(true);
+              }}
+              rightIcon="chevron-right"
+            />
           </List>
         </Card>
       </DemoSection>
       <Popup
         active={open1}
         title="标题"
+        subTitle="副标题"
         onClose={() => {
           setOpen1(false);
         }}
@@ -91,6 +109,32 @@ export default () => {
           setOpen4(false);
         }}
         actions={[{ label: '主要按钮', color: 'primary' }, { label: '次要按钮' }]}
+      >
+        <div style={{ padding: '15px' }}>
+          <p>内容详情内容详情内容详情内容详情内容详情内容详情</p>
+        </div>
+      </Popup>
+      <Popup
+        active={open5}
+        title="标题"
+        onClose={() => {
+          setOpen5(false);
+        }}
+        height={80}
+        actions={[{ label: '主要按钮', color: 'primary' }, { label: '次要按钮' }]}
+        vertical={false}
+      >
+        <div style={{ padding: '15px' }}>
+          <p>内容详情内容详情内容详情内容详情内容详情内容详情</p>
+        </div>
+      </Popup>
+      <Popup
+        active={open6}
+        title="标题"
+        onClose={() => {
+          setOpen6(false);
+        }}
+        bgColor="gray"
       >
         <div style={{ padding: '15px' }}>
           <p>内容详情内容详情内容详情内容详情内容详情内容详情</p>

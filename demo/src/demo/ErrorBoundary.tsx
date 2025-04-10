@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { ErrorBoundary, FallbackProps } from '../../../src';
-import '../../../src/styles/index.less';
 
 function BuggyCounter() {
   const [counter, setCounter] = useState(0);

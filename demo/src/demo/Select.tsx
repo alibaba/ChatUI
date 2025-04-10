@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Select } from '../../../src';
-import '../../../src/styles/index.less';
 
 export default () => {
   const [value1, setValue1] = useState('');

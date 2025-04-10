@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { Icon } from '../Icon';
 
-interface ToastProps {
+export interface ToastProps {
   content: React.ReactNode;
-  type: string;
-  duration: number;
+  type?: 'success' | 'error' | 'loading';
+  duration?: number;
   onUnmount?: () => void;
 }
 
-function renderIcon(type: string) {
+function renderIcon(type: ToastProps['type']) {
   switch (type) {
     case 'success':
       return <Icon type="check-circle" />;
     case 'error':
-      return <Icon type="close-circle" />;
+      return <Icon type="warning-circle" />;
     case 'loading':
       return <Icon type="spinner" spin />;
     default:
@@ -23,7 +23,7 @@ function renderIcon(type: string) {
 }
 
 export const Toast: React.FC<ToastProps> = (props) => {
-  const { content, type, duration, onUnmount } = props;
+  const { content, type, duration = 2000, onUnmount } = props;
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -42,12 +42,6 @@ export const Toast: React.FC<ToastProps> = (props) => {
     }
   }, [duration, onUnmount]);
 
-  function handleClick() {
-    if (onUnmount) {
-      onUnmount();
-    }
-  }
-
   return (
     <div
       className={clsx('Toast', { show })}
@@ -56,7 +50,7 @@ export const Toast: React.FC<ToastProps> = (props) => {
       aria-live="assertive"
       aria-atomic="true"
     >
-      <div className="Toast-content" role="presentation" onClick={handleClick}>
+      <div className="Toast-content" role="presentation">
         {renderIcon(type)}
         <p className="Toast-message">{content}</p>
       </div>

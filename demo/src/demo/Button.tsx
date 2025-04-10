@@ -1,7 +1,6 @@
 import React from 'react';
 import { DemoPage, DemoSection } from '../components';
 import { Button, IconButton } from '../../../src';
-import '../../../src/styles/index.less';
 
 export default () => (
   <DemoPage>
@@ -29,23 +28,25 @@ export default () => (
     </DemoSection>
     <DemoSection title="按钮尺寸">
       <div className="demo-row">
-        <Button color="primary" size="lg">
-          大号按钮
-        </Button>
-        <Button color="primary">普通按钮</Button>
         <Button color="primary" size="sm">
           小号按钮
         </Button>
+        <Button color="primary">普通按钮</Button>
+        <Button color="primary" size="lg">
+          大号按钮
+        </Button>
       </div>
       <div>
-        <Button size="lg">大号按钮</Button>
-        <Button>普通按钮</Button>
         <Button size="sm">小号按钮</Button>
+        <Button>普通按钮</Button>
+        <Button size="lg">大号按钮</Button>
       </div>
     </DemoSection>
     <DemoSection title="按钮变体">
-      <Button variant="text">文本按钮</Button>
-      <Button variant="float">1条新消息</Button>
+      <Button variant="outline" color="primary">
+        outline variant
+      </Button>
+      <Button variant="text">text variant</Button>
     </DemoSection>
     <DemoSection title="图标按钮">
       <IconButton icon="image" />

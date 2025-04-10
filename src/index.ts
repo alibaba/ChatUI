@@ -3,12 +3,19 @@ import 'intersection-observer';
 export { default as clsx } from 'clsx';
 export { default as DOMPurify } from 'dompurify';
 
+export { default as canUse } from './utils/canUse';
 export { importScript } from './utils/importScript';
 export { lazyComponent } from './utils/lazyComponent';
 export { mountComponent } from './utils/mountComponent';
 
+export { default as useClickOutside } from './hooks/useClickOutside';
+export { default as useForwardRef } from './hooks/useForwardRef';
+export { useLatest } from './hooks/useLatest';
 export { default as useMessages } from './hooks/useMessages';
+export { default as useMount } from './hooks/useMount';
 export { default as useQuickReplies } from './hooks/useQuickReplies';
+export { useTitleTyping } from './hooks/useTitleTyping';
+export { useTypewriter } from './hooks/useTypewriter';
 
 export { ComponentsProvider, useComponents } from './components/ComponentsProvider';
 export type { ComponentsProviderProps, ComponentsMap } from './components/ComponentsProvider';
@@ -24,11 +31,20 @@ export { Bubble } from './components/Bubble';
 export type { BubbleProps } from './components/Bubble';
 export { Button } from './components/Button';
 export type { ButtonProps } from './components/Button';
-export { Card, CardMedia, CardTitle, CardContent, CardText, CardActions } from './components/Card';
+export {
+  Card,
+  CardMedia,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardText,
+  CardActions,
+} from './components/Card';
 export type {
   CardProps,
   CardSize,
   CardMediaProps,
+  CardHeaderProps,
   CardTitleProps,
   CardContentProps,
   CardTextProps,
@@ -64,7 +80,14 @@ export { List, ListItem } from './components/List';
 export type { ListProps, ListItemProps } from './components/List';
 export { Loading } from './components/Loading';
 export type { LoadingProps } from './components/Loading';
-export { LocaleProvider, LocaleContext, useLocale } from './components/LocaleProvider';
+export {
+  ConfigProvider,
+  ConfigProvider as LocaleProvider,
+  ConfigContext,
+  ConfigContext as LocaleContext,
+  useConfig,
+  useLocale,
+} from './components/ConfigProvider';
 export { MediaObject } from './components/MediaObject';
 export type { MediaObjectProps } from './components/MediaObject';
 export { Message, SystemMessage } from './components/Message';
@@ -91,6 +114,8 @@ export type {
   QuickReplyProps,
   QuickReplyItemProps,
 } from './components/QuickReplies';
+export { Quote } from './components/Quote';
+export type { QuoteProps } from './components/Quote';
 export { Radio, RadioGroup } from './components/Radio';
 export type { RadioProps, RadioGroupProps, RadioValue } from './components/Radio';
 export { RateActions } from './components/RateActions';
@@ -98,12 +123,16 @@ export type { RateActionsProps } from './components/RateActions';
 export type { RecorderHandle } from './components/Recorder';
 export { RichText } from './components/RichText';
 export type { RichTextProps } from './components/RichText';
+export { ScrollGrid } from './components/ScrollGrid';
+export type { ScrollGridProps } from './components/ScrollGrid';
 export { ScrollView } from './components/ScrollView';
 export type { ScrollViewProps } from './components/ScrollView';
 export { Search } from './components/Search';
 export type { SearchProps } from './components/Search';
 export { Select } from './components/Select';
 export type { SelectProps } from './components/Select';
+export { Skeleton } from './components/Skeleton';
+export type { SkeletonProps } from './components/Skeleton';
 export { Stepper, Step } from './components/Stepper';
 export type { StepperProps, StepProps } from './components/Stepper';
 export { Tabs, Tab } from './components/Tabs';
@@ -112,12 +141,18 @@ export { Tag } from './components/Tag';
 export type { TagProps } from './components/Tag';
 export { Text } from './components/Text';
 export type { TextProps } from './components/Text';
+export { Think } from './components/Think';
+export type { ThinkProps } from './components/Think';
 export { Time } from './components/Time';
 export type { TimeProps } from './components/Time';
-export { toast } from './components/Toast';
+export { Toast, toast } from './components/Toast';
+export type { ToastProps } from './components/Toast';
 export { Toolbar } from './components/Toolbar';
 export type { ToolbarProps, ToolbarItemProps } from './components/Toolbar';
 export { Tree, TreeNode } from './components/Tree';
+export { Typing } from './components/Typing';
+export { TypingBubble } from './components/TypingBubble';
+export type { TypingBubbleProps } from './components/TypingBubble';
 export type { TreeProps, TreeNodeProps } from './components/Tree';
 export { Video } from './components/Video';
 export type { VideoProps } from './components/Video';

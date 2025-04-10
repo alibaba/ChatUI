@@ -2,26 +2,51 @@
   display: flex;
   align-items: flex-end;
   padding: @composer-padding;
+  --action-size: @composer-input-min-height;
+  --action-font-size: 20Px;
 
   > div + div {
-    margin-left: var(--gutter);
+    margin-left: 9Px;
+  }
+  &[data-has-value="false"] .Composer-actions[data-action="send"],
+  &[data-has-value="true"] .Composer-actions[data-action-icon] {
+    width: 0;
+    margin: 0;
+    opacity: 0;
+  }
+  &[data-has-value="true"] {
+    .Composer-inputWrap {
+      margin-left: 0;
+    }
+    .Composer-sendBtn {
+      animation: 0.3s sendIn;
+    }
   }
 }
 
 .Composer-actions {
   display: flex;
   align-items: center;
-  height: @composer-input-min-height;
+  overflow: hidden;
+  width: var(--action-size);
+  height: var(--action-size);
+  transition: width 0.1s;
 
+  &[data-action='send'] {
+    width: var(--send-width, 63Px);
+  }
   .IconBtn {
-    margin: 0 -@icon-button-lg-padding;
-    font-size: @composer-icon-size;
+    padding: 8Px;
+    background: var(--color-fill-1);
+    font-size: var(--action-font-size);
+    color: var(--color-text-1);
   }
 }
 
 .Composer-toggleBtn {
-  transition: transform 0.2s;
-
+  .Icon {
+    transition: transform 0.3s;
+  }
   &.active .Icon {
     transform: rotate(45deg);
   }
@@ -33,13 +58,46 @@
 }
 
 .Composer-input {
-  overflow: hidden;
+  overflow-x: hidden;
   max-height: @composer-input-max-height;
   padding: @composer-input-padding;
-  border: @composer-input-border;
-  border-radius: @composer-input-border-radius;
-  background: @composer-input-bg;
-  word-break: break-all;
+  border: 0;
+  border-radius: var(--radius-md);
+  // background: @composer-input-bg;
+  line-height: 20Px;
+  font-size: 15Px;
   caret-color: @composer-input-caret-color;
   transition: @composer-input-transition;
+}
+
+.Composer-sendBtn {
+  flex: 0 0 auto;
+  min-width: 0;
+  padding-left: 16Px;
+  padding-right: 16Px;
+}
+
+@keyframes sendIn {
+  0% {
+    transform: scale(0.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.ChatApp[data-elder-mode="true"] {
+  .Composer {
+    --action-size: 50Px;
+    --action-font-size: 34Px;
+  }
+  .Composer-input {
+    padding: 9Px 12Px;
+    font-size: 21Px;
+    line-height: 32Px;
+  }
+  .Composer-sendBtn {
+    padding: 4Px 13Px;
+    font-size: 17Px;
+  }
 }

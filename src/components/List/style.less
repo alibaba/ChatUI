@@ -5,6 +5,21 @@
     border: @list-border-width solid @list-border-color;
     border-radius: @list-border-radius;
   }
+  &[data-variant="buttons"] {
+    .ListItem {
+      margin-top: 9px;
+      padding: 5px 12px;
+      border: 1px solid var(--color-line-2);
+      border-radius: var(--radius-md);
+      color: var(--color-text-2);
+      font-size: 14px;
+      line-height: 1.5;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
 }
 
 .ListItem {
@@ -15,7 +30,6 @@
   border: 0;
   color: @list-item-color;
   font-size: @list-item-font-size;
-  font-weight: @list-item-font-weight;
   line-height: @list-item-line-height;
   text-decoration: none;
   transition: 0.3s;
@@ -40,13 +54,19 @@ button.ListItem {
 
 a.ListItem,
 button.ListItem {
-  &:hover {
-    background: @list-item-hover-bg;
-    background-clip: padding-box;
-    cursor: pointer;
-  }
   &:active {
     background: @list-item-active-bg;
+  }
+}
+
+@media (hover: hover) {
+  a.ListItem,
+  button.ListItem {
+    &:hover {
+      background: @list-item-hover-bg;
+      background-clip: padding-box;
+      cursor: pointer;
+    }
   }
 }
 

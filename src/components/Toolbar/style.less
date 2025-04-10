@@ -1,11 +1,12 @@
 .Toolbar {
-  padding: 10px 12px 25px;
+  padding: var(--gutter);
+  padding-top: 0;
 }
 
 .Toolbar-item {
   display: inline-block;
   width: 25%;
-  margin-top: 20px;
+  margin-top: var(--gutter);
   text-align: center;
 }
 
@@ -13,31 +14,84 @@
   position: relative;
   display: inline-block;
   overflow: hidden;
-  width: 72px;
-  padding: 6px;
+  // width: 76Px;
+  max-width: 100%;
+  min-width: 0;
+  padding: 6Px;
   border: 0;
+  border-radius: 0;
   background: transparent;
-  color: var(--gray-1);
+  color: var(--color-text-3);
+  font-weight: 400;
   vertical-align: top;
+
+  &:hover {
+    background: transparent;
+  }
+  &:active {
+    .Toolbar-btnIcon {
+      background: @btn-hover-bg;
+    }
+  }
 }
+
+@media (hover: hover) {
+  .Toolbar-btn {
+    &:hover {
+      .Toolbar-btnIcon {
+        background: @btn-hover-bg;
+      }
+    }
+  }
+}
+
+@toolbar-icon-size: 30Px;
 
 .Toolbar-btnIcon {
   display: inline-block;
+  padding: 12Px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-1);
+  transition: 0.3s;
 
   .Icon {
-    font-size: 40px;
-    transition: 0.3s;
+    font-size: @toolbar-icon-size;
+    vertical-align: top;
   }
 }
 
 .Toolbar-img {
-  width: 40px;
-  height: 40px;
+  width: @toolbar-icon-size;
+  height: @toolbar-icon-size;
+  vertical-align: top;
 }
 
 .Toolbar-btnText {
   display: block;
-  margin-top: 12px;
-  font-size: @font-size-xs;
-  transition: 0.3s;
+  margin-top: 8Px;
+  font-size: 14Px;
+  line-height: 1.1;
+  white-space: initial;
+  word-wrap: break-word;
+}
+
+.ChatApp[data-elder-mode='true'] {
+  .Toolbar-btnIcon {
+    padding: 16Px;
+  }
+}
+
+@media (min-width: 350px) {
+  .ChatApp[data-elder-mode='true'] {
+    // .Toolbar-btn {
+    //   width: 86Px;
+    // }
+    .Toolbar-btnIcon {
+      padding: 19Px;
+    }
+    .Toolbar-btnIcon .Icon {
+      font-size: 36Px;
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from '../Modal';
 import { Flex } from '../Flex';
-import { useLocale } from '../LocaleProvider';
+import { useLocale } from '../ConfigProvider';
 
 export type SendConfirmProps = {
   file: Blob;

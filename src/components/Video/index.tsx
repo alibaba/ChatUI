@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useState, useRef } from 'react';
 import clsx from 'clsx';
+import { Icon } from '../Icon';
+import { formatTime } from '../../utils/formatTime';
 
 export type VideoProps = React.VideoHTMLAttributes<HTMLVideoElement> & {
   className?: string;
@@ -66,7 +68,7 @@ export const Video: React.FC<VideoProps> = (props) => {
       style={style}
     >
       {hasCover && <img className="Video-cover" src={cover} onLoad={onCoverLoad} alt="" />}
-      {hasDuration && <span className="Video-duration">{duration}</span>}
+      {hasDuration && <span className="Video-duration">{formatTime(+duration)}</span>}
       <video
         className="Video-video"
         src={src}
@@ -82,7 +84,7 @@ export const Video: React.FC<VideoProps> = (props) => {
       </video>
       {hasCover && (
         <button className={clsx('Video-playBtn', { paused })} type="button" onClick={handleClick}>
-          <span className="Video-playIcon" />
+          <Icon className="Video-playIcon" type="play-fill" />
         </button>
       )}
     </div>

@@ -2,6 +2,304 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/alibaba/ChatUI/compare/v3.0.0-beta.8...v3.0.0) (2025-04-10)
+
+
+### Features
+
+* sync 3.2.0 ([f5cf17a](https://github.com/alibaba/ChatUI/commit/f5cf17a5bfd92da66d2d50bce8a1f835abe7d2ce))
+
+## [3.0.0-beta.8](https://github.com/alibaba/ChatUI/compare/v3.0.0-beta.7...v3.0.0-beta.8) (2024-11-14)
+
+
+### Features
+
+* sync 3.1.10 ([13b3315](https://github.com/alibaba/ChatUI/commit/13b33158c01125b40de5c4f30f80b1282250a102))
+
+## [3.0.0-beta.7](https://github.com/alibaba/ChatUI/compare/v3.0.0-beta.6...v3.0.0-beta.7) (2024-09-22)
+
+
+### Features
+
+* 新增 ScrollGrid ([2e75c7a](https://github.com/alibaba/ChatUI/commit/2e75c7a0edf7a6b95f8651adaf771f578f10a68e))
+
+## [3.0.0-beta.6](https://github.com/alibaba/ChatUI/compare/v3.0.0-beta.5...v3.0.0-beta.6) (2024-09-19)
+
+
+### Features
+
+* sync 3.1.7 ([38fce27](https://github.com/alibaba/ChatUI/commit/38fce2749c8e225392ca4f929f2b7cc3ba377a7e))
+
+## [3.0.0-beta.5](https://github.com/alibaba/ChatUI/compare/v3.0.0-beta.4...v3.0.0-beta.5) (2024-09-11)
+
+
+### Features
+
+* sync 3.1.6 ([31a9d7c](https://github.com/alibaba/ChatUI/commit/31a9d7cd506ae78926d3d4406cfcdfe8b03dbfe9))
+
+## [3.0.0-beta.4](https://github.com/alibaba/ChatUI/compare/v3.0.0-beta.3...v3.0.0-beta.4) (2024-08-28)
+
+
+### Features
+
+* add Quote ([374a253](https://github.com/alibaba/ChatUI/commit/374a2533561c656cc9f4e0fe7850eef872f516e7))
+
+## [3.0.0-beta.3](https://github.com/alibaba/ChatUI/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2024-08-15)
+
+
+### Features
+
+* sync 3.1.4 ([83c2719](https://github.com/alibaba/ChatUI/commit/83c2719bc9e68e294b72a44758562a4ad0692583))
+
+## [3.0.0-beta.2](https://github.com/alibaba/ChatUI/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2024-08-06)
+
+
+### Features
+
+* sync 3.1.2 ([1e89d1e](https://github.com/alibaba/ChatUI/commit/1e89d1e5164071a2010cd380a38ca127c8c44b1f))
+
+## [3.0.0-beta.1](https://github.com/alibaba/ChatUI/compare/v2.4.8-beta.0...v3.0.0-beta.1) (2024-06-11)
+
+
+### Features
+
+* sync 2.6.1 ([d25234b](https://github.com/alibaba/ChatUI/commit/d25234bc42db5541f970bd42f4700ccbd3876eab))
+* sync 3.0.11 ([2ce6fdc](https://github.com/alibaba/ChatUI/commit/2ce6fdc5acff74043613e213fb4e4a4663c3a28b))
+* sync 3.0.5 ([af5524f](https://github.com/alibaba/ChatUI/commit/af5524fc60f73a153d68eeab12ff89bbd19a84d5))
+
+
+### Bug Fixes
+
+* miss key when use img in rightContent ([#108](https://github.com/alibaba/ChatUI/issues/108)) ([1a58b0b](https://github.com/alibaba/ChatUI/commit/1a58b0bbb3c0a1ccf684aa48612982016817ac65))
+
+### [2.4.8-beta.0](https://github.com/alibaba/ChatUI/compare/v2.4.2...v2.4.8-beta.0) (2022-12-13)
+
+
+### Features
+
+* sync 2.4.8 ([631ce1e](https://github.com/alibaba/ChatUI/commit/631ce1eaa0621fb1a4bc768ad620e84d8a863ad8))
+
+### [2.4.2](https://github.com/alibaba/ChatUI/compare/v2.3.1...v2.4.2) (2022-09-01)
+
+
+### Features
+
+* sync 2.4.2 ([477f605](https://github.com/alibaba/ChatUI/commit/477f605b34a588511ff745b46b2bbeea5277b8b3))
+
+### [2.3.1](https://github.com/alibaba/ChatUI/compare/v2.3.0...v2.3.1) (2022-07-20)
+
+
+### Bug Fixes
+
+* [MessageContainer] scrollToEnd when focus ([320b2ec](https://github.com/alibaba/ChatUI/commit/320b2ec04ccfcf41c58406e1b60ca6532f919561))
+
+## [2.3.0](https://github.com/alibaba/ChatUI/compare/v2.2.2...v2.3.0) (2022-07-19)
+
+
+### Features
+
+* [Modal] support `btnVariant` ([0d86cde](https://github.com/alibaba/ChatUI/commit/0d86cde80cd49b4568aa807806d622d164d8cc47))
+
+### [2.2.2](https://github.com/alibaba/ChatUI/compare/v2.2.1...v2.2.2) (2022-07-19)
+
+
+### Bug Fixes
+
+* [QuickReplies] update styles ([5c622b1](https://github.com/alibaba/ChatUI/commit/5c622b1a478129d5b08537953216634622ee3bfa))
+* [Search] fix type ([794a482](https://github.com/alibaba/ChatUI/commit/794a482040878b678470f4936001b34b1508e206))
+* [SystemMessage] fix padding ([1abbbf3](https://github.com/alibaba/ChatUI/commit/1abbbf30841a757111db89543e53801ead83f2b2))
+* [Typing] remove useless style ([062cf95](https://github.com/alibaba/ChatUI/commit/062cf9514c3a4da002ca914f494381333e706adf))
+* update brand-3 ([0fbeb8e](https://github.com/alibaba/ChatUI/commit/0fbeb8e3e5040d0bb9eed7f38a835573f53b414b))
+
+### [2.2.1](https://github.com/alibaba/ChatUI/compare/v2.2.0...v2.2.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* [Button] fix hover ([56aaaae](https://github.com/alibaba/ChatUI/commit/56aaaaecec667eb2bca9e4a2e2051d8f3bcb5fa1))
+* [css] update `--red`'s value ([1ead654](https://github.com/alibaba/ChatUI/commit/1ead654a9063a0023e95cf8a373aa9bc20035997))
+* [Toast] fix icon ([e23f952](https://github.com/alibaba/ChatUI/commit/e23f9521211a185037eb43059ed6e4da0c881271))
+
+## [2.2.0](https://github.com/alibaba/ChatUI/compare/v2.1.3...v2.2.0) (2022-07-06)
+
+
+### Features
+
+* [Message] support `user.url` ([069664f](https://github.com/alibaba/ChatUI/commit/069664f3ff5c7ae5f937cfd377341f767eed2535))
+* [Stepper] support `inverted` ([29eacf4](https://github.com/alibaba/ChatUI/commit/29eacf4b7f172fa11dca7e3db6c57cc3bd0142a5))
+
+
+### Bug Fixes
+
+* [Message] use circle avatar ([e397592](https://github.com/alibaba/ChatUI/commit/e3975929a2876be6252408e9cbf8d2b606c7c009))
+* [Typing] fix color ([d49a0cf](https://github.com/alibaba/ChatUI/commit/d49a0cf832ba64d542d16612e37205fc546be191))
+
+### [2.1.3](https://github.com/alibaba/ChatUI/compare/v2.1.2...v2.1.3) (2022-06-29)
+
+
+### Bug Fixes
+
+* [MessageContainer] `scrollToEnd` support `force` ([ea8566b](https://github.com/alibaba/ChatUI/commit/ea8566be1285d9ceb5b9969d3e1bbc2a34190fb9))
+
+### [2.1.2](https://github.com/alibaba/ChatUI/compare/v2.1.1...v2.1.2) (2022-06-28)
+
+
+### Bug Fixes
+
+* [BackBottom] ([5177e30](https://github.com/alibaba/ChatUI/commit/5177e308fd4c99600042abfe3dc1a6d2fbec1e35))
+
+### [2.1.1](https://github.com/alibaba/ChatUI/compare/v2.1.0...v2.1.1) (2022-06-27)
+
+
+### Bug Fixes
+
+* [MessageContainer] fix showBackBottom ([2afb8e9](https://github.com/alibaba/ChatUI/commit/2afb8e95a3d5f74d18aaec770c7236c621ce296f))
+
+## [2.1.0](https://github.com/alibaba/ChatUI/compare/v2.0.0...v2.1.0) (2022-06-27)
+
+
+### Features
+
+* [BackBottom] ([28810a9](https://github.com/alibaba/ChatUI/commit/28810a9e375be708681be6bf8687c54525578cf5))
+
+
+### Bug Fixes
+
+* [Radio] fix styles ([b71d4d3](https://github.com/alibaba/ChatUI/commit/b71d4d37d78c10c92d16944fdd608d74f92ed065))
+* [Toolbar] fix hover ([a6a97e7](https://github.com/alibaba/ChatUI/commit/a6a97e7a92cb01f42ba9fe7301765dcdedd3c0dd))
+
+### [1.4.1](https://github.com/alibaba/ChatUI/compare/v1.4.0...v1.4.1) (2022-04-22)
+
+
+### Bug Fixes
+
+* [InfiniteScroll] fix handleOffset ([3ec9b83](https://github.com/alibaba/ChatUI/commit/3ec9b831130803f7f5916d5aa1cad9032096066a))
+
+## [1.4.0](https://github.com/alibaba/ChatUI/compare/v2.0.0-beta.0...v1.4.0) (2022-04-19)
+
+
+### Bug Fixes
+
+* [InfiniteScroll] forwardRef ([5e3e1cc](https://github.com/alibaba/ChatUI/commit/5e3e1ccb054913b099d40d17f5cfd518f7f72cd1))
+
+## [2.0.0](https://github.com/alibaba/ChatUI/compare/v2.0.0-beta.2...v2.0.0) (2022-06-20)
+
+
+### Features
+
+* [Search] support `showSearch` ([4c9509b](https://github.com/alibaba/ChatUI/commit/4c9509ba8e78b2210ff27b596cd2f66cead22cd7))
+
+
+### Bug Fixes
+
+* [Composer] fix send button's padding ([8ffbe2e](https://github.com/alibaba/ChatUI/commit/8ffbe2edc4804efa271736f42f58b30232addf9a))
+* [Divider] fix color ([ed846e8](https://github.com/alibaba/ChatUI/commit/ed846e8e56f490b5cebcd73670cc99416db4049d))
+* [Video] fix display ([8e3ffb8](https://github.com/alibaba/ChatUI/commit/8e3ffb891c9241a2793c9e8b893664522829b04a))
+* fix hover ([031ada1](https://github.com/alibaba/ChatUI/commit/031ada10c12fcb8ac59d09418a0ab16c973b1089))
+
+## [2.0.0-beta.2](https://github.com/alibaba/ChatUI/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2022-06-06)
+
+
+### Bug Fixes
+
+* [Button] fix `.Btn--text`'s `font-size` ([8514431](https://github.com/alibaba/ChatUI/commit/8514431f6d291c12357c9db3abf539d46503bd0e))
+* [Card] fix size ([3328857](https://github.com/alibaba/ChatUI/commit/3328857b03dd593b832594677f50639e42f398ef))
+* [Tabs] fix pointer ([b3fe423](https://github.com/alibaba/ChatUI/commit/b3fe423e55088ffa396b87671de1f91fa278e038))
+
+## [2.0.0-beta.1](https://github.com/alibaba/ChatUI/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2022-05-16)
+
+
+### Features
+
+* [Button] support `--btn-primary-*` css vars ([e120f38](https://github.com/alibaba/ChatUI/commit/e120f3872bd14bfb6cbfbc6635fc8b0e11bee3b1))
+* [Popup] support `bgColor` ([b3ca197](https://github.com/alibaba/ChatUI/commit/b3ca197a485a7b0c76b601364e2add0df2fd57d0))
+
+
+### Bug Fixes
+
+* [Button] fix hover & border-color ([6ed10e3](https://github.com/alibaba/ChatUI/commit/6ed10e3e6e9f894e38e687178f6291d83d4f3229))
+* [Button] fix padding ([7a1a594](https://github.com/alibaba/ChatUI/commit/7a1a5941a29749e2d48b11d9b531a85fbc842c8e))
+* [Card]  use `flex: 1` to button ([1fcd90f](https://github.com/alibaba/ChatUI/commit/1fcd90fd38f91f689f6342d495b47bd0b76ac417))
+* [Navbar] apply `min-height` to .Navbar-main ([de28610](https://github.com/alibaba/ChatUI/commit/de28610cda52bf236de36089f5f114a51b3f118c))
+* [Tabs] fix textWidth ([515917f](https://github.com/alibaba/ChatUI/commit/515917f881304fa0aa0265080ef83c9f006612dd))
+
+## [2.0.0-beta.0](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.7...v2.0.0-beta.0) (2022-03-30)
+
+
+### Bug Fixes
+
+* [Bubble] min-width ([bcad4bb](https://github.com/alibaba/ChatUI/commit/bcad4bb8c05af67383ad4ca590f7d64ba7f35404))
+* [Popup] abs ([5f32761](https://github.com/alibaba/ChatUI/commit/5f32761e942e506116e13485ab5c168858b4474c))
+
+## [2.0.0-alpha.7](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.6...v2.0.0-alpha.7) (2022-03-30)
+
+
+### Features
+
+* [Toast] ui5.1 ([12f6a31](https://github.com/alibaba/ChatUI/commit/12f6a31d596be89dfca9e6ac9cbb146c7294a570))
+
+## [2.0.0-alpha.6](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.5...v2.0.0-alpha.6) (2022-03-29)
+
+
+### Bug Fixes
+
+* ui5.1 ([30a51c9](https://github.com/alibaba/ChatUI/commit/30a51c93487ab3e6153fa1fa73b47de7736c0287))
+
+## [2.0.0-alpha.5](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.4...v2.0.0-alpha.5) (2022-03-28)
+
+
+### Bug Fixes
+
+* ui5.1 ([78a2d04](https://github.com/alibaba/ChatUI/commit/78a2d049a95d8744e0e77d0b25d057db7eb5ab94))
+
+## [2.0.0-alpha.4](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.3...v2.0.0-alpha.4) (2022-03-22)
+
+
+### Bug Fixes
+
+* ui5.1 ([a468ef9](https://github.com/alibaba/ChatUI/commit/a468ef977ebe6f7a7cf68c710baeb97c5e0c27b1))
+
+## [2.0.0-alpha.3](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2022-03-15)
+
+
+### Bug Fixes
+
+* [DEMO] fix styles ([b0225e0](https://github.com/alibaba/ChatUI/commit/b0225e0415718032b7922f01692c4f8e32713d3a))
+* [List] update styles ([f85c911](https://github.com/alibaba/ChatUI/commit/f85c91118c98337046b754adb774b01ea07c5cd1))
+* [Modal] fix actions ([5ce52ed](https://github.com/alibaba/ChatUI/commit/5ce52edf5aae3d9f7952dbc33f26655aff6076b7))
+* [SystemMessage] update styles ([f40e313](https://github.com/alibaba/ChatUI/commit/f40e3134f87284f9b6cae85a366091177885b192))
+* rm storybook ([709e1fc](https://github.com/alibaba/ChatUI/commit/709e1fceaf1ac46056aaf239e22d654259e6d5fb))
+
+## [2.0.0-alpha.2](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2022-03-04)
+
+
+### Bug Fixes
+
+* [Button] remove `xl` size, add `--link-color` ([75f6b01](https://github.com/alibaba/ChatUI/commit/75f6b012e130ddb9462cc6edabb5204d117c7780))
+* [IconButton] size ([f506f7e](https://github.com/alibaba/ChatUI/commit/f506f7e6c014db9836afbe1abc5bea82482d50f2))
+* [MessageList] font-size ([615a8e1](https://github.com/alibaba/ChatUI/commit/615a8e1ee34b194a141bb3a29ebca80aa433f982))
+* [Popup] fix actions ([b8fbd9b](https://github.com/alibaba/ChatUI/commit/b8fbd9bf9a282012fe9d039cd882594aace16f87))
+
+## [2.0.0-alpha.1](https://github.com/alibaba/ChatUI/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2022-03-01)
+
+
+### Features
+
+* pxtorem ([d92d5a6](https://github.com/alibaba/ChatUI/commit/d92d5a69649e7e9ab516a2771748bb3c7599da96))
+
+
+### Bug Fixes
+
+* [Modal] fix safe area ([6beae88](https://github.com/alibaba/ChatUI/commit/6beae88720f0f794db75b62fc6bceba058352bef))
+* ui 5.1 ([62b6863](https://github.com/alibaba/ChatUI/commit/62b686366924ad4bb57111dcb426cadb87c44a5a))
+
+## [2.0.0-alpha.0](https://github.com/alibaba/ChatUI/compare/v1.3.0...v2.0.0-alpha.0) (2022-02-22)
+
+
+### Features
+
+* ui 5.1 ([70a2627](https://github.com/alibaba/ChatUI/commit/70a2627f8ddae0e4e5395ed44c08a3f3ed4d7d2a))
+
 ## [1.3.0](https://github.com/alibaba/ChatUI/compare/v1.2.4...v1.3.0) (2022-01-25)
 
 

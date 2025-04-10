@@ -18,9 +18,9 @@
     content: attr(aria-label);
     margin-bottom: 10px;
     padding: 0.5em 1em;
-    border-radius: 6px;
-    background: var(--gray-1);
-    color: var(--white);
+    border-radius: var(--radius-md);
+    background: var(--color-text-1);
+    color: var(--color-fill-1);
     font-size: @font-size-xs;
     white-space: nowrap;
   }
@@ -29,8 +29,8 @@
     width: 0;
     height: 0;
     transform-origin: top;
-    border: 5px solid transparent;
-    border-top-color: var(--gray-1);
+    border: (5 / 16rem) solid transparent;
+    border-top-color: var(--color-text-1);
   }
   &:hover:before,
   &:hover:after {
