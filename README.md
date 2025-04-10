@@ -114,10 +114,6 @@ Visit [Customize Theme](https://chatui.io/docs/customize-theme) for detail
 
 Visit [i18n](https://chatui.io/docs/i18n) for detail
 
-## Discussion
-
-<img width="400" height="515" src="https://img.alicdn.com/imgextra/i1/O1CN01T0kGHu1Ceao2ARz4m_!!6000000000106-0-tps-828-1068.jpg">
-
 ## License
 
 MIT
