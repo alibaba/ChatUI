@@ -7,9 +7,10 @@ export type CardMediaProps = {
   aspectRatio?: 'square' | 'wide';
   color?: string;
   image?: string;
+  children?: React.ReactNode;
 };
 
-export const CardMedia: React.FC<CardMediaProps> = (props) => {
+export const CardMedia = (props: CardMediaProps) => {
   const { className, aspectRatio = 'square', color, image, children, ...other } = props;
 
   const bgStyle = {

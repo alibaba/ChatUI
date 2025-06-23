@@ -8,7 +8,7 @@ export type IconProps = React.SVGProps<SVGSVGElement> & {
   spin?: boolean;
 };
 
-export const Icon: React.FC<IconProps> = (props) => {
+export const Icon = (props: IconProps) => {
   const { type, className, spin, name, ...other } = props;
   const ariaProps = typeof name === 'string' ? { 'aria-label': name } : { 'aria-hidden': true };
 

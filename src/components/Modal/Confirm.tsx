@@ -6,12 +6,12 @@ import { ButtonProps } from '../Button';
 
 const isPrimary = (btn: ButtonProps) => btn.color === 'primary';
 
-export const Confirm: React.FC<ModalProps> = ({
+export const Confirm = ({
   className,
   vertical: oVertical,
   actions,
   ...other
-}) => {
+}: ModalProps) => {
   const { locale = '' } = useLocale();
   const isZh = locale.includes('zh');
   // 中文默认横排

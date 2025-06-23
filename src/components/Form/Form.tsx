@@ -3,13 +3,14 @@ import clsx from 'clsx';
 
 export type FormProps = {
   className?: string;
+  children?: React.ReactNode;
   /** @deprecated Use `<Input>`'s `variant` instead */
   theme?: string;
 };
 
 export const ThemeContext = React.createContext('');
 
-export const Form: React.FC<FormProps> = (props) => {
+export const Form = (props: FormProps) => {
   const { className, theme = '', children, ...other } = props;
   return (
     <ThemeContext.Provider value={theme}>

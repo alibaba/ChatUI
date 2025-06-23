@@ -11,7 +11,7 @@ export type TreeNodeProps = {
   children: any[]; // FIXME
 };
 
-export const TreeNode: React.FC<TreeNodeProps> = (props) => {
+export const TreeNode = (props: TreeNodeProps) => {
   const { title, content, link, children = [], onClick, onExpand } = props;
   const [expand, setExpand] = useState(false);
   const hasChildren = children.length > 0;

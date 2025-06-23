@@ -15,29 +15,27 @@
   display: inline-block;
   width: 4px;
   height: 4px;
-  border-radius: var(--radius-sm);
-  animation: typing-dot (@frame-time * 3) ease-in-out infinite;
-  background: var(--gray-5);
-  transform: rotate(-15deg);
+  border-radius: 4px;
+  animation: typing-dot (@frame-time * 4) ease-in-out infinite;
+  background: var(--gray-4);
 
   & + & {
     margin-left: 4px;
   }
-  &:nth-child(3) {
-    animation-delay: 0.1s;
-  }
-  &:nth-child(4) {
+  &[data-i="1"] {
     animation-delay: 0.2s;
+  }
+  &[data-i="2"] {
+    animation-delay: 0.3s;
   }
 }
 
 @keyframes typing-dot {
   0%, 40%, 100% {
-    height: 4px;
-    background: var(--color-line-2);
+    background: var(--gray-4);
   }
   20% {
-    height: 12px;
-    background-image: linear-gradient(162deg, var(--brand-2) 0%, var(--brand-1) 100%);
+    background: var(--gray-3);
+    transform: scale(1.2);
   }
 }

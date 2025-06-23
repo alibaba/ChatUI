@@ -181,7 +181,7 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
     useImperativeHandle(ref, () => ({ ref: messagesRef, scrollToEnd }), [scrollToEnd]);
 
     return (
-      <div className="MessageContainer" ref={messagesRef} tabIndex={-1}>
+      <div className="MessageContainer" ref={messagesRef}>
         <div className="MessageContainer-before">
           {renderBeforeMessageList && renderBeforeMessageList()}
         </div>

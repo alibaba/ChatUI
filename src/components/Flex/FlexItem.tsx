@@ -8,7 +8,7 @@ export interface FlexItemProps extends React.HTMLAttributes<HTMLElement> {
   order?: number;
 }
 
-export const FlexItem: React.FC<FlexItemProps> = (props) => {
+export const FlexItem = (props: FlexItemProps) => {
   const { className, flex, alignSelf, order, style, children, ...other } = props;
   return (
     <div

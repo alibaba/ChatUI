@@ -3,9 +3,10 @@ import clsx from 'clsx';
 
 export type CardContentProps = {
   className?: string;
+  children?: React.ReactNode;
 };
 
-export const CardContent: React.FC<CardContentProps> = (props) => {
+export const CardContent = (props: CardContentProps) => {
   const { className, children, ...other } = props;
   return (
     <div className={clsx('CardContent', className)} {...other}>

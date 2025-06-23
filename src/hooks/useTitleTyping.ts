@@ -31,12 +31,12 @@ export function useTitleTyping() {
       // delay 后开始
       setIsTyping(true);
 
-      after([2500, 3500], () => {
-        // 2.5-3.5s 后暂停
+      after([3000, 6000], () => {
+        // 3-6s 后暂停
         setIsTyping(false);
 
-        after([1000, 1800], () => {
-          // 1-1.8s 后重新开始
+        after([1000, 2000], () => {
+          // 1-2s 后重新开始
           start();
         });
       });

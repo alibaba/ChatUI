@@ -46,7 +46,7 @@ export const ComposerInput = ({
   }, [inputRef]);
 
   return (
-    <div className={clsx({ 'S--invisible': invisible })}>
+    <div className={clsx({ 'S--invisible': invisible })} aria-hidden={invisible}>
       <Input
         className="Composer-input"
         rows={1}

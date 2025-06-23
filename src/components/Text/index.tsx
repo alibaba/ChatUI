@@ -7,9 +7,10 @@ export interface TextProps {
   align?: 'left' | 'center' | 'right' | 'justify';
   breakWord?: boolean;
   truncate?: boolean | number;
+  children?: React.ReactNode;
 }
 
-export const Text: React.FC<TextProps> = (props) => {
+export const Text = (props: TextProps) => {
   const { as: Element = 'div', className, align, breakWord, truncate, children, ...other } = props;
   const ellipsis = Number.isInteger(truncate);
 

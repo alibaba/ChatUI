@@ -12,7 +12,7 @@ export type RateActionsProps = {
   onClick: (value: string) => void;
 };
 
-export const RateActions: React.FC<RateActionsProps> = (props) => {
+export const RateActions = (props: RateActionsProps) => {
   const { trans } = useLocale('RateActions', {
     up: '赞同',
     down: '反对',

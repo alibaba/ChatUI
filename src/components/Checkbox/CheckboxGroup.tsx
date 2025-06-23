@@ -12,7 +12,7 @@ export type CheckboxGroupProps = {
   onChange: (value: CheckboxValue[], event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const CheckboxGroup: React.FC<CheckboxGroupProps> = (props) => {
+export const CheckboxGroup = (props: CheckboxGroupProps) => {
   const { className, options, value, name, disabled, block, onChange } = props;
 
   function handleChange(val: CheckboxValue, e: React.ChangeEvent<HTMLInputElement>) {

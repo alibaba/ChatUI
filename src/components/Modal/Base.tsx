@@ -28,6 +28,7 @@ export type ModalProps = {
   avatar?: string;
   onClose?: () => void;
   onBackdropClick?: () => void;
+  children?: React.ReactNode;
 };
 
 function clearModal() {
@@ -36,7 +37,7 @@ function clearModal() {
   }
 }
 
-export const Base: React.FC<ModalProps> = (props) => {
+export const Base = (props: ModalProps) => {
   const {
     baseClass,
     active,

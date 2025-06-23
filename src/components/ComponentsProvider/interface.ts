@@ -51,4 +51,5 @@ export interface ComponentsMap {
 
 export interface ComponentsProviderProps {
   components: ComponentsMap;
+  children?: React.ReactNode;
 }
