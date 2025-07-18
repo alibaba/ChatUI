@@ -4,7 +4,8 @@
     "rootDir": "src",
     "declaration": true,
     "declarationDir": "lib",
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "types": ["node"]
   },
   "exclude": [
     "node_modules",
