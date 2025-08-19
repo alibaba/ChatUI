@@ -34,7 +34,7 @@
     outline: 0;
   }
   &:active {
-    --btn-bg: @btn-active-bg;
+    --btn-bg: var(--btn-active-bg);
   }
   &:disabled {
     pointer-events: none;
@@ -86,7 +86,7 @@
 @media (hover: hover) {
   .Btn {
     &:hover {
-      --btn-bg: @btn-hover-bg;
+      --btn-bg: var(--btn-hover-bg);
     }
     &--primary:not(.Btn--outline) {
       &:hover {

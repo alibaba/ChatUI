@@ -1,0 +1,146 @@
+.RedPacket {
+  --red-packet-object-width: 84px;
+  --red-packet-height: 80px;
+  --red-packet-color: var(--red);
+  --red-packet-value-color: var(--red-packet-color);
+  --red-packet-condition-color: rgba(255, 3, 0, 0.5);
+  --red-packet-main-text-color: var(--white);
+  --red-packet-name-font-size: 15px;
+  --red-packet-desc-color: rgba(255, 255, 255, 0.9);
+  --red-packet-desc-font-size: 12px;
+  --red-packet-object-bg: var(--white);
+  --red-packet-bg: linear-gradient(270deg, #ff3333 0%, #ff4433 43%);
+  --red-packet-arc-color: #f43;
+
+  --btn-padding: 3px 12px;
+  --btn-bg: #fff0e9;
+  --btn-active-bg: var(--btn-bg);
+  --btn-hover-bg: var(--btn-bg);
+  --btn-border-color: var(--btn-bg);
+  --btn-color: var(--red-packet-color);
+  --btn-font-size: 13px;
+
+  position: relative;
+  height: var(--red-packet-height);
+  box-sizing: border-box;
+  border-radius: var(--radius-md);
+  border-top-right-radius: calc(var(--radius-md) + 2px);
+  background: var(--red-packet-bg);
+  color: var(--red-packet-main-text-color);
+
+  .Btn {
+    min-width: 0;
+    margin: 12px;
+  }
+  &[data-variant='cash'] {
+    --red-packet-color: #5b360d;
+    --red-packet-main-text-color: var(--red-packet-color);
+    --red-packet-desc-color: rgba(91, 54, 13, 0.9);
+    --red-packet-bg: linear-gradient(270deg, #ffd7a8 0%, #ffe0ba 50%);
+    --red-packet-arc-color: #ffe0ba;
+
+    .Countdown-unit {
+      background: rgba(91, 54, 13, 0.1);
+    }
+  }
+  &[data-variant='image'] {
+    --red-packet-bg: #fff2f2;
+    --red-packet-arc-color: #fff2f2;
+    --red-packet-main-text-color: var(--red);
+    --red-packet-desc-color: rgba(255, 3, 0, 0.9);
+
+    --btn-bg: var(--red);
+    --btn-color: var(--white);
+  }
+  &[data-status='expired'],
+  &[data-status='used'] {
+    border: 1px solid var(--color-line-2);
+    --red-packet-value-color: var(--color-text-1);
+    --red-packet-condition-color: var(--color-text-3);
+    --red-packet-main-text-color: var(--color-text-1);
+    --red-packet-desc-color: var(--color-text-2);
+    --red-packet-object-bg: transparent;
+    --red-packet-bg: var(--color-fill-2);
+
+    --btn-bg: transparent;
+    --btn-border-color: var(--red-packet-color);
+    --btn-color: var(--red-packet-color);
+
+    .RedPacket-arc {
+      display: none;
+    }
+  }
+  &[data-in-list='false'] {
+    --red-packet-object-width: 70px;
+    --red-packet-height: 61px;
+    --red-packet-name-font-size: 12px;
+    --red-packet-desc-font-size: 10px;
+
+    --btn-padding: 2px 6px;
+    --btn-font-size: 12px;
+
+    &[data-status='expired'],
+    &[data-status='used'] {
+      --btn-border-color: var(--color-line-2);
+      --btn-color: var(--color-text-2);
+    }
+  }
+}
+
+.RedPacket-object {
+  position: relative;
+  overflow: hidden;
+  width: var(--red-packet-object-width);
+  margin-right: 12px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+  background: var(--red-packet-object-bg);
+  background-clip: content-box;
+  color: var(--red-packet-value-color);
+  line-height: 1.15;
+}
+
+.RedPacket-condition {
+  color: var(--red-packet-condition-color);
+  font-size: 10px;
+}
+
+.RedPacket-arc {
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  height: var(--red-packet-height);
+}
+
+.RedPacket-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.RedPacket-name {
+  font-size: var(--red-packet-name-font-size);
+  font-weight: 500;
+}
+
+.RedPacket-desc {
+  color: var(--red-packet-desc-color);
+  font-size: var(--red-packet-desc-font-size);
+}
+
+.RedPacket-tag {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  padding: 0 4px;
+  border-radius: 4px 0 6px 0;
+  background: #fff1eb;
+  color: #ff5000;
+  font-size: 12px;
+}
+
+@media (max-width: 374px) {
+  .RedPacket .Btn {
+    margin: 0 8px 0 6px;
+  }
+}

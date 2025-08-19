@@ -1,0 +1,163 @@
+.Coupon {
+  --coupon-object-width: 80px;
+  --coupon-height: 80px;
+  --coupon-value-color: var(--red);
+  --coupon-condition-color: rgba(255, 3, 0, 0.5);
+  --coupon-main-text-color: var(--color-text-1);
+  --coupon-name-font-size: 15px;
+  --coupon-desc-color: rgba(255, 3, 0, 0.9);
+  --coupon-desc-font-size: 12px;
+  --coupon-bg: #fff2f2;
+  --coupon-border-color: rgba(232, 16, 0, 0.15);
+
+  --coupon-badge-color: #662600;
+  --coupon-badge-bg: #ffefd9;
+
+  --btn-padding: 3px 12px;
+  --btn-bg: var(--red);
+  --btn-active-bg: var(--btn-bg);
+  --btn-hover-bg: var(--btn-bg);
+  --btn-border-color: var(--btn-bg);
+  --btn-color: var(--white);
+  --btn-font-size: 13px;
+
+  position: relative;
+  height: var(--coupon-height);
+  box-sizing: border-box;
+  border: 1px solid var(--coupon-border-color);
+  border-radius: var(--radius-md);
+  background: var(--coupon-bg);
+  color: var(--coupon-main-text-color);
+  mask: radial-gradient(circle at var(--coupon-object-width) top, transparent 4px, #000 0) top left /
+      100% 50% no-repeat,
+    radial-gradient(circle at var(--coupon-object-width) bottom, transparent 4px, #000 0) bottom
+      right / 100% 50% no-repeat;
+
+  .Btn {
+    min-width: 0;
+    margin: 12px;
+  }
+  &[data-status='expired'],
+  &[data-status='used'] {
+    --coupon-border-color: var(--color-line-2);
+    --coupon-value-color: var(--color-text-1);
+    --coupon-condition-color: var(--color-text-3);
+    --coupon-main-text-color: var(--color-text-1);
+    --coupon-desc-color: var(--color-text-2);
+    --coupon-bg: var(--color-fill-2);
+
+    --coupon-badge-color: var(--color-text-2);
+    --coupon-badge-bg: rgba(80, 96, 122, 0.2);
+
+    --btn-bg: transparent;
+    --btn-border-color: var(--red);
+    --btn-color: var(--red);
+
+    .Coupon-arc {
+      display: none;
+    }
+  }
+  &[data-in-list='false'] {
+    --coupon-width: 70px;
+    --coupon-height: 61px;
+    --coupon-name-font-size: 12px;
+    --coupon-desc-font-size: 10px;
+
+    --btn-padding: 2px 6px;
+    --btn-font-size: 12px;
+
+    &[data-status='expired'],
+    &[data-status='used'] {
+      --btn-border-color: var(--color-line-2);
+      --btn-color: var(--color-text-2);
+    }
+  }
+  .StatusBadge {
+    top: -1px;
+    right: -1px;
+  }
+  .Countdown-unit {
+    color: var(--coupon-value-color);
+    background: rgba(255, 3, 0, 0.1);
+  }
+}
+
+.Coupon-object {
+  position: relative;
+  overflow: hidden;
+  width: var(--coupon-object-width);
+  color: var(--coupon-value-color);
+  line-height: 1.15;
+}
+
+.Coupon-condition {
+  color: var(--coupon-condition-color);
+  font-size: 10px;
+}
+
+.Coupon-divider {
+  position: relative;
+  height: calc(100% - 16px);
+  border-left: 1px dashed var(--coupon-border-color);
+  margin: 8px 12px 8px -1px;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    border: 1px solid var(--coupon-border-color);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    left: -6px;
+  }
+  &:before {
+    top: -14px;
+  }
+  &:after {
+    bottom: -14px;
+  }
+}
+
+.Coupon-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Coupon-name {
+  font-size: var(--coupon-name-font-size);
+  font-weight: 500;
+}
+
+.Coupon-desc {
+  color: var(--coupon-desc-color);
+  font-size: var(--coupon-desc-font-size);
+}
+
+@media (max-width: 374px) {
+  .Coupon .Btn {
+    margin: 0 8px 0 6px;
+  }
+}
+
+@supports (mask-image: url('')) {
+  .Coupon-divider {
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      border: 1px solid var(--coupon-border-color);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      left: -6px;
+    }
+    &:before {
+      top: -14px;
+    }
+    &:after {
+      bottom: -14px;
+    }
+  }
+}

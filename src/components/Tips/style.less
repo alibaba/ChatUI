@@ -1,0 +1,23 @@
+.Tips {
+  padding: 8px;
+  border-radius: var(--radius-md);
+  background: var(--color-fill-2);
+  color: var(--color-text-1);
+  font-size: 12px;
+
+  .Icon {
+    margin: 2px 4px 0 0;
+    font-size: 14px;
+  }
+  &[data-size="lg"] {
+    font-size: 14px;
+
+    .Icon {
+      font-size: 15px;
+    }
+  }
+  &[data-primary="true"] {
+    background: var(--brand-4);
+    color: var(--brand-1);
+  }
+}
