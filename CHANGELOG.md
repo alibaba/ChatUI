@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/alibaba/ChatUI/compare/v3.1.0-beta.0...v3.1.0) (2025-08-22)
+
+
+### Features
+
+* sync 3.2.3 ([7b5c3a4](https://github.com/alibaba/ChatUI/commit/7b5c3a4ce93fd6947e23c47243bfe30fdd624ec2))
+
 ## [3.1.0-beta.0](https://github.com/alibaba/ChatUI/compare/v3.0.1...v3.1.0-beta.0) (2025-08-19)
 
 
