@@ -39,6 +39,7 @@ export const navConfig = [
     list: [
       { name: '头像', code: 'avatar' },
       { name: '图片轮播', code: 'carousel' },
+      { name: '倒计时', code: 'countdown' },
       { name: '分割线', code: 'divider' },
       { name: '空状态', code: 'empty' },
       { name: '列表', code: 'list' },
@@ -63,18 +64,21 @@ export const navConfig = [
     title: '反馈组件',
     list: [
       { name: '无限滚动', code: 'infinite-scroll' },
-      { name: '加载', code: 'Loading' },
+      { name: '加载', code: 'loading' },
       { name: '确认框', code: 'confirm' },
       { name: '模态框', code: 'modal' },
       { name: '上拉弹窗', code: 'popup' },
       { name: '下拉刷新', code: 'pull-to-refresh' },
+      { name: '提示信息', code: 'tips' },
       { name: '轻提示', code: 'toast' },
     ],
   },
   {
     title: '业务组件',
     list: [
+      { name: '优惠券', code: 'coupon' },
       { name: '商品卡片', code: 'goods' },
+      { name: '红包', code: 'red-packet' },
       { name: '价格', code: 'price' },
     ],
   },
