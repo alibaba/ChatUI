@@ -249,16 +249,18 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
           >
             <div className="PullToRefresh-indicator">{renderIndicator(status, distance)}</div>
             {!disabled && useFallback && (
-              typeof loadMoreText === 'function' ? (
-                loadMoreText(handleLoadMore)
-              ) : (
-                <Flex className="PullToRefresh-fallback" center>
-                  {renderIndicator(status, oDistance)}
-                  <Button className="PullToRefresh-loadMore" variant="text" onClick={handleLoadMore}>
-                    {loadMoreText}
-                  </Button>
-                </Flex>
-              )
+              <Flex className="PullToRefresh-fallback" center>
+                {typeof loadMoreText === 'function' ? (
+                  loadMoreText(handleLoadMore)
+                ) : (
+                  <>
+                    {renderIndicator(status, oDistance)}
+                    <Button className="PullToRefresh-loadMore" variant="text" onClick={handleLoadMore}>
+                      {loadMoreText}
+                    </Button>
+                  </>
+                )}
+              </Flex>
             )}
             {React.Children.only(children)}
           </div>
