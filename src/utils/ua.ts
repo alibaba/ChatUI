@@ -12,3 +12,7 @@ export function getIOSMajorVersion() {
 }
 
 export const isArkWeb = ua.includes('ArkWeb');
+
+export const isHuaweiBrowser = ua.includes('HuaweiBrowser/');
+
+export const isAliApp = ua.includes('AliApp');

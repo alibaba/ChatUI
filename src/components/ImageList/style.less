@@ -1,0 +1,20 @@
+.ImageList {
+  --image-list-size: 44px;
+  --image-list-fit: cover;
+
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  margin: -4px 0 0 -4px;
+  padding: 0;
+  list-style: none;
+
+  .Image {
+    display: block;
+    width: var(--image-list-size);
+    height: var(--image-list-size);
+    margin: 4px 0 0 4px;
+    border-radius: var(--radius-md);
+    object-fit: var(--image-list-fit);
+  }
+}

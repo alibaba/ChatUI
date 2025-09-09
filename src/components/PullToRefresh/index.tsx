@@ -158,7 +158,7 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
     const touchMove = useCallback(
       (e: TouchEvent) => {
         const currentY = e.touches[0].clientY;
-        const canPull = wrapperRef.current.scrollTop <= 0;
+        const canPull = wrapperRef.current?.scrollTop <= 0;
 
         if (canPull) {
           if (!sharedRef.current.startY) {

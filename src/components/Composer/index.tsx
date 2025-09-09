@@ -11,7 +11,7 @@ import { ComposerInput } from './ComposerInput';
 import { SendButton } from './SendButton';
 import { Action } from './Action';
 import toggleClass from '../../utils/toggleClass';
-import { isIOS, isArkWeb } from '../../utils/ua';
+import { isIOS, isArkWeb, isAliApp } from '../../utils/ua';
 import { updateViewportTop, setViewportTop } from './viewportTop';
 
 export const CLASS_NAME_FOCUSING = 'S--focusing';
@@ -138,7 +138,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
 
     function resizeHandler() {
       // Android 没有下面安全区且可以悬浮键盘，故不做收起失焦处理
-      if (isIOS || isArkWeb) {
+      if (isIOS || (isArkWeb && isAliApp)) {
         toggleFocusing();
       }
     }

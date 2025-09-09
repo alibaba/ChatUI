@@ -8,7 +8,7 @@ import {
 } from '../MessageContainer';
 import { QuickReplies, QuickReplyItemProps } from '../QuickReplies';
 import { Composer as DComposer, ComposerProps, ComposerHandle } from '../Composer';
-import { isSafari, getIOSMajorVersion } from '../../utils/ua';
+import { isSafari, isHuaweiBrowser, getIOSMajorVersion } from '../../utils/ua';
 
 export type ChatProps = Omit<ComposerProps, 'onFocus' | 'onChange' | 'onBlur'> &
   ConfigContextType &
@@ -192,7 +192,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
 
   useEffect(() => {
     const rootEl = document.documentElement;
-    if (isSafari) {
+    if (isSafari || isHuaweiBrowser) {
       rootEl.dataset.safari = '';
     }
 

@@ -42,6 +42,7 @@ export const navConfig = [
       { name: '倒计时', code: 'countdown' },
       { name: '分割线', code: 'divider' },
       { name: '空状态', code: 'empty' },
+      { name: 'KV条目', code: 'kv-list' },
       { name: '列表', code: 'list' },
       { name: '导航', code: 'navbar' },
       { name: '公告', code: 'notice' },
@@ -78,8 +79,9 @@ export const navConfig = [
     list: [
       { name: '优惠券', code: 'coupon' },
       { name: '商品卡片', code: 'goods' },
-      { name: '红包', code: 'red-packet' },
+      { name: '订单对象', code: 'order-object' },
       { name: '价格', code: 'price' },
+      { name: '红包', code: 'red-packet' },
     ],
   },
   {

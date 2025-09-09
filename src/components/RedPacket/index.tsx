@@ -21,6 +21,8 @@ export interface RedPacketProps {
   condition?: string;
   /* 失效日期 (时间戳) */
   endAt?: number;
+  /* 有效期信息 */
+  dateDesc?: string;
   /* 描述信息 */
   desc?: string;
   /* 主图 */
@@ -55,6 +57,7 @@ export const RedPacket = (props: RedPacketProps) => {
     condition,
     name,
     endAt,
+    dateDesc,
     desc,
     status = 'normal',
     variant = 'redPacket',
@@ -100,7 +103,11 @@ export const RedPacket = (props: RedPacketProps) => {
         <Text className="RedPacket-name" truncate>
           {name}
         </Text>
-        {endAt && (
+        {dateDesc ? (
+          <Text className="RedPacket-desc" truncate>
+            {dateDesc}
+          </Text>
+        ) : endAt ? (
           <Text className="RedPacket-desc" truncate>
             {showCountdown ? (
               <>
@@ -110,7 +117,7 @@ export const RedPacket = (props: RedPacketProps) => {
               formatExpireTime(endAt)
             )}
           </Text>
-        )}
+        ) : null}
         <Text className="RedPacket-desc" truncate>
           {desc}
         </Text>
