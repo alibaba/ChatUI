@@ -178,6 +178,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     rightAction,
     Composer = DComposer,
     isX,
+    nearBottomThreshold
   } = props;
   const [currentColorScheme, setCurrentColorScheme] = useState<'light' | 'dark'>('light');
 
@@ -252,6 +253,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
           onScroll={onScroll}
           onBackBottomShow={onBackBottomShow}
           onBackBottomClick={onBackBottomClick}
+          nearBottomThreshold={nearBottomThreshold}
         />
         <div className="ChatFooter">
           {renderQuickReplies ? (
