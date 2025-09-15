@@ -1,6 +1,6 @@
 {
   "name": "@chatui/core",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "The React library for Chatbot UI",
   "main": "lib/index.js",
   "module": "es/index.js",
