@@ -24,7 +24,7 @@ export interface RedPacketProps {
   /* 有效期信息 */
   dateDesc?: string;
   /* 描述信息 */
-  desc?: string;
+  desc?: React.ReactNode;
   /* 主图 */
   image?: string;
   /* 是否显示倒计时 */

@@ -26,6 +26,7 @@ export { default as Loading } from './Loading';
 export { default as MediaObject } from './MediaObject';
 export { default as MessageStatus } from './MessageStatus';
 export { default as Modal } from './Modal';
+export { default as MultiRedPacket } from './MultiRedPacket';
 export { default as Navbar } from './Navbar';
 export { default as Notice } from './Notice';
 export { default as OrderObject } from './OrderObject';

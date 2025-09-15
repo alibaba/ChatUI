@@ -179,6 +179,8 @@ export { OrderObject } from './components/OrderObject';
 export type { OrderObjectProps } from './components/OrderObject';
 export { RedPacket } from './components/RedPacket';
 export type { RedPacketProps } from './components/RedPacket';
+export { MultiRedPacket } from './components/MultiRedPacket';
+export type { MultiRedPacketProps } from './components/MultiRedPacket';
 
 export { Chat as default } from './components/Chat';
 export type { ChatProps } from './components/Chat';

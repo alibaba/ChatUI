@@ -79,6 +79,7 @@ export const navConfig = [
     list: [
       { name: '优惠券', code: 'coupon' },
       { name: '商品卡片', code: 'goods' },
+      { name: '多红包', code: 'multi-red-packet' },
       { name: '订单对象', code: 'order-object' },
       { name: '价格', code: 'price' },
       { name: '红包', code: 'red-packet' },

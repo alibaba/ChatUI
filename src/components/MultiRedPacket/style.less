@@ -1,0 +1,53 @@
+.MultiRedPacket {
+  display: flex;
+  align-items: center;
+
+  .RedPacket {
+    --red-packet-object-width: 60px;
+    --red-packet-name-font-size: 15px;
+    --red-packet-desc-font-size: 12px;
+
+    flex: 1;
+  }
+  .RedPacket-img {
+    width: 36px;
+    height: 36px;
+  }
+  .RedPacket-desc {
+    span + span {
+      margin-left: 6px;
+      padding-left: 6px;
+      border-left: 1px solid rgba(255, 255, 255, 0.45);
+    }
+    strong {
+      font-size: 14px;
+    }
+  }
+}
+
+.MultiRedPacket-stack {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    width: 6px;
+    margin-right: -2px;
+    box-sizing: border-box;
+    border: 2px solid #ff9999;
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+    border-right: 0;
+    background: #fff;
+  }
+  &:before {
+    height: 53px;
+    border-color: #ff9999;
+  }
+  &:after {
+    height: 57px;
+    border-color: #ff6666;
+  }
+}

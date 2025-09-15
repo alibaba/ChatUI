@@ -100,23 +100,6 @@
   height: calc(100% - 16px);
   border-left: 1px dashed var(--coupon-border-color);
   margin: 8px 12px 8px -1px;
-
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    border: 1px solid var(--coupon-border-color);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    left: -6px;
-  }
-  &:before {
-    top: -14px;
-  }
-  &:after {
-    bottom: -14px;
-  }
 }
 
 .Coupon-main {
@@ -148,10 +131,11 @@
       content: '';
       position: absolute;
       border: 1px solid var(--coupon-border-color);
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       left: -6px;
+      box-sizing: border-box;
     }
     &:before {
       top: -14px;
