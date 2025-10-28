@@ -8,6 +8,7 @@ import { Time } from '../Time';
 export interface User {
   avatar?: string;
   name?: string;
+  avatarAlt?: string;
   url?: string;
   [k: string]: any;
 }
@@ -56,7 +57,7 @@ export interface MessageProps {
 const Message = (props: MessageProps) => {
   const { renderMessageContent = () => null, ...msg } = props;
   const { type, content, user = {}, _id: id, position = 'left', hasTime = true, createdAt } = msg;
-  const { name, avatar } = user;
+  const { name, avatar, avatarAlt } = user;
 
   if (type === 'system') {
     return <SystemMessage content={content.text} action={content.action} />;
@@ -72,7 +73,7 @@ const Message = (props: MessageProps) => {
         </div>
       )}
       <div className="Message-main">
-        {isRL && avatar && <Avatar src={avatar} shape="square" alt="" url={user.url} />}
+        {isRL && avatar && <Avatar src={avatar} shape="square" alt={avatarAlt} url={user.url} />}
         <div className="Message-inner">
           {isRL && name && <div className="Message-author">{name}</div>}
           <div className="Message-content" role="alert" aria-live="assertive" aria-atomic="false">

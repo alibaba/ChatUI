@@ -4,10 +4,9 @@ import { Price } from '../Price';
 import { Button } from '../Button';
 import { Flex, FlexItem } from '../Flex';
 import { Text } from '../Text';
-import { Countdown } from '../Countdown';
 import { StatusBadge } from '../StatusBadge';
 import { Image } from '../Image';
-import { isWithin24Hours, formatExpireTime } from '../../utils/date';
+import { formatExpireTime } from '../../utils/date';
 
 type RedPacketStatus = 'normal' | 'nearExpired' | 'expired' | 'used';
 
@@ -22,13 +21,11 @@ export interface RedPacketProps {
   /* 失效日期 (时间戳) */
   endAt?: number;
   /* 有效期信息 */
-  dateDesc?: string;
+  dateDesc?: React.ReactNode;
   /* 描述信息 */
   desc?: React.ReactNode;
   /* 主图 */
   image?: string;
-  /* 是否显示倒计时 */
-  showCountdown?: 'auto' | boolean;
   /* 状态 */
   status?: RedPacketStatus;
   /* 标签 */
@@ -63,15 +60,12 @@ export const RedPacket = (props: RedPacketProps) => {
     variant = 'redPacket',
     tag,
     image,
-    showCountdown: oShowCountdown,
     inList = false,
     btnText = '查看',
     onClick,
   } = props;
 
   const statusLabel = statusLabelMap[status] || '';
-  const nearExpired = status === 'nearExpired' || (endAt && isWithin24Hours(endAt));
-  const showCountdown = oShowCountdown === true || (oShowCountdown === 'auto' && nearExpired);
 
   return (
     <Flex
@@ -109,13 +103,7 @@ export const RedPacket = (props: RedPacketProps) => {
           </Text>
         ) : endAt ? (
           <Text className="RedPacket-desc" truncate>
-            {showCountdown ? (
-              <>
-                <span>限时</span> <Countdown targetDate={endAt} />
-              </>
-            ) : (
-              formatExpireTime(endAt)
-            )}
+            {formatExpireTime(endAt)}
           </Text>
         ) : null}
         <Text className="RedPacket-desc" truncate>

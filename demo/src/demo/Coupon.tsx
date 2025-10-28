@@ -1,5 +1,5 @@
 import { DemoPage, DemoSection } from '../components';
-import { Coupon } from '../../../src';
+import { Coupon, Countdown } from '../../../src';
 
 const getTodayEndTimestamp = (): number => {
   const date = new Date();
@@ -99,7 +99,7 @@ export default () => (
         name="优惠券标题"
         endAt={endTs}
         status="nearExpired"
-        showCountdown="auto"
+        dateDesc={<><span>限时</span> <Countdown targetDate={endTs} /></>}
         desc="限该店内商品使用"
         onClick={() => {
           console.log('on click');
@@ -127,6 +127,19 @@ export default () => (
         endAt={endTs}
         desc="限该店内商品使用"
         status="expired"
+        onClick={() => {
+          console.log('on click');
+        }}
+      />
+    </DemoSection>
+    <hr />
+    <DemoSection title="单优惠券：折扣券" bg="gray">
+      <Coupon
+        discount={9.5}
+        condition="满10元可用"
+        name="优惠券标题"
+        endAt={endTs}
+        desc="限该店内商品使用"
         onClick={() => {
           console.log('on click');
         }}

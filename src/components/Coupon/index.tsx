@@ -4,9 +4,8 @@ import { Price } from '../Price';
 import { Button } from '../Button';
 import { Flex, FlexItem } from '../Flex';
 import { Text } from '../Text';
-import { Countdown } from '../Countdown';
 import { StatusBadge } from '../StatusBadge';
-import { isWithin24Hours, formatExpireTime } from '../../utils/date';
+import { formatExpireTime } from '../../utils/date';
 
 type CouponStatus = 'normal' | 'nearExpired' | 'expired' | 'used';
 
@@ -16,14 +15,16 @@ export interface CouponProps {
   name: string;
   /* 金额 */
   value?: number;
+  /* 折扣 */
+  discount?: number;
   /* 满减条件 */
   condition?: string;
   /* 失效日期 (时间戳) */
   endAt?: number;
+  /* 有效期信息 */
+  dateDesc?: React.ReactNode;
   /* 描述信息 */
-  desc?: string;
-  /* 是否显示倒计时 */
-  showCountdown?: 'auto' | boolean;
+  desc?: React.ReactNode;
   /* 状态 */
   status?: CouponStatus;
   /* 是否在列表中 */
@@ -45,20 +46,19 @@ export const Coupon = (props: CouponProps) => {
   const {
     className,
     value,
+    discount,
     condition,
     name,
     endAt,
+    dateDesc,
     desc,
     status = 'normal',
-    showCountdown: oShowCountdown,
     inList = false,
     btnText = '查看',
     onClick,
   } = props;
 
   const statusLabel = statusLabelMap[status] || '';
-  const nearExpired = status === 'nearExpired' || (endAt && isWithin24Hours(endAt));
-  const showCountdown = oShowCountdown === true || (oShowCountdown === 'auto' && nearExpired);
 
   return (
     <Flex
@@ -68,7 +68,20 @@ export const Coupon = (props: CouponProps) => {
       onClick={inList ? undefined : onClick}
     >
       <Flex className="Coupon-object" center direction="column">
-        {value && <Price className="Coupon-value" price={value} currency="¥" autoFit />}
+        {
+          value
+            ? <Price className="Coupon-value" price={value} currency="¥" autoFit />
+            : (
+              discount
+                ? (
+                  <div className="Coupon-discount Price" data-size="xl">
+                    <span className="Price-integer">{discount}</span>
+                    <span className="Coupon-discount-suffix">折</span>
+                  </div>
+                )
+                : null
+            )
+        }
         <Text className="Coupon-condition" truncate>
           {condition}
         </Text>
@@ -78,17 +91,15 @@ export const Coupon = (props: CouponProps) => {
         <Text className="Coupon-name" truncate>
           {name}
         </Text>
-        {endAt && (
+        {dateDesc ? (
           <Text className="Coupon-desc" truncate>
-            {showCountdown ? (
-              <>
-                <span>限时</span> <Countdown targetDate={endAt} />
-              </>
-            ) : (
-              formatExpireTime(endAt)
-            )}
+            {dateDesc}
           </Text>
-        )}
+        ) : endAt ? (
+          <Text className="Coupon-desc" truncate>
+            {formatExpireTime(endAt)}
+          </Text>
+        ) : null}
         <Text className="Coupon-desc" truncate>
           {desc}
         </Text>

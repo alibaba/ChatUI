@@ -1,5 +1,5 @@
 import { DemoPage, DemoSection } from '../components';
-import { RedPacket } from '../../../src';
+import { RedPacket, Countdown } from '../../../src';
 
 const getTodayEndTimestamp = (): number => {
   const date = new Date();
@@ -104,7 +104,7 @@ export default () => (
         endAt={endTs}
         desc="使用规则限淘宝天猫实物商品"
         status="nearExpired"
-        showCountdown="auto"
+        dateDesc={<><span>限时</span> <Countdown targetDate={endTs} /></>}
         onClick={() => {
           console.log('on click');
         }}
@@ -178,7 +178,7 @@ export default () => (
         value={2.22}
         name="礼金券标题"
         endAt={endTs}
-        showCountdown="auto"
+        dateDesc={<><span>限时</span> <Countdown targetDate={endTs} /></>}
         desc="指定淘宝天猫实物商指定淘宝天猫实物商"
         variant="cash"
         btnText="去使用"
