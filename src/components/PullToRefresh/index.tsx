@@ -18,7 +18,7 @@ export interface PullToRefreshProps {
   distance?: number;
   loadingDistance?: number;
   distanceRatio?: number;
-  loadMoreText?: string;
+  loadMoreText?: string | ((onLoadMore: () => void) => React.ReactNode);
   maxDistance?: number;
   onRefresh?: () => Promise<any>;
   onScroll?: (event: React.UIEvent<HTMLDivElement, UIEvent>) => void;
@@ -250,10 +250,16 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
             <div className="PullToRefresh-indicator">{renderIndicator(status, distance)}</div>
             {!disabled && useFallback && (
               <Flex className="PullToRefresh-fallback" center>
-                {renderIndicator(status, oDistance)}
-                <Button className="PullToRefresh-loadMore" variant="text" onClick={handleLoadMore}>
-                  {loadMoreText}
-                </Button>
+                {typeof loadMoreText === 'function' ? (
+                  loadMoreText(handleLoadMore)
+                ) : (
+                  <>
+                    {renderIndicator(status, oDistance)}
+                    <Button className="PullToRefresh-loadMore" variant="text" onClick={handleLoadMore}>
+                      {loadMoreText}
+                    </Button>
+                  </>
+                )}
               </Flex>
             )}
             {React.Children.only(children)}
