@@ -8,6 +8,7 @@ const orderList = [
     currency: '¥',
     price: 999.99,
     count: 1,
+    caption: '共2件',
   },
   {
     img: 'https://gw.alicdn.com/imgextra/i3/O1CN01KqcC9j1tZ7lkyTRzj_!!6000000005915-55-tps-72-72.svg',

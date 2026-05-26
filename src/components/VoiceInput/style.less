@@ -1,0 +1,52 @@
+.VoiceInput {
+  height: 240Px;
+  padding: var(--gutter);
+  padding-top: 0;
+}
+
+.VoiceInput-tip {
+  padding-top: 90Px;
+  font-size: var(--font-size-body);
+  color: var(--color-text-2);
+  text-align: center;
+}
+
+.VoiceInput-control {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18Px;
+}
+
+.VoiceInput-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 65Px;
+  height: 65Px;
+  border-radius: 50%;
+  background: var(--btn-bg);
+  color: var(--brand-1);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+
+  // 强制触摸 target 锁定在按钮本体，避免落在 <svg>/<use> 内部元素上
+  // <use> 在 xlinkHref 变化时会重新实例化 shadow tree，作为 touchstart target 的事件关联会丢失，导致 touchend 不派发
+  & > * {
+    pointer-events: none;
+  }
+
+}
+
+// 录音中按钮保持原尺寸 + 绝对定位，避免占位影响 waves 居中；
+// 不能用 width:0/height:0 压缩，iOS WebKit 会因 target 失去几何尺寸中断触摸事件链，导致 touchend 丢失
+.VoiceInput[data-voice-status='recording'] .VoiceInput-btn {
+  position: absolute;
+  opacity: 0;
+}
+
+.VoiceInput-btnIcon {
+  font-size: 32Px;
+}

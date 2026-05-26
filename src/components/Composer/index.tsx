@@ -10,11 +10,18 @@ import { ToolbarItem } from './ToolbarItem';
 import { ComposerInput } from './ComposerInput';
 import { SendButton } from './SendButton';
 import { Action } from './Action';
+import { MarqueeBorder } from './MarqueeBorder';
+import { VoiceInput, VoiceInputStatus } from '../VoiceInput';
 import toggleClass from '../../utils/toggleClass';
 import { isIOS, isArkWeb, isAliApp } from '../../utils/ua';
 import { updateViewportTop, setViewportTop } from './viewportTop';
 
 export const CLASS_NAME_FOCUSING = 'S--focusing';
+
+/** 阻止 mouseup 冒泡，用于拦截 ClickOutside 的 document 监听 */
+const stopMouseUp = (ev: MouseEvent) => {
+  ev.stopPropagation();
+};
 
 export type InputType = 'voice' | 'text';
 
@@ -27,6 +34,8 @@ export type ComposerProps = {
   inputType?: InputType;
   onInputTypeChange?: (inputType: InputType) => void;
   recorder?: RecorderProps;
+  /** 是否启用新版语音输入 UI 面板（语音输入配置仍通过 recorder 属性传递） */
+  enableNewVoiceInput?: boolean;
   onSend: (type: string, content: string) => void;
   onBeforeSend?: (type: string, content: string) => boolean | Promise<boolean>;
   onImageSend?: (file: File) => Promise<any>;
@@ -52,6 +61,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     wideBreakpoint,
     placeholder: oPlaceholder = '请输入...',
     recorder = {},
+    enableNewVoiceInput,
     onInputTypeChange,
     onFocus,
     onBlur,
@@ -73,6 +83,9 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   const [inputType, setInputType] = useState(initialInputType || 'text');
   const [isAccessoryOpen, setAccessoryOpen] = useState(false);
   const [accessoryContent, setAccessoryContent] = useState('');
+  const [isVoicePanelOpen, setVoicePanelOpen] = useState(false);
+  // 新版语音输入 UI 面板状态
+  const [voiceStatus, setVoiceStatus] = useState<VoiceInputStatus>(VoiceInputStatus.INITED);
   const inputRef = useRef<HTMLTextAreaElement>(null!);
   const focused = useRef(false);
   const blurTimer = useRef<any>();
@@ -163,25 +176,60 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
     }
   }, [text]);
 
+  // 聚焦输入框 语音面板收起、唤起键盘后 重新计算 viewport-top（iOS）
+  useEffect(() => {
+    if (!isVoicePanelOpen && isIOS && focused.current) {
+      // 面板收起后延迟触发 updateViewportTop，等待软键盘弹出稳定
+      const timer = setTimeout(() => {
+        updateViewportTop();
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+    return;
+  }, [isVoicePanelOpen]);
+
   useImperativeHandle(ref, () => ({
     setText,
   }));
 
   const handleInputTypeChange = useCallback(() => {
-    const isVoice = inputType === 'voice';
-    const nextType = isVoice ? 'text' : 'voice';
-    setInputType(nextType);
+    if (enableNewVoiceInput) {
+      // 启用了新版语音输入 UI，使用 VoiceInput 面板交互
+      const willOpenVoicePanel = !isVoicePanelOpen;
+      const nextType = willOpenVoicePanel ? 'voice' : 'text';
+      setInputType(nextType);
+      setVoicePanelOpen(willOpenVoicePanel);
+      if (willOpenVoicePanel) {
+        // 打开语音面板时自动关闭工具栏，避免两个面板同时显示
+        setAccessoryOpen(false);
+        setAccessoryContent('');
+      } else {
+        // 关闭语音面板时重置语音输入状态、聚焦和选区文本输入框
+        setVoiceStatus(VoiceInputStatus.INITED);
+        const input = inputRef.current;
+        input.focus();
+        input.selectionStart = input.selectionEnd = input.value.length;
+      }
+      if (onInputTypeChange) {
+        onInputTypeChange(nextType);
+      }
+    } else {
+      // 原有逻辑：切换内联 Recorder
+      const isVoice = inputType === 'voice';
+      const nextType = isVoice ? 'text' : 'voice';
+      setInputType(nextType);
 
-    if (isVoice) {
-      const input = inputRef.current;
-      input.focus();
-      // eslint-disable-next-line no-multi-assign
-      input.selectionStart = input.selectionEnd = input.value.length;
+      if (isVoice) {
+        const input = inputRef.current;
+        input.focus();
+        // eslint-disable-next-line no-multi-assign
+        input.selectionStart = input.selectionEnd = input.value.length;
+      }
+      if (onInputTypeChange) {
+        onInputTypeChange(nextType);
+      }
     }
-    if (onInputTypeChange) {
-      onInputTypeChange(nextType);
-    }
-  }, [inputType, onInputTypeChange]);
+  }, [inputType, onInputTypeChange, enableNewVoiceInput, isVoicePanelOpen]);
 
   const handleInputFocus = useCallback(
     (e: React.FocusEvent<HTMLTextAreaElement>) => {
@@ -269,10 +317,16 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
 
   const handleSendBtnClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
+      // 语音面板展开时，阻止本次点击后续的 mouseup 冒泡到 document
+      // 否则 VoiceInput 内部的 ClickOutside（bubble 阶段监听 document.mouseup）会把面板收起
+      // 利用 capture 阶段 + once，抢在 ClickOutside 前处理，且不影响其他场景
+      if (isVoicePanelOpen) {
+        document.addEventListener('mouseup', stopMouseUp, { capture: true, once: true });
+      }
       send();
       e.preventDefault();
     },
-    [send],
+    [send, isVoicePanelOpen],
   );
 
   const handleAccessoryToggle = useCallback(() => {
@@ -301,6 +355,18 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
 
   const handlePopoverClose = useCallback(() => {
     setAccessoryContent('');
+  }, []);
+
+  /** 语音输入状态变化处理 - 联动输入框样式 */
+  const handleVoiceStatusChange = useCallback((status: VoiceInputStatus) => {
+    setVoiceStatus(status);
+  }, []);
+
+  /** 关闭语音面板 */
+  const handleVoicePanelClose = useCallback(() => {
+    setVoicePanelOpen(false);
+    setInputType('text');
+    setVoiceStatus(VoiceInputStatus.INITED);
   }, []);
 
   const isInputText = inputType === 'text';
@@ -345,19 +411,27 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
 
   return (
     <>
-      <div className="Composer" data-has-value={hasValue} data-has-text-once={!!textOnce}>
+      <div
+        className="Composer"
+        data-has-value={hasValue}
+        data-has-text-once={!!textOnce}
+        data-voice-status={voiceStatus}
+        data-new-voice-input={!!enableNewVoiceInput}
+      >
         {recorder.canRecord && (
           <Action
             className="Composer-inputTypeBtn"
             data-icon={inputTypeIcon}
             icon={inputTypeIcon}
             onClick={handleInputTypeChange}
+            onMouseUp={(e) => e.stopPropagation()}
             aria-label={isInputText ? '切换到语音输入' : '切换到键盘输入'}
           />
         )}
         <div className="Composer-inputWrap">
-          <ComposerInput invisible={!isInputText} {...inputProps} />
-          {!isInputText && <Recorder {...recorder} />}
+          <ComposerInput invisible={!isInputText && !enableNewVoiceInput} {...inputProps} />
+          {!isInputText && !enableNewVoiceInput && <Recorder {...recorder} />}
+          {enableNewVoiceInput && <MarqueeBorder />}
         </div>
         {!text && rightAction && <Action {...rightAction} />}
         {hasToolbar && (
@@ -376,6 +450,15 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
         <AccessoryWrap onClickOutside={handleAccessoryBlur}>
           {accessoryContent || <Toolbar items={toolbar} onClick={handleToolbarClick} />}
         </AccessoryWrap>
+      )}
+      {enableNewVoiceInput && isVoicePanelOpen && (
+        <VoiceInput
+          onStart={recorder.onStart}
+          onEnd={recorder.onEnd}
+          onCancel={recorder.onCancel}
+          onStatusChange={handleVoiceStatusChange}
+          onClose={handleVoicePanelClose}
+        />
       )}
     </>
   );

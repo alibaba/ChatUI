@@ -6,6 +6,17 @@
   overflow-y: auto;
 }
 
+:root {
+  --font-size-scale: 1;
+  font-size: calc(4.26667vw * var(--font-size-scale));
+}
+
+@media (max-width: 374px), (min-width: 768px) {
+  :root {
+    font-size: calc(16px * var(--font-size-scale));
+  }
+}
+
 body {
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
   line-height: 1.5;
@@ -79,11 +90,6 @@ body {
       font-size: 14px;
     }
   }
-  &[data-page='goods'] {
-    .demo-section {
-      background: var(--app-bg);
-    }
-  }
   &[data-page='search'] {
     .demo-section {
       background: var(--app-bg);
@@ -120,7 +126,7 @@ body {
 
 .demo-section {
   padding: 16px;
-  
+
   &:not(:last-child) {
     margin-bottom: 8px;
   }
@@ -197,15 +203,14 @@ body {
 
 // OrderSelector
 .OrdderSelector {
-  .Popup-dialog {
-    background: var(--gray-7);
-  }
   .Popup-body {
     padding: 0 6px 9px;
   }
 }
 
 .OrderGroup {
+  margin-top: 12px;
+
   &-header {
     display: flex;
     justify-content: space-between;

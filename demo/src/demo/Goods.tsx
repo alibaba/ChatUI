@@ -5,7 +5,7 @@ import { ConfigProvider } from '../../../src/components/ConfigProvider';
 
 export default () => (
   <DemoPage>
-    <DemoSection title="基础用法">
+    <DemoSection title="基础用法" bg="gray">
       <Card size="xl">
         <Goods
           img="//gw.alicdn.com/tfs/TB1p_nirYr1gK0jSZR0XXbP8XXa-300-300.png"
@@ -28,7 +28,7 @@ export default () => (
         />
       </Card>
     </DemoSection>
-    <DemoSection title="订单（标题+描述+状态）">
+    <DemoSection title="订单（标题+描述+状态）" bg="gray">
       <Card size="xl">
         <Goods
           img="//gw.alicdn.com/tfs/TB1p_nirYr1gK0jSZR0XXbP8XXa-300-300.png"
@@ -47,7 +47,7 @@ export default () => (
         </Goods>
       </Card>
     </DemoSection>
-    <DemoSection title="订单（标题+描述+状态）">
+    <DemoSection title="订单（标题+描述+状态）" bg="gray">
       <Card size="xl">
         <Goods
           type="order"
@@ -61,7 +61,7 @@ export default () => (
         />
       </Card>
     </DemoSection>
-    <DemoSection title="订单（标题+状态）">
+    <DemoSection title="订单（标题+状态）" bg="gray">
       <Card size="xl">
         <Goods
           type="order"
@@ -74,7 +74,7 @@ export default () => (
         />
       </Card>
     </DemoSection>
-    <DemoSection title="订单（标题+描述）">
+    <DemoSection title="订单（标题+描述）" bg="gray">
       <Card size="xl">
         <Goods
           type="order"
@@ -87,7 +87,7 @@ export default () => (
         />
       </Card>
     </DemoSection>
-    <DemoSection title="渲染 children">
+    <DemoSection title="渲染 children" bg="gray">
       <Card size="xl">
         <Goods
           type="order"
@@ -102,7 +102,7 @@ export default () => (
         </Goods>
       </Card>
     </DemoSection>
-    <DemoSection title="渲染 asideContent">
+    <DemoSection title="渲染 asideContent" bg="gray">
       <Card size="xl">
         <Goods
           type="order"
@@ -116,7 +116,7 @@ export default () => (
         />
       </Card>
     </DemoSection>
-    <DemoSection title="订单列表">
+    <DemoSection title="订单列表" bg="gray">
       <Card size="xl">
         <Goods
           type="order"
@@ -155,7 +155,7 @@ export default () => (
         </Goods>
       </Card>
     </DemoSection>
-    <DemoSection title="待支付运费">
+    <DemoSection title="待支付运费" bg="gray">
       <Card fluid>
         <CardTitle>您有5笔历史运费待支付</CardTitle>
         <CardContent>
@@ -207,7 +207,7 @@ export default () => (
         />
       </Card>
     </DemoSection>
-    <DemoSection title="适老化（props）">
+    <DemoSection title="适老化（props）" bg="gray">
       <Card>
         <Goods
           img="//gw.alicdn.com/tfs/TB1p_nirYr1gK0jSZR0XXbP8XXa-300-300.png"
@@ -222,8 +222,7 @@ export default () => (
           unit="kg"
           elderMode
           action={{
-            label: '发送',
-            color: 'primary',
+            icon: 'cart',
             onClick(e) {
               console.log(e);
             },
@@ -231,7 +230,7 @@ export default () => (
         />
       </Card>
     </DemoSection>
-    <DemoSection title="适老化（ConfigProvider）">
+    <DemoSection title="适老化（ConfigProvider）" bg="gray">
       <ConfigProvider elderMode>
         <Card>
           <Goods

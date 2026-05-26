@@ -12,10 +12,10 @@
   visibility: hidden;
 
   &[data-type='success'] .Icon {
-    color: var(--green);
+    color: var(--color-success);
   }
   &[data-type='error'] .Icon {
-    color: var(--red);
+    color: var(--color-warning);
   }
   &[data-type='loading'] .Icon {
     color: var(--brand-1);
@@ -32,7 +32,7 @@
 
 .Toast-content {
   display: flex;
-  max-width: 90vw;
+  max-width: 275px;
   padding: @toast-content-padding;
   border-radius: var(--radius-md);
   background: var(--color-toast);

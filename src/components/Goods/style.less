@@ -1,16 +1,17 @@
 .Goods {
-  padding: @goods-padding;
-  font-size: 14px;
+  padding: 12Px;
+  font-size: var(--font-size-sm);
 
   &[data-elder-mode="true"] {
-    --goods-img-size: 56px;
+    --goods-img-size: 56Px;
 
-    .Price {
-      color: var(--brand-1);
+    .Goods-desc,
+    .Goods-count {
+      font-size: 16Px;
     }
   }
   &[data-variant="inList"] {
-    --goods-img-size: 88px;
+    --goods-img-size: 88Px;
 
     .Goods-status {
       display: flex;
@@ -19,13 +20,30 @@
     }
   }
   &[data-variant="compact"] {
-    --goods-img-size: 44px;
-    padding: 8px;
+    --goods-img-size: 39Px;
+    padding: 0 6px 0 0;
+    align-items: center;
     background: var(--color-fill-2);
     color: var(--color-text-2);
+    border-radius: var(--radius-md);
 
+    .Goods-figure {
+      padding: 1px;
+    }
+    .Goods-name {
+      font-size: var(--font-size-xs);
+    }
     .Price {
       font-weight: 400;
+      font-size: var(--font-size-xs);
+    }
+    .Goods-aside {
+      flex-direction: row;
+      align-items: center;
+    }
+    .Goods-countUnit {
+      margin-top: 0;
+      font-size: var(--font-size-xs);
     }
   }
   & + & {
@@ -102,7 +120,7 @@
   display: flex;
   align-self: flex-start;
   position: relative;
-  margin-right: @goods-gap;
+  margin-right: 8px;
 }
 
 .Goods-caption {
@@ -111,9 +129,10 @@
   bottom: 0;
   right: 0;
   text-align: center;
+  white-space: nowrap;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
-  background: rgba(14, 17, 25, 0.5);
+  background: var(--color-mask);
   color: var(--white);
-  font-size: 12px;
+  font-size: var(--font-size-xs);
   line-height: 20px;
 }

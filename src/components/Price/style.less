@@ -43,3 +43,21 @@
 .Price-currency {
   font-size: 0.8em;
 }
+
+.Coupon,
+.RedPacket {
+  .Price {
+    &[data-size="xl"] {
+      font-size: 30Px;
+    }
+    &[data-size="lg"] {
+      font-size: 24Px;
+    }
+    &[data-size="md"] {
+      font-size: 18Px;
+    }
+    &[data-size="sm"] {
+      font-size: 14Px;
+    }
+  }
+}

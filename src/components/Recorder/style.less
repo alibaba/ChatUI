@@ -3,11 +3,11 @@
   top: 50%;
   left: 50%;
   z-index: @zindex-recorder-toast;
-  width: 160px;
-  height: 160px;
-  padding: 10px;
+  width: 160Px;
+  height: 160Px;
+  padding: 10Px;
   transform: translate(-50%, -50%);
-  border-radius: 12px;
+  border-radius: 12Px;
   background: var(--color-toast);
   color: var(--color-fill-1);
   text-align: center;
@@ -15,7 +15,7 @@
 
 .Recorder--cancel {
   .RecorderToast {
-    color: var(--red);
+    color: var(--color-warning);
   }
   .Recorder-btn {
     background: @btn-hover-bg;
@@ -25,7 +25,7 @@
 
 .RecorderToast-icon {
   position: relative;
-  font-size: 37px;
+  font-size: 37Px;
 }
 
 .RecorderToast-waves {
@@ -46,32 +46,32 @@
 }
 
 .RecorderToast-wave-1 {
-  top: -25px;
-  left: 14px;
-  font-size: 176px;
+  top: -25Px;
+  left: 14Px;
+  font-size: 176Px;
   opacity: 0.2;
 }
 
 .RecorderToast-wave-2 {
-  top: -12px;
-  left: -21px;
-  font-size: 186px;
+  top: -12Px;
+  left: -21Px;
+  font-size: 186Px;
   opacity: 0.4;
 }
 
 .RecorderToast-wave-3 {
-  top: 40px;
-  left: 55px;
-  font-size: 71px;
+  top: 40Px;
+  left: 55Px;
+  font-size: 71Px;
   opacity: 0.8;
 }
 
 .Recorder-btn {
-  height: 36px;
+  height: var(--action-size);
   border-radius: var(--radius-md);
   background: var(--color-fill-1);
   color: var(--brand-1);
-  line-height: 36px;
+  line-height: var(--action-size);
   text-align: center;
   transition: .3s;
 }
@@ -85,5 +85,11 @@
   }
   100% {
     transform: translateY(5%) rotate(360deg);
+  }
+}
+
+.ChatApp[data-elder-mode="true"] {
+  .Recorder-btn {
+    font-size: 20Px;
   }
 }

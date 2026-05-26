@@ -31,6 +31,11 @@ export default {
     releaseOrSwipe: '松开发送，上滑取消',
     release2cancel: '松开手指，取消发送',
   },
+  VoiceInput: {
+    hold2talk: '按住说话转文本',
+    releaseOrSwipe: '松开停止，上滑取消',
+    release2send: '松开手指，取消输入',
+  },
   Search: {
     search: '搜索',
   },

@@ -31,6 +31,11 @@ export default {
     releaseOrSwipe: 'Relâchez pour envoyer, balayez vers le haut pour annuler',
     release2cancel: 'Relâcher pour annuler',
   },
+  VoiceInput: {
+    hold2talk: 'Appuyez et maintenez pour convertir la parole en texte',
+    releaseOrSwipe: 'Relâchez pour arrêter, balayez vers le haut pour annuler',
+    release2send: 'Relâchez pour annuler',
+  },
   Search: {
     search: 'Chercher',
   },

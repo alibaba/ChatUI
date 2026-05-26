@@ -9,11 +9,16 @@
   color: var(--ribbon-color);
   font-weight: 500;
   white-space: nowrap;
-  font-size: 12px;
+  font-size: var(--font-size-xs);
 
   &[data-color='gray'] {
     --ribbon-bg: rgba(80, 96, 122, 0.2);
     --ribbon-color: var(--color-text-2);
+  }
+
+  &[data-color='yellow'] {
+    --ribbon-bg: #fffbcc;
+    --ribbon-color: #aa6600;
   }
 
   &[data-position='left'] {
@@ -60,7 +65,7 @@
     }
   }
   &[data-size='sm'] {
-    font-size: 10px;
+    font-size: var(--font-size-xs);
     line-height: 1;
   }
 }
@@ -68,4 +73,16 @@
 .Arc {
   position: absolute;
   color: var(--ribbon-bg);
+}
+
+.RedPacket .Ribbon,
+.Coupon .Ribbon {
+  --ribbon-bg: #ffe0cc;
+  --ribbon-color: #ff6200;
+  --font-size-xs: 12Px;
+
+  &[data-color='gray'] {
+    --ribbon-bg: rgba(80, 96, 122, 0.2);
+    --ribbon-color: #50607a;
+  }
 }

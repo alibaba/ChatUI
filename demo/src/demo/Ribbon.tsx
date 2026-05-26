@@ -43,6 +43,14 @@ export default () => (
       <Card style={{ position: 'relative', width: '160px', height: '80px' }}>
         <Ribbon color="gray" position="right">已使用</Ribbon>
       </Card>
+      <br />
+      <Card style={{ position: 'relative', width: '160px', height: '80px' }}>
+        <Ribbon color="yellow">加抵金</Ribbon>
+      </Card>
+      <br />
+      <Card style={{ position: 'relative', width: '160px', height: '80px' }}>
+        <Ribbon color="yellow" position="right">限时优惠</Ribbon>
+      </Card>
     </DemoSection>
   </DemoPage>
 );

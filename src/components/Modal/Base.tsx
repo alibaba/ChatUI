@@ -9,27 +9,37 @@ import useNextId from '../../hooks/useNextId';
 import toggleClass from '../../utils/toggleClass';
 import { useConfig } from '../ConfigProvider';
 
-export type ModalProps = {
-  active?: boolean;
+type BaseModalProps = {
   baseClass?: string;
+  active?: boolean;
   className?: string;
-  title?: string;
-  subTitle?: string;
+  title?: React.ReactNode;
   titleId?: string;
   showClose?: boolean;
   autoFocus?: boolean;
   backdrop?: boolean | 'static';
-  height?: number | string;
-  overflow?: boolean;
   actions?: ButtonProps[];
   vertical?: boolean;
-  btnVariant?: ButtonProps['variant'];
   bgColor?: string;
-  avatar?: string;
+  bodyAlign?: 'left' | 'center';
   onClose?: () => void;
   onBackdropClick?: () => void;
   children?: React.ReactNode;
 };
+
+export type ModalProps = BaseModalProps & {
+  avatar?: string;
+};
+
+export type PopupProps = BaseModalProps & {
+  subTitle?: string;
+  logo?: string;
+  actionsDesc?: React.ReactNode;
+  height?: number | string;
+  overflow?: boolean;
+};
+
+type InternalProps = BaseModalProps & ModalProps & PopupProps;
 
 function clearModal() {
   if (!document.querySelector('.Modal') && !document.querySelector('.Popup')) {
@@ -37,7 +47,7 @@ function clearModal() {
   }
 }
 
-export const Base = (props: ModalProps) => {
+export const Base = (props: InternalProps) => {
   const {
     baseClass,
     active,
@@ -49,11 +59,13 @@ export const Base = (props: ModalProps) => {
     backdrop = true,
     height,
     overflow,
+    actionsDesc,
     actions,
     vertical = true,
-    btnVariant,
     bgColor,
     avatar,
+    logo,
+    bodyAlign,
     children,
     onBackdropClick,
     onClose,
@@ -97,6 +109,8 @@ export const Base = (props: ModalProps) => {
 
   const isPopup = baseClass === 'Popup';
   const hasAvatar = avatar && baseClass === 'Modal';
+  const hasLogo = !!(isPopup && logo);
+  const hasSubTitle = !!(isPopup && subTitle);
 
   return createPortal(
     <div
@@ -122,13 +136,32 @@ export const Base = (props: ModalProps) => {
       >
         <div className={`${baseClass}-content`}>
           {hasAvatar && (
-            <div className={`${baseClass}-avatar`} style={{ '--avatar': `url(${avatar})` } as React.CSSProperties} />
+            <div
+              className={`${baseClass}-avatar`}
+              style={{ '--avatar': `url(${avatar})` } as React.CSSProperties}
+            />
           )}
-          <div className={`${baseClass}-header`}>
-            <h5 className={`${baseClass}-title`} id={titleId}>
-              {title}
-            </h5>
-            {isPopup && subTitle && <h6 className={`${baseClass}-subtitle`}>{subTitle}</h6>}
+          <div
+            className={`${baseClass}-header`}
+            data-has-logo={hasLogo}
+            data-has-sub-title={hasSubTitle}
+          >
+            {hasLogo ? (
+              <div className={`${baseClass}-headerText`}>
+                <img className={`${baseClass}-logo`} src={logo} alt="" />
+                <h5 className={`${baseClass}-title`} id={titleId}>
+                  {title}
+                </h5>
+                {subTitle && <h6 className={`${baseClass}-subtitle`}>{subTitle}</h6>}
+              </div>
+            ) : (
+              <>
+                <h5 className={`${baseClass}-title`} id={titleId}>
+                  {title}
+                </h5>
+                {subTitle && <h6 className={`${baseClass}-subtitle`}>{subTitle}</h6>}
+              </>
+            )}
             {showClose && onClose && (
               <IconButton
                 className={`${baseClass}-close`}
@@ -139,15 +172,18 @@ export const Base = (props: ModalProps) => {
               />
             )}
           </div>
-          <div className={clsx(`${baseClass}-body`, { overflow })}>{children}</div>
-          {actions && (
-            <div
-              className={`${baseClass}-footer ${baseClass}-footer--${vertical ? 'v' : 'h'}`}
-              data-variant={btnVariant || 'round'}
-            >
-              {actions.map((item) => (
-                <Button size="lg" block={isPopup} variant={btnVariant} {...item} key={item.label} />
-              ))}
+          <div className={clsx(`${baseClass}-body`, { overflow })} data-align={bodyAlign}>
+            {children}
+          </div>
+          {(actions || actionsDesc) && (
+            <div className={`${baseClass}-footer ${baseClass}-footer--${vertical ? 'v' : 'h'}`}>
+              {isPopup && actionsDesc && (
+                <div className={`${baseClass}-actionsDesc`}>{actionsDesc}</div>
+              )}
+              {actions &&
+                actions.map((item) => (
+                  <Button size="lg" block={isPopup} {...item} key={item.label} />
+                ))}
             </div>
           )}
         </div>

@@ -31,6 +31,11 @@ export default {
     releaseOrSwipe: 'حرر للإرسال ، اسحب لأعلى للإلغاء',
     release2cancel: 'حرر للإلغاء',
   },
+  VoiceInput: {
+    hold2talk: 'اضغط مع الاستمرار لتحويل الكلام إلى نص',
+    releaseOrSwipe: 'افصل الزر لإيقاف التشغيل، وحرك لأعلى للإلغاء',
+    release2send: 'حرر للإلغاء',
+  },
   Search: {
     search: 'يبحث',
   },

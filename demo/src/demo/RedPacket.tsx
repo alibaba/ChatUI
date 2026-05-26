@@ -216,7 +216,7 @@ export default () => (
     <hr />
     <DemoSection title="省钱卡-未失效" bg="gray">
       <RedPacket
-        image="http://iph.href.lu/140x106?text=%E5%9B%BE%E7%89%87&fg=cacfd7&bg=f3f6f8"
+        image="https://devtool.tech/api/placeholder/140/106?fontSize=16"
         name="淘宝省钱月卡"
         desc="0元免至 2023.11"
         variant="image"
@@ -228,7 +228,7 @@ export default () => (
     </DemoSection>
     <DemoSection title="失效-已使用" bg="gray">
       <RedPacket
-        image="http://iph.href.lu/140x106?text=%E5%9B%BE%E7%89%87&fg=cacfd7&bg=f3f6f8"
+        image="https://devtool.tech/api/placeholder/140/106?fontSize=16"
         name="权益标题"
         desc="权益使用条件/规则"
         variant="image"
@@ -240,10 +240,70 @@ export default () => (
     </DemoSection>
     <DemoSection title="失效-已过期" bg="gray">
       <RedPacket
-        image="http://iph.href.lu/140x106?text=%E5%9B%BE%E7%89%87&fg=cacfd7&bg=f3f6f8"
+        image="https://devtool.tech/api/placeholder/140/106?fontSize=16"
         name="权益标题"
         desc="权益使用条件/规则"
         variant="image"
+        status="expired"
+        onClick={() => {
+          console.log('on click');
+        }}
+      />
+    </DemoSection>
+    <hr />
+    <DemoSection title="加抵金：列表模式" bg="gray">
+      <RedPacket
+        value={5.00}
+        condition="满50元可用"
+        name="加抵金"
+        endAt={endTs}
+        desc="限指定商品使用"
+        variant="additional-credit"
+        inList
+        btnText="选择"
+        onClick={() => {
+          console.log('on click');
+        }}
+      />
+    </DemoSection>
+    <DemoSection title="加抵金：即将过期" bg="gray">
+      <RedPacket
+        value={10.00}
+        condition="满100元可用"
+        name="加抵金"
+        endAt={endTs}
+        desc="限指定商品使用"
+        variant="additional-credit"
+        status="nearExpired"
+        dateDesc={<><span>限时</span> <Countdown targetDate={endTs} /></>}
+        btnText="去使用"
+        onClick={() => {
+          console.log('on click');
+        }}
+      />
+    </DemoSection>
+    <DemoSection title="加抵金：已使用" bg="gray">
+      <RedPacket
+        value={10.00}
+        condition="满100元可用"
+        name="加抵金"
+        endAt={endTs}
+        desc="限指定商品使用"
+        variant="additional-credit"
+        status="used"
+        onClick={() => {
+          console.log('on click');
+        }}
+      />
+    </DemoSection>
+    <DemoSection title="加抵金：已过期" bg="gray">
+      <RedPacket
+        value={10.00}
+        condition="满100元可用"
+        name="加抵金"
+        endAt={endTs}
+        desc="限指定商品使用"
+        variant="additional-credit"
         status="expired"
         onClick={() => {
           console.log('on click');

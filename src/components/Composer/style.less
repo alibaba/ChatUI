@@ -9,14 +9,18 @@
     margin-left: 9Px;
   }
   &[data-has-value="false"] .Composer-actions[data-action="send"],
-  &[data-has-value="true"] .Composer-actions[data-action-icon] {
+  &[data-has-value="true"][data-new-voice-input="true"]
+    .Composer-actions[data-action-icon]:not([data-action-icon="mic"]):not([data-action-icon="keyboard"]),
+  &[data-has-value="true"]:not([data-new-voice-input="true"]) .Composer-actions[data-action-icon] {
     width: 0;
     margin: 0;
     opacity: 0;
   }
   &[data-has-value="true"] {
-    .Composer-inputWrap {
-      margin-left: 0;
+    &:not([data-new-voice-input="true"]) {
+      .Composer-inputWrap {
+        margin-left: 0;
+      }
     }
     .Composer-sendBtn {
       animation: 0.3s sendIn;
@@ -59,8 +63,9 @@
 
 .Composer-input {
   overflow-x: hidden;
+  min-height: var(--action-size);
   max-height: @composer-input-max-height;
-  padding: @composer-input-padding;
+  padding: 8Px 12Px;
   border: 0;
   border-radius: var(--radius-md);
   // background: @composer-input-bg;
@@ -73,8 +78,9 @@
 .Composer-sendBtn {
   flex: 0 0 auto;
   min-width: 0;
-  padding-left: 16Px;
-  padding-right: 16Px;
+  padding: 8Px 16Px;
+  font-size: 14Px;
+  line-height: 18Px;
 }
 
 @keyframes sendIn {
@@ -86,18 +92,174 @@
   }
 }
 
+/* 语音输入状态联动样式（仅新版语音输入启用时生效） */
+.Composer[data-new-voice-input="true"] {
+  // 创建独立堆叠上下文，使子元素 ::before 的 z-index: -1 不会穿透到祖先背景
+  .Composer-inputWrap {
+    isolation: isolate;
+  }
+
+  // 渐变覆盖层：默认隐藏，仅在 recording 状态由动画驱动显隐
+  // - 径向渐变：自左上角 brand-3 实色向外淡化至透明（起点 alpha = 1）
+  // - z-index: -1 配合 inputWrap 的 isolation，将渐变压到 textarea 背后，文字不被覆盖
+  // - pointer-events: none 避免遮挡输入；will-change: opacity 提示合成层
+  .Composer-inputWrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 55%;
+    max-width: 80Px;
+    height: 80%;
+    max-height: 36Px;
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+    background: radial-gradient(
+      ellipse at top left,
+      var(--brand-3) 0%,
+      transparent 60%
+    );
+    pointer-events: none;
+    opacity: 0;
+    z-index: -1;
+    will-change: opacity;
+  }
+
+  // recording 状态联动：渐变层呼吸 + 跑马灯点亮 + 输入框底色让位
+  &[data-voice-status='recording'] {
+    .Composer-input {
+      // 让背后的渐变层透出来（原填充色上提到 inputWrap）
+      background-color: transparent;
+    }
+
+    // 由 inputWrap 接管输入框底色，渐变层落在 inputWrap 背景与 textarea 之间
+    // 边框不再用 box-shadow，改由 ::after 实现可动效的 1Px 边框（同时规避 iOS WebKit overflow-x + box-shadow 裁剪 bug）
+    .Composer-inputWrap {
+      background-color: var(--color-fill-1);
+      border-radius: var(--radius-md);
+    }
+
+    // 输入框左上角径向渐变呼吸覆盖层
+    // 通过 ::before 伪元素叠加在 inputWrap 上，不影响输入交互
+    .Composer-inputWrap::before {
+      animation: voiceInputPulse 2s ease-in-out infinite;
+    }
+
+    // 边框跑马灯动效：由 SVG <MarqueeBorder /> 接管，这里仅负责在 recording 状态下点亮
+    .Composer-marquee {
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes voiceInputPulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+// 边框跑马灯层（SVG 实现）：默认隐藏，仅在 recording 状态点亮
+// - 两个 <rect> 重叠：底层实色铺整圈，上层 stroke-dasharray + dashoffset 动画
+// - rx / ry 跟随 var(--radius-md)，与 inputWrap 圆角保持同步
+// - pathLength=100 将周长归一化，dasharray="25 75" 即亮段占 1/4 周长
+// - animation: 3s linear infinite，stroke-dashoffset 从 0 到 -100 实现顺时针匀速绕圈
+// - vector-effect: non-scaling-stroke 保证描边始终 1Px，不被容器拉伸影响
+.Composer-marquee {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  overflow: visible;
+  will-change: opacity;
+
+  rect {
+    rx: var(--radius-md);
+    ry: var(--radius-md);
+    fill: none;
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  &-base {
+    // 使用 stroke + stroke-opacity 拆分代替 color-mix，避免 Android 老版 WebView
+    // 不支持 color-mix() 时整个 stroke 声明被丢弃导致底色不渲染。
+    // stroke-opacity 是 SVG 1.1 属性，全环境兼容。
+    stroke: var(--brand-1);
+    stroke-opacity: 0.65;
+  }
+
+  // 三层 sweep 叠加营造亮段两端羽化渐变：
+  // - 中心同步原理：每层 dashoffset 起点 = L/2、终点 = L/2 - 100（变化量恒为 -100），
+  //   三层在 1.5s 内同步走完一圈，亮段中心任意时刻重合
+  // - 亮段长度从外到内递减，透明度从外到内递增，叠加后亮段中间最亮、两端逐步淡出
+  &-sweep {
+    stroke: var(--brand-1);
+
+    &--outer {
+      stroke-dasharray: 50 50;
+      stroke-opacity: 0.2;
+      animation: marqueeRotateOuter 1.5s linear infinite;
+    }
+
+    &--mid {
+      stroke-dasharray: 32 68;
+      stroke-opacity: 0.5;
+      animation: marqueeRotateMid 1.5s linear infinite;
+    }
+
+    &--core {
+      stroke-dasharray: 15 85;
+      stroke-opacity: 1;
+      animation: marqueeRotateCore 1.5s linear infinite;
+    }
+  }
+}
+
+@keyframes marqueeRotateOuter {
+  from {
+    stroke-dashoffset: 25;
+  }
+  to {
+    stroke-dashoffset: -75;
+  }
+}
+
+@keyframes marqueeRotateMid {
+  from {
+    stroke-dashoffset: 16;
+  }
+  to {
+    stroke-dashoffset: -84;
+  }
+}
+
+@keyframes marqueeRotateCore {
+  from {
+    stroke-dashoffset: 7.5;
+  }
+  to {
+    stroke-dashoffset: -92.5;
+  }
+}
+
 .ChatApp[data-elder-mode="true"] {
-  .Composer {
-    --action-size: 50Px;
-    --action-font-size: 34Px;
-  }
   .Composer-input {
-    padding: 9Px 12Px;
-    font-size: 21Px;
-    line-height: 32Px;
+    padding: 4Px 12Px;
+    font-size: 20Px;
+    line-height: 1.4;
   }
-  .Composer-sendBtn {
-    padding: 4Px 13Px;
-    font-size: 17Px;
+}
+
+html[data-color-scheme='dark'] {
+  // 不展示语音输入时输入框左上角的呼吸渐变
+  .Composer[data-new-voice-input='true'] {
+    .Composer-inputWrap::before {
+      content: none;
+    }
   }
 }

@@ -19,12 +19,12 @@ export const OrderObject = (props: OrderObjectProps) => {
   const firstOrder = list[0];
 
   return (
-    <div className={clsx('OrderObject', className)} onClick={onClick}>
+    <div className={clsx('OrderObject', { 'OrderObject--hasTitle': title }, className)} onClick={onClick}>
       {title && <div className="OrderObject-title">{title}</div>}
       {count > 1 ? (
         <Flex alignItems="center">
           <FlexItem>
-            <ImageList list={list.slice(0, 3).map((t) => ({ src: t.img! }))} />
+            <ImageList list={list.slice(0, 3).map((t) => ({ src: t.img!, caption: t.caption }))} />
           </FlexItem>
           <div className="OrderObject-count">{`共${count}件`}</div>
           <Icon type="chevron-right" />

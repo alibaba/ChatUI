@@ -41,12 +41,12 @@
       top: (@step-title-height / 2 + @step-icon-size / 2 + 2px);
     }
     .Step-icon {
-      color: var(--red);
+      color: var(--color-warning);
     }
   }
   &[data-status='success'] {
     .Step-icon {
-      color: var(--green);
+      color: var(--color-success);
     }
   }
 }
@@ -89,7 +89,7 @@
   font-size: var(--font-size-md);
 
   .Card & {
-    font-size: 15px;
+    font-size: var(--font-size-body);
   }
   small {
     margin-left: 12px;

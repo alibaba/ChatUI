@@ -1,7 +1,7 @@
 .KvList {
   --kv-aside-width: 90px;
   --kv-title-color: var(--color-text-2);
-  --kv-gap: 10px;
+  --kv-gap: 10Px;
 
   &[data-align='left'] {
     .KvItem-title {
@@ -31,14 +31,14 @@
 
 .KvItem {
   color: var(--color-text-1);
-  font-size: 15px;
+  font-size: var(--font-size-body);
 
   & + & {
     margin-top: 8px;
   }
 
   &[data-level='2'] {
-    font-size: 14px;
+    font-size: var(--font-size-sm);
   }
   &[data-highlight='true'] {
     .KvItem-main {
@@ -69,5 +69,5 @@
 
 .KvItem-desc {
   color: var(--color-text-3);
-  font-size: 12px;
+  font-size: var(--font-size-xs);
 }

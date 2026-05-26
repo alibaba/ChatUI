@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ConfigProvider, ConfigContextType } from '../ConfigProvider';
+import { useColorScheme } from '../../hooks/useColorScheme';
 import { Navbar, NavbarProps } from '../Navbar';
 import {
   MessageContainer,
@@ -177,10 +178,11 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     onToolbarClick,
     onAccessoryToggle,
     rightAction,
+    enableNewVoiceInput,
     Composer = DComposer,
     isX,
   } = props;
-  const [currentColorScheme, setCurrentColorScheme] = useState<'light' | 'dark'>('light');
+  const currentColorScheme = useColorScheme(colorScheme);
 
   function handleInputFocus(e: React.FocusEvent<HTMLTextAreaElement>) {
     if (messagesRef && messagesRef.current) {
@@ -209,29 +211,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     }
   }, []);
 
-  useEffect(() => {
-    const updateColorScheme = (scheme: 'light' | 'dark') => {
-      setCurrentColorScheme(scheme);
-      document.documentElement.dataset.colorScheme = scheme;
-    };
 
-    if (colorScheme === 'auto') {
-      const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      const handleColorSchemeChange = (e: MediaQueryListEvent | MediaQueryList) => {
-        updateColorScheme(e.matches ? 'dark' : 'light');
-      }
-
-      colorSchemeQuery.addEventListener('change', handleColorSchemeChange);
-      handleColorSchemeChange(colorSchemeQuery);
-
-      return () => {
-        colorSchemeQuery.removeEventListener('change', handleColorSchemeChange);
-      }
-    } else if (colorScheme === 'dark') {
-      updateColorScheme(colorScheme);
-    }
-    return;
-  }, [colorScheme]);
 
   return (
     <ConfigProvider locale={locale} locales={locales} colorScheme={currentColorScheme} elderMode={elderMode}>
@@ -285,6 +265,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
             onBeforeSend={onBeforeSend}
             onImageSend={onImageSend}
             rightAction={rightAction}
+            enableNewVoiceInput={enableNewVoiceInput}
           />
         </div>
       </div>

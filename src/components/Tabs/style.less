@@ -2,16 +2,16 @@
 @scrollable-width: 18px;
 
 .Tabs {
-  --tab-font-size: 15px;
+  --tab-font-size: var(--font-size-body);
   --tab-active-color: var(--color-text-1);
-  --tab-line-bottom: 5px;
+  --tab-line-bottom: 5Px;
 
   &[data-color='primary'] {
     --tab-active-color: var(--brand-1);
   }
   &[data-size='lg'] {
-    --tab-font-size: 18px;
-    --tab-line-bottom: 3px;
+    --tab-font-size: var(--font-size-lg);
+    --tab-line-bottom: 3Px;
   }
 }
 
@@ -53,13 +53,13 @@
 }
 
 .Tabs-navLink {
-  padding: 9px;
+  padding: 9Px;
   border: 0;
   border-radius: var(--radius-md);
   background: transparent;
   color: var(--color-text-2);
   font-size: var(--tab-font-size);
-  line-height: 18px;
+  line-height: 18Px;
   transition: color 0.3s;
 
   &:focus:not(:focus-visible) {
@@ -82,7 +82,7 @@
       left: 50%;
       transform: translateX(-50%);
       width: 12px;
-      height: 2px;
+      height: 2Px;
       background: currentColor;
       border-radius: var(--radius-sm);
     }

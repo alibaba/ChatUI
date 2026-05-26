@@ -13,6 +13,8 @@ export interface CouponProps {
   className?: string;
   /* 标题 */
   name: string;
+  /* 左侧自定义内容 (优先级最高) */
+  leftContent?: React.ReactNode;
   /* 金额 */
   value?: number;
   /* 折扣 */
@@ -46,6 +48,7 @@ const statusLabelMap: Record<CouponStatus, string> = {
 export const Coupon = (props: CouponProps) => {
   const {
     className,
+    leftContent,
     value,
     discount,
     condition,
@@ -70,17 +73,20 @@ export const Coupon = (props: CouponProps) => {
     >
       <Flex className="Coupon-object" center direction="column">
         {
-          value
-            ? <Price className="Coupon-value" price={value} currency="¥" autoFit />
-            : (
-              discount
-                ? (
-                  <div className="Coupon-discount Price" data-size="xl">
-                    <span className="Price-integer">{discount}</span>
-                    <span className="Coupon-discount-suffix">折</span>
-                  </div>
+          leftContent
+            || (
+              value
+                ? <Price className="Coupon-value" price={value} currency="¥" autoFit />
+                : (
+                  discount
+                    ? (
+                      <div className="Coupon-discount Price" data-size="xl">
+                        <span className="Price-integer">{discount}</span>
+                        <span className="Coupon-discount-suffix">折</span>
+                      </div>
+                    )
+                    : null
                 )
-                : null
             )
         }
         <Text className="Coupon-condition" truncate={2}>

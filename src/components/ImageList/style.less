@@ -1,5 +1,5 @@
 .ImageList {
-  --image-list-size: 44px;
+  --image-list-size: 32px;
   --image-list-fit: cover;
 
   display: flex;
@@ -9,12 +9,30 @@
   padding: 0;
   list-style: none;
 
+  &-item {
+    position: relative;
+    margin: 4px 0 0 4px;
+  }
+
   .Image {
     display: block;
     width: var(--image-list-size);
     height: var(--image-list-size);
-    margin: 4px 0 0 4px;
     border-radius: var(--radius-md);
     object-fit: var(--image-list-fit);
+  }
+
+  &-caption {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    background: var(--color-mask);
+    color: #fff;
+    font-size: var(--font-size-xs);
+    line-height: 15px;
   }
 }

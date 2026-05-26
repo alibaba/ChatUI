@@ -10,10 +10,13 @@ export default () => {
     <Popup
       className="OrdderSelector"
       active={active}
+      bgColor="gray"
+      logo="https://gw.alicdn.com/imgextra/i2/O1CN01H7qCRA1LR9vjy8vE2_!!6000000001295-2-tps-236-180.png"
       onClose={() => {
         setActive(false);
       }}
-      title="请选择您要咨询的订单"
+      title="请选择您要咨询的问题"
+      subTitle="淘小蜜为您更精准的匹配人工客服"
       actions={[{ label: '没有对应订单' }]}
     >
       <div>

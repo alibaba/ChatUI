@@ -73,8 +73,9 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
   } = props;
 
   const elderMode = oElderMode || configCtx.elderMode;
-  const isOrder = type === 'order' && !elderMode;
-  const isGoods = type !== 'order' && !elderMode;
+  const isOrder = type === 'order';
+  const isGoods = type !== 'order';
+  const isCompact = variant === 'compact';
   const isInList = variant === 'inList';
 
   const priceProps = { currency, locale };
@@ -127,7 +128,7 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
                * 1. 有 desc，单行
                * 2. 无 desc，2行
                */
-              truncate={isOrder && !desc ? 2 : true}
+              truncate={isOrder && !desc && !isCompact ? 2 : true}
               className="Goods-name"
             >
               {name}
@@ -142,12 +143,7 @@ export const Goods = React.forwardRef<GoodsRef, GoodsProps>((props, ref) => {
                 {desc}
               </Text>
             )}
-            {elderMode ? (
-              <Flex alignItems="center" justifyContent="space-between">
-                {priceCont}
-                {actionCont}
-              </Flex>
-            ) : (
+            {!elderMode && (
               tags.length > 0 && (
                 <div className="Goods-tags">
                   {tags.map((t) => (

@@ -25,7 +25,7 @@
     .Label:after {
       content: '*';
       display: inline-block;
-      color: var(--red);
+      color: var(--color-warning);
       font-size: @font-size-sm;
       font-family: SimSun,sans-serif;
       line-height: 1;
@@ -35,10 +35,10 @@
   &.is-invalid {
     .Label,
     .HelpText {
-      color: var(--red);
+      color: var(--color-warning);
     }
     .Input {
-      border-color: var(--red);
+      border-color: var(--color-warning);
     }
   }
   .RadioGroup,

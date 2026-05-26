@@ -1,5 +1,6 @@
 .ChatApp[data-elder-mode='true'] {
   --rate-width: 38Px;
+  --msg-gutter: calc(var(--msg-avatar-gap) + var(--rate-width));
 }
 
 .RateActions {
@@ -28,7 +29,7 @@
   &[data-type='down'] {
     &:hover,
     &.active {
-      color: var(--blue);
+      color: var(--color-link);
     }
   }
 }

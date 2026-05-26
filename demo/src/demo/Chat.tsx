@@ -367,7 +367,7 @@ export default () => {
   return (
     <Chat
       colorScheme="auto"
-      elderMode={false}
+      elderMode
       onRefresh={handleRefresh}
       navbar={{
         leftContent: {
@@ -397,6 +397,7 @@ export default () => {
       messagesRef={msgRef}
       onToolbarClick={handleToolbarClick}
       recorder={{ canRecord: true }}
+      enableNewVoiceInput
       wideBreakpoint="800px"
       messages={messages}
       renderMessageContent={renderMessageContent}

@@ -33,7 +33,7 @@ export interface RedPacketProps {
   /* 是否在列表中 */
   inList?: boolean;
   /* 变体 */
-  variant?: 'redPacket' | 'cash' | 'image';
+  variant?: 'redPacket' | 'cash' | 'image' | 'additional-credit';
   /* 按钮文本 */
   btnText?: string;
   onClick?: (e: React.MouseEvent) => void;
@@ -119,7 +119,13 @@ export const RedPacket = (props: RedPacketProps) => {
       )}
       {statusLabel && (
         <Ribbon
-          color={['expired', 'used'].includes(status) ? 'gray' : 'primary'}
+          color={
+            ["expired", "used"].includes(status)
+              ? "gray"
+              : variant === "additional-credit"
+                ? "yellow"
+                : "primary"
+          }
           position="right"
           size="sm"
         >

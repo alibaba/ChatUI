@@ -5,6 +5,7 @@ import { Image } from '../Image';
 type ImgItem = {
   src: string;
   id?: string;
+  caption?: string;
   [k: string]: any;
 };
 
@@ -15,16 +16,21 @@ export interface ImageListProps {
 }
 
 interface ImageItemProps {
-  img: ImgItem;
+  item: ImgItem;
   onClick?: ImageListProps['onClick'];
 }
 
-const ImageItem = ({ img, onClick }: ImageItemProps) => {
+const ImageItem = ({ item, onClick }: ImageItemProps) => {
   const handleClick = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-    onClick?.(img, e);
+    onClick?.(item, e);
   };
 
-  return <Image src={img.src} onClick={handleClick} />;
+  return (
+    <li className="ImageList-item">
+      <Image src={item.src} onClick={handleClick} />
+      {item.caption && <div className="ImageList-caption">{item.caption}</div>}
+    </li>
+  );
 };
 
 export const ImageList = (props: ImageListProps) => {
@@ -32,10 +38,8 @@ export const ImageList = (props: ImageListProps) => {
 
   return (
     <ul className={clsx('ImageList', className)}>
-      {list.map((img) => (
-        <li key={img.id || img.src}>
-          <ImageItem img={img} onClick={onClick} />
-        </li>
+      {list.map((item) => (
+        <ImageItem key={item.id || item.src} item={item} onClick={onClick} />
       ))}
     </ul>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Base, ModalProps } from './Base';
+import { Base, PopupProps } from './Base';
 
-export const Popup = (props: ModalProps) => (
+export const Popup = (props: PopupProps) => (
   <Base baseClass="Popup" overflow {...props} />
 );

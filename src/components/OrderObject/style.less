@@ -1,18 +1,22 @@
 .OrderObject {
-  padding: 8px;
+  padding: 4px 8px 4px 4px;
   border-radius: var(--radius-md);
   background: var(--color-fill-2);
   color: var(--color-text-2);
-  font-size: 14px;
+  font-size: var(--font-size-sm);
 
   .Goods {
     padding: 0;
   }
   .Icon {
-    font-size: 16px;
+    font-size: var(--font-size-md);
+  }
+  &--hasTitle {
+    padding: 8px;
   }
 }
 
 .OrderObject-title {
   margin-bottom: 4px;
+  font-size: var(--font-size-xs);
 }

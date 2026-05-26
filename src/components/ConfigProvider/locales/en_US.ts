@@ -31,6 +31,11 @@ export default {
     releaseOrSwipe: 'Release to send, swipe up to cancel',
     release2cancel: 'Release to cancel',
   },
+  VoiceInput: {
+    hold2talk: 'Hold to convert speech to text',
+    releaseOrSwipe: 'Release to stop, swipe up to cancel',
+    release2send: 'Release to cancel',
+  },
   Search: {
     search: 'Search',
   },

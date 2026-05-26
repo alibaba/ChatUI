@@ -5,7 +5,7 @@ export interface RibbonProps {
   className?: string;
   position?: 'left' | 'center' | 'right';
   size?: 'sm' | 'md';
-  color?: 'primary' | 'gray';
+  color?: 'primary' | 'gray' | 'yellow';
   children?: React.ReactNode;
 }
 

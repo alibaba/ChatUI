@@ -1,22 +1,23 @@
 .Coupon {
-  --coupon-object-width: 80px;
-  --coupon-height: 80px;
-  --coupon-value-color: var(--red);
+  --coupon-object-width: 80Px;
+  --coupon-height: 80Px;
+  --coupon-value-color: #ff0300;
   --coupon-condition-color: rgba(255, 3, 0, 0.5);
-  --coupon-main-text-color: var(--color-text-1);
-  --coupon-name-font-size: 15px;
+  --coupon-main-text-color: #11192d;
+  --coupon-name-font-size: 15Px;
   --coupon-desc-color: rgba(255, 3, 0, 0.9);
-  --coupon-desc-font-size: 12px;
+  --coupon-desc-font-size: 12Px;
   --coupon-bg: #fff2f2;
   --coupon-border-color: rgba(232, 16, 0, 0.15);
 
-  --btn-padding: 3px 12px;
-  --btn-bg: var(--red);
+  --btn-padding: 3Px 12Px;
+  --btn-bg: #ff0300;
   --btn-active-bg: var(--btn-bg);
   --btn-hover-bg: var(--btn-bg);
   --btn-border-color: var(--btn-bg);
-  --btn-color: var(--white);
-  --btn-font-size: 13px;
+  --btn-color: #fff;
+  --btn-font-size: 13Px;
+  --btn-line-height: 18Px;
 
   position: relative;
   height: var(--coupon-height);
@@ -25,53 +26,54 @@
   border-radius: var(--radius-md);
   background: var(--coupon-bg);
   color: var(--coupon-main-text-color);
-  mask: radial-gradient(circle at var(--coupon-object-width) top, transparent 4px, #000 0) top left /
+  mask: radial-gradient(circle at var(--coupon-object-width) top, transparent 4Px, #000 0) top left /
       100% 50% no-repeat,
-    radial-gradient(circle at var(--coupon-object-width) bottom, transparent 4px, #000 0) bottom
+    radial-gradient(circle at var(--coupon-object-width) bottom, transparent 4Px, #000 0) bottom
       right / 100% 50% no-repeat;
 
   .Btn {
     min-width: 0;
-    margin: 12px;
+    margin: 12Px;
   }
   &[data-status='expired'],
   &[data-status='used'],
   &[data-status='deleted'] {
-    --coupon-border-color: var(--color-line-2);
-    --coupon-value-color: var(--color-text-1);
-    --coupon-condition-color: var(--color-text-3);
-    --coupon-main-text-color: var(--color-text-1);
-    --coupon-desc-color: var(--color-text-2);
-    --coupon-bg: var(--color-fill-2);
+    --coupon-border-color: #cacfd7;
+    --coupon-value-color: #11192d;
+    --coupon-condition-color: #7c889c;
+    --coupon-main-text-color: #11192d;
+    --coupon-desc-color: #50607a;
+    --coupon-bg: #f3f6f8;
 
     --btn-bg: transparent;
-    --btn-border-color: var(--red);
-    --btn-color: var(--red);
+    --btn-border-color: #ff0300;
+    --btn-color: #ff0300;
 
     .Coupon-arc {
       display: none;
     }
   }
   &[data-in-list='false'] {
-    --coupon-width: 70px;
-    --coupon-height: 61px;
-    --coupon-name-font-size: 12px;
-    --coupon-desc-font-size: 10px;
+    --coupon-width: 70Px;
+    --coupon-height: 61Px;
+    --coupon-name-font-size: 12Px;
+    --coupon-desc-font-size: 10Px;
 
-    --btn-padding: 2px 6px;
-    --btn-font-size: 12px;
+    --btn-padding: 2Px 6Px;
+    --btn-font-size: 12Px;
 
     &[data-status='expired'],
     &[data-status='used'],
     &[data-status='deleted'] {
-      --btn-border-color: var(--color-line-2);
-      --btn-color: var(--color-text-2);
+      --btn-border-color: #cacfd7;
+      --btn-color: #50607a;
     }
   }
   .Countdown-unit {
     color: var(--coupon-value-color);
     background: rgba(255, 3, 0, 0.1);
   }
+
 }
 
 .Coupon-object {
@@ -83,21 +85,21 @@
 }
 
 .Coupon-discount-suffix {
-  margin-left: 2px;
+  margin-left: 2Px;
   font-size: 0.6em;
   font-weight: 500;
 }
 
 .Coupon-condition {
   color: var(--coupon-condition-color);
-  font-size: 10px;
+  font-size: 10Px;
 }
 
 .Coupon-divider {
   position: relative;
-  height: calc(100% - 16px);
+  height: calc(100% - 16Px);
   border-left: 1px dashed var(--coupon-border-color);
-  margin: 8px 12px 8px -1px;
+  margin: 8Px 12Px 8Px -1Px;
 }
 
 .Coupon-main {
@@ -118,7 +120,7 @@
 
 @media (max-width: 374px) {
   .Coupon .Btn {
-    margin: 0 8px 0 6px;
+    margin: 0 8Px 0 6Px;
   }
 }
 
@@ -129,17 +131,17 @@
       content: '';
       position: absolute;
       border: 1px solid var(--coupon-border-color);
-      width: 10px;
-      height: 10px;
+      width: 10Px;
+      height: 10Px;
       border-radius: 50%;
-      left: -6px;
+      left: -6Px;
       box-sizing: border-box;
     }
     &:before {
-      top: -14px;
+      top: -14Px;
     }
     &:after {
-      bottom: -14px;
+      bottom: -14Px;
     }
   }
 }

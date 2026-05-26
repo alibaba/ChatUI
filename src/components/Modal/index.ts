@@ -1,4 +1,4 @@
 export { Modal } from './Modal';
 export { Confirm } from './Confirm';
 export { Popup } from './Popup';
-export type { ModalProps } from './Base';
+export type { ModalProps, PopupProps } from './Base';

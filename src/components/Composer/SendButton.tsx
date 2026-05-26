@@ -18,7 +18,7 @@ export const SendButton = ({ disabled, onClick }: SendButtonProps) => {
     if (wrap && btn) {
       wrap.style.setProperty('--send-width', `${btn.offsetWidth}px`);
     }
-  }, [])
+  }, []);
 
   return (
     <div className="Composer-actions" data-action="send" ref={wrapRef}>

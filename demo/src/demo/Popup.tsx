@@ -9,6 +9,7 @@ export default () => {
   const [open4, setOpen4] = useState(false);
   const [open5, setOpen5] = useState(false);
   const [open6, setOpen6] = useState(false);
+  const [open7, setOpen7] = useState(false);
 
   return (
     <DemoPage>
@@ -60,6 +61,14 @@ export default () => {
               as="button"
               onClick={() => {
                 setOpen6(true);
+              }}
+              rightIcon="chevron-right"
+            />
+            <ListItem
+              content="带 Logo"
+              as="button"
+              onClick={() => {
+                setOpen7(true);
               }}
               rightIcon="chevron-right"
             />
@@ -137,6 +146,19 @@ export default () => {
         bgColor="gray"
       >
         <div style={{ padding: '15px' }}>
+          <p>内容详情内容详情内容详情内容详情内容详情内容详情</p>
+        </div>
+      </Popup>
+      <Popup
+        active={open7}
+        title="导航标题"
+        subTitle="导航副标题"
+        logo="https://devtool.tech/api/placeholder/118/90?fontSize=16"
+        onClose={() => {
+          setOpen7(false);
+        }}
+      >
+        <div style={{ padding: '0px 15px' }}>
           <p>内容详情内容详情内容详情内容详情内容详情内容详情</p>
         </div>
       </Popup>
