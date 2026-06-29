@@ -248,7 +248,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
 
   const handleInputKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-      if (!e.shiftKey && e.keyCode === 13) {
+      if (!e.shiftKey && e.keyCode === 13 && !e.nativeEvent.isComposing) {
         send();
         e.preventDefault();
       }
