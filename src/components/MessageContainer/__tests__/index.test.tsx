@@ -37,6 +37,15 @@ describe('<MessageContainer />', () => {
     expect(messageContainer && messageContainer.firstChild).toContainHTML(`<p>${text}</p>`);
   });
 
+  it('should support isTyping', () => {
+    const { container } = render(<MessageContainer
+      messages={messages}
+      isTyping
+      renderMessageContent={(msg) => <p>{msg.content}</p>}
+    />);
+    expect(container.querySelectorAll('.Typing').length).toBe(1);
+  });
+
   // it('should support onScroll', async () => {
   //   const text = 'Test Before MessageList';
   //   const onScroll = jest.fn();

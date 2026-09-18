@@ -4,6 +4,7 @@ import { SystemMessage } from './SystemMessage';
 import { IMessageStatus } from '../MessageStatus';
 import { Avatar } from '../Avatar';
 import { Time } from '../Time';
+import { Typing } from '../Typing';
 
 export interface User {
   avatar?: string;
@@ -77,7 +78,7 @@ const Message = (props: MessageProps) => {
         <div className="Message-inner">
           {isRL && name && <div className="Message-author">{name}</div>}
           <div className="Message-content" role="alert" aria-live="assertive" aria-atomic="false">
-            {renderMessageContent(msg)}
+            {type === 'typing' ? <Typing /> : renderMessageContent(msg)}
           </div>
         </div>
       </div>
