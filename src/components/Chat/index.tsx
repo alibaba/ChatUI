@@ -180,6 +180,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     enableNewVoiceInput,
     Composer = DComposer,
     isX,
+    nearBottomThreshold
   } = props;
   const currentColorScheme = useColorScheme(colorScheme);
 
@@ -232,6 +233,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
           onScroll={onScroll}
           onBackBottomShow={onBackBottomShow}
           onBackBottomClick={onBackBottomClick}
+          nearBottomThreshold={nearBottomThreshold}
         />
         <div className="ChatFooter">
           {renderQuickReplies ? (
