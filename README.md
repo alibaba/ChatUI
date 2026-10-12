@@ -55,11 +55,13 @@ yarn add @chatui/core
 ## Usage
 
 ```jsx
+import React, { useState } from 'react';
 import Chat, { Bubble, useMessages } from '@chatui/core';
 import '@chatui/core/dist/index.css';
 
 const App = () => {
-  const { messages, appendMsg, setTyping } = useMessages([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const { messages, appendMsg } = useMessages([]);
 
   function handleSend(type, val) {
     if (type === 'text' && val.trim()) {
@@ -69,13 +71,14 @@ const App = () => {
         position: 'right',
       });
 
-      setTyping(true);
+      setIsTyping(true);
 
       setTimeout(() => {
         appendMsg({
           type: 'text',
           content: { text: 'Bala bala' },
         });
+        setIsTyping(false);
       }, 1000);
     }
   }
@@ -89,6 +92,7 @@ const App = () => {
     <Chat
       navbar={{ title: 'Assistant' }}
       messages={messages}
+      isTyping={isTyping}
       renderMessageContent={renderMessageContent}
       onSend={handleSend}
     />
