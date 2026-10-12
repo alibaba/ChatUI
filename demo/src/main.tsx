@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { routerConfig } from './routerConfig';
-import './index.less';
+import { applyUrlParams } from './utils';
 import '../../src/styles/index.less';
+import './index.less';
+
+applyUrlParams();
 
 const router = createHashRouter(routerConfig, {
   future: {

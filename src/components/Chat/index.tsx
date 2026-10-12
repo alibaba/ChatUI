@@ -161,7 +161,6 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
     onQuickReplyScroll,
     renderQuickReplies,
     text,
-    textOnce,
     placeholder,
     onInputFocus,
     onInputChange,
@@ -250,7 +249,6 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>((props, ref) => 
             ref={composerRef}
             inputType={inputType}
             text={text}
-            textOnce={textOnce}
             inputOptions={inputOptions}
             placeholder={placeholder}
             onAccessoryToggle={onAccessoryToggle}

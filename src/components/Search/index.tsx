@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import clsx from 'clsx';
 import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
@@ -33,6 +33,7 @@ export const Search = ({
   ...other
 }: SearchProps) => {
   const [query, setQuery] = useState(value || '');
+  const inputRef = useRef<HTMLInputElement>(null);
   const { trans } = useLocale('Search');
 
   const handleChange = (val: string) => {
@@ -45,25 +46,37 @@ export const Search = ({
 
   const handleClear = () => {
     setQuery('');
+    // 清除后把焦点还给输入框，方便继续输入
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
 
     if (onClear) {
       onClear();
     }
   };
 
+  const doSearch = (
+    e: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    if (onSearch) {
+      onSearch(query, e);
+    }
+    // 搜索后让输入框失焦，收起软键盘
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.keyCode === 13) {
-      if (onSearch) {
-        onSearch(query, e);
-      }
+      doSearch(e);
       e.preventDefault();
     }
   };
 
   const handleSearchClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (onSearch) {
-      onSearch(query, e);
-    }
+    doSearch(e);
   };
 
   return (
@@ -72,6 +85,7 @@ export const Search = ({
       <Input
         className="Search-input"
         type="search"
+        ref={inputRef}
         value={query}
         disabled={disabled}
         enterKeyHint="search"
@@ -79,14 +93,16 @@ export const Search = ({
         onKeyDown={handleKeyDown}
         {...other}
       />
-      {clearable && query && (
-        <IconButton className="Search-clear" icon="x-circle-fill" onClick={handleClear} />
-      )}
-      {showSearch && (
-        <Button className="Search-btn" color="primary" onClick={handleSearchClick}>
-          {trans('search')}
-        </Button>
-      )}
+      <div className="Search-actions">
+        {clearable && query && (
+          <IconButton className="Search-clear" icon="x-circle-fill" onClick={handleClear} />
+        )}
+        {showSearch && (
+          <Button className="Search-btn" size="sm" color="primary" onClick={handleSearchClick}>
+            {trans('search')}
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

@@ -23,5 +23,16 @@ export default () => (
         }}
       />
     </DemoSection>
+    <DemoSection title="多现金">
+      <MultiRedPacket
+        name="体验保障赠金"
+        variant="multiCash"
+        count={3}
+        total={50}
+        onClick={() => {
+          console.log('on click');
+        }}
+      />
+    </DemoSection>
   </DemoPage>
 );

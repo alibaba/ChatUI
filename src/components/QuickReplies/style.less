@@ -24,14 +24,14 @@
   position: relative;
   display: block;
   margin: 0;
-  padding: 4Px 12Px;
+  padding: 4px 12px;
   border: 1px solid transparent;
   border-radius: var(--radius-md);
-  line-height: 20Px;
+  line-height: 1.43;
   background: var(--color-fill-1);
   cursor: pointer;
   color: var(--color-text-1);
-  font-size: @quick-reply-font-size;
+  font-size: var(--font-size-sm);
   transition: 0.15s ease-in-out;
 
   &.new::after {
@@ -75,19 +75,11 @@
   }
   .Icon {
     color: var(--brand-1);
-    font-size: 15Px;
+    font-size: 1.07143em;
   }
 }
 
 .ChatApp[data-elder-mode="true"] {
-  .QuickReply {
-    font-size: 17Px;
-    line-height: 26Px;
-
-    .Icon {
-      font-size: 17Px;
-    }
-  }
   .QuickReply-img {
     max-height: 17Px;
   }

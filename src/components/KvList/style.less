@@ -20,7 +20,7 @@
     .KvItem-title {
       flex: 1;
     }
-    .KvItem-main {
+    .KvItem-value {
       flex: initial;
       width: var(--kv-aside-width);
       text-align: right;
@@ -63,11 +63,46 @@
   color: var(--kv-title-color);
 }
 
-.KvItem-main {
+.KvItem-value {
+  display: flex;
+  align-items: center;
   margin-left: var(--kv-gap);
+}
+
+.KvItem-main {
+  min-width: 0;
 }
 
 .KvItem-desc {
   color: var(--color-text-3);
   font-size: var(--font-size-xs);
+}
+
+// 翻译模式：键值对降级为纵向布局，避免翻译后文本过长被截断
+:root[data-translated] {
+  .KvItem + .KvItem {
+    margin-top: 12px;
+  }
+  .KvItem-content {
+    flex-direction: column;
+    align-items: initial;
+  }
+  .KvItem-value {
+    margin-left: 0;
+    margin-top: 6px;
+  }
+  // 优先级提升：覆盖 .KvList[data-align='left'] 下的固定宽度与 Text--truncate 截断
+  .KvList {
+    &[data-align='left'] .KvItem-title {
+      width: auto;
+    }
+    .KvItem-title {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+    }
+    &[data-align='left'] .KvItem-desc {
+      margin-left: 0;
+    }
+  }
 }

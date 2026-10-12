@@ -2,14 +2,6 @@
   padding: 12Px;
   font-size: var(--font-size-sm);
 
-  &[data-elder-mode="true"] {
-    --goods-img-size: 56Px;
-
-    .Goods-desc,
-    .Goods-count {
-      font-size: 16Px;
-    }
-  }
   &[data-variant="inList"] {
     --goods-img-size: 88Px;
 
@@ -57,7 +49,7 @@
   }
   &-name {
     margin: 0;
-    font-size: @font-size-sm;
+    font-size: var(--font-size-sm);
     font-weight: 400;
   }
   &-main {
@@ -72,16 +64,16 @@
   }
   &-meta {
     color: @goods-meta-color;
-    font-size: @goods-meta-font-size;
+    font-size: var(--font-size-xs);
   }
   &-countUnit {
     margin-left: 6px;
     color: @goods-count-color;
-    font-size: @goods-count-font-size;
+    font-size: var(--font-size-sm);
   }
   &-unit {
     margin-left: 3px;
-    font-size: @goods-unit-font-size;
+    font-size: var(--font-size-xs);
   }
   &-buyBtn {
     float: right;
@@ -135,4 +127,20 @@
   color: var(--white);
   font-size: var(--font-size-xs);
   line-height: 20px;
+}
+
+// Goods-desc 包含 ul/li 时，父级 truncate 对块级子元素无效，
+// 让每个 li 各自独立截断
+.Goods-desc.Text--truncate {
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

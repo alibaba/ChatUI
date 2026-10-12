@@ -1,7 +1,14 @@
 .MultiRedPacket {
+  --red-packet-stack-color-1: #ff9999;
+  --red-packet-stack-color-2: #ff6666;
+  --red-packet-divide-color: rgba(255, 255, 255, 0.45);
   display: flex;
-  align-items: center;
 
+  &[data-variant="multiCash"] {
+    --red-packet-stack-color-1: #FFE5C5;
+    --red-packet-stack-color-2: #FFE0BA;
+    --red-packet-divide-color: rgba(91, 54, 13, 0.45);
+  }
   .RedPacket {
     --red-packet-object-width: 60px;
     --red-packet-name-font-size: var(--font-size-body);
@@ -17,10 +24,11 @@
     span + span {
       margin-left: 6px;
       padding-left: 6px;
-      border-left: 1px solid rgba(255, 255, 255, 0.45);
+      border-left: 1px solid var(--red-packet-divide-color);
     }
     strong {
       font-size: var(--font-size-sm);
+      font-family: var(--font-family-number);
     }
   }
 }
@@ -37,17 +45,18 @@
     width: 6px;
     margin-right: -2px;
     box-sizing: border-box;
-    border: 2px solid #ff9999;
+    border: 2px solid;
+    border-width: 2px;
     border-radius: var(--radius-md) 0 0 var(--radius-md);
     border-right: 0;
     background: #fff;
   }
   &:before {
-    height: 53px;
-    border-color: #ff9999;
+    height: 86.89%;
+    border-color: var(--red-packet-stack-color-1);
   }
   &:after {
-    height: 57px;
-    border-color: #ff6666;
+    height: 93.44%;
+    border-color: var(--red-packet-stack-color-2);
   }
 }

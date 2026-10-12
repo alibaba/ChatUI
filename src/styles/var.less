@@ -53,6 +53,7 @@
 @font-size-xxs: 1rem * (10px / @font-size-root);
 @font-size-xs: 1rem * (12px / @font-size-root);
 @font-size-sm: 1rem * (14px / @font-size-root);
+@font-size-body: 1rem * (15px / @font-size-root);
 @font-size-md: 1rem * (16px / @font-size-root);
 @font-size-lg: 1rem * (18px / @font-size-root);
 
@@ -102,11 +103,9 @@
 @btn-transition: 0.15s ease-in-out;
 
 // Composer
-@composer-padding: 9px var(--gutter);
-
 @composer-input-max-height: 132px;
 @composer-input-min-height: 36Px;
-@composer-input-padding: 8px 12px;
+
 @composer-input-bg: var(--color-fill-1);
 @composer-input-caret-color: var(--brand-2);
 @composer-input-transition: border-color 0.15s ease-in-out;
@@ -186,13 +185,7 @@
 @card-size-sm: 104px;
 @card-size-xs: 80px;
 
-// 卡片自适应宽度 = 100%宽度 - 赞踩宽度 - 赞踩左右边距
-@card-fluid-width: calc(100% - var(--rate-width) - 16Px);
-@card-max-width: 432Px;
-@card-min-width: 256Px;
-
 @card-btn-padding: 10px;
-@card-btn-line-height: 1.5;
 @card-btn-spacing-x: @gutter;
 @card-btn-spacing-y: 0;
 @card-btn-border-color: var(--color-line-1);
@@ -304,7 +297,6 @@
 @quick-replies-padding: 9Px var(--gutter);
 
 @quick-reply-color: var(--color-text-1);
-@quick-reply-font-size: 14Px;
 
 @quick-reply-dot-top: 0;
 @quick-reply-dot-right: 0;

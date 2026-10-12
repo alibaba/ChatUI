@@ -95,6 +95,19 @@
   }
 }
 
+// 大字 / 极大字档位：横向按钮布局降级为纵向，避免按钮被挤压换行
+:root[data-font-scale$='large'] .Modal-footer--h {
+  flex-direction: column;
+
+  .Btn {
+    flex: initial;
+  }
+  .Btn + .Btn {
+    margin-left: 0;
+    margin-top: 12px;
+  }
+}
+
 .Modal-footer--v {
   flex-direction: column;
 
@@ -183,7 +196,7 @@
 .Popup-title {
   margin: @popup-title-margin;
   color: @popup-title-color;
-  font-size: @popup-title-font-size;
+  font-size: var(--font-size-lg);
   font-weight: 500;
   text-align: center;
 }
@@ -202,7 +215,7 @@
 .Popup-subtitle {
   margin: 0;
   color: var(--color-text-2);
-  font-size: 12px;
+  font-size: var(--font-size-xs);
   font-weight: 400;
   text-align: center;
 }
@@ -274,7 +287,7 @@
 .Popup-actionsDesc {
   margin-bottom: 8px;
   color: var(--color-text-3);
-  font-size: 12px;
+  font-size: var(--font-size-xs);
   text-align: center;
 }
 
@@ -305,5 +318,30 @@
   }
   .Popup-footer--v {
     padding-bottom: 12px;
+  }
+}
+
+// 翻译模式
+:root[data-translated] {
+  .Popup-logo {
+    display: none;
+  }
+  .Popup-title,
+  .Popup-subtitle {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+  .Modal-footer--h,
+  .Popup-footer--h {
+    flex-direction: column;
+
+    .Btn {
+      flex: initial;
+    }
+    .Btn + .Btn {
+      margin-left: 0;
+      margin-top: 12px;
+    }
   }
 }

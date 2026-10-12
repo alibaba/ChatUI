@@ -22,6 +22,9 @@ import Chat, {
   useTitleTyping,
 } from '../../../src';
 import OrderSelector from './OrdderSelector';
+import { getUrlParam } from '../utils';
+
+const colorSchemeParam = (getUrlParam('colorScheme') || undefined) as 'light' | 'dark' | 'auto' | undefined;
 
 type MessageWithoutId = Omit<MessageProps, '_id'>;
 
@@ -366,7 +369,7 @@ export default () => {
 
   return (
     <Chat
-      colorScheme="auto"
+      colorScheme={colorSchemeParam}
       elderMode
       onRefresh={handleRefresh}
       navbar={{

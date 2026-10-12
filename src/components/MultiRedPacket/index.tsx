@@ -7,7 +7,7 @@ export interface MultiRedPacketProps {
   name: string;
   count?: number;
   total?: number;
-  variant?: 'redPacket' | 'cash';
+  variant?: 'redPacket' | 'cash' | 'multiCash';
   btnText?: string;
   onClick?: (e: React.MouseEvent) => void;
 }
@@ -15,6 +15,7 @@ export interface MultiRedPacketProps {
 const imageMap = {
   redPacket: 'https://gw.alicdn.com/imgextra/i2/O1CN01IAmvNz27AIyYyGXL7_!!6000000007756-55-tps-72-72.svg',
   cash: 'https://gw.alicdn.com/imgextra/i4/O1CN01Zgq0Nb281tJdBdhm2_!!6000000007873-55-tps-72-72.svg',
+  multiCash: 'https://gw.alicdn.com/imgextra/i3/O1CN01IEAqdz23BRZwNIbyG_!!6000000007217-55-tps-72-72.svg',
 };
 
 export const MultiRedPacket = (props: MultiRedPacketProps) => {
@@ -24,6 +25,7 @@ export const MultiRedPacket = (props: MultiRedPacketProps) => {
     <div className={clsx('MultiRedPacket', className)} data-variant={variant}>
       <div className="MultiRedPacket-stack" />
       <RedPacket
+        variant={variant === 'multiCash' ? 'cash' : undefined}
         image={imageMap[variant]}
         name={name}
         btnText={btnText}

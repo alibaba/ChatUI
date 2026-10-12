@@ -28,7 +28,6 @@ export type InputType = 'voice' | 'text';
 export type ComposerProps = {
   wideBreakpoint?: string;
   text?: string;
-  textOnce?: string;
   inputOptions?: InputProps;
   placeholder?: string;
   inputType?: InputType;
@@ -56,10 +55,9 @@ export interface ComposerHandle {
 export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, ref) => {
   const {
     text: initialText = '',
-    textOnce: oTextOnce,
     inputType: initialInputType = 'text',
     wideBreakpoint,
-    placeholder: oPlaceholder = '请输入...',
+    placeholder = '请输入...',
     recorder = {},
     enableNewVoiceInput,
     onInputTypeChange,
@@ -77,9 +75,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   } = props;
 
   const [text, setText] = useState(initialText);
-  const [textOnce, setTextOnce] = useState(oTextOnce);
   const [hasValue, setHasValue] = useState(!!text);
-  const [placeholder, setPlaceholder] = useState(oTextOnce || oPlaceholder);
   const [inputType, setInputType] = useState(initialInputType || 'text');
   const [isAccessoryOpen, setAccessoryOpen] = useState(false);
   const [accessoryContent, setAccessoryContent] = useState('');
@@ -268,31 +264,23 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
 
   const send = useCallback(async () => {
     const sendType = 'text';
-    const sendContent = text || textOnce || '';
 
-    if (!sendContent) return;
+    if (!text) return;
 
     if (onBeforeSend) {
-      const allowed = await Promise.resolve(onBeforeSend(sendType, sendContent));
+      const allowed = await Promise.resolve(onBeforeSend(sendType, text));
       if (!allowed) {
         return;
       }
     }
 
-    if (text) {
-      onSend(sendType, text);
-      setText('');
-    } else if (textOnce) {
-      onSend(sendType, textOnce);
-    }
-    if (textOnce) {
-      setTextOnce('');
-      setPlaceholder(oPlaceholder);
-    }
+    onSend(sendType, text);
+    setText('');
+
     if (focused.current) {
       inputRef.current.focus();
     }
-  }, [oPlaceholder, onBeforeSend, onSend, text, textOnce]);
+  }, [onBeforeSend, onSend, text]);
 
   const handleInputKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -414,7 +402,6 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
       <div
         className="Composer"
         data-has-value={hasValue}
-        data-has-text-once={!!textOnce}
         data-voice-status={voiceStatus}
         data-new-voice-input={!!enableNewVoiceInput}
       >

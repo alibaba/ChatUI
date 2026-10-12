@@ -1,13 +1,14 @@
 .Search {
   display: flex;
   align-items: center;
-  padding: 3Px 5Px 3Px 15Px;
+  height: 36px;
+  padding: 0 12Px;
   background: var(--color-fill-1);
   border-radius: var(--radius-md);
 
   &-icon,
   &-clear {
-    font-size: 18Px;
+    font-size: 20px;
   }
   &-icon {
     color: var(--color-text-3);
@@ -15,19 +16,15 @@
   &-input {
     flex: 1;
     border: 0;
-    padding: 0 9Px;
+    padding: 0 8Px;
+    font-size: var(--font-size-body);
 
     &::-webkit-search-cancel-button {
       display: none;
     }
   }
-  &-input:focus + &-clear,
-  &-input:focus ~ .Btn--primary {
-    opacity: 1;
-  }
   &-clear {
     color: var(--color-text-3);
-    opacity: 0;
 
     &:hover {
       background: initial;
@@ -38,11 +35,29 @@
     opacity: 0.5;
   }
   .Btn--primary {
-    min-width: 56Px;
     margin-left: 6Px;
-    padding: 2Px 12Px;
-    font-size: 12Px;
-    line-height: 18Px;
+  }
+  &:not(:focus-within) .Search-actions {
+    max-width: 0;
     opacity: 0;
   }
+}
+
+.Search-actions {
+  display: flex;
+  align-items: center;
+  // 上限只需大于实际内容宽度，预留宽松以免大字号/长译文下被截断
+  max-width: 200px;
+  overflow: hidden;
+  // 收起时过渡一小段时间，保证 iOS 上失焦后的 click 仍能落在按钮上
+  transition: max-width 0.2s, opacity 0.2s;
+}
+
+// 大字 / 极大字档位：搜索框内按钮内边距下沉，避免按钮高度超出搜索框
+:root[data-font-scale='large'] .Search {
+  --btn-padding-sm: 4px 12px;
+}
+
+:root[data-font-scale='xlarge'] .Search {
+  --btn-padding-sm: 0 12px;
 }

@@ -46,10 +46,12 @@ export const KvItem = (props: KvItemProps) => {
         <Text className="KvItem-title" truncate>
           {title}
         </Text>
-        <FlexItem className="KvItem-main">
-          {isString ? <Text truncate={ellipsis}>{children}</Text> : children}
+        <FlexItem className="KvItem-value">
+          <span className="KvItem-main">
+            {isString ? <Text truncate={ellipsis}>{children}</Text> : children}
+          </span>
+          {rightIcon && <Icon type={rightIcon} />}
         </FlexItem>
-        {rightIcon && <Icon type={rightIcon} />}
       </Flex>
       {desc && <div className="KvItem-desc">{desc}</div>}
     </div>

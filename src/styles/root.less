@@ -51,11 +51,22 @@
   --color-success: var(--green);
   --color-link: var(--link-color);
 
-  --font-size-xs: @font-size-xs; // 12px
-  --font-size-sm: @font-size-sm; // 14px
-  --font-size-body: 0.9375rem; // 15px
-  --font-size-md: @font-size-md; // 16px
-  --font-size-lg: @font-size-lg; // 18px
+  --font-size-scale: 1;
+  --font-size-scale-lite: ~"min(1.14, var(--font-size-scale))";
+
+  --font-size-xs: calc(@font-size-xs * var(--font-size-scale)); // 12px
+  --font-size-sm: calc(@font-size-sm * var(--font-size-scale)); // 14px
+  --font-size-body: calc(@font-size-body * var(--font-size-scale)); // 15px
+  --font-size-md: calc(@font-size-md * var(--font-size-scale)); // 16px
+  --font-size-lg: calc(@font-size-lg * var(--font-size-scale)); // 18px
+
+  --font-size-xs-lite: calc(@font-size-xs * var(--font-size-scale-lite));
+  --font-size-sm-lite: calc(@font-size-sm * var(--font-size-scale-lite));
+  --font-size-body-lite: calc(@font-size-body * var(--font-size-scale-lite));
+  --font-size-md-lite: calc(@font-size-md * var(--font-size-scale-lite));
+  --font-size-lg-lite: calc(@font-size-lg * var(--font-size-scale-lite));
+
+  --font-family-number: 'AlibabaSans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
 
   --radius-sm: 4Px;
   --radius-md: 6Px;
@@ -90,25 +101,25 @@
   --footer-bg: var(--color-fill-2);
 
   --gutter: @gutter;
-  --rate-width: 32Px;
+  --rate-width: 32px;
 
   // 头像和消息内容的间隙
   --msg-avatar-gap: 6Px;
   // 消息旁边的空白空间：间隙 + 头像的宽度（点赞踩的宽度一致）
   --msg-gutter: calc(var(--msg-avatar-gap) + var(--rate-width));
 
-  --btn-padding: 0.5rem 0.75rem; // 8px 12px
+  --btn-padding: 8px 12px;
   --btn-border-color: var(--color-line-2);
   --btn-border-radius: var(--radius-md);
   --btn-bg: var(--color-fill-1);
   --btn-color: var(--color-text-2);
   --btn-font-weight: 500;
-  --btn-font-size: @btn-font-size;
-  --btn-line-height: 1.125rem; // 18px
+  --btn-font-size: var(--font-size-sm);
+  --btn-line-height: 18px;
   --btn-padding-sm: 4px 12px;
-  --btn-font-size-sm: @btn-font-size-sm;
-  --btn-padding-lg: 0.625rem 0.75rem; // 10px 12px
-  --btn-font-size-lg: 0.9375rem; // 15px
+  --btn-font-size-sm: var(--font-size-sm);
+  --btn-padding-lg: 10px 12px;
+  --btn-font-size-lg: var(--font-size-body);
   --btn-active-bg: rgba(0, 0, 0, 0.08);
   --btn-hover-bg: rgba(0, 0, 0, 0.04);
   --btn-primary-border-color: transparent;
@@ -119,4 +130,23 @@
 
   --skeleton-bg-1: #f6f6f6;
   --skeleton-bg-2: #f0f0f0;
+}
+
+// 字号档位：大档（sm 按钮升档到 md 高度 36，md 升档到 lg 高度 40，lg 保持 40）
+:root[data-font-scale='large'] {
+  --font-size-scale: 1.14;
+
+  --btn-padding-sm: 8px 12px;
+  --btn-padding: 10px 12px;
+}
+
+// 字号档位：极大档（升档规则同 large，但字号已超过 18px，line-height 与 padding 一并下沉重算）
+:root[data-font-scale='xlarge'] {
+  --font-size-scale: 1.3;
+
+  --btn-padding-sm: 4px 12px;
+  --btn-padding: 6px 12px;
+  --btn-padding-lg: 6px 12px;
+
+  --btn-line-height: 26px;
 }

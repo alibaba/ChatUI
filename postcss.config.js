@@ -10,7 +10,8 @@ const cssnanoConfig = {
 
 const pxtoremConfig = {
   propList: ['*', '!border*', '!box-shadow'],
-  selectorBlackList: [':root'],
+  // selectorBlackList: [':root'],
+  minPixelValue: 2,
 };
 
 /** @type {import('postcss-load-config').Config} */

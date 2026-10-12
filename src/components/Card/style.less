@@ -21,8 +21,8 @@
   }
   &--fluid {
     width: calc(100% - var(--msg-gutter));
-    max-width: @card-max-width;
-    min-width: @card-min-width;
+    max-width: 432Px;
+    min-width: 224Px;
   }
 }
 
@@ -153,13 +153,13 @@
   }
   &-title {
     margin: 0;
-    font-size: @card-title-font-size;
+    font-size: var(--font-size-md);
     font-weight: @card-title-font-weight;
   }
   &-subtitle {
     margin: 0;
     color: @card-subtitle-color;
-    font-size: @card-subtitle-font-size;
+    font-size: var(--font-size-xs);
   }
 }
 
@@ -185,10 +185,22 @@
 
   .Btn {
     flex: 1;
-    line-height: @card-btn-line-height;
   }
   .Btn + .Btn {
     margin-left: @card-btn-spacing-x;
+  }
+}
+
+// 大字 / 极大字档位：横向按钮布局降级为纵向，避免按钮被挤压换行
+:root[data-font-scale$='large'] .CardActions {
+  flex-direction: column;
+
+  .Btn {
+    flex: initial;
+  }
+  .Btn + .Btn {
+    margin-left: 0;
+    margin-top: @card-btn-spacing-x;
   }
 }
 

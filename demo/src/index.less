@@ -1,19 +1,16 @@
-// :root {
-//   font-size: (16 * 100vw / 375);
-// }
-
-#root {
-  overflow-y: auto;
-}
-
 :root {
-  --font-size-scale: 1;
-  font-size: calc(4.26667vw * var(--font-size-scale));
+  font-size: 4.26667vw;
 }
 
-@media (max-width: 374px), (min-width: 768px) {
+@media (max-width: 374px) {
   :root {
-    font-size: calc(16px * var(--font-size-scale));
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 431px) {
+  :root {
+    font-size: 18.5px;
   }
 }
 
@@ -21,6 +18,10 @@ body {
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
   line-height: 1.5;
   color: var(--color-text-1);
+}
+
+#root {
+  overflow-y: auto;
 }
 
 .demo-index {

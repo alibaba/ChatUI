@@ -3,7 +3,7 @@
   z-index: @zindex-navbar;
   display: flex;
   align-items: center;
-  padding: @navbar-padding;
+  padding: 0 var(--gutter);
   padding-top: var(--safe-top);
   background: var(--navbar-bg);
 
@@ -16,10 +16,12 @@
     padding: 3Px 0;
     box-sizing: border-box;
   }
-  &-left,
-  &-right {
-    display: flex;
-    width: 58Px;
+  &:not(.Navbar--left) {
+    .Navbar-left,
+    .Navbar-right {
+      display: flex;
+      width: 90Px;
+    }
   }
   &-right {
     justify-content: flex-end;
@@ -27,7 +29,7 @@
   &-title {
     margin: 0;
     color: @navbar-color;
-    font-size: 18px;
+    font-size: var(--font-size-lg);
     font-weight: 500;
   }
   &-logo {
@@ -36,8 +38,9 @@
     height: @navbar-logo-height;
   }
   .IconBtn {
+    padding: 2px;
     color: var(--color-text-1);
-    font-size: 24Px;
+    font-size: 24px;
   }
   .IconBtn + .IconBtn,
   .Navbar-rightSlot + .IconBtn {
@@ -46,12 +49,6 @@
 }
 
 .Navbar--left {
-  .Navbar-left {
-    width: 24Px;
-  }
-  .Navbar-right {
-    width: auto;
-  }
   .Navbar-main {
     min-height: 62Px;
     margin-left: 9Px;
@@ -69,9 +66,6 @@
 }
 
 .ChatApp[data-elder-mode='true'] {
-  .Navbar .IconBtn {
-    font-size: 26Px;
-  }
   .Navbar-logo {
     height: 43Px;
   }

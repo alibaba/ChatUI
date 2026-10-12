@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   overflow: visible;
-  min-width: 80Px;
+  min-width: 54Px;
   margin: 0;
   padding: var(--btn-padding);
   border: @btn-border-width solid var(--btn-border-color);
@@ -81,6 +81,10 @@
 
 .no-btn-flex .Btn:not(.Btn--block) {
   display: inline-block;
+
+  .Icon {
+    margin: 0 auto;
+  }
 }
 
 @media (hover: hover) {
