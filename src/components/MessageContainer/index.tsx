@@ -9,6 +9,19 @@ import getToBottom from '../../utils/getToBottom';
 
 const listenerOpts = canUse('passiveListener') ? { passive: true } : false;
 
+const DEFAULT_FOLLOW_SCREEN = 2;
+
+export interface ScrollBehaviorConfig {
+  /** 是否跟随自己发的消息，默认 true */
+  followSelf?: boolean;
+  /** 是否跟随收到的消息，默认 true */
+  followIncoming?: boolean;
+  /** 不在底部时是否显示新消息数量，默认 true */
+  showNewCount?: boolean;
+  /** 距离多少屏以内才自动跟随，默认 2 */
+  followScreen?: number;
+}
+
 export interface MessageContainerProps {
   messages: MessageProps[];
   renderMessageContent: (message: MessageProps) => React.ReactNode;
@@ -19,6 +32,8 @@ export interface MessageContainerProps {
   renderBeforeMessageList?: () => React.ReactNode;
   onBackBottomShow?: () => void;
   onBackBottomClick?: () => void;
+  /** 滚动行为配置 */
+  scrollBehaviorConfig?: ScrollBehaviorConfig;
 }
 
 export interface MessageContainerHandle {
@@ -43,6 +58,7 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
       renderMessageContent,
       onBackBottomShow,
       onBackBottomClick,
+      scrollBehaviorConfig = {},
     } = props;
 
     const [showBackBottom, setShowBackBottom] = useState(false);
@@ -52,6 +68,7 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
     const messagesRef = useRef<HTMLDivElement>(null);
     const scrollerRef = useRef<PullToRefreshHandle>(null);
     const lastMessage = messages[messages.length - 1];
+    const scrollBehaviorConfigRef = useRef<ScrollBehaviorConfig>(scrollBehaviorConfig);
 
     const clearBackBottom = () => {
       setNewCount(0);
@@ -116,22 +133,44 @@ export const MessageContainer = React.forwardRef<MessageContainerHandle, Message
     }, [showBackBottom]);
 
     useEffect(() => {
+      scrollBehaviorConfigRef.current = scrollBehaviorConfig;
+    }, [scrollBehaviorConfig]);
+
+    useEffect(() => {
       const scroller = scrollerRef.current;
       const wrapper = scroller && scroller.wrapperRef.current;
-
+      
       if (!wrapper || !lastMessage || lastMessage.position === 'pop') {
         return;
       }
 
+      const {
+        followSelf = true,
+        followIncoming = true,
+        followScreen = DEFAULT_FOLLOW_SCREEN,
+        showNewCount = true,
+      } = scrollBehaviorConfigRef.current;
+
+
       if (lastMessage.position === 'right') {
-        // 自己发的消息，强制滚动到底部
-        scrollToEnd({ force: true });
-      } else if (isNearBottom(wrapper, 2)) {
-        const animated = !!wrapper.scrollTop;
-        scrollToEnd({ animated, force: true });
+        // 自己发的消息
+        if (followSelf) {
+          scrollToEnd({ force: true });
+        }
       } else {
-        setNewCount((c) => c + 1);
-        setShowBackBottom(true);
+        // 收到的消息
+        if (followIncoming && isNearBottom(wrapper, followScreen)) {
+          const animated = !!wrapper.scrollTop;
+          scrollToEnd({ animated, force: true });
+        } else {
+          // 防止滚动条较底下的时候出现回到底部的按钮
+          if (!isNearBottom(wrapper, Math.max(followScreen, DEFAULT_FOLLOW_SCREEN))) {
+            if (showNewCount) {
+              setNewCount((c) => c + 1);
+            }
+            setShowBackBottom(true);
+          }
+        }
       }
     }, [lastMessage, scrollToEnd]);
 
